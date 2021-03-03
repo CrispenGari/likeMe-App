@@ -1,0 +1,271 @@
+.post {
+  width: 100%;
+  background: white;
+  padding: white;
+  user-select: none;
+  user-zoom: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  margin: 5px 0;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.post__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.post__center {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.post__center > img {
+  width: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.post__center__likes {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  width: 400px;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.post__center__likes > h1 {
+  color: lightseagreen !important;
+  font-size: 30px !important;
+}
+.post__icon__unlike__number {
+  font-size: 80px !important;
+  animation: like-animation infinite linear 1500ms !important;
+}
+@keyframes like-animation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+.post__info {
+  flex: 1;
+  margin: 0px 5px;
+  display: flex;
+  flex-direction: column;
+}
+.post__iconButton {
+  background: #fafafa !important;
+}
+.post__bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+.post__bottom__buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 10px;
+}
+.post__bottom__comment__input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.post__bottom__comment__input > input {
+  flex: 1;
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background: #fafafa;
+}
+.post__bottom__comment__input > button {
+  width: 80px;
+  background: lightseagreen;
+  outline: none;
+  cursor: pointer;
+  padding: 3px 10px;
+  text-align: center;
+  color: white;
+  border: none;
+  font-weight: bolder;
+  border-radius: 5px;
+  position: relative;
+}
+
+.post__bottom__comment__input > button::before,
+.post__bottom__comment__input > button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 24px;
+  border-radius: 5px;
+}
+.post__bottom__comment__input > button::before {
+  border-top: 2px solid black;
+  right: 0;
+  top: -4px;
+}
+
+.post__bottom__comment__input > button::after {
+  border-bottom: 2px solid black;
+  bottom: -4px;
+  left: 0;
+}
+
+.post__bottom__comment__input > button:hover::before,
+.post__bottom__comment__input > button:hover::after {
+  width: 100%;
+}
+.post__bottom__comment__input > button:hover {
+  background-color: orange !important;
+}
+.post__bottom__comment__input > button:active {
+  background-color: green !important;
+}
+.post__hash__tag {
+  text-decoration: underline;
+  color: lightseagreen !important;
+  font-weight: 500;
+  cursor: pointer;
+}
+.post__info > div:first-of-type {
+  display: flex;
+  align-items: center;
+}
+.post__info > div > h1 {
+  color: lightseagreen !important;
+  font-size: 16px;
+  padding-bottom: 8px;
+  align-items: center;
+}
+.post__info > div:first-of-type > small {
+  color: gray;
+  margin-left: 5px;
+  padding-bottom: 8px;
+}
+.post__high__badge {
+  color: green !important;
+  font-size: 16px;
+}
+.post__icon__button__message {
+  width: fit-content !important;
+  height: fit-content !important;
+}
+.post__icon__button__like {
+  width: fit-content !important;
+  height: fit-content !important;
+}
+.post__icon__like,
+.post__icon__unlike__number {
+  color: purple !important;
+}
+.post__icon__unlike {
+  color: purple !important;
+}
+.post__icon__message {
+  color: green !important;
+}
+.post__icon__download {
+  color: orange !important;
+}
+.post__bottom__buttons > h1 > span {
+  color: gray;
+  margin-left: 3px;
+}
+.post__buttom__comment__container {
+  display: flex;
+  flex-direction: column;
+}
+.post__buttom__comment__container > button {
+  background: lightseagreen;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+}
+.post__buttom__comment__container > button::before,
+.post__buttom__comment__container > button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 24px;
+  border-radius: 5px;
+}
+.post__buttom__comment__container > button::before {
+  border-top: 2px solid black;
+  right: 0;
+  top: -4px;
+}
+
+.post__buttom__comment__container > button::after {
+  border-bottom: 2px solid black;
+  bottom: -4px;
+  left: 0;
+}
+
+.post__buttom__comment__container > button:hover::before,
+.post__buttom__comment__container > button:hover::after {
+  width: 100%;
+}
+.post__buttom__comment__container > button:hover {
+  background-color: orange !important;
+}
+.post__buttom__comment__container > button:active {
+  background-color: green !important;
+}
+.post__category__badge {
+  font-weight: bold !important;
+  color: red !important;
+}
+.post__category__badge--complicated {
+  color: orangered !important;
+}
+.post__category__badge--searching {
+  color: orangered !important;
+}
+.post__category__badge--single {
+  color: green !important;
+}
+.post__info > p {
+  display: flex;
+  flex-wrap: wrap;
+}
+.post__info > p > span {
+  margin-right: 4px;
+}
+.post__buttom__comment__container > h1 {
+  text-align: center;
+  color: orange;
+  padding: 5px;
+}

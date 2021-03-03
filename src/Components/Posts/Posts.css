@@ -1,0 +1,11 @@
+.posts {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.posts::-webkit-scrollbar {
+  display: none;
+}

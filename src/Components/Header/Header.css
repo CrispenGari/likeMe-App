@@ -1,0 +1,105 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  user-select: none;
+  user-zoom: none;
+  border-bottom: 1px solid lightgray;
+  max-height: 60px !important;
+}
+.header__left > h1 {
+  display: flex;
+  align-items: center;
+}
+.header__left > h1 > span {
+  font-size: 25px !important;
+}
+.header__left > h1 > span:last-child {
+  color: orange !important;
+}
+.header__left > h1 > span:first-of-type {
+  color: green !important;
+}
+.header__left > h1 > .header__like__icon {
+  color: lightseagreen !important;
+  font-size: 40px !important;
+  animation: rotate-animation 3s linear infinite !important;
+  margin-right: 5px;
+}
+@keyframes rotate-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.header__center {
+  position: relative;
+}
+.header__center > .header__search__results__container {
+  position: absolute;
+  background-color: #fafafa;
+  width: 100%;
+  z-index: 10;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.header__search {
+  display: flex;
+  background: #f5f5f5;
+  padding: 3px 10px 3px 25px;
+  border-radius: 999px;
+  width: 100%;
+  max-width: 230px;
+  justify-content: center;
+  align-items: center;
+}
+.header__search > input {
+  outline: none;
+  border: none;
+  flex: 1;
+  background: inherit !important;
+}
+.header__search > .header__search__icon {
+  cursor: pointer;
+  color: gray !important;
+}
+.header__search:focus-within {
+  background: #fafafa;
+}
+.header__right {
+}
+.header__right__avatar {
+  width: 45px !important;
+  height: 45px !important;
+  user-select: none !important;
+}
+
+.header__search__results__container > div {
+  padding: 5px !important;
+  font-size: 14px !important;
+  border-radius: 5px !important;
+  user-select: none !important;
+  user-zoom: none !important;
+  background-color: white !important;
+}
+.header__search__results__container > div:nth-child(even) {
+  background: #fafafa !important;
+}
+.header__search__results__container > div:hover {
+  background: lightseagreen !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+.header__search__results__container > div:active {
+  background: orange !important;
+  color: white !important;
+  cursor: pointer !important;
+}

@@ -1,0 +1,97 @@
+.welcome {
+  width: 100vw;
+  user-select: none;
+  user-zoom: none;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: grid;
+  place-items: center;
+  background-color: white;
+}
+.welcome__main > p {
+  text-transform: capitalize;
+}
+.welcome__main > p > span {
+  color: lightseagreen !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: ease-animation infinite linear 1s;
+}
+
+.welcome__loading {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.welcome__loading > div {
+  width: 10px;
+  height: 10px;
+  margin: 3rem 0.2rem;
+  background: lightseagreen;
+  border-radius: 50%;
+  animation: loading-animation 0.6s infinite alternate;
+}
+.welcome__main {
+  width: 100%;
+  max-width: 500px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  height: 60vh;
+}
+.welcome__loading > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.welcome__loading > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.welcome__main > h1 {
+  display: flex;
+  align-items: center;
+}
+.welcome__main > h1 > span {
+  font-size: 25px !important;
+}
+.welcome__main > h1 > span:last-child {
+  color: orange !important;
+}
+.welcome__main > h1 > span:first-of-type {
+  color: green !important;
+}
+.welcome__like__icon {
+  color: lightseagreen !important;
+  font-size: 45px !important;
+  animation: rotate-animation 3s linear infinite !important;
+  margin-right: 5px;
+}
+@keyframes rotate-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ease-animation {
+  from {
+    transform: scale(1.01);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0.6;
+    color: orange !important;
+  }
+}
+@keyframes loading-animation {
+  to {
+    opacity: 0.1;
+    transform: translate3d(0, -10px, 0);
+  }
+}

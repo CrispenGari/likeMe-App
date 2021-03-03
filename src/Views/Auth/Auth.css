@@ -1,0 +1,127 @@
+.auth {
+  width: 100vw;
+  user-select: none;
+  user-zoom: none;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: grid;
+  place-items: center;
+  box-shadow: 2px 2px 2px 2px lightgray;
+}
+.auth__main > small {
+  text-align: center;
+}
+.auth__main > small > a {
+  color: lightseagreen !important;
+  text-decoration: none !important;
+}
+.auth__main > p.auth__error {
+  color: red !important;
+  text-align: center;
+  font-style: italic;
+}
+
+.auth__main > button {
+  background-color: #141414;
+  border: none;
+  color: #ffffff;
+  outline: none;
+  padding: 5px 40px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.auth__main > button::before,
+.auth__main > button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 24px;
+  border-radius: 5px;
+}
+.auth__main > button::before {
+  border-top: 2px solid lightseagreen;
+  right: 0;
+  top: -4px;
+}
+
+.auth__main > button::after {
+  border-bottom: 2px solid lightseagreen;
+  bottom: -4px;
+  left: 0;
+}
+
+.auth__main > button:hover::before,
+.auth__main > button:hover::after {
+  width: 100%;
+}
+.auth__main > button:hover {
+  background-color: orange !important;
+}
+.auth__main > button:active {
+  background-color: green !important;
+}
+.auth__main {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  width: 100%;
+  max-width: 500px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  height: 60vh;
+}
+.auth__main > h1 {
+  display: flex;
+  align-items: center;
+}
+.auth__main > h1 > span {
+  font-size: 25px !important;
+}
+.auth__main > h1 > span:last-child {
+  color: orange !important;
+}
+.auth__main > h1 > span:first-of-type {
+  color: green !important;
+}
+.auth__like__icon {
+  color: lightseagreen !important;
+  font-size: 45px !important;
+  animation: rotate-animation 3s linear infinite !important;
+  margin-right: 5px;
+}
+
+.auth__main > p {
+  text-transform: capitalize;
+  text-align: center;
+}
+.auth__main > p > span {
+  color: lightseagreen !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: ease-animation infinite linear 1s;
+}
+@keyframes rotate-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ease-animation {
+  from {
+    transform: scale(1.01);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0.6;
+    color: orange !important;
+  }
+}

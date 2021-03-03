@@ -1,0 +1,193 @@
+.form {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+  border-bottom: solid 1px lightgray;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  position: relative;
+}
+.form__posting {
+  position: absolute;
+  background: rgba(0, 0, 0, 0);
+  width: 96%;
+  height: 90%;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  user-select: none;
+  border-radius: 5px;
+}
+.form__top {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+}
+.form__input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 10px;
+  max-height: 100px;
+}
+.form__input__suggestions {
+  position: absolute;
+  top: 100%;
+  width: 50%;
+  background-color: #fafafa;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  user-select: none;
+  z-index: 500;
+}
+.form__hash__tag {
+  background-color: white;
+  padding: 5px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form__hash__tag:nth-child(even) {
+  background-color: #fafafa;
+}
+.form__input > textarea {
+  flex: 1;
+
+  resize: none;
+  background: #fafafa;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  height: fit-content;
+}
+.form__avatar {
+  width: 40px !important;
+  height: 40px !important;
+  cursor: pointer;
+}
+.post__input--hidden {
+  display: none;
+}
+.form__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form__select {
+  width: 100px;
+  background: #fafafa;
+  outline: none;
+  border: none;
+}
+.form__controls > button {
+  width: 100px;
+  background: lightseagreen;
+  outline: none;
+  cursor: pointer;
+  padding: 3px 10px;
+  text-align: center;
+  color: white;
+  border: none;
+  font-weight: bolder;
+  border-radius: 5px;
+  position: relative;
+}
+.post__icon {
+  font-size: 25px !important;
+  color: green !important;
+}
+.post__iconButton {
+  background-color: #fafafa !important;
+}
+
+.form__controls > button::before,
+.form__controls > button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 24px;
+  border-radius: 5px;
+}
+.form__controls > button::before {
+  border-top: 2px solid black;
+  right: 0;
+  top: -4px;
+}
+
+.form__controls > button::after {
+  border-bottom: 2px solid black;
+  bottom: -4px;
+  left: 0;
+}
+
+.form__controls > button:hover::before,
+.form__controls > button:hover::after {
+  width: 100%;
+}
+.form__controls > button:hover {
+  background-color: orange !important;
+}
+.form__controls > button:active {
+  background-color: green !important;
+}
+
+.form__hash__tag:hover {
+  background: lightseagreen !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+.form__hash__tag:active {
+  background: orange !important;
+  color: white !important;
+  cursor: pointer !important;
+}
+.form__hash__tag:hover > small,
+.form__hash__tag:hover > h1,
+.form__hash__tag:active > small,
+.form__hash__tag:active > h1 {
+  color: white !important;
+}
+.form__hash__tag:active {
+  color: white !important;
+}
+.form__posting__loading {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+}
+.form__posting__loading > div {
+  width: 10px;
+  height: 10px;
+  margin: 3rem 0.2rem;
+  background: lightseagreen;
+  border-radius: 50%;
+  animation: loading-animation 0.6s infinite alternate;
+}
+.form__posting__loading > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.form__posting__loading > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.form__posting > h1 {
+  background: lightseagreen;
+  padding: 5px 20px;
+  color: white;
+  border-radius: 5px;
+  font-weight: normal !important;
+}

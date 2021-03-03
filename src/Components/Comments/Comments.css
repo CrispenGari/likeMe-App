@@ -1,0 +1,54 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.comments > h1 {
+  text-transform: uppercase;
+  text-align: center;
+  margin: 5px;
+}
+.comments > button {
+  background: lightseagreen;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+}
+.comments > button::before,
+.comments > button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 24px;
+  border-radius: 5px;
+}
+.comments > button::before {
+  border-top: 2px solid black;
+  right: 0;
+  top: -4px;
+}
+
+.comments > button::after {
+  border-bottom: 2px solid black;
+  bottom: -4px;
+  left: 0;
+}
+
+.comments > button:hover::before,
+.comments > button:hover::after {
+  width: 100%;
+}
+.comments > button:hover {
+  background-color: orange !important;
+}
+.comments > button:active {
+  background-color: green !important;
+}
