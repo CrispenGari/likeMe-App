@@ -8,6 +8,7 @@ import {
   MoreVert,
   GetApp,
 } from "@material-ui/icons";
+
 import { HiBadgeCheck } from "react-icons/hi";
 import { Comments } from "../../Components";
 import { useSelector } from "react-redux";
@@ -163,7 +164,7 @@ const Post = ({ post }) => {
 
           <h1>{likes.length}</h1>
         </div>
-        <img src={post?.data?.imageURL} alt="post" />
+        <img src={post?.data?.imageURL} alt="post" loading="lazy" />
       </div>
       <div className="post__bottom">
         <div className="post__bottom__buttons">
@@ -193,13 +194,16 @@ const Post = ({ post }) => {
           </button>
         </div>
         <div className="post__buttom__comment__container">
-          {!showComments && comments.length > 0 ? (
+          {!showComments && comments.length > 0 && (
             <button onClick={() => setShowComments(true)}>Read Comments</button>
-          ) : (
-            <h1>No Comments for this post</h1>
           )}
+          {comments.length <= 0 && <h1>No Comments for this post</h1>}
           {showComments && (
-            <Comments comments={comments} setShowComments={setShowComments} postId={post?.id} />
+            <Comments
+              comments={comments}
+              setShowComments={setShowComments}
+              postId={post?.id}
+            />
           )}
         </div>
       </div>

@@ -6,7 +6,7 @@ const Comments = ({ setShowComments, comments, postId }) => {
     <div className="comments">
       <h1>All Comments</h1>
       {comments.map((comment) => {
-        return <Comment key={comment?.id} comment={comment}  postId={postId}/>;
+        return <Comment key={comment?.id} comment={comment} postId={postId} />;
       })}
       <button onClick={() => setShowComments(false)}>Hide Comments</button>
     </div>

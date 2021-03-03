@@ -17,7 +17,11 @@ const Comment = ({ comment, postId }) => {
   return (
     <div className="comment">
       <div className="comment__top">
-        <Avatar className="comment__avatar" />
+        <Avatar
+          className="comment__avatar"
+          src={comment?.data?.userAvatar}
+          alt={comment?.data?.username}
+        />
         <div className="comment__info">
           <h1>
             {comment?.data?.username}{" "}

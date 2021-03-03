@@ -16,11 +16,12 @@
   background: rgba(0, 0, 0, 0);
   width: 96%;
   height: 90%;
-  z-index: 500;
+  z-index: 5;
   display: grid;
   place-items: center;
   user-select: none;
   border-radius: 5px;
+  padding: 20%;
 }
 .form__top {
   display: flex;
@@ -62,7 +63,6 @@
 }
 .form__input > textarea {
   flex: 1;
-
   resize: none;
   background: #fafafa;
   outline: none;
@@ -70,6 +70,9 @@
   border-radius: 5px;
   padding: 10px;
   height: fit-content;
+}
+.form__input::-webkit-scrollbar {
+  display: none;
 }
 .form__avatar {
   width: 40px !important;
@@ -186,8 +189,56 @@
 }
 .form__posting > h1 {
   background: lightseagreen;
-  padding: 5px 20px;
+  padding: 3px 20px;
   color: white;
   border-radius: 5px;
   font-weight: normal !important;
+  font-size: 13px !important;
+  font-weight: normal !important;
+}
+.form__post__preview {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+.form__post__preview > h1 {
+  font-size: 15px;
+  color: lightseagreen;
+  margin-bottom: 10px;
+}
+.form__image__container {
+  width: 100%;
+  max-width: 45vh !important;
+  border-radius: 5px;
+  position: relative;
+}
+.form__post__preview__image {
+  object-fit: contain !important;
+  border-radius: 5px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.form__image__delete__icon {
+  color: white !important;
+}
+.form__image__delete__button {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background: black !important;
+  z-index: 100 !important;
+}
+.form__close__button {
+  width: fit-content !important;
+  height: fit-content !important;
+  margin-left: 5px !important;
+  padding: 5px !important;
+}
+.form__close__button__icon {
+  font-size: 20px !important;
+  color: orange !important;
 }

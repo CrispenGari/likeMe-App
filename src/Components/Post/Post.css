@@ -13,6 +13,7 @@
   padding: 10px;
   justify-content: center;
   align-items: center;
+  scroll-snap-align: center;
 }
 .post__top {
   display: flex;
@@ -30,9 +31,11 @@
   align-items: center;
 }
 .post__center > img {
-  width: 400px;
+  /* width: 400px; */
+
   object-fit: contain;
-  border-radius: 10px;
+
+  max-height: 55vh !important;
 }
 .post__center__likes {
   flex: 1;
@@ -249,10 +252,10 @@
   color: red !important;
 }
 .post__category__badge--complicated {
-  color: orangered !important;
+  color: orange !important;
 }
 .post__category__badge--searching {
-  color: orangered !important;
+  color: blue !important;
 }
 .post__category__badge--single {
   color: green !important;

@@ -5,4 +5,17 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative !important;
+}
+.home__create__post {
+  width: 50px !important;
+  height: 50px !important;
+  background: black !important;
+  position: absolute !important;
+  bottom: 80px !important;
+  left: 20px;
+}
+.home__create__post {
+  color: white !important;
+  font-size: 60px !important;
 }

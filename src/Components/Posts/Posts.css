@@ -4,7 +4,11 @@
   overflow-y: scroll;
   width: 100%;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 3px auto;
+  padding: 20px 0;
+  /* overflow-y: auto; */
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y mandatory;
 }
 .posts::-webkit-scrollbar {
   display: none;

@@ -1,6 +1,5 @@
 .comment {
   display: flex;
-  flex-direction: column;
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -9,23 +8,26 @@
   user-select: none;
   user-zoom: none;
   background-color: white;
+  justify-content: space-between;
 }
 .comment__top {
   display: flex;
+  justify-content: flex-start;
+  flex: 1;
 }
 .comment:nth-child(odd) {
   background-color: #fafafa;
 }
 .comment__avatar {
-  width: 20px !important;
-  height: 20px !important;
+  width: 30px !important;
+  height: 30px !important;
 }
 .comment__info {
   margin-left: 5px;
   flex: 1;
 }
 .comment__info > h1 {
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   color: lightseagreen !important;
 }
@@ -46,8 +48,8 @@
   font-size: 18px !important;
 }
 .comment__bottom {
-  width: 100%;
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: space-between;
 }
