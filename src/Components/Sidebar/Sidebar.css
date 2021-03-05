@@ -1,0 +1,44 @@
+/* Should apear on laptops and larger devices */
+.sidebar {
+  position: absolute;
+  right: 5px;
+  background-color: white;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  top: 70px;
+  width: 100%;
+  max-width: 25vw;
+  border-radius: 5px;
+  border: solid lightgray 1px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  display: none;
+  max-height: 60vh;
+  user-zoom: none;
+  user-select: none;
+}
+.sidebar > h1 {
+  padding: 15px 15px 5px 15px;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+}
+.sidebar__users {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 1;
+  width: 100%;
+  padding: 15px;
+}
+.sidebar__users::-webkit-scrollbar {
+  display: none;
+}
+@media only screen and (min-width: 1025px) {
+  .sidebar {
+    display: inline-flex !important;
+  }
+}

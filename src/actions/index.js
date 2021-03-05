@@ -6,6 +6,12 @@ const setUser = (value) => {
     value: value,
   };
 };
+const setUsers = (value) => {
+  return {
+    type: constants.SET_USERS,
+    value: value,
+  };
+};
 const setLikes = (value) => {
   return {
     type: constants.SET_LIKES,
@@ -33,6 +39,7 @@ const setHashTags = (value) => {
 
 const actions = {
   setUser,
+  setUsers,
   setMessages,
   setPosts,
   setHashTags,

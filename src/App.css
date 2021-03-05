@@ -8,6 +8,15 @@
 }
 body {
   background: #f5f5f5;
+  --mobile-device-min: 320px;
+  --tablets-device-min: 481px;
+  --laptops-device-min: 769px;
+  --desktops-device-min: 1025px;
+  --mobile-device-max: 480px;
+  --tablets-device-max: 768px;
+  --laptops-device-max: 1024px;
+  --desktops-device-max: 1200px;
+  --telephone-device-min: 1201px;
 }
 div,
 p,

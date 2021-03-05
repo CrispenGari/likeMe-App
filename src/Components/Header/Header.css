@@ -60,6 +60,7 @@
   max-width: 230px;
   justify-content: center;
   align-items: center;
+  margin: 0 5px;
 }
 .header__search > input {
   outline: none;
@@ -75,10 +76,13 @@
   background: #fafafa;
 }
 .header__right {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
 }
 .header__right__avatar {
-  width: 45px !important;
-  height: 45px !important;
+  width: 40px !important;
+  height: 40px !important;
   user-select: none !important;
 }
 
@@ -102,4 +106,61 @@
   background: orange !important;
   color: white !important;
   cursor: pointer !important;
+}
+.header__icon__button__badge {
+  background: orange !important;
+  color: white !important;
+  position: absolute;
+  width: 20px !important;
+  height: 20px !important;
+  top: 0;
+  right: 0;
+  user-select: none;
+  border-radius: 50% !important;
+  user-zoom: none;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+.header__right__icon__button {
+  position: relative !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  padding: 8px !important;
+  background-color: #fafafa !important;
+  margin-right: 5px !important;
+}
+.header__icon__message__friends {
+  font-size: 25px !important;
+  color: lightseagreen !important;
+}
+.header__icon__message__menu {
+  font-size: 25px !important;
+}
+.header__icon__message {
+  color: green !important;
+  font-size: 25px !important;
+}
+
+.header__right__control__container {
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .header__right__control__container {
+    display: none !important;
+  }
+  .header__icon__button__menu {
+    display: inline-flex !important;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .header__right__control__container {
+    display: inline-flex !important;
+  }
+  .header__icon__button__menu {
+    display: none !important;
+  }
 }

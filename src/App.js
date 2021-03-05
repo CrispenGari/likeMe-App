@@ -12,6 +12,22 @@ const App = () => {
   const [welcome, setWelcome] = useState(true);
 
   useEffect(() => {
+    const unsubscribe = firebase.db
+      .collection("users")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        dispatch(
+          actions.setUsers(
+            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+          )
+        );
+      });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch]);
+  useEffect(() => {
     const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(actions.setUser(authUser));
@@ -56,7 +72,7 @@ const App = () => {
       <div className="app">
         <Router>
           <Switch>
-            <Route path="/profile">
+            <Route path="/profile/:uid">
               <Profile />
             </Route>
             <Route path="/messages">

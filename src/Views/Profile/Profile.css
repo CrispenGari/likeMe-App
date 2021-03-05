@@ -1,0 +1,166 @@
+.profile {
+  width: 100%;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  user-zoom: none;
+}
+.profile__main,
+.profile__posts {
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto 5px auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  background: white;
+  flex: 1;
+  max-height: 85vh;
+  border-radius: 5px;
+}
+.profile__main > h1 {
+  padding: 10px;
+  user-select: none;
+}
+.profile__barner {
+  width: 100%;
+  height: 25vh;
+  position: relative;
+  background-position: center center center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.profile__barner > button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 70px;
+}
+.profile__basics__avatar {
+  width: 70px !important;
+  height: 70px !important;
+  margin-top: -40px;
+
+  border: 3px solid lightseagreen;
+  border-top: 3px solid white;
+}
+.profile__basics {
+  padding: 10px;
+  display: flex;
+  justify-content: first baseline;
+}
+.profile__basics__right {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+  align-items: flex-start;
+}
+.profile__basics__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  border-right: 1px solid lightgray;
+}
+.profile__select,
+.profile__basics__right__info > input {
+  width: 200px;
+  margin: 5px 0;
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 2px 5px;
+  outline: none;
+  border: none;
+}
+.profile__basics__right__info {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  user-select: none;
+}
+.profile__basics__right__info > button,
+.profile__barner > button {
+  margin: 5px 0;
+  outline: none;
+  border: none;
+  background: lightseagreen;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.profile__basics__right__info > button:hover,
+.profile__barner > button:hover {
+  background: orange;
+}
+.profile__bottom__followers {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.profile__bottom__followers > small {
+  color: gray;
+  user-select: none;
+}
+.post__more {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+  background-color: #fafafa;
+}
+.post__more > small {
+  display: flex;
+  padding: 3px;
+  justify-content: space-between;
+  user-select: none;
+  user-zoom: none;
+  align-items: center;
+}
+.profile__basics__left > img {
+  width: 150px;
+  margin: 5px;
+  border-radius: 5px;
+  object-fit: contain;
+}
+.profile__basics__left > small:last-of-type {
+  display: flex;
+  justify-content: center;
+  color: gray;
+  width: 100%;
+  user-select: none;
+  padding: 5px;
+}
+.profile__basics__left > small:last-of-type > span {
+  color: orange;
+  margin-right: 5px;
+}
+.profile__basics__left > small:last-of-type > span:last-of-type {
+  color: green !important;
+  margin-left: 5px;
+}
+.profile__edits__controls {
+  display: flex;
+  justify-content: space-between;
+}
+.profile__edits__controls > button {
+  margin: 5px 0;
+  outline: none;
+  border: none;
+  background: lightseagreen;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80px;
+}
+.profile__edits__controls > button:last-of-type {
+  background-color: orangered;
+}
+.profile__edits__controls > button:hover {
+  background-color: black;
+}

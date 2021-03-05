@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import { Header, Posts, Form } from "../../Components";
+import { Header, Posts, Form, Sidebar } from "../../Components";
 import firebase from "../../backend";
 import actions from "../../actions";
 import { useDispatch } from "react-redux";
@@ -36,6 +36,7 @@ const Home = () => {
       >
         <IoIosCreate className="home__create__post__icon" />
       </IconButton>
+      <Sidebar />
     </div>
   );
 };
