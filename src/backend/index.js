@@ -1,14 +1,23 @@
 import firebase from "firebase";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAjkOqQ-MIXm-limp5Mqf0CYMSbFfJhBdo",
+//   authDomain: "like-me-app-39ad7.firebaseapp.com",
+//   projectId: "like-me-app-39ad7",
+//   storageBucket: "like-me-app-39ad7.appspot.com",
+//   messagingSenderId: "102019436154",
+//   appId: "1:102019436154:web:da6d95d7e14ca38ee575c3",
+//   measurementId: "G-X0Y7137TZF",
+// };
 const firebaseConfig = {
-  apiKey: "AIzaSyAjkOqQ-MIXm-limp5Mqf0CYMSbFfJhBdo",
-  authDomain: "like-me-app-39ad7.firebaseapp.com",
-  projectId: "like-me-app-39ad7",
-  storageBucket: "like-me-app-39ad7.appspot.com",
-  messagingSenderId: "102019436154",
-  appId: "1:102019436154:web:da6d95d7e14ca38ee575c3",
-  measurementId: "G-X0Y7137TZF",
+  apiKey: "AIzaSyA6vgXKus8ilVQaqB8P5E4FAni10h0P-CU",
+  authDomain: "like-me-78671.firebaseapp.com",
+  projectId: "like-me-78671",
+  storageBucket: "like-me-78671.appspot.com",
+  messagingSenderId: "51162384651",
+  appId: "1:51162384651:web:21078b68c55c7960ea7a0e",
+  measurementId: "G-Y0JN6JGEJF",
 };
 const app = firebase.initializeApp(firebaseConfig);
 

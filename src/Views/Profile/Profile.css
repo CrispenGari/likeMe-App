@@ -7,8 +7,11 @@
   user-select: none;
   user-zoom: none;
 }
-.profile__main,
-.profile__posts {
+.profile__header {
+  position: sticky;
+  width: 100%;
+}
+.profile__container {
   width: 100%;
   max-width: 500px;
   margin: 10px auto 5px auto;
@@ -18,12 +21,39 @@
   box-shadow: 2px 2px 2px 2px lightgray;
   background: white;
   flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
   max-height: 85vh;
-  border-radius: 5px;
+}
+.profile__container::-webkit-scrollbar {
+  display: none;
+}
+.profile__main {
+  margin-bottom: 5px;
+}
+.profile__container > h1 {
+  padding: 10px;
+  font-size: 16px !important;
+}
+.profile__posts {
 }
 .profile__main > h1 {
   padding: 10px;
   user-select: none;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile__main > h1 > button {
+  background-color: black;
+  color: white;
+  width: 90px;
+  outline: none;
+  border: none;
+  padding: 2px 5px;
+  text-align: center;
+  border-radius: 5px;
 }
 .profile__barner {
   width: 100%;
@@ -163,4 +193,10 @@
 }
 .profile__edits__controls > button:hover {
   background-color: black;
+}
+.profile__main > h1 > button:hover {
+  background-color: orange;
+}
+.profile__main > h1 > button:active {
+  background-color: lightseagreen;
 }

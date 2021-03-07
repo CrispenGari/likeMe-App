@@ -2,13 +2,23 @@ import React from "react";
 import "./User.css";
 import { Avatar } from "@material-ui/core";
 import { HiBadgeCheck } from "react-icons/hi";
-const User = () => {
+import { useHistory } from "react-router-dom";
+const User = ({ user }) => {
+  const history = useHistory();
+  const openChat = () => {
+    history.replace(`/chat/${user?.data?.uid}`);
+  };
   return (
-    <div className="user">
-      <Avatar className="user__avatar" />
+    <div className="user" onClick={openChat}>
+      <Avatar
+        className="user__avatar"
+        src={user?.data?.photoURL}
+        alt={user?.data?.displayName}
+      />
       <div className="user__info">
         <h1>
-          Username <HiBadgeCheck className="post__high__badge" />
+          {user?.data?.displayName}{" "}
+          <HiBadgeCheck className="post__high__badge" />
         </h1>
         <small>Hello, how are you doing today?</small>
       </div>

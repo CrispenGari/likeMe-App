@@ -2,7 +2,15 @@ import React from "react";
 import "./Person.css";
 import { Avatar } from "@material-ui/core";
 import { HiBadgeCheck } from "react-icons/hi";
+import { useHistory } from "react-router-dom";
 const Person = ({ user }) => {
+  const history = useHistory();
+  const openProfile = () => {
+    history.push(`/profile/${user?.data?.uid}`);
+  };
+  const openChat = () => {
+    history.replace(`/chat/${user?.data?.uid}`);
+  };
   return (
     <div className="person">
       <div className="person__top">
@@ -28,8 +36,8 @@ const Person = ({ user }) => {
         </div>
       </div>
       <div className="person__bottom">
-        <button>Message</button>
-        <button>Profile</button>
+        <button onClick={openChat}>Message</button>
+        <button onClick={openProfile}>Profile</button>
         <button>Follow</button>
       </div>
     </div>

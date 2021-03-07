@@ -16,7 +16,8 @@
   border: solid lightgray 1px;
   box-shadow: 2px 2px 2px 2px lightgray;
   display: none;
-  max-height: 60vh;
+  height: 65vh;
+  max-height: 65vh;
   user-zoom: none;
   user-select: none;
 }

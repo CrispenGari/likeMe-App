@@ -121,9 +121,7 @@ const Post = ({ post }) => {
         <div className="post__info">
           <div>
             <h1>
-              {post?.data?.username === user?.displayName
-                ? "You"
-                : post?.data?.username}{" "}
+              {post?.data?.userId === user?.uid ? "You" : post?.data?.username}{" "}
               <HiBadgeCheck className="post__high__badge" />
             </h1>{" "}
             <small>•</small> <small>2hrs ago</small>

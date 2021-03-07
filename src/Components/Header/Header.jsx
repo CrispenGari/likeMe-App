@@ -5,7 +5,6 @@ import { Search, Message, Menu } from "@material-ui/icons";
 import countries from "../../utils/countries";
 import { AiFillLike } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import firebase from "../../backend";
 import { IoIosPeople } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 const Header = () => {
@@ -40,11 +39,10 @@ const Header = () => {
       }
     }
   };
-
   return (
     <div className="header">
       <div className="header__left">
-        <h1>
+        <h1 onClick={() => history.push("/")}>
           <AiFillLike className="header__like__icon" />
           <span>M</span>
           <span>e</span>
@@ -71,7 +69,11 @@ const Header = () => {
       </div>
       <div className="header__right">
         <div className="header__right__control__container">
-          <IconButton className="header__right__icon__button" title="messages">
+          <IconButton
+            onClick={() => history.push("/messages")}
+            className="header__right__icon__button"
+            title="messages"
+          >
             <div className="header__icon__button__badge">5</div>
             <Message className="header__icon__message" />
           </IconButton>

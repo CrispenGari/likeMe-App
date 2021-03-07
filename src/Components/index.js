@@ -7,3 +7,4 @@ export { default as Comment } from "./Comment/Comment";
 export { default as User } from "./User/User";
 export { default as Sidebar } from "./Sidebar/Sidebar";
 export { default as Person } from "./Person/Person";
+export { default as Message } from "./Message/Message";
