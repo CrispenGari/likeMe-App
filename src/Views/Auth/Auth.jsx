@@ -4,13 +4,14 @@ import "./Auth.css";
 import { AiFillLike } from "react-icons/ai";
 import firebase from "../../backend";
 import fb from "firebase";
+import { Link } from "react-router-dom";
 const Auth = () => {
   const [error, setError] = useState("");
   const login = () => {
     firebase.auth
       .signInWithPopup(firebase.googleAuthProvider)
       .then((authUser) => {
-        console.log(authUser);
+        // console.log(authUser);
         // Check if the user is a new user and get his or her information and post to the database
         if (authUser.additionalUserInfo.isNewUser) {
           firebase.db.collection("users").add({
@@ -49,8 +50,8 @@ const Auth = () => {
         <p className="auth__error">{error}</p>
         <button onClick={login}>Continue with Google</button>
         <small>
-          By using this application, you are automatically accepting terms and
-          conditions. <a href="/">Terms and Conditions</a>
+          By using this application, you are automatically accepting the terms
+          and conditions. <Link to="/terms">Terms and Conditions</Link>
         </small>
         <small>Developed by Crispen Gari</small>
       </div>

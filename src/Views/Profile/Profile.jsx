@@ -60,6 +60,28 @@ const Profile = () => {
     const currUposts = posts?.filter((post) => post?.data?.userId === uid);
     setCurrentUserPosts(currUposts);
   }, [uid, posts]);
+  console.log(users);
+
+  const followUser = () => {
+    firebase.db
+      .collection("users")
+      .where("uid", "==", uid)
+      .get()
+      .then((snapshot) => {
+        firebase.db
+          .collection("users")
+          .doc(snapshot.docs[0]?.id)
+          .collection("followers")
+          .add({
+            displayName: user?.displayName,
+            email: user?.email,
+            emailVerified: user?.emailVerified,
+            phoneNumber: user?.phoneNumber,
+            photoURL: user?.photoURL,
+            uid: user?.uid,
+          });
+      });
+  };
 
   return (
     <div className="profile">
@@ -97,7 +119,7 @@ const Profile = () => {
                 id="profile__background__banner"
                 style={{ display: "none" }}
               />
-              <button>Edit</button>
+              {uid === user?.uid && <button>Edit</button>}
             </label>
           </div>
           <div className="profile__basics">
@@ -184,14 +206,16 @@ const Profile = () => {
                       <button onClick={discard}>Discard</button>
                     </div>
                     <div className="profile__bottom__followers">
-                      <small>2 • Followings</small>|<small>3 • Followers</small>
+                      <small>2 • Followings</small> |{" "}
+                      <small>3 • Followers</small>
                     </div>
                   </>
                 ) : (
                   <>
-                    <button>Follow</button>
+                    <button onClick={followUser}>Follow</button>
                     <div className="profile__bottom__followers">
-                      <small>2 • Followings</small>|<small>3 • Followers</small>
+                      <small>2 • Followings</small> |{" "}
+                      <small>3 • Followers</small>
                     </div>
                   </>
                 )}

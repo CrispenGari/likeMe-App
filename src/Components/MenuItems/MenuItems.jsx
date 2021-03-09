@@ -19,8 +19,8 @@ const MenuItems = () => {
         <Avatar src={user?.photoURL} alt={user?.displayName} />
         <h1>{user?.displayName}</h1>
       </div>
-      <div className="menuitem">
-        <div onClick={() => history.push("/messages")}>
+      <div className="menuitem" onClick={() => history.push("/messages")}>
+        <div>
           <div className="menuitems__icon__button__badge">5</div>
           <Message className="menuitems__icon__message" />
         </div>

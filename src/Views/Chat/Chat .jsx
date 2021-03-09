@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
+import Marquee from "react-smooth-marquee";
 import fb from "firebase";
 import "./Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
@@ -37,7 +38,8 @@ const Chat = () => {
     });
     setChatMessages(_chatMessages);
   }, [messages, uid, user?.uid]);
-  const sendMessage = () => {
+  const sendMessage = (e) => {
+    e.preventDefault();
     if (chatId && message) {
       firebase.db
         .collection("messages")
@@ -45,6 +47,7 @@ const Chat = () => {
           chatId: chatId,
           message: message,
           sender: user?.uid,
+          receiver: uid,
           timestamp: fb.firestore.FieldValue.serverTimestamp(),
         })
         .finally(() => {
@@ -80,21 +83,24 @@ const Chat = () => {
             </div>
           </div>
           <div className="chat__chats">
+            <marquee loop direction="right" className="chat__main__marquee">
+              {newFriend?.data?.bio || "No bio Provided"}
+            </marquee>
             <div className="chat__messages">
               {chatMessages?.map((message, i) => (
                 <Message newFriend={newFriend} key={i} message={message} />
               ))}
             </div>
-            <div className="chat__input">
+            <form className="chat__input">
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="type a message..."
               ></textarea>
-              <div onClick={sendMessage}>
+              <button onClick={sendMessage} type="submit">
                 <FiSend className="chat__send__icon" />
-              </div>
-            </div>
+              </button>
+            </form>
           </div>
         </div>
       </div>

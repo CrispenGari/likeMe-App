@@ -5,7 +5,7 @@ import "./Message.css";
 import timeFunct from "../../utils/time";
 const Message = ({ message, newFriend }) => {
   const user = useSelector((state) => state.user);
-  console.log(message);
+
   return (
     <div
       className={`message ${

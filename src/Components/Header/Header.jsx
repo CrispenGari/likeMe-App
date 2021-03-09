@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { Avatar, IconButton, Popover } from "@material-ui/core";
 import { Search, Message, Menu } from "@material-ui/icons";
-import countries from "../../utils/countries";
 import { AiFillLike } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { IoIosPeople } from "react-icons/io";
@@ -12,13 +11,23 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestionsResults, setSuggestionsResults] = useState([]);
   const user = useSelector((state) => state.user);
+  const users = useSelector((state) => state.users);
+  // All people except me are friends in this case
+  const [friends, setFriends] = useState([]);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openPop = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  // This method will open the profile of the selected friend
+  const openFriendProfile = (friend) => {
+    history.push(`/profile/${friend?.data?.uid}`);
+  };
+
   const select = (suggestion) => {
-    setSearchTerm(suggestion);
+    setSearchTerm(suggestion?.data?.displayName);
+    openFriendProfile(suggestion);
     setSuggestionsResults([]);
   };
   const suggest = () => {
@@ -27,18 +36,42 @@ const Header = () => {
     }
     search(searchTerm);
   };
+
+  useEffect(() => {
+    const _friends = users?.filter((user_) => user_?.data?.uid !== user?.uid);
+    setFriends(_friends);
+  }, [users, user?.uid]);
+
   const search = (query) => {
     if (query.length > 0) {
-      const res = countries
-        .filter((country) => {
+      const res = friends
+        .filter((friend) => {
           const exp = new RegExp(`^${query}`, "gi");
-          return country.match(exp);
+          // search for either name, surname, email, phone, bio, username
+          return (
+            friend?.data?.displayName?.match(exp) ||
+            friend?.data?.email?.match(exp) ||
+            friend?.data?.surname?.match(exp) ||
+            friend?.data?.status?.match(exp) ||
+            friend?.data?.bio?.match(exp) ||
+            friend?.data?.firstName?.match(exp)
+          );
         })
         .splice(0, 5);
       setSuggestionsResults(res);
       if (res.length === 0) {
         setSuggestionsResults(
-          countries.filter((country) => country.indexOf(query) !== -1)
+          friends.filter((friend) => {
+            return (
+              friend?.data?.displayName?.indexOf(query) !== -1 ||
+              friend?.data?.email?.indexOf(query) !== -1 ||
+              friend?.data?.surname?.indexOf(query) !== -1 ||
+              friend?.data?.status?.indexOf(query) !== -1 ||
+              friend?.data?.bio?.indexOf(query) !== -1 ||
+              friend?.data?.firstName?.indexOf(query) !== -1
+            );
+            // friend.indexOf(query) !== -1
+          })
         );
       }
     }
@@ -66,7 +99,7 @@ const Header = () => {
         <div className="header__search__results__container">
           {suggestionsResults.map((suggestion, index) => (
             <div key={index} onClick={() => select(suggestion)}>
-              {suggestion}
+              {suggestion?.data?.displayName}
             </div>
           ))}
         </div>
@@ -78,11 +111,29 @@ const Header = () => {
             className="header__right__icon__button"
             title="messages"
           >
-            <div className="header__icon__button__badge">5</div>
+            {users?.length - 1 > 0 && (
+              <div className="header__icon__button__badge">
+                {
+                  // all chats
+                  users?.length - 1
+                }
+              </div>
+            )}
             <Message className="header__icon__message" />
           </IconButton>
-          <IconButton className="header__right__icon__button" title="people">
-            <div className="header__icon__button__badge">5</div>
+          <IconButton
+            className="header__right__icon__button"
+            title="people"
+            onClick={() => history.push("/people")}
+          >
+            {users?.length - 1 > 0 && (
+              <div className="header__icon__button__badge">
+                {
+                  // all users excluding me
+                  users?.length - 1
+                }
+              </div>
+            )}
             <IoIosPeople className="header__icon__message__friends" />
           </IconButton>
           <Avatar

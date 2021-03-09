@@ -59,8 +59,12 @@
   padding: 5px;
   resize: none;
 }
-.chat__input > div {
+.chat__input > button {
   margin-left: 5px;
+  outline: none;
+  background-color: inherit !important;
+  border: none;
+  cursor: pointer;
 }
 .chat__send__icon {
   cursor: pointer;
@@ -97,4 +101,14 @@
 }
 .chat__container__header__right > small {
   color: lightseagreen;
+}
+.chat__main__marquee {
+  width: 100%;
+  z-index: 10;
+  padding: 2px;
+  font-size: 12px;
+  user-select: none;
+  user-zoom: none;
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white;
 }

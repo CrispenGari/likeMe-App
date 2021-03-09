@@ -26,10 +26,8 @@ const Messages = () => {
           </div>
           <div className="messages__chats">
             {users?.map(
-              (user_) =>
-                user_?.data.uid !== user?.uid && (
-                  <User key={user?.id} user={user_} />
-                )
+              (user_, i) =>
+                user_?.data.uid !== user?.uid && <User key={i} user={user_} />
             )}
           </div>
         </div>

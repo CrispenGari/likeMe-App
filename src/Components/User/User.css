@@ -25,6 +25,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: gray;
+}
+.user__left > small {
+  font-size: 12px;
 }
 .user__message__badge {
   color: white !important;

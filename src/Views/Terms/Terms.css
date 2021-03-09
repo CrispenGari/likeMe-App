@@ -1,0 +1,119 @@
+.termsandconditions {
+  width: 100%;
+  padding: 20px 10px;
+  user-select: none !important;
+  user-zoom: none !important;
+}
+
+.termsandconditions__app__logo {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  width: 100%;
+  max-width: 500px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  margin: 0px auto;
+}
+.termsandconditions__app__logo > h1 {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+.termsandconditions__app__logo > h1 > span {
+  font-size: 25px !important;
+}
+.termsandconditions__app__logo > h1 > span:last-child {
+  color: orange !important;
+}
+.termsandconditions__app__logo > h1 > span:first-of-type {
+  color: green !important;
+}
+.auth__like__icon {
+  color: lightseagreen !important;
+  font-size: 45px !important;
+  animation: rotate-animation 3s linear infinite !important;
+  margin-right: 5px;
+}
+
+.termsandconditions__app__logo > p {
+  text-transform: capitalize;
+  text-align: center;
+}
+.termsandconditions__app__logo > p > span {
+  color: lightseagreen !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: ease-animation infinite linear 1s;
+}
+.termsandconditions__body {
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
+}
+.termsandconditions__body > h1 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.termsandconditions__body > h2,
+.termsandconditions__body > p > h2 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+ul {
+  padding: 0 15px;
+  margin: 5px 0;
+}
+ul > li {
+  font-weight: bold;
+}
+.termsandconditions__body > p {
+  margin-top: 5px;
+}
+.termsandconditions__body > p:last-of-type > h5 {
+  color: gray;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: normal;
+}
+.termsandconditions__buttons {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid lightgray;
+  max-width: 500px;
+  margin: 10px auto;
+}
+.termsandconditions__buttons > .termsandconditions__buttons__left {
+  align-items: center;
+  display: flex;
+}
+.termsandconditions__buttons > .termsandconditions__buttons__left > button {
+  width: 70px;
+  border: 1px solid lightseagreen;
+  outline: none;
+  margin: 5px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.termsandconditions__buttons
+  > .termsandconditions__buttons__left
+  > button:hover {
+  color: white;
+  background-color: black;
+}
+.termsandconditions__buttons
+  > .termsandconditions__buttons__left
+  > button:active {
+  color: white;
+  background-color: black;
+  background-color: limegreen;
+}
