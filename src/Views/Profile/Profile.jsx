@@ -6,6 +6,7 @@ import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import firebase from "../../backend";
+import { AlertTitle, Alert } from "@material-ui/lab";
 const Profile = () => {
   const { uid } = useParams();
   const user = useSelector((state) => state.user);
@@ -15,7 +16,41 @@ const Profile = () => {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserPosts, setCurrentUserPosts] = useState([]);
+  const [gender, setGender] = useState("Male");
+  const [phone, setPhone] = useState("");
+  const [bio, setBio] = useState("");
+  const [status, setStatus] = useState("Single");
+  const [alert, setAlert] = useState(false);
 
+  const updateProfile = () => {
+    firebase.db
+      .collection("users")
+      .where("uid", "==", uid)
+      .get()
+      .then((snapshot) => {
+        firebase.db
+          .collection("users")
+          .doc(snapshot.docs[0]?.id)
+          .update({
+            phoneNumber: phone && phone,
+            gender: gender && gender,
+            status: status && status,
+            bio: bio && bio,
+          });
+        discard();
+        setAlert(!false);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
+      });
+  };
+  const discard = () => {
+    setGender("Male");
+    setPhone("");
+    setBio("");
+    setStatus("Single");
+    setAllowEdit(false);
+  };
   useEffect(() => {
     const currU = users?.filter((user) => user?.data?.uid === uid);
     setCurrentUser(currU[0]);
@@ -32,6 +67,12 @@ const Profile = () => {
         <Header />
       </div>
       <div className="profile__container">
+        {alert && (
+          <Alert severity="success">
+            <AlertTitle>{user?.displayName.split(/\s/)[0]}</AlertTitle>
+            Your profile was — <strong>Updated</strong>
+          </Alert>
+        )}
         <div className="profile__main">
           <h1>
             {currentUser?.data?.displayName}{" "}
@@ -48,13 +89,16 @@ const Profile = () => {
               <p></p>
             )}
           </h1>
-          <div
-            className="profile__barner"
-            style={{
-              backgroundImage: `url("https://www.rasmussen.edu/-/media/images/blogs/school-of-technology/computerprogramminghard_banner.jpg?la=en&hash=1897D131AAF9AA952B206B04C44A4969E9D644D5")`,
-            }}
-          >
-            <button>Edit</button>
+          <div className="profile__barner">
+            <label htmlFor="profile__background__banner">
+              <input
+                type="file"
+                accept="images/*"
+                id="profile__background__banner"
+                style={{ display: "none" }}
+              />
+              <button>Edit</button>
+            </label>
           </div>
           <div className="profile__basics">
             <Avatar
@@ -82,13 +126,22 @@ const Profile = () => {
                       type="text"
                       placeholder="Bio"
                       disabled={!allowEdit}
+                      value={bio}
+                      onChange={(e) => setBio(e.target.value)}
                     />
                     <input
                       type="text"
                       placeholder="Phone Number"
                       disabled={!allowEdit}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                     />
-                    <select className="profile__select" disabled={!allowEdit}>
+                    <select
+                      className="profile__select"
+                      disabled={!allowEdit}
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
                       {[
                         "Single",
                         "In Relationship",
@@ -105,7 +158,12 @@ const Profile = () => {
                         );
                       })}
                     </select>
-                    <select className="profile__select" disabled={!allowEdit}>
+                    <select
+                      className="profile__select"
+                      disabled={!allowEdit}
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
+                    >
                       {["Male", "Female", "Trans-gender"].map(
                         (status, index) => {
                           return (
@@ -120,8 +178,10 @@ const Profile = () => {
                       )}
                     </select>
                     <div className="profile__edits__controls">
-                      <button>Save</button>
-                      <button>Discard</button>
+                      <button onClick={updateProfile} disabled={!allowEdit}>
+                        Save
+                      </button>
+                      <button onClick={discard}>Discard</button>
                     </div>
                     <div className="profile__bottom__followers">
                       <small>2 • Followings</small>|<small>3 • Followers</small>
@@ -158,6 +218,7 @@ const Profile = () => {
             </small>
           </div>
         </div>
+
         <h1>Posts</h1>
         <div className="profile__posts">
           {currentUserPosts?.map((post) => {

@@ -36,7 +36,7 @@ const Chat = () => {
       );
     });
     setChatMessages(_chatMessages);
-  }, [messages]);
+  }, [messages, uid, user?.uid]);
   const sendMessage = () => {
     if (chatId && message) {
       firebase.db

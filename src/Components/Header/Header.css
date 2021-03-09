@@ -12,7 +12,9 @@
   user-zoom: none;
   border-bottom: 1px solid lightgray;
   max-height: 60px !important;
+  position: relative;
 }
+
 .header__left > h1 {
   display: flex;
   align-items: center;
@@ -156,12 +158,19 @@
   .header__icon__button__menu {
     display: inline-flex !important;
   }
+  .header__right__menu__container {
+    display: inline-flex !important;
+  }
 }
 @media only screen and (min-width: 768px) {
   .header__right__control__container {
     display: inline-flex !important;
   }
   .header__icon__button__menu {
+    display: none !important;
+    margin-right: 5px !important;
+  }
+  .header__right__menu__container {
     display: none !important;
   }
 }

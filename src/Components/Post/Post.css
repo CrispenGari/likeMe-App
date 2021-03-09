@@ -14,6 +14,16 @@
   justify-content: center;
   align-items: center;
   scroll-snap-align: center;
+  cursor: pointer;
+}
+.post:hover {
+  opacity: 0.9 !important;
+}
+.post__avatar {
+  cursor: pointer;
+}
+.post__avatar:hover {
+  opacity: 0.6 !important;
 }
 .post__top {
   display: flex;
@@ -164,6 +174,10 @@
   font-size: 16px;
   padding-bottom: 8px;
   align-items: center;
+  cursor: pointer;
+}
+.post__info > div > h1:hover {
+  text-decoration: underline;
 }
 .post__info > div:first-of-type > small {
   color: gray;

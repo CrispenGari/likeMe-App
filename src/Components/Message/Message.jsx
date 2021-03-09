@@ -2,8 +2,10 @@ import React from "react";
 import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import "./Message.css";
+import timeFunct from "../../utils/time";
 const Message = ({ message, newFriend }) => {
   const user = useSelector((state) => state.user);
+  console.log(message);
   return (
     <div
       className={`message ${
@@ -22,7 +24,7 @@ const Message = ({ message, newFriend }) => {
         <p>{message?.data?.message}</p>
         <p>
           <small>seen</small>
-          <small>12.30</small>
+          <small>{timeFunct(message?.data?.timestamp)}</small>
         </p>
       </div>
     </div>

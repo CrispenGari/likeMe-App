@@ -1,0 +1,57 @@
+.menuitems {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0 !important;
+  width: 200px !important;
+  z-index: 100;
+  user-select: none;
+  user-zoom: none;
+  -webkit-user-drag: none;
+}
+.menuitem {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  cursor: pointer;
+  align-items: center;
+  margin: 2px 0;
+  border-bottom: 1px solid lightgray;
+}
+.menuitem > h1 {
+  flex: 1;
+  margin-left: 5px;
+  color: gray;
+  font-weight: 700 !important;
+}
+.menuitem > div {
+  position: relative;
+  padding: 8px !important;
+}
+.menuitems > h1 {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.menuitems__icon__message {
+  color: green !important;
+  font-size: 25px !important;
+}
+.menuitems__icon__message__friends {
+  font-size: 25px !important;
+  color: lightseagreen !important;
+}
+.menuitems__icon__button__badge {
+  background: orange !important;
+  color: white !important;
+  position: absolute;
+  width: 20px !important;
+  height: 20px !important;
+  top: 0;
+  left: 0;
+  user-select: none;
+  border-radius: 50% !important;
+  user-zoom: none;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}

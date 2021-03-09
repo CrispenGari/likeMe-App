@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, Popover } from "@material-ui/core";
 import { Search, Message, Menu } from "@material-ui/icons";
 import countries from "../../utils/countries";
 import { AiFillLike } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { IoIosPeople } from "react-icons/io";
 import { useHistory } from "react-router-dom";
+import { MenuItems } from "../../Components";
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestionsResults, setSuggestionsResults] = useState([]);
   const user = useSelector((state) => state.user);
   const history = useHistory();
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openPop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
   const select = (suggestion) => {
     setSearchTerm(suggestion);
     setSuggestionsResults([]);
@@ -90,12 +94,30 @@ const Header = () => {
           />
         </div>
 
-        <IconButton
-          className="header__right__icon__button header__icon__button__menu"
-          title="Menu"
-        >
-          <Menu className="header__icon__message__menu" />
-        </IconButton>
+        <div className="header__right__menu__container">
+          <IconButton
+            className="header__right__icon__button header__icon__button__menu"
+            title="Menu"
+            onClick={openPop}
+          >
+            <Menu className="header__icon__message__menu" />
+          </IconButton>
+          <Popover
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <MenuItems />
+          </Popover>
+        </div>
       </div>
     </div>
   );

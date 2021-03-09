@@ -6,8 +6,8 @@ const Posts = () => {
   const posts = useSelector((state) => state.posts);
   return (
     <div className="posts">
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
+      {posts.map((post, i) => (
+        <Post key={i} post={post} />
       ))}
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Messages.css";
 import { Header, User } from "../../Components";
 import { Search } from "@material-ui/icons";

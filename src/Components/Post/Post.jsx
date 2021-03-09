@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, Popover } from "@material-ui/core";
 import {
   FavoriteBorder,
   Favorite,
@@ -14,13 +14,33 @@ import { Comments } from "../../Components";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
 import fb from "firebase";
+import { useHistory } from "react-router-dom";
+import timeFunct from "../../utils/time";
+import { PostOptions } from "../../Components";
 const Post = ({ post }) => {
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [postTime, setPostTime] = useState("");
   const user = useSelector((state) => state.user);
+  const history = useHistory();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openPop = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const openProfile = () => {
+    history.push(`/profile/${post?.data?.userId}`);
+  };
+  const openChat = () => {
+    history.replace(`/chat/${post?.data?.userId}`);
+  };
+
+  useEffect(() => {
+    setPostTime(timeFunct(post?.data?.timestamp));
+  }, [post]);
 
   useEffect(() => {
     const unsubscribe = firebase.db
@@ -117,14 +137,15 @@ const Post = ({ post }) => {
           className="post__avatar"
           src={post?.data?.userAvatar}
           alt={post?.data?.username}
+          onClick={openProfile}
         />
         <div className="post__info">
           <div>
-            <h1>
+            <h1 onClick={openProfile}>
               {post?.data?.userId === user?.uid ? "You" : post?.data?.username}{" "}
               <HiBadgeCheck className="post__high__badge" />
             </h1>{" "}
-            <small>•</small> <small>2hrs ago</small>
+            <small>•</small> <small>{postTime}</small>
             <small>•</small>
             <small
               className={`post__category__badge ${
@@ -150,9 +171,26 @@ const Post = ({ post }) => {
             })}
           </p>
         </div>
-        <IconButton className="post__iconButton">
-          <MoreVert />
-        </IconButton>
+        <div>
+          <IconButton className="post__iconButton" onClick={openPop}>
+            <MoreVert />
+          </IconButton>
+          <Popover
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <PostOptions />
+          </Popover>
+        </div>
       </div>
       <div className="post__center">
         <div className="post__center__likes" onDoubleClick={handleLike}>
@@ -171,7 +209,13 @@ const Post = ({ post }) => {
           <IconButton className="post__icon__button__message" title="download">
             <GetApp className="post__icon__download" />
           </IconButton>
-          <IconButton className="post__icon__button__message" title="message">
+          <IconButton
+            className="post__icon__button__message"
+            title="message"
+            onClick={openChat}
+            // You can not text yourself
+            disabled={user?.uid === post?.data?.userId}
+          >
             <Message className="post__icon__message" />
           </IconButton>
           <IconButton onClick={handleLike} className="post__icon__button__like">

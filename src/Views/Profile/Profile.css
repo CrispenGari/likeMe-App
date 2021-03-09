@@ -58,15 +58,19 @@
 .profile__barner {
   width: 100%;
   height: 25vh;
+  background-color: black !important;
   position: relative;
   background-position: center center center center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 0;
 }
-.profile__barner > button {
+.profile__barner > label {
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+.profile__barner > label > button {
   cursor: pointer;
   width: 70px;
 }
@@ -74,7 +78,6 @@
   width: 70px !important;
   height: 70px !important;
   margin-top: -40px;
-
   border: 3px solid lightseagreen;
   border-top: 3px solid white;
 }
@@ -113,8 +116,7 @@
   padding: 5px;
   user-select: none;
 }
-.profile__basics__right__info > button,
-.profile__barner > button {
+.profile__basics__right__info > button {
   margin: 5px 0;
   outline: none;
   border: none;
@@ -199,4 +201,18 @@
 }
 .profile__main > h1 > button:active {
   background-color: lightseagreen;
+}
+
+@media only screen and (max-width: 768px) {
+  .profile__basics__right {
+    flex-direction: column;
+    border: none;
+    flex: 1;
+  }
+  .profile__basics__left {
+    border: none;
+    flex: 1;
+  }
+}
+@media only screen and (min-width: 768px) {
 }
