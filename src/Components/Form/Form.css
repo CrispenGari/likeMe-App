@@ -225,12 +225,22 @@
 .form__image__delete__icon {
   color: white !important;
 }
-.form__image__delete__button {
+.form__image__locationOff__icon {
+  color: white !important;
+}
+.form__image__locationOn__icon {
+  color: limegreen !important;
+}
+.form__image__delete__button,
+.form__image__location__button {
   position: absolute !important;
   top: 10px !important;
   right: 10px !important;
-  background: black !important;
+  background: rgba(0, 0, 0, 0.8) !important;
   z-index: 100 !important;
+}
+.form__image__location__button {
+  top: 70px !important;
 }
 .form__close__button {
   width: fit-content !important;

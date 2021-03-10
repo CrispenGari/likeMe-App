@@ -4,19 +4,21 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .messages__container {
   width: 100%;
   max-width: 500px;
-  margin: 10px auto 5px auto;
+  margin: 0px auto 5px auto;
   display: flex;
   flex-direction: column;
   border: 1px solid lightgray;
   box-shadow: 2px 2px 2px 2px lightgray;
   background: white;
   flex: 1;
-  height: 85vh;
-  max-height: 85vh;
+  height: 100%;
+
+  margin-bottom: 5px;
 }
 .messages__search {
   display: flex;
@@ -25,13 +27,17 @@
   padding: 4px 10px;
   border-radius: 999px;
   background: #fafafa;
+  width: 70%;
   max-width: 200px;
+  padding-left: 15px;
+}
+.message__search__icon {
+  margin: 0px 5px !important;
 }
 .messages__search > input {
   outline: none;
   border: none;
-  flex: 1;
-  padding: 4px 10px;
+  padding: 2px 0 2px 4px;
   background: inherit;
 }
 .messages__container > div:first-of-type {
@@ -42,7 +48,7 @@
   border-bottom: 1px solid lightgray;
 }
 .messages__container > div > h1 {
-  font-size: 25px !important;
+  font-size: 20px !important;
 }
 .messages__chats {
   flex: 1;
@@ -52,6 +58,39 @@
   flex-direction: column;
   padding: 5px;
 }
-.messages__chats::-webkit-scrollbar {
+.messages__chats::-webkit-scrollbar,
+.messages__main::-webkit-scrollbar {
   display: none;
+}
+.messages__main {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 5px;
+}
+@media only screen and (max-width: 768px) {
+  .messages__container > div > h1 {
+    font-size: 18px !important;
+  }
+  .messages__search {
+    display: flex;
+    flex: 1;
+    width: 70%;
+    align-items: center;
+    padding: 3px;
+    margin: 0px 5px;
+  }
+  .messages__search > input {
+    outline: none;
+    border: none;
+    flex: 1;
+    padding: 0 !important;
+    background: inherit;
+  }
+  .messages__main {
+    flex: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px;
+  }
 }

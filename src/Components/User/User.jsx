@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TextTruncate from "react-text-truncate";
 import "./User.css";
 import { Avatar } from "@material-ui/core";
 import { HiBadgeCheck } from "react-icons/hi";
@@ -7,17 +8,23 @@ import { useSelector } from "react-redux";
 const User = ({ user }) => {
   const history = useHistory();
   const [chatMessages, setChatMessages] = useState([]);
+  const currentUser = useSelector((state) => state.user);
   const messages = useSelector((state) => state.messages);
 
   const openChat = () => {
     history.replace(`/chat/${user?.data?.uid}`);
   };
+
   useEffect(() => {
-    const _chatMessages = messages?.filter((message) => {
-      return message?.data?.receiver === user?.data?.uid;
-    });
-    setChatMessages(_chatMessages);
-  }, [messages, user?.data?.uid]);
+    setChatMessages(
+      messages?.filter((message) => {
+        return (
+          String(message?.data?.chatId).includes(currentUser?.uid) &&
+          String(message?.data?.chatId).includes(user?.data?.uid)
+        );
+      })
+    );
+  }, [currentUser?.uid, messages, user?.data?.uid]);
 
   return (
     <div className="user" onClick={openChat}>
@@ -34,9 +41,16 @@ const User = ({ user }) => {
         {/* Show the last message */}
         {chatMessages?.length ? (
           <small>
-            {chatMessages[chatMessages?.length - 1]?.data?.message} •{" "}
-            {chatMessages[chatMessages?.length - 1]?.data?.receiver !==
-            user?.data?.uid
+            <TextTruncate
+              line={1}
+              element="span"
+              truncateText="…"
+              text={chatMessages[chatMessages?.length - 1]?.data?.message}
+              className="user__info__last__message"
+            />
+            •{" "}
+            {chatMessages[chatMessages?.length - 1]?.data?.receiver ===
+            currentUser?.uid
               ? "not you"
               : "you"}
           </small>
@@ -46,9 +60,11 @@ const User = ({ user }) => {
       </div>
       <div className="user__left">
         <small>all messages</small>
-        <div className="user__message__badge">
-          <small>{chatMessages?.length}</small>
-        </div>
+        {Boolean(chatMessages.length) && (
+          <div className="user__message__badge">
+            <small>{chatMessages?.length}</small>
+          </div>
+        )}
       </div>
     </div>
   );

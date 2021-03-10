@@ -3,16 +3,19 @@
   flex-direction: column;
   user-select: none;
 }
-.postoptions > h1 {
+.postoptions > button {
   padding: 5px 10px;
   margin: 2px 0;
   cursor: pointer;
   background-color: #fafafa;
+  outline: none;
+  border: none;
+  text-align: start;
 }
-.postoptions > h1:nth-child(odd) {
+.postoptions > button:nth-child(odd) {
   background-color: white;
 }
-.postoptions > h1:hover {
+.postoptions > button:hover {
   background-color: lightseagreen;
   color: white;
 }

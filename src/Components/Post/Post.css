@@ -92,7 +92,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 3px;
 }
 .post__bottom__buttons {
   display: flex;
@@ -172,9 +172,10 @@
 .post__info > div > h1 {
   color: lightseagreen !important;
   font-size: 16px;
-  padding-bottom: 8px;
+  padding-bottom: 3px;
   align-items: center;
   cursor: pointer;
+  text-transform: lowercase !important;
 }
 .post__info > div > h1:hover {
   text-decoration: underline;
@@ -182,11 +183,11 @@
 .post__info > div:first-of-type > small {
   color: gray;
   margin-left: 5px;
-  padding-bottom: 8px;
+  padding-bottom: 5px;
 }
 .post__high__badge {
   color: green !important;
-  font-size: 16px;
+  font-size: 14px;
 }
 .post__icon__button__message {
   width: fit-content !important;
@@ -285,4 +286,19 @@
   text-align: center;
   color: orange;
   padding: 5px;
+}
+p.post__location {
+  margin: 2px 0;
+  user-select: none;
+  text-transform: inherit;
+  color: limegreen;
+  padding: 2px 0;
+  text-align: center;
+  font-weight: 600;
+}
+@media only screen and (max-width: 768px) {
+  .post__info > div > h1 {
+    font-size: 14px !important;
+    padding-bottom: 3px;
+  }
 }

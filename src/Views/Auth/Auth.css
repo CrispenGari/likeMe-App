@@ -3,10 +3,11 @@
   user-select: none;
   user-zoom: none;
   height: 100vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  display: grid;
-  place-items: center;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 2px 2px 2px 2px lightgray;
 }
 .auth__main > small {
@@ -75,6 +76,8 @@
   padding: 10px;
   border-radius: 5px;
   height: 60vh;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 .auth__main > h1 {
   display: flex;

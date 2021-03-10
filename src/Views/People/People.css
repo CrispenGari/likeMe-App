@@ -55,3 +55,28 @@
 .people__list::-webkit-scrollbar {
   display: none;
 }
+@media only screen and (max-width: 768px) {
+  .people__container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0px auto 5px auto;
+  }
+  .people__search {
+    display: flex;
+    flex: 1;
+    width: 70%;
+    align-items: center;
+    padding: 3px;
+    margin: 0px 5px;
+  }
+  .people__search > input {
+    outline: none;
+    border: none;
+    flex: 1;
+    padding: 0 !important;
+    background: inherit;
+  }
+  .people__container > div > h1 {
+    font-size: 18px !important;
+  }
+}

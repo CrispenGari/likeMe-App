@@ -1,15 +1,51 @@
 import React from "react";
 import "./PostOptions.css";
-const PostOptions = () => {
+import { useSelector } from "react-redux";
+import firebase from "../../backend";
+
+const PostOptions = ({ post, setShowNotification, setAnchorEl }) => {
+  const user = useSelector((state) => state.user);
+  console.log(
+    String(post?.data?.imageURL)
+      .split(/images%2/)[1]
+      ?.split("?")[0]
+  );
+  const deletePost = () => {
+    // DELETE A POST FROM A DATABASE AS WELL AS STORAGE
+    firebase.db
+      .collection("posts")
+      .doc(post?.id)
+      .delete()
+      .then(() =>
+        firebase.storage
+          .ref()
+          .child(
+            `images/${
+              String(post?.data?.imageURL)
+                .split(/images%2/)[1]
+                ?.split("?")[0]
+            }`
+          )
+          .delete()
+      )
+      .finally(() => {
+        setShowNotification(true);
+        setAnchorEl(null);
+      });
+  };
   return (
     <div className="postoptions">
-      <h1>Follow</h1>
-      <h1>Delete</h1>
-      <h1>Turn On Notifications</h1>
-      <h1>Mute</h1>
+      <button disabled={user?.uid === post?.data?.userId}>Follow</button>
+      <button onClick={deletePost} disabled={user?.uid !== post?.data?.userId}>
+        Delete
+      </button>
+      <button disabled={user?.uid === post?.data?.userId}>
+        Turn On Notifications
+      </button>
+      <button disabled={user?.uid === post?.data?.userId}>Mute</button>
       <hr />
-      <h1>Share</h1>
-      <h1>Download</h1>
+      <button>Share</button>
+      <button>Download</button>
     </div>
   );
 };

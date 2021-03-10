@@ -1,12 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
-import { Delete, PhotoCamera } from "@material-ui/icons";
+import {
+  Delete,
+  PhotoCamera,
+  LocationOn,
+  LocationOff,
+} from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { AiFillCloseCircle } from "react-icons/ai";
 import "./Form.css";
 import firebase from "../../backend";
 import fb from "firebase";
-
+import locationAxios from "../../data/location";
 const Form = ({ setShowForm }) => {
   const user = useSelector((state) => state.user);
   const hashTags = useSelector((state) => state.hashTags);
@@ -18,14 +23,26 @@ const Form = ({ setShowForm }) => {
   const [image, setImage] = useState(null);
   const textInputRef = useRef(null);
   const [preview, setPreview] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [allowLocationToBeDetected, setAllowLocationToBeDetected] = useState(
+    true
+  );
   useEffect(() => {
     if (progress === 100) {
       setPosting(false);
       setImage(null);
       setPreview(null);
       setShowForm(false);
+      setAllowLocationToBeDetected(true);
     }
   }, [progress, setShowForm]);
+
+  useEffect(() => {
+    (async () => {
+      const _location = await locationAxios.get("");
+      setCurrentLocation(_location.data);
+    })();
+  }, []);
 
   const removePhoto = () => {
     setPreview(null);
@@ -40,6 +57,7 @@ const Form = ({ setShowForm }) => {
     setProgress(0);
     setCategory("single");
     setSuggestionsResults([]);
+    setAllowLocationToBeDetected(true);
   };
   useEffect(() => {
     if (!image) {
@@ -154,6 +172,13 @@ const Form = ({ setShowForm }) => {
                 imageURL: url,
                 caption: caption,
                 timestamp: fb.firestore.FieldValue.serverTimestamp(),
+                location: allowLocationToBeDetected
+                  ? `${currentLocation?.country}(${String(
+                      currentLocation?.country_code
+                    ).toLowerCase()}), ${currentLocation?.region} • ${
+                      currentLocation?.city
+                    }`
+                  : null,
               });
             });
         }
@@ -219,6 +244,23 @@ const Form = ({ setShowForm }) => {
               onClick={removePhoto}
             >
               <Delete className="form__image__delete__icon" />
+            </IconButton>
+            <IconButton
+              className="form__image__location__button"
+              title={
+                allowLocationToBeDetected
+                  ? "Turn Off Location"
+                  : "Turn On Location"
+              }
+              onClick={() =>
+                setAllowLocationToBeDetected(!allowLocationToBeDetected)
+              }
+            >
+              {allowLocationToBeDetected ? (
+                <LocationOn className="form__image__locationOn__icon" />
+              ) : (
+                <LocationOff className="form__image__locationOff__icon" />
+              )}
             </IconButton>
             <img
               src={preview}

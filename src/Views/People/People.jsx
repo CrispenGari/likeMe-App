@@ -26,6 +26,7 @@ const People = () => {
           </div>
           <div className="people__list">
             {/* We don't want to display the current user on people suggestions */}
+
             {users
               ?.filter((user_) => user?.uid !== user_?.data.uid)
               .map((user) => {

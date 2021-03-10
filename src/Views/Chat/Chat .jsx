@@ -49,6 +49,7 @@ const Chat = () => {
           sender: user?.uid,
           receiver: uid,
           timestamp: fb.firestore.FieldValue.serverTimestamp(),
+          read: false,
         })
         .finally(() => {
           setMessage("");

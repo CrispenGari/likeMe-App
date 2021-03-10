@@ -17,7 +17,7 @@ import fb from "firebase";
 import { useHistory } from "react-router-dom";
 import timeFunct from "../../utils/time";
 import { PostOptions } from "../../Components";
-const Post = ({ post }) => {
+const Post = ({ post, setShowNotification }) => {
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -27,6 +27,7 @@ const Post = ({ post }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const openPop = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -142,31 +143,36 @@ const Post = ({ post }) => {
         <div className="post__info">
           <div>
             <h1 onClick={openProfile}>
-              {post?.data?.userId === user?.uid ? "You" : post?.data?.username}{" "}
+              {post?.data?.userId === user?.uid
+                ? "You"
+                : String(post?.data?.username).split(/\s/).join("_")}{" "}
               <HiBadgeCheck className="post__high__badge" />
             </h1>{" "}
             <small>•</small> <small>{postTime}</small>
-            <small>•</small>
-            <small
-              className={`post__category__badge ${
-                post?.data?.category === "complicated"
-                  ? "post__category__badge--complicated"
-                  : post?.data?.category === "searching"
-                  ? "post__category__badge--searching"
-                  : post?.data?.category === "single"
-                  ? "post__category__badge--single"
-                  : ""
-              }`}
-            >
-              {post?.data?.category}
-            </small>
           </div>
+          <p
+            className={`post__category__badge ${
+              post?.data?.category === "complicated"
+                ? "post__category__badge--complicated"
+                : post?.data?.category === "searching"
+                ? "post__category__badge--searching"
+                : post?.data?.category === "single"
+                ? "post__category__badge--single"
+                : ""
+            }`}
+          >
+            {"• " + post?.data?.category}
+          </p>
           <p>
-            {post?.data?.caption.split(" ").map((cap) => {
+            {post?.data?.caption.split(" ").map((cap, i) => {
               if (cap.startsWith("#")) {
-                return <span className="post__hash__tag">{cap}</span>;
+                return (
+                  <span key={i} className="post__hash__tag">
+                    {cap}
+                  </span>
+                );
               } else {
-                return <span>{cap}</span>;
+                return <span key={i}>{cap}</span>;
               }
             })}
           </p>
@@ -188,7 +194,11 @@ const Post = ({ post }) => {
               horizontal: "center",
             }}
           >
-            <PostOptions />
+            <PostOptions
+              setShowNotification={setShowNotification}
+              post={post}
+              setAnchorEl={setAnchorEl}
+            />
           </Popover>
         </div>
       </div>
@@ -204,6 +214,7 @@ const Post = ({ post }) => {
         </div>
         <img src={post?.data?.imageURL} alt="post" loading="lazy" />
       </div>
+      <p className="post__location">{post?.data?.location}</p>
       <div className="post__bottom">
         <div className="post__bottom__buttons">
           <IconButton className="post__icon__button__message" title="download">

@@ -21,7 +21,7 @@ const Messages = () => {
             <h1>Messages</h1>
             <div className="messages__search">
               <input type="text" placeholder="Search chat..." />
-              <Search />
+              <Search className="message__search__icon" />
             </div>
           </div>
           <div className="messages__chats">
