@@ -24,14 +24,14 @@ const Person = ({ user }) => {
             {user?.data?.displayName}{" "}
             <HiBadgeCheck className="post__high__badge" />
           </h1>
-          <small>Bio</small>
+          <small>{user?.data?.bio || "No Bio Provided"}</small>
           <div className="person__top__info__followings">
             <small>2 • Followings</small>
             <small>3 • Followers</small>
           </div>
           <div className="person__top__info__more">
-            <small>Gender</small>
-            <small>Status</small>
+            <small>{user?.data?.gender || "Not Given"}</small>
+            <small>{user?.data?.status || "Not Given"}</small>
           </div>
         </div>
       </div>

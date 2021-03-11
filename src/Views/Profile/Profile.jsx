@@ -241,13 +241,12 @@ const Profile = () => {
                 <span>{currentUser?.data?.lastSignInTime}</span>{" "}
               </small>
             </div>
-          </div>
-
-          <h1>Posts</h1>
-          <div className="profile__posts">
-            {currentUserPosts?.map((post) => {
-              return <Post key={post?.id} post={post} />;
-            })}
+            <h1>Posts</h1>
+            <div className="profile__posts">
+              {currentUserPosts?.map((post) => {
+                return <Post key={post?.id} post={post} />;
+              })}
+            </div>
           </div>
         </div>
       </div>

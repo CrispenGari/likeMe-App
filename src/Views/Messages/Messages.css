@@ -17,28 +17,32 @@
   background: white;
   flex: 1;
   height: 100%;
-
   margin-bottom: 5px;
 }
 .messages__search {
   display: flex;
   flex: 1;
   align-items: center;
-  padding: 4px 10px;
+  padding: 4px 10px !important;
   border-radius: 999px;
   background: #fafafa;
-  width: 70%;
+  justify-self: flex-end !important;
   max-width: 200px;
-  padding-left: 15px;
 }
 .message__search__icon {
-  margin: 0px 5px !important;
+  margin-right: 0px !important;
 }
 .messages__search > input {
   outline: none;
   border: none;
   padding: 2px 0 2px 4px;
   background: inherit;
+}
+.messages__container__header {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 .messages__container > div:first-of-type {
   display: flex;
@@ -68,6 +72,19 @@
   overflow-x: hidden;
   padding: 5px;
 }
+/* For fleets */
+.messages__fleets {
+  width: 100%;
+  max-width: 500px;
+  margin: 0px auto;
+  padding: 2px 5px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-bottom: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+/* End of fleets */
 @media only screen and (max-width: 768px) {
   .messages__container > div > h1 {
     font-size: 18px !important;
@@ -75,10 +92,11 @@
   .messages__search {
     display: flex;
     flex: 1;
-    width: 70%;
     align-items: center;
     padding: 3px;
     margin: 0px 5px;
+    background: #fafafa;
+    padding: 2px 5px !important;
   }
   .messages__search > input {
     outline: none;

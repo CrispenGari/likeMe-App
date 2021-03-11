@@ -19,6 +19,16 @@ const firebaseConfig = {
 //   appId: "1:51162384651:web:21078b68c55c7960ea7a0e",
 //   measurementId: "G-Y0JN6JGEJF",
 // };
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyB1gTlqsdwUZMUwJ1MxwFzsjJw-QBC8v28",
+//   authDomain: "likeme-7c975.firebaseapp.com",
+//   projectId: "likeme-7c975",
+//   storageBucket: "likeme-7c975.appspot.com",
+//   messagingSenderId: "229667542535",
+//   appId: "1:229667542535:web:a89c76cc888279c0d5bca2",
+//   measurementId: "G-SZ0JZD10WS",
+// };
 const app = firebase.initializeApp(firebaseConfig);
 
 const auth = app.auth();

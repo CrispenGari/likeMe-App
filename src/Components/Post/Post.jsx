@@ -212,7 +212,7 @@ const Post = ({ post, setShowNotification }) => {
 
           <h1>{likes.length}</h1>
         </div>
-        <img src={post?.data?.imageURL} alt="post" loading="lazy" />
+        <img src={post?.data?.imageURL} alt="post" />
       </div>
       <p className="post__location">{post?.data?.location}</p>
       <div className="post__bottom">

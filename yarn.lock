@@ -6220,6 +6220,11 @@ ignore@^5.1.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.8.tgz#f150a8b50a34289b33e22f5889abd4d8016f0e57"
   integrity sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
 
+image-downloader@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/image-downloader/-/image-downloader-4.0.2.tgz#dd40174f9d7f7762796cf4fd38aacb9648b836b3"
+  integrity sha512-lk3kQ5dwGMZz2Q1UHAFVOhTLW73lV55s5DSM4rDPttEKtRrf9yEWxwRlXp9xIr7owvTeIEAc4VCPAghunlNxzQ==
+
 immer@8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
@@ -9733,6 +9738,11 @@ react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+
+react-fast-marquee@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-fast-marquee/-/react-fast-marquee-1.1.1.tgz#7e8639c542cb0f1346f69ade1d65fba3bd9028d2"
+  integrity sha512-4XM0kqD0UZ8v1b+u44xMdSlhAND6WYn+5IDpoEHMf5GOGU2X9I3C1tWGUoxs9aAWF90KJ3mYEAr2DJkty2LATg==
 
 react-icons@^4.2.0:
   version "4.2.0"

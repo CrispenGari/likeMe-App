@@ -4,6 +4,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .chat__container {
   width: 100%;
@@ -15,8 +16,11 @@
   box-shadow: 2px 2px 2px 2px lightgray;
   background: white;
   flex: 1;
-  height: 85vh;
-  max-height: 85vh;
+  height: 100%;
+}
+.chat__main {
+  flex: 1;
+  height: 100%;
 }
 
 .chat__container > div:first-of-type {
@@ -33,6 +37,11 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  /* background-image: url(https://cdn.dribbble.com/users/23582/screenshots/3319553/paper_clip_love.gif); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .chat__chats::-webkit-scrollbar {
   display: none;
@@ -41,6 +50,10 @@
   padding: 10px;
   flex: 1;
   width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(https://cdn.dribbble.com/users/23582/screenshots/3319553/paper_clip_love.gif);
 }
 
 .chat__input {
@@ -109,6 +122,27 @@
   font-size: 12px;
   user-select: none;
   user-zoom: none;
-  background: rgba(0, 0, 0, 0.8) !important;
   color: white;
+  display: none !important;
+}
+.chat__container__header__right {
+  user-select: none;
+  user-zoom: none;
+  cursor: pointer;
+}
+.chat__container__header:hover {
+  background-color: #fafafa;
+}
+.chat__container__header__right:hover > h1 {
+  color: lightseagreen;
+  text-decoration: underline;
+}
+@media only screen and (max-width: 768px) {
+  .chat__container {
+    flex: 1;
+    margin: 0px auto;
+  }
+  .chat__header {
+    display: none;
+  }
 }

@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
-import Marquee from "react-smooth-marquee";
+// import Marquee from "react-fast-marquee";
 import fb from "firebase";
 import "./Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
@@ -78,15 +78,19 @@ const Chat = () => {
                 className="chat__header__avatar"
               />
             </div>
-            <div className="chat__container__header__right">
+            <div
+              className="chat__container__header__right"
+              title="profile"
+              onClick={() => history.push(`/profile/${uid}`)}
+            >
               <h1>{newFriend?.data?.displayName}</h1>
               <small>Private Chat</small>
+              {/* <Marquee loop direction="right" className="chat__main__marquee">
+                {newFriend?.data?.bio || "No bio Provided"}
+              </Marquee> */}
             </div>
-          </div>
+          </div>{" "}
           <div className="chat__chats">
-            <marquee loop direction="right" className="chat__main__marquee">
-              {newFriend?.data?.bio || "No bio Provided"}
-            </marquee>
             <div className="chat__messages">
               {chatMessages?.map((message, i) => (
                 <Message newFriend={newFriend} key={i} message={message} />

@@ -12,7 +12,7 @@ import "./Form.css";
 import firebase from "../../backend";
 import fb from "firebase";
 import locationAxios from "../../data/location";
-const Form = ({ setShowForm }) => {
+const Form = ({ setShowForm, setShowNotification }) => {
   const user = useSelector((state) => state.user);
   const hashTags = useSelector((state) => state.hashTags);
   const [caption, setCaption] = useState("");
@@ -34,8 +34,9 @@ const Form = ({ setShowForm }) => {
       setPreview(null);
       setShowForm(false);
       setAllowLocationToBeDetected(true);
+      setShowNotification(true);
     }
-  }, [progress, setShowForm]);
+  }, [progress, setShowForm, setShowNotification]);
 
   useEffect(() => {
     (async () => {

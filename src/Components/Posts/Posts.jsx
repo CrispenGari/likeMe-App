@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Posts.css";
 import { Post } from "../../Components";
 import { useSelector } from "react-redux";
-import { AlertTitle, Alert } from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 import { Snackbar } from "@material-ui/core";
 const Posts = () => {
   const posts = useSelector((state) => state.posts);

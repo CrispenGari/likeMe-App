@@ -1,6 +1,6 @@
 import React from "react";
 import "./Messages.css";
-import { Header, User } from "../../Components";
+import { Header, User, Fleets } from "../../Components";
 import { Search } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 const Messages = () => {
@@ -12,12 +12,12 @@ const Messages = () => {
       <div className="messages__header">
         <Header />
       </div>
+      <div className="messages__fleets">
+        <Fleets />
+      </div>
       <div className="messages__main">
         <div className="messages__container">
-          <div
-            className="
-        "
-          >
+          <div className="messages__container__header">
             <h1>Messages</h1>
             <div className="messages__search">
               <input type="text" placeholder="Search chat..." />

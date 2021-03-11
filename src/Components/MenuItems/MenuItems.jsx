@@ -26,7 +26,7 @@ const MenuItems = () => {
         </div>
         <h1>Messages</h1>
       </div>
-      <div className="menuitem">
+      <div className="menuitem" onClick={() => history.push("/people")}>
         <div>
           <div className="menuitems__icon__button__badge">5</div>
           <IoIosPeople className="menuitems__icon__message__friends" />

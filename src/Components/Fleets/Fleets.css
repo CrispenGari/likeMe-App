@@ -1,0 +1,37 @@
+.fleets {
+  display: flex;
+  align-self: center;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 5px 0px;
+}
+.fleets__left {
+  cursor: pointer;
+  position: relative;
+}
+.fleets__left__avatar {
+  border: 3px solid limegreen;
+}
+.fleets__right {
+  display: flex;
+  align-self: center;
+  margin: 0px 5px;
+}
+
+.fleets::-webkit-scrollbar {
+  display: none !important;
+}
+.fleets__left__add__button {
+  position: absolute !important;
+  bottom: 5px !important ;
+  right: 5px !important;
+  padding: 3px !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  background-color: limegreen !important;
+}
+.fleets__left__add__icon {
+  color: white !important;
+  font-size: 10px !important;
+}
