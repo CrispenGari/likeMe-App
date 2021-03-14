@@ -19,10 +19,10 @@ const Messages = () => {
         <div className="messages__container">
           <div className="messages__container__header">
             <h1>Messages</h1>
-            <div className="messages__search">
+            {/* <div className="messages__search">
               <input type="text" placeholder="Search chat..." />
               <Search className="message__search__icon" />
-            </div>
+            </div> */}
           </div>
           <div className="messages__chats">
             {users?.map(

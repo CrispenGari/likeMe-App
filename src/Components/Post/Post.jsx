@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
-import { Avatar, IconButton, Popover } from "@material-ui/core";
+import { Avatar, IconButton, Popover, Modal } from "@material-ui/core";
 import {
   FavoriteBorder,
   Favorite,
@@ -20,7 +20,7 @@ import { PostOptions } from "../../Components";
 const Post = ({ post, setShowNotification }) => {
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
-  const [showComments, setShowComments] = useState(false);
+  const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [postTime, setPostTime] = useState("");
@@ -131,8 +131,18 @@ const Post = ({ post, setShowNotification }) => {
         .finally(() => setLiked(true));
     }
   };
+
   return (
     <div className="post">
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        className="post__comments__modal"
+      >
+        <Comments comments={comments} setOpen={setOpen} />
+      </Modal>
       <div className="post__top">
         <Avatar
           className="post__avatar"
@@ -249,16 +259,10 @@ const Post = ({ post, setShowNotification }) => {
           </button>
         </div>
         <div className="post__buttom__comment__container">
-          {!showComments && comments.length > 0 && (
-            <button onClick={() => setShowComments(true)}>Read Comments</button>
-          )}
-          {comments.length <= 0 && <h1>No Comments for this post</h1>}
-          {showComments && (
-            <Comments
-              comments={comments}
-              setShowComments={setShowComments}
-              postId={post?.id}
-            />
+          {comments?.length > 0 ? (
+            <button onClick={() => setOpen(true)}>Read Comments</button>
+          ) : (
+            <h1>No Comments</h1>
           )}
         </div>
       </div>

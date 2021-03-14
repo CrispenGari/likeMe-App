@@ -2,19 +2,29 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
-  height: 40vh;
+  height: 80vh;
   overflow-x: hidden;
   overflow-y: scroll;
+  width: 100%;
+  background-color: white;
+  max-width: 500px;
+  margin: 10px auto;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px lightgray;
 }
 .comments::-webkit-scrollbar {
   display: none;
 }
 .comments > h1 {
   text-transform: uppercase;
-  text-align: center;
   margin: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
 }
-.comments > button {
+.comments > h1 > button {
   background: lightseagreen;
   color: white;
   outline: none;
@@ -26,8 +36,8 @@
   cursor: pointer;
   position: relative;
 }
-.comments > button::before,
-.comments > button::after {
+.comments > h1 > button::before,
+.comments > h1 > button::after {
   border: 0 solid transparent;
   transition: all 0.3s;
   content: "";
@@ -36,25 +46,25 @@
   width: 24px;
   border-radius: 5px;
 }
-.comments > button::before {
+.comments > h1 > button::before {
   border-top: 2px solid black;
   right: 0;
   top: -4px;
 }
 
-.comments > button::after {
+.comments > h1 > button::after {
   border-bottom: 2px solid black;
   bottom: -4px;
   left: 0;
 }
 
-.comments > button:hover::before,
-.comments > button:hover::after {
+.comments > h1 > button:hover::before,
+.comments > h1 > button:hover::after {
   width: 100%;
 }
-.comments > button:hover {
+.comments > h1 > button:hover {
   background-color: orange !important;
 }
-.comments > button:active {
+.comments > h1 > button:active {
   background-color: green !important;
 }

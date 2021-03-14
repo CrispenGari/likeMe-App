@@ -19,10 +19,10 @@ const People = () => {
                 "
           >
             <h1>People</h1>
-            <div className="people__search">
+            {/* <div className="people__search">
               <input type="text" placeholder="Search people..." />
               <Search />
-            </div>
+            </div> */}
           </div>
           <div className="people__list">
             {/* We don't want to display the current user on people suggestions */}

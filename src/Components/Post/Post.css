@@ -9,12 +9,20 @@
   border-radius: 5px;
   border-bottom: 1px solid lightgray;
   box-shadow: 2px 2px 2px 2px lightgray;
-  margin: 5px 0;
+  margin: 10px 0 !important;
   padding: 10px;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: center;
   cursor: pointer;
+  overflow-y: hidden;
+  scroll-snap-align: start;
+  flex: 1 !important;
+}
+.post__comments__modal {
+  width: 100vw !important;
+  height: 100vh !important;
+  display: grid !important;
+  place-items: center !important;
 }
 .post:hover {
   opacity: 0.9 !important;
@@ -39,13 +47,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 45vh;
 }
 .post__center > img {
   /* width: 400px; */
-
   object-fit: contain;
-
-  max-height: 55vh !important;
+  max-height: 45vh !important;
 }
 .post__center__likes {
   flex: 1;
