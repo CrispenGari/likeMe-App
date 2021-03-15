@@ -1,7 +1,7 @@
 import React from "react";
 import "./People.css";
 import { Header } from "../../Components";
-import { Search } from "@material-ui/icons";
+
 import { useSelector } from "react-redux";
 import { Person } from "../../Components";
 const People = () => {

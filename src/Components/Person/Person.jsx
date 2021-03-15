@@ -38,7 +38,7 @@ const Person = ({ user }) => {
       <div className="person__bottom">
         <button onClick={openChat}>Message</button>
         <button onClick={openProfile}>Profile</button>
-        <button>Follow</button>
+        <button disabled>Follow</button>
       </div>
     </div>
   );

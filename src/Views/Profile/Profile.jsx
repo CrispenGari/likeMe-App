@@ -21,6 +21,8 @@ const Profile = () => {
   const [bio, setBio] = useState("");
   const [status, setStatus] = useState("Single");
   const [alert, setAlert] = useState(false);
+  const [userFollowers, setUserFollowers] = useState([]);
+  const [userFollowings, setUserFollowings] = useState([]);
 
   const updateProfile = () => {
     firebase.db
@@ -61,25 +63,139 @@ const Profile = () => {
     setCurrentUserPosts(currUposts);
   }, [uid, posts]);
 
-  const followUser = () => {
+  useEffect(() => {
     firebase.db
       .collection("users")
       .where("uid", "==", uid)
       .get()
       .then((snapshot) => {
+        const userDocId = snapshot.docs[0]?.id;
         firebase.db
           .collection("users")
-          .doc(snapshot.docs[0]?.id)
+          .doc(userDocId)
           .collection("followers")
-          .add({
-            displayName: user?.displayName,
-            email: user?.email,
-            emailVerified: user?.emailVerified,
-            phoneNumber: user?.phoneNumber,
-            photoURL: user?.photoURL,
-            uid: user?.uid,
+          .get()
+          .then((snapshot_) => {
+            setUserFollowers(
+              snapshot_.docs.map((doc) => ({ id: doc?.id, data: doc?.data() }))
+            );
+          })
+          .then(() => {
+            firebase.db
+              .collection("users")
+              .doc(userDocId)
+              .collection("followings")
+              .get()
+              .then((snapshot__) => {
+                setUserFollowings(
+                  snapshot__.docs.map((doc) => ({
+                    id: doc?.id,
+                    data: doc?.data(),
+                  }))
+                );
+              });
           });
       });
+  }, [uid]);
+
+  console.log("Followers", userFollowers);
+  console.log("Followings", userFollowings);
+  // console.log(user, currentUser?.data?.uid);
+
+  // FOLLOW THE USER IF THE BUTTON IS CLICKED IF YOU ARE NOT FOLLOWING OTHERWISE UN FOLLOW THE USER
+  const followUser = (isFollowing) => {
+    console.log("isFollowing is: ", isFollowing);
+    if (!isFollowing) {
+      firebase.db
+        .collection("users")
+        .where("uid", "==", uid)
+        .get()
+        .then((snapshot) => {
+          const userDocId = snapshot.docs[0]?.id;
+          // console.log(userDocId);
+          firebase.db
+            .collection("users")
+            .doc(userDocId)
+            .collection("followers")
+            .where("uid", "==", uid)
+            .get()
+            .then((followerSnapshot) => {
+              firebase?.db
+                .collection("users")
+                .doc(userDocId)
+                .collection("followers")
+                .doc(followerSnapshot.docs[0]?.id)
+                .delete();
+            });
+        })
+        .then(() => {
+          // Add the followed user to your followings
+          firebase.db
+            .collection("users")
+            .where("uid", "==", currentUser?.data?.uid)
+            .get()
+            .then((snapshot) => {
+              const userDocId_ = snapshot.docs[0]?.id;
+              firebase.db
+                .collection("users")
+                .doc(userDocId_)
+                .collection("followings")
+                .where("uid", "==", currentUser?.data?.uid)
+                .get()
+                .then((followingSnapshot) => {
+                  firebase.db
+                    .collection("users")
+                    .doc(userDocId_)
+                    .collection("followings")
+                    .doc(followingSnapshot.docs[0].id)
+                    .delete();
+                });
+            });
+        });
+    } else {
+      firebase.db
+        .collection("users")
+        .where("uid", "==", uid)
+        .get()
+        .then((snapshot) => {
+          const userDocId = snapshot.docs[0]?.id;
+          // console.log(userDocId);
+          firebase.db
+            .collection("users")
+            .doc(userDocId)
+            .collection("followers")
+            .add({
+              displayName: user?.displayName,
+              email: user?.email,
+              emailVerified: user?.emailVerified,
+              phoneNumber: user?.phoneNumber,
+              photoURL: user?.photoURL,
+              uid: user?.uid,
+            });
+        })
+        .then(() => {
+          // Add the followed user to your followings
+          firebase.db
+            .collection("users")
+            .where("uid", "==", currentUser?.data?.uid)
+            .get()
+            .then((snapshot) => {
+              const userDocId_ = snapshot.docs[0]?.id;
+              firebase.db
+                .collection("users")
+                .doc(userDocId_)
+                .collection("followings")
+                .add({
+                  displayName: currentUser?.data?.displayName,
+                  email: currentUser?.data?.email,
+                  emailVerified: currentUser?.data?.emailVerified,
+                  phoneNumber: currentUser?.data?.phoneNumber,
+                  photoURL: currentUser?.data?.photoURL,
+                  uid: currentUser?.data?.uid,
+                });
+            });
+        });
+    }
   };
 
   return (
@@ -208,14 +324,29 @@ const Profile = () => {
                         <button onClick={discard}>Discard</button>
                       </div>
                       <div className="profile__bottom__followers">
-                        <small>{`2 • Followings | 3 • Followers`}</small>
+                        <small>{`${userFollowings?.length} • Followings | ${userFollowers?.length} • Followers`}</small>
                       </div>
                     </>
                   ) : (
                     <>
-                      <button onClick={followUser}>Follow</button>
+                      <button
+                        disabled
+                        onClick={() =>
+                          followUser(
+                            userFollowings.filter((user_following) => {
+                              return uid === user_following?.data?.uid;
+                            }).length === 0
+                          )
+                        }
+                      >
+                        {userFollowings.filter((user_following) => {
+                          return uid === user_following?.data?.uid;
+                        }).length === 0
+                          ? "Follow"
+                          : "Unfollow"}
+                      </button>
                       <div className="profile__bottom__followers">
-                        <small>{`2 • Followings | 3 • Followers`}</small>
+                        <small>{`${userFollowings?.length} • Followings | ${userFollowers?.length} • Followers`}</small>
                       </div>
                     </>
                   )}
