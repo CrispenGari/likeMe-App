@@ -141,7 +141,13 @@ const Post = ({ post, setShowNotification }) => {
         aria-describedby="simple-modal-description"
         className="post__comments__modal"
       >
-        <Comments comments={comments} setOpen={setOpen} />
+        <Comments
+          comments={comments}
+          setComment={setComment}
+          setOpen={setOpen}
+          postComment={postComment}
+          comment={comment}
+        />
       </Modal>
       <div className="post__top">
         <Avatar

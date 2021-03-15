@@ -1,16 +1,45 @@
 import React from "react";
 import "./Comments.css";
 import { Comment } from "../../Components";
-const Comments = ({ setOpen, comments, postId }) => {
+const Comments = ({
+  setOpen,
+  comments,
+  postId,
+  postComment,
+  setComment,
+  comment,
+}) => {
   return (
     <div className="comments">
       <h1>
         All Comments{" "}
         <button onClick={() => setOpen(false)}>Hide Comments</button>
       </h1>
-      {comments.map((comment) => {
-        return <Comment key={comment?.id} comment={comment} postId={postId} />;
-      })}
+      <div className="comments__container">
+        {comments.map((comment) => {
+          return (
+            <Comment key={comment?.id} comment={comment} postId={postId} />
+          );
+        })}
+      </div>
+      <form className="post__bottom__comment__input">
+        <input
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          type="text"
+          placeholder="Type your comment..."
+        />
+        <button
+          type="submit"
+          disabled={!comment}
+          onClick={(e) => {
+            e.preventDefault();
+            postComment();
+          }}
+        >
+          post
+        </button>
+      </form>
     </div>
   );
 };

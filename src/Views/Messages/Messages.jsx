@@ -1,8 +1,8 @@
 import React from "react";
 import "./Messages.css";
 import { Header, User, Fleets } from "../../Components";
-import { Search } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+
 const Messages = () => {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);

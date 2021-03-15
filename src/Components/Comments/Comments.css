@@ -3,8 +3,8 @@
   flex-direction: column;
   padding: 10px;
   height: 80vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  user-select: none;
+  user-zoom: none;
   width: 100%;
   background-color: white;
   max-width: 500px;
@@ -12,7 +12,12 @@
   border-radius: 5px;
   box-shadow: 2px 2px 2px 2px lightgray;
 }
-.comments::-webkit-scrollbar {
+.comments__container {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.comments__container::-webkit-scrollbar {
   display: none;
 }
 .comments > h1 {

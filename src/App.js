@@ -11,70 +11,15 @@ import {
   Terms,
   People,
 } from "./Views";
-import firebase from "./backend";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useFirebaseData } from "./hooks";
 
-import actions from "./actions";
 const App = () => {
+  // USE THE HOOK useFirebaseData
+  useFirebaseData();
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const [welcome, setWelcome] = useState(true);
-  useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("messages")
-      .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) => {
-        dispatch(
-          actions.setMessages(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          )
-        );
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
-  useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("users")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        dispatch(
-          actions.setUsers(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          )
-        );
-      });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
-  useEffect(() => {
-    const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        dispatch(actions.setUser(authUser));
-      } else {
-        dispatch(actions.setUser(null));
-      }
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("hashtags")
-      .onSnapshot((snapshot) => {
-        dispatch(actions.setHashTags(snapshot.docs.map((doc) => doc.data())));
-      });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
-
+  console.log("Mounted");
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setWelcome(false);
