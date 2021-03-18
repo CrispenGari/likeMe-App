@@ -12,6 +12,12 @@ const setUsers = (value) => {
     value: value,
   };
 };
+const setFleets = (value) => {
+  return {
+    type: constants.SET_FLEETS,
+    value: value,
+  };
+};
 const setLikes = (value) => {
   return {
     type: constants.SET_LIKES,
@@ -44,6 +50,7 @@ const actions = {
   setPosts,
   setHashTags,
   setLikes,
+  setFleets,
 };
 
 export default actions;

@@ -4,6 +4,7 @@ import posts from "./postsReducer";
 import user from "./userReducer";
 import hashTags from "./hashTagsReducer";
 import users from "./usersReducer";
+import fleets from "./fleetsReducer";
 
 const rootReducers = combineReducers({
   messages,
@@ -11,6 +12,7 @@ const rootReducers = combineReducers({
   user,
   hashTags,
   users,
+  fleets,
 });
 
 export default rootReducers;

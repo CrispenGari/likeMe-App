@@ -71,6 +71,9 @@
   padding: 10px;
   height: fit-content;
 }
+.form__input > textarea::-webkit-scrollbar {
+  display: none;
+}
 .form__input::-webkit-scrollbar {
   display: none;
 }
@@ -251,4 +254,11 @@
 .form__close__button__icon {
   font-size: 20px !important;
   color: orange !important;
+}
+.form__words__limit {
+  font-size: 14px !important;
+  color: gray !important;
+  padding: 3px 0;
+  user-zoom: none;
+  user-select: none;
 }

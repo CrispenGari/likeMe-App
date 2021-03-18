@@ -5,6 +5,7 @@ const constants = {
   SET_POSTS: "SET_POSTS",
   SET_HASH_TAGS: "SET_HASH_TAGS",
   SET_LIKES: "SET_LIKES",
+  SET_FLEETS: "SET_FLEETS",
 };
 
 export default constants;

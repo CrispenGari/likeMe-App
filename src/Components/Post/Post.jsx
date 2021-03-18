@@ -63,7 +63,6 @@ const Post = ({ post, setShowNotification }) => {
       unsubscribe();
     };
   }, [post?.id, likes, user?.email]);
-
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")

@@ -6,3 +6,6 @@
 .fleet__avatar {
   border: 2px solid lightseagreen !important;
 }
+.fleet__avatar--nofleets {
+  border: none !important;
+}

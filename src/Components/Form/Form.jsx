@@ -27,6 +27,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
   const [allowLocationToBeDetected, setAllowLocationToBeDetected] = useState(
     true
   );
+
   useEffect(() => {
     if (progress === 100) {
       setPosting(false);
@@ -200,6 +201,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
         />
         <div className="form__input">
           <textarea
+            maxLength="150"
             onKeyUp={suggest}
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
@@ -220,6 +222,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
               </div>
             ))}
           </div>
+          <p className="form__words__limit">{caption?.length}/150 characters</p>
         </div>
         <IconButton className="form__close__button" onClick={closeForm}>
           <AiFillCloseCircle className="form__close__button__icon" />
