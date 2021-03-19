@@ -251,8 +251,26 @@ const Fleets = ({ setDeleteNotification }) => {
           </label>
         </div>
         <div className="fleets__right">
+          {/* No fleets users should be displayed last */}
           {users
             ?.filter((u) => u?.data?.uid !== user?.uid)
+            .filter((us) => {
+              return (
+                fleets.filter((fleet) => fleet?.data?.userId === us?.data?.uid)
+                  ?.length > 0
+              );
+            })
+            .concat(
+              users
+                ?.filter((u) => u?.data?.uid !== user?.uid)
+                .filter((us) => {
+                  return (
+                    fleets.filter(
+                      (fleet) => fleet?.data?.userId === us?.data?.uid
+                    )?.length === 0
+                  );
+                })
+            )
             .map((user_, i) => {
               return (
                 <Fleet
