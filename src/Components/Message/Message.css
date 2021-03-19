@@ -44,3 +44,8 @@
   color: green !important;
   user-select: none;
 }
+.message__body > img {
+  width: 100%;
+  max-width: 300px;
+  object-fit: contain;
+}

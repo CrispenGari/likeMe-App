@@ -5,11 +5,6 @@ import firebase from "../../backend";
 
 const PostOptions = ({ post, setShowNotification, setAnchorEl }) => {
   const user = useSelector((state) => state.user);
-  console.log(
-    String(post?.data?.imageURL)
-      .split(/images%2/)[1]
-      ?.split("?")[0]
-  );
   const deletePost = () => {
     // DELETE A POST FROM A DATABASE AS WELL AS STORAGE
     firebase.db
@@ -21,9 +16,7 @@ const PostOptions = ({ post, setShowNotification, setAnchorEl }) => {
           .ref()
           .child(
             `images/${
-              String(post?.data?.imageURL)
-                .split(/images%2/)[1]
-                ?.split("?")[0]
+              String(post?.data?.imageURL).split("%2F")[1]?.split("?")[0]
             }`
           )
           .delete()
@@ -33,6 +26,7 @@ const PostOptions = ({ post, setShowNotification, setAnchorEl }) => {
         setAnchorEl(null);
       });
   };
+
   return (
     <div className="postoptions">
       <button disabled={user?.uid === post?.data?.userId}>Follow</button>

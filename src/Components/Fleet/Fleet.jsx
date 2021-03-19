@@ -7,9 +7,15 @@ const Fleet = ({ user, setCurrentFleets, openOthersFleets }) => {
   const [userFleets, setUserFleets] = useState([]);
   const openFleets = () => {
     setCurrentFleets(
-      fleets?.filter((fleet) => {
-        return user?.data?.uid === fleet?.data?.userId;
-      })
+      fleets
+        ?.filter((fleet) => {
+          return user?.data?.uid === fleet?.data?.userId;
+        })
+        .sort((a, b) => {
+          const date1 = new Date(a?.data?.timestamp?.toDate());
+          const date2 = new Date(b?.data?.timestamp?.toDate());
+          return date1 - date2;
+        })
     );
     openOthersFleets();
   };

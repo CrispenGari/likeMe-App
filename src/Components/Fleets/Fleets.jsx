@@ -7,8 +7,8 @@ import { Add, Delete } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
 import fb from "firebase";
-
-const Fleets = () => {
+import { FcPrevious, FcNext } from "react-icons/fc";
+const Fleets = ({ setDeleteNotification }) => {
   const user = useSelector((state) => state.user);
   const users = useSelector((state) => state.users);
   const [myFleets, setMyFleets] = useState([]);
@@ -20,16 +20,62 @@ const Fleets = () => {
   const [viewFleets, setViewFleets] = useState(false);
   const [fleetIndex, setFleetIndex] = useState(0);
   const [currentFleets, setCurrentFleets] = useState([]);
+  const [fleetProgress, setFleetProgress] = useState(0);
+
+  // DELETE ALL EXPIRED FLEETS 24 HOURS
+
+  useEffect(() => {
+    fleets.forEach((fleet) => {
+      if (
+        Number.parseInt(
+          (new Date().getTime() -
+            new Date(fleet?.data?.timestamp?.seconds * 1000).getTime()) /
+            (1000 * 24 * 3600)
+        ) >= 1
+      ) {
+        // old fleet delete it
+        firebase.db
+          .collection("fleets")
+          .doc(fleet?.id)
+          .delete()
+          .then(() => {
+            // Remove from the firebase storage if exists
+            if (fleet?.data?.fleetURL) {
+              firebase.storage
+                .ref()
+                .child(
+                  `fleets/${
+                    fleet?.data?.fleetURL.split("%2F")[1]?.split("?")[0]
+                  }`
+                )
+                .delete();
+            }
+          });
+      }
+    });
+  }, [fleets]);
+
+  // -------------- END DELETE
+
   const openOthersFleets = () => {
     setFleetIndex(0);
+    setFleetProgress(0);
     setViewFleets(true);
   };
+
   const openMyFleets = () => {
     setFleetIndex(0);
+    setFleetProgress(0);
     setCurrentFleets(
-      fleets?.filter((fleet) => {
-        return fleet?.data?.userId === user?.uid;
-      })
+      fleets
+        ?.filter((fleet) => {
+          return fleet?.data?.userId === user?.uid;
+        })
+        .sort((a, b) => {
+          const date1 = new Date(a?.data?.timestamp?.toDate());
+          const date2 = new Date(b?.data?.timestamp?.toDate());
+          return date1 - date2;
+        })
     );
     setViewFleets(true);
   };
@@ -64,13 +110,6 @@ const Fleets = () => {
                 fleetURL: url,
                 caption: caption,
                 timestamp: fb.firestore.FieldValue.serverTimestamp(),
-                // location: allowLocationToBeDetected
-                //   ? `${currentLocation?.country}(${String(
-                //       currentLocation?.country_code
-                //     ).toLowerCase()}), ${currentLocation?.region} • ${
-                //       currentLocation?.city
-                //     }`
-                //   : null,
               });
             })
             .finally(() => {
@@ -108,10 +147,11 @@ const Fleets = () => {
     const intervalId = setInterval(() => {
       if (fleetIndex === currentFleets.length - 1) {
         setViewFleets(false);
+        setFleetProgress(0);
       } else {
         setFleetIndex(fleetIndex + 1);
       }
-    }, 5000);
+    }, 10000);
 
     return () => {
       clearInterval(intervalId);
@@ -119,12 +159,65 @@ const Fleets = () => {
   }, [currentFleets.length, fleetIndex]);
 
   useEffect(() => {
+    if (viewFleets) {
+      const intervalId = setInterval(() => {
+        if (fleetProgress === 9) {
+          setFleetProgress(0);
+        } else {
+          setFleetProgress(fleetProgress + 1);
+        }
+      }, 1000);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [viewFleets, fleetProgress]);
+
+  useEffect(() => {
     setMyFleets(
-      fleets?.filter((fleet) => {
-        return user?.uid === fleet?.data?.userId;
-      })
+      fleets
+        ?.filter((fleet) => {
+          return user?.uid === fleet?.data?.userId;
+        })
+        .sort((a, b) => {
+          const date1 = new Date(a?.data?.timestamp?.toDate());
+          const date2 = new Date(b?.data?.timestamp?.toDate());
+          return date1 - date2;
+        })
     );
   }, [user, fleets]);
+
+  const deleteFleet = () => {
+    firebase.db
+      .collection("fleets")
+      .doc(currentFleets[fleetIndex]?.id)
+      .delete()
+      .then(() => {
+        // Remove from the firebase storage if exists
+        if (currentFleets[fleetIndex]?.data?.fleetURL) {
+          firebase.storage
+            .ref()
+            .child(
+              `fleets/${
+                currentFleets[fleetIndex]?.data?.fleetURL
+                  .split("%2F")[1]
+                  ?.split("?")[0]
+              }`
+            )
+            .delete();
+        }
+      });
+    setViewFleets(false);
+    setDeleteNotification(true);
+  };
+  const next = () => {
+    setFleetIndex(fleetIndex + 1);
+    setFleetProgress(0);
+  };
+  const prev = () => {
+    setFleetIndex(fleetIndex - 1);
+    setFleetProgress(0);
+  };
   return (
     <div className="fleets">
       <div className="fleets__container">
@@ -175,6 +268,33 @@ const Fleets = () => {
       {(image || (viewFleets && currentFleets.length > 0)) && (
         <div className="fleets__preview">
           {viewFleets && (
+            <IconButton
+              className="fleets__preview__navigate__button__prev"
+              onClick={prev}
+              disabled={fleetIndex === 0}
+            >
+              <FcPrevious className="fleets__preview__navigate__button__icon" />
+            </IconButton>
+          )}
+          {viewFleets && (
+            <IconButton
+              className="fleets__preview__navigate__button__next"
+              disabled={fleetIndex === currentFleets.length - 1}
+              onClick={next}
+            >
+              <FcNext className="fleets__preview__navigate__button__icon" />
+            </IconButton>
+          )}
+          {viewFleets && user?.uid === currentFleets[fleetIndex]?.data?.userId && (
+            <IconButton
+              className="fleets__preview__delete__button"
+              title="delete fleet"
+              onClick={deleteFleet}
+            >
+              <Delete className="fleets__image__delete__icon" />
+            </IconButton>
+          )}
+          {viewFleets && (
             <div className="fleets__count">
               {currentFleets?.map((_, index) => (
                 <div
@@ -182,7 +302,11 @@ const Fleets = () => {
                   className={`fleets__progress ${
                     index === fleetIndex && "fleet__progress--active"
                   }`}
-                ></div>
+                >
+                  <p
+                    style={{ width: `${((fleetProgress + 1) / 10) * 100}%` }}
+                  ></p>
+                </div>
               ))}
             </div>
           )}
@@ -236,7 +360,14 @@ const Fleets = () => {
                 onChange={(e) => setCaption(e.target.value)}
               />
             ) : (
-              <p>{currentFleets[fleetIndex]?.data?.caption}</p>
+              <>
+                <p>{currentFleets[fleetIndex]?.data?.caption}</p>
+                <small>
+                  {new Date(
+                    currentFleets[fleetIndex]?.data?.timestamp?.toDate()
+                  ).toLocaleTimeString()}
+                </small>
+              </>
             )}
             {!viewFleets && <button onClick={post}>Post Fleet</button>}
           </div>

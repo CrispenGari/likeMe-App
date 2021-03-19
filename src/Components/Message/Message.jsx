@@ -5,7 +5,6 @@ import "./Message.css";
 import timeFunct from "../../utils/time";
 const Message = ({ message, newFriend }) => {
   const user = useSelector((state) => state.user);
-
   return (
     <div
       className={`message ${
@@ -21,6 +20,9 @@ const Message = ({ message, newFriend }) => {
         }
       />
       <div className="message__body">
+        {message?.data?.imageMessage && (
+          <img src={message?.data?.imageMessage} alt="message-post" />
+        )}
         <p>{message?.data?.message}</p>
         <p>
           <small>seen</small>

@@ -52,6 +52,7 @@
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
   background-size: cover;
   background-image: url(https://cdn.dribbble.com/users/23582/screenshots/3319553/paper_clip_love.gif);
 }
@@ -72,7 +73,8 @@
   padding: 5px;
   resize: none;
 }
-.chat__input > button {
+.chat__input > button,
+.chat__input > label > button {
   margin-left: 5px;
   outline: none;
   background-color: inherit !important;
@@ -80,9 +82,14 @@
   cursor: pointer;
 }
 .chat__send__icon {
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 40px !important;
   color: lightseagreen;
+}
+.chat__attach__picture__icon {
+  cursor: pointer !important;
+  font-size: 40px !important;
+  color: lime;
 }
 .chat__container__header {
   display: flex;
@@ -137,6 +144,51 @@
   color: lightseagreen;
   text-decoration: underline;
 }
+.chat__image__preview {
+  object-fit: contain;
+  width: 80%;
+  margin: 5px auto;
+  padding: 5px;
+  max-height: 50% !important;
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  background: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+}
+.chat__image__preview > img {
+  height: 150px;
+  margin: auto;
+  border-radius: 5px;
+  object-fit: contain;
+  -webkit-user-drag: none;
+}
+.chat__image__preview > p {
+  font-size: 12px !important;
+  color: #333;
+  user-select: none;
+  user-zoom: none;
+  margin-left: 5px;
+  flex: 1;
+
+  position: relative;
+}
+.chat__preview__image__cancel__button {
+  position: absolute !important;
+  bottom: 10px !important;
+  right: 10px !important;
+  z-index: 20 !important;
+  padding: 5px !important;
+  width: fit-content !important;
+  height: fit-content !important;
+}
+.chat__preview__image__cancel__icon {
+  color: orange;
+  font-size: 20px !important;
+}
 @media only screen and (max-width: 768px) {
   .chat__container {
     flex: 1;
@@ -145,4 +197,12 @@
   .chat__header {
     display: none;
   }
+}
+@media only screen and (min-width: 768px) {
+  .chat__messages {
+    padding-bottom: 65px;
+  }
+  /* .chat__input {
+    height: 30px !important;
+  } */
 }
