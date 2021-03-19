@@ -5,11 +5,18 @@ import { Avatar } from "@material-ui/core";
 import { HiBadgeCheck } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-const User = ({ user }) => {
+const User = ({ user, fleets }) => {
   const history = useHistory();
   const [chatMessages, setChatMessages] = useState([]);
   const currentUser = useSelector((state) => state.user);
   const messages = useSelector((state) => state.messages);
+  const [fleetsCount, setFleetsCount] = useState(0);
+
+  useEffect(() => {
+    setFleetsCount(
+      fleets?.filter((fleet) => fleet?.data?.userId === user?.data?.uid).length
+    );
+  }, [fleets, user]);
 
   const openChat = () => {
     history.replace(`/chat/${user?.data?.uid}`);
@@ -29,7 +36,9 @@ const User = ({ user }) => {
   return (
     <div className="user" onClick={openChat}>
       <Avatar
-        className="user__avatar"
+        className={`user__avatar ${
+          fleetsCount !== 0 && "user__avatar--has-fleet"
+        }`}
         src={user?.data?.photoURL}
         alt={user?.data?.displayName}
       />

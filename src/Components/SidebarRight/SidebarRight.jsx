@@ -4,7 +4,9 @@ import { User } from "../../Components";
 import { useSelector } from "react-redux";
 const Sidebar = () => {
   const users = useSelector((state) => state.users);
+  const fleets = useSelector((state) => state.fleets);
   const user = useSelector((state) => state.user);
+
   return (
     <div className="sidebarright">
       <h1>Chats</h1>
@@ -13,7 +15,7 @@ const Sidebar = () => {
         {users
           ?.filter((user_) => user?.uid !== user_?.data.uid)
           .map((user) => {
-            return <User key={user?.id} user={user} />;
+            return <User key={user?.id} user={user} fleets={fleets} />;
           })}
       </div>
     </div>

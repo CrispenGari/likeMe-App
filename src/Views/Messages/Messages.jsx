@@ -9,6 +9,7 @@ const Messages = () => {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
   const [deleteNotification, setDeleteNotification] = useState(false);
+  const fleets = useSelector((state) => state.fleets);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -27,15 +28,13 @@ const Messages = () => {
         <div className="messages__container">
           <div className="messages__container__header">
             <h1>Messages</h1>
-            {/* <div className="messages__search">
-              <input type="text" placeholder="Search chat..." />
-              <Search className="message__search__icon" />
-            </div> */}
           </div>
           <div className="messages__chats">
             {users?.map(
               (user_, i) =>
-                user_?.data.uid !== user?.uid && <User key={i} user={user_} />
+                user_?.data.uid !== user?.uid && (
+                  <User key={i} user={user_} fleets={fleets} />
+                )
             )}
           </div>
         </div>

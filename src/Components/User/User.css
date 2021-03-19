@@ -42,3 +42,6 @@
   justify-content: center !important;
   align-items: center !important;
 }
+.user__avatar--has-fleet {
+  border: 3px solid lightseagreen !important;
+}

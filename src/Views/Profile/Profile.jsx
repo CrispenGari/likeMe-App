@@ -6,6 +6,7 @@ import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import firebase from "../../backend";
+
 import { AlertTitle, Alert } from "@material-ui/lab";
 const Profile = () => {
   const { uid } = useParams();
@@ -24,6 +25,85 @@ const Profile = () => {
   const [userFollowers, setUserFollowers] = useState([]);
   const [userFollowings, setUserFollowings] = useState([]);
 
+  const deleteAccount = () => {
+    // Delete the user in the collection users
+    firebase.db
+      .collection("users")
+      .where("uid", "==", user?.uid)
+      .get()
+      .then((snapshot) => {
+        firebase.db.collection("users").doc(snapshot.docs[0]?.id).delete();
+      })
+      .then(() => {
+        // Delete their posts as well
+        firebase.db
+          .collection("posts")
+          .where("userId", "==", uid)
+          .get()
+          .then((snapshot) => {
+            snapshot.docs.forEach((doc) => {
+              firebase.db.collection("posts").doc(doc?.id).delete();
+            });
+          })
+          .then(() => {
+            // Delete all their messages recieved and sent
+            firebase.db
+              .collection("messages")
+              .where("receiver", "==", uid)
+              .get()
+              .then((snapshot) => {
+                // For recieved mess
+                snapshot.docs.forEach((doc) => {
+                  firebase.storage
+                    .ref()
+                    .child(
+                      `messages/${
+                        doc?.data()?.imageMessage.split("%2F")[1]?.split("?")[0]
+                      }`
+                    )
+                    .delete()
+                    .then(() => {
+                      firebase.db.collection("messages").doc(doc?.id).delete();
+                    });
+                });
+              })
+              .then(() => {
+                firebase.db
+                  .collection("messages")
+                  .where("sender", "==", uid)
+                  .get()
+                  .then((snapshot) => {
+                    // For recieved mess
+                    snapshot.docs.forEach((doc) => {
+                      firebase.storage
+                        .ref()
+                        .child(
+                          `messages/${
+                            doc
+                              ?.data()
+                              ?.imageMessage.split("%2F")[1]
+                              ?.split("?")[0]
+                          }`
+                        )
+                        .delete()
+                        .then(() => {
+                          firebase.db
+                            .collection("messages")
+                            .doc(doc?.id)
+                            .delete();
+                        });
+                    });
+                  });
+              });
+          })
+          .finally(() => {
+            // delete the user
+            firebase.auth?.currentUser?.delete().then(() => {
+              console.log("deleted");
+            });
+          });
+      });
+  };
   const updateProfile = () => {
     firebase.db
       .collection("users")
@@ -372,7 +452,23 @@ const Profile = () => {
                 <span>{currentUser?.data?.lastSignInTime}</span>{" "}
               </small>
             </div>
-            <h1>Posts</h1>
+            <h1>
+              Posts{" "}
+              {uid === user?.uid ? (
+                <button
+                  onClick={deleteAccount}
+                  style={{
+                    width: "fit-content",
+                    paddingLeft: 5,
+                    paddingRight: 5,
+                  }}
+                >
+                  Delete Account
+                </button>
+              ) : (
+                <p></p>
+              )}
+            </h1>
             <div className="profile__posts">
               {currentUserPosts?.map((post) => {
                 return <Post key={post?.id} post={post} />;

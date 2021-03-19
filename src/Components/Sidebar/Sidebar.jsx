@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 const Sidebar = () => {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
+
   return (
     <div className="sidebar">
       <h1>People</h1>

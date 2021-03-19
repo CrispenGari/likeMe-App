@@ -13,9 +13,9 @@ import {
 } from "./Views";
 import { useSelector } from "react-redux";
 import { useFirebaseData } from "./hooks";
-
 const App = () => {
   // USE THE HOOK useFirebaseData
+
   useFirebaseData();
   const user = useSelector((state) => state.user);
   const [welcome, setWelcome] = useState(true);
