@@ -1,5 +1,5 @@
 .post {
-  width: 100%;
+  width: 100% !important;
   background: white;
   padding: white;
   user-select: none;
@@ -17,6 +17,7 @@
   overflow-y: hidden;
   scroll-snap-align: start;
   flex: 1 !important;
+  /* max-width: 100px !important; */
 }
 .post__comments__modal {
   width: 100vw !important;
@@ -50,9 +51,10 @@
   height: 45vh;
 }
 .post__center > img {
-  /* width: 400px; */
+  width: 300px !important;
   object-fit: contain;
   max-height: 45vh !important;
+  border-radius: 5px !important;
 }
 .post__center__likes {
   flex: 1;
@@ -61,7 +63,7 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
-  width: 400px;
+  width: 90%;
   position: absolute;
   height: 100%;
   display: flex;
@@ -69,6 +71,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  margin: 0px auto;
 }
 .post__center__likes > h1 {
   color: lightseagreen !important;

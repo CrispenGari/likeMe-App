@@ -257,7 +257,11 @@ const Post = ({ post, setShowNotification }) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             type="text"
-            placeholder="Type your comment..."
+            placeholder={
+              comments?.length === 0
+                ? "Be the first one to comment..."
+                : "Type your comment..."
+            }
           />
           <button disabled={!comment} onClick={postComment}>
             post

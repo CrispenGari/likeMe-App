@@ -158,6 +158,7 @@
   background: white;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 2px lightgray;
+  flex-wrap: wrap;
 }
 .chat__image__preview > img {
   height: 150px;

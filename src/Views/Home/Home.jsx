@@ -9,6 +9,8 @@ import { Snackbar } from "@material-ui/core";
 const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  document.title = "LikeMe • Home • posts";
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

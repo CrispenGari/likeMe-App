@@ -1,6 +1,6 @@
 import React from "react";
 import "./SidebarRight.css";
-import { User } from "../../Components";
+import { User, Fleets } from "../../Components";
 import { useSelector } from "react-redux";
 const Sidebar = () => {
   const users = useSelector((state) => state.users);
@@ -9,6 +9,9 @@ const Sidebar = () => {
 
   return (
     <div className="sidebarright">
+      <div className="messages__fleets">
+        <Fleets />
+      </div>
       <h1>Chats</h1>
       <div className="sidebarright__users">
         {/* We don't want to display the current user on people suggestions */}

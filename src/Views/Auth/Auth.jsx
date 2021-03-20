@@ -7,6 +7,8 @@ import fb from "firebase";
 import { Link } from "react-router-dom";
 const Auth = () => {
   const [error, setError] = useState("");
+  document.title = `LikeMe • Authentication`;
+
   const login = () => {
     firebase.auth
       .signInWithPopup(firebase.googleAuthProvider)

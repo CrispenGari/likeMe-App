@@ -1,9 +1,13 @@
 import React from "react";
 import { AiFillLike } from "react-icons/ai";
 import "./Terms.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+
 const Terms = () => {
   const history = useHistory();
+  const { pathname } = useLocation();
+  document.title = `LikeMe • ${pathname.split(/\//)[1]} `;
+
   return (
     <div className="termsandconditions">
       <div className="termsandconditions__app__logo">
@@ -65,7 +69,7 @@ const Terms = () => {
         <div className="termsandconditions__buttons__left">
           <button
             onClick={() => {
-              window.location.href = "https://ww.google.com/";
+              window.location.href = "/";
             }}
           >
             Reject

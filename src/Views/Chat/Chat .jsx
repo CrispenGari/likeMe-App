@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header, Message } from "../../Components";
 import { FiSend } from "react-icons/fi";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { MdArrowBack, MdCancel } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -23,6 +23,10 @@ const Chat = () => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [chatMessages, setChatMessages] = useState([]);
+  const { pathname } = useLocation();
+  document.title = `LikeMe • ${
+    pathname.split(/\//)[1]
+  }  • ${newFriend?.data?.displayName?.split(/\s/).join("_").toLowerCase()} `;
 
   const handleChange = (event) => {
     event.preventDefault();

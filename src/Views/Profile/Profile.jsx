@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Header, Post } from "../../Components";
 import { Avatar } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import firebase from "../../backend";
 
 import { AlertTitle, Alert } from "@material-ui/lab";
@@ -24,6 +24,10 @@ const Profile = () => {
   const [alert, setAlert] = useState(false);
   const [userFollowers, setUserFollowers] = useState([]);
   const [userFollowings, setUserFollowings] = useState([]);
+  const { pathname } = useLocation();
+  document.title = `LikeMe • ${
+    pathname.split(/\//)[1]
+  }  • ${currentUser?.data?.displayName?.split(/\s/).join("_").toLowerCase()} `;
 
   const deleteAccount = () => {
     // Delete the user in the collection users

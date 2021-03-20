@@ -4,12 +4,15 @@ import { Header, User, Fleets } from "../../Components";
 import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import { Snackbar } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
 const Messages = () => {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
   const [deleteNotification, setDeleteNotification] = useState(false);
   const fleets = useSelector((state) => state.fleets);
+  const { pathname } = useLocation();
+  document.title = `LikeMe • ${pathname.split(/\//)[1]}`;
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

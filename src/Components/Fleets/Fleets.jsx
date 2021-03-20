@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import firebase from "../../backend";
 import fb from "firebase";
 import { FcPrevious, FcNext } from "react-icons/fc";
-const Fleets = ({ setDeleteNotification }) => {
+const Fleets = ({ setDeleteNotification, allFleets }) => {
   const user = useSelector((state) => state.user);
   const users = useSelector((state) => state.users);
   const [myFleets, setMyFleets] = useState([]);
@@ -221,35 +221,40 @@ const Fleets = ({ setDeleteNotification }) => {
   return (
     <div className="fleets">
       <div className="fleets__container">
-        <div className="fleets__left">
-          {myFleets?.length > 0 ? (
-            <Avatar
-              className="fleets__left__avatar"
-              src={myFleets[myFleets?.length - 1]?.data?.fleetURL}
-              alt={user?.displayName}
-              onClick={openMyFleets}
-            />
-          ) : (
-            <Avatar
-              className="fleets__left__avatar--nofleets"
-              src={user?.photoURL}
-              alt={user?.displayName}
-            />
-          )}
-          <label htmlFor="fleet__input">
-            <input
-              type="file"
-              accept="image/*"
-              id="fleet__input"
-              className="fleet__input--hidden"
-              onChange={handleChange}
-              multiple={false}
-            />
-            <IconButton className="fleets__left__add__button" component="span">
-              <Add className="fleets__left__add__icon" />
-            </IconButton>
-          </label>
-        </div>
+        {!allFleets && (
+          <div className="fleets__left">
+            {myFleets?.length > 0 ? (
+              <Avatar
+                className="fleets__left__avatar"
+                src={myFleets[myFleets?.length - 1]?.data?.fleetURL}
+                alt={user?.displayName}
+                onClick={openMyFleets}
+              />
+            ) : (
+              <Avatar
+                className="fleets__left__avatar--nofleets"
+                src={user?.photoURL}
+                alt={user?.displayName}
+              />
+            )}
+            <label htmlFor="fleet__input">
+              <input
+                type="file"
+                accept="image/*"
+                id="fleet__input"
+                className="fleet__input--hidden"
+                onChange={handleChange}
+                multiple={false}
+              />
+              <IconButton
+                className="fleets__left__add__button"
+                component="span"
+              >
+                <Add className="fleets__left__add__icon" />
+              </IconButton>
+            </label>
+          </div>
+        )}
         <div className="fleets__right">
           {/* No fleets users should be displayed last */}
           {users

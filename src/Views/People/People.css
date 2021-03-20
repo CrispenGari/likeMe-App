@@ -43,6 +43,7 @@
 }
 .people__container > div > h1 {
   font-size: 25px !important;
+  user-select: none !important;
 }
 .people__list {
   flex: 1;

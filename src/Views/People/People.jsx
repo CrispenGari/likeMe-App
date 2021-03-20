@@ -1,12 +1,15 @@
 import React from "react";
 import "./People.css";
 import { Header } from "../../Components";
-
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Person } from "../../Components";
 const People = () => {
   const users = useSelector((state) => state.users);
   const user = useSelector((state) => state.user);
+  const { pathname } = useLocation();
+  document.title = `LikeMe • ${pathname.split(/\//)[1]}`;
+
   return (
     <div className="people">
       <div className="people__header">
