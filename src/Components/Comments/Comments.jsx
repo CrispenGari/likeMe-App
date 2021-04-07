@@ -1,6 +1,7 @@
 import React from "react";
 import "./Comments.css";
 import { Comment } from "../../Components";
+
 const Comments = ({
   setOpen,
   comments,

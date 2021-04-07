@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import firebase from "../../backend";
 
 import fb from "firebase";
-import "./Chat.css";
+import "./Chat.scss";
 import { Avatar, IconButton, LinearProgress } from "@material-ui/core";
 const Chat = () => {
   const [newFriend, setNewFriend] = useState(null);

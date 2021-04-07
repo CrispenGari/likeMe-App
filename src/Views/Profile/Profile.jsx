@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Profile.css";
+import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { Header, Post } from "../../Components";
 import { Avatar } from "@material-ui/core";

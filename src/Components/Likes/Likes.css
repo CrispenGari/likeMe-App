@@ -1,0 +1,87 @@
+.likes {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 80vh;
+  user-select: none;
+  user-zoom: none;
+  width: 100%;
+  background-color: white;
+  max-width: 500px;
+  margin: 10px auto;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+}
+.likes__container {
+  /* flex: 1; */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: fit-content !important;
+  align-items: flex-start;
+}
+.likes__container--nolikes {
+  display: grid;
+  place-items: center;
+}
+.likes__container--nolikes > h1 {
+  color: gray !important;
+}
+.likes__container::-webkit-scrollbar {
+  display: none;
+}
+.likes > h1 {
+  text-transform: uppercase;
+  margin: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+.likes > h1 > button {
+  background: lightseagreen;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+}
+.likes > h1 > button::before,
+.likes > h1 > button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 24px;
+  border-radius: 5px;
+}
+.likes > h1 > button::before {
+  border-top: 2px solid black;
+  right: 0;
+  top: -4px;
+}
+
+.likes > h1 > button::after {
+  border-bottom: 2px solid black;
+  bottom: -4px;
+  left: 0;
+}
+
+.likes > h1 > button:hover::before,
+.likes > h1 > button:hover::after {
+  width: 100%;
+}
+.likes > h1 > button:hover {
+  background-color: orange !important;
+}
+.likes > h1 > button:active {
+  background-color: green !important;
+}

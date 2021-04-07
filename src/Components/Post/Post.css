@@ -1,5 +1,5 @@
 .post {
-  width: 100% !important;
+  width: 97% !important;
   background: white;
   padding: white;
   user-select: none;
@@ -9,13 +9,13 @@
   border-radius: 5px;
   border-bottom: 1px solid lightgray;
   box-shadow: 2px 2px 2px 2px lightgray;
-  margin: 10px 0 !important;
+  margin: 10px auto !important;
   padding: 10px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   overflow-y: hidden;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
   flex: 1 !important;
   /* max-width: 100px !important; */
 }
@@ -210,15 +210,23 @@
 .post__icon__like,
 .post__icon__unlike__number {
   color: purple !important;
+  font-size: 20px !important;
 }
 .post__icon__unlike {
   color: purple !important;
+  font-size: 20px !important;
 }
 .post__icon__message {
   color: green !important;
+  font-size: 20px !important;
 }
 .post__icon__download {
   color: orange !important;
+  font-size: 20px !important;
+}
+.post__icon__comments {
+  color: cornflowerblue !important;
+  font-size: 20px !important;
 }
 .post__bottom__buttons > h1 > span {
   color: gray;
@@ -305,6 +313,17 @@ p.post__location {
   padding: 2px 0;
   text-align: center;
   font-weight: 600;
+}
+.post__bottom__button__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post__bottom__button__container > h1 {
+  user-select: none;
+  user-zoom: none;
+  margin-left: 5px !important;
 }
 @media only screen and (max-width: 768px) {
   .post__info > div > h1 {

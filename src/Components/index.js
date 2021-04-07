@@ -13,3 +13,5 @@ export { default as PostOptions } from "./PostOptions/PostOptions";
 export { default as MenuItems } from "./MenuItems/MenuItems";
 export { default as Fleets } from "./Fleets/Fleets";
 export { default as Fleet } from "./Fleet/Fleet";
+export { default as Likes } from "./Likes/Likes";
+export { default as Like } from "./Like/Like";

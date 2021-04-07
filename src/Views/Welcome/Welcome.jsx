@@ -1,5 +1,5 @@
 import React from "react";
-import "./Welcome.css";
+import "./Welcome.scss";
 import { AiFillLike } from "react-icons/ai";
 const Welcome = () => {
   document.title = `LikeMe • Welcome`;

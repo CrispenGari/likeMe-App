@@ -1,0 +1,26 @@
+.like {
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  user-zoom: none;
+  flex-direction: column;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  width: 150px;
+  height: fit-content;
+  margin: 10px;
+  box-shadow: 1px 1px 1px 1px lightgray;
+}
+.like > h1 {
+  flex: 1;
+  font-size: 12px;
+  cursor: pointer;
+  color: lightseagreen !important;
+}
+.like__high__badge {
+  color: green !important;
+}

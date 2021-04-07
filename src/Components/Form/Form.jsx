@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
+import useSound from "use-sound";
 import {
   Delete,
   PhotoCamera,
@@ -12,6 +13,7 @@ import "./Form.css";
 import firebase from "../../backend";
 import fb from "firebase";
 import locationAxios from "../../data/location";
+import boopSfx from "../../sounds/post1.wav";
 const Form = ({ setShowForm, setShowNotification }) => {
   const user = useSelector((state) => state.user);
   const hashTags = useSelector((state) => state.hashTags);
@@ -27,17 +29,18 @@ const Form = ({ setShowForm, setShowNotification }) => {
   const [allowLocationToBeDetected, setAllowLocationToBeDetected] = useState(
     true
   );
-
+  const [play] = useSound(boopSfx);
   useEffect(() => {
     if (progress === 100) {
       setPosting(false);
       setImage(null);
       setPreview(null);
+      play();
       setShowForm(false);
       setAllowLocationToBeDetected(true);
       setShowNotification(true);
     }
-  }, [progress, setShowForm, setShowNotification]);
+  }, [progress, setShowForm, setShowNotification, play]);
 
   useEffect(() => {
     (async () => {
