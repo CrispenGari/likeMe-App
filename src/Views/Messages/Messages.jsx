@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Messages.scss";
+import "./Messages.css";
 import { Header, User, Fleets } from "../../Components";
 import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";

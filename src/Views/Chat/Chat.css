@@ -17,6 +17,7 @@
   background: white;
   flex: 1;
   height: 100%;
+  margin-bottom: 2px;
 }
 .chat__main {
   flex: 1;
@@ -64,6 +65,7 @@
   bottom: 0;
   display: flex;
   padding: 5px;
+  align-items: flex-start;
 }
 .chat__input > textarea {
   flex: 1;
@@ -72,6 +74,9 @@
   border: none;
   padding: 5px;
   resize: none;
+}
+.chat__input > textarea::-webkit-scrollbar {
+  display: none;
 }
 .chat__input > button,
 .chat__input > label > button {
@@ -83,12 +88,12 @@
 }
 .chat__send__icon {
   cursor: pointer !important;
-  font-size: 40px !important;
+  font-size: 25px !important;
   color: lightseagreen;
 }
 .chat__attach__picture__icon {
   cursor: pointer !important;
-  font-size: 40px !important;
+  font-size: 25px !important;
   color: lime;
 }
 .chat__container__header {

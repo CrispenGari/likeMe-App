@@ -19,7 +19,7 @@ const useFirebaseData = () => {
     return () => {
       unsubscribe();
     };
-  });
+  }, [dispatch]);
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("messages")

@@ -18,6 +18,7 @@ import fb from "firebase";
 import { useHistory } from "react-router-dom";
 import timeFunct from "../../utils/time";
 import boopSfx from "../../sounds/post1.wav";
+import like from "../../sounds/like.mp3";
 import useSound from "use-sound";
 
 const Post = ({ post, setShowNotification }) => {
@@ -31,7 +32,8 @@ const Post = ({ post, setShowNotification }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [play] = useSound(boopSfx)
+  const [play] = useSound(boopSfx);
+  const [playLike] = useSound(like);
 
   const openPop = (event) => {
     setAnchorEl(event.currentTarget);
@@ -99,7 +101,10 @@ const Post = ({ post, setShowNotification }) => {
       })
       .then(() => console.clear())
       .catch((error) => console.clear())
-      .finally(() => {setComment("");play()});
+      .finally(() => {
+        setComment("");
+        play();
+      });
   };
   const handleLike = () => {
     let userLike = "";
@@ -132,7 +137,10 @@ const Post = ({ post, setShowNotification }) => {
         })
         .then(() => console.clear())
         .catch((error) => console.log(error))
-        .finally(() => setLiked(true));
+        .finally(() => {
+          setLiked(true);
+          playLike();
+        });
     }
   };
 

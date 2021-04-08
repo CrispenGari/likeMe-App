@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./Auth.scss";
+import "./Auth.css";
 import { AiFillLike } from "react-icons/ai";
 import firebase from "../../backend";
 import fb from "firebase";

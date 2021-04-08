@@ -48,32 +48,10 @@ const Header = () => {
         .filter((friend) => {
           const exp = new RegExp(`^${query}`, "gi");
           // search for either name, surname, email, phone, bio, username
-          return (
-            friend?.data?.displayName?.match(exp) ||
-            friend?.data?.email?.match(exp) ||
-            friend?.data?.surname?.match(exp) ||
-            friend?.data?.status?.match(exp) ||
-            friend?.data?.bio?.match(exp) ||
-            friend?.data?.firstName?.match(exp)
-          );
+          return friend?.data?.displayName?.match(exp);
         })
         .splice(0, 5);
       setSuggestionsResults(res);
-      if (res.length === 0) {
-        setSuggestionsResults(
-          friends.filter((friend) => {
-            return (
-              friend?.data?.displayName?.indexOf(query) !== -1 ||
-              friend?.data?.email?.indexOf(query) !== -1 ||
-              friend?.data?.surname?.indexOf(query) !== -1 ||
-              friend?.data?.status?.indexOf(query) !== -1 ||
-              friend?.data?.bio?.indexOf(query) !== -1 ||
-              friend?.data?.firstName?.indexOf(query) !== -1
-            );
-            // friend.indexOf(query) !== -1
-          })
-        );
-      }
     }
   };
   return (

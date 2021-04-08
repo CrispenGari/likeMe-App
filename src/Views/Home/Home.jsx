@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Home.scss";
+import "./Home.css";
 import { Header, Posts, Form, Sidebar, SidebarRight } from "../../Components";
 
 import { IoIosCreate } from "react-icons/io";

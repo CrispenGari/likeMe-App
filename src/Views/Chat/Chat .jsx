@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import firebase from "../../backend";
 
 import fb from "firebase";
-import "./Chat.scss";
+import "./Chat.css";
 import { Avatar, IconButton, LinearProgress } from "@material-ui/core";
 const Chat = () => {
   const [newFriend, setNewFriend] = useState(null);
@@ -192,6 +192,7 @@ const Chat = () => {
           <form className="chat__input">
             <textarea
               value={message}
+              rows={1}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="type a message..."
             ></textarea>
@@ -204,9 +205,7 @@ const Chat = () => {
                 style={{ display: "none" }}
                 onChange={handleChange}
               />
-              {/* <button component="span" type="button"> */}
               <AiFillPicture className="chat__attach__picture__icon" />
-              {/* </button> */}
             </label>
             <button onClick={sendMessage} type="submit">
               <FiSend className="chat__send__icon" />

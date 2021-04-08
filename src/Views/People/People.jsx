@@ -1,5 +1,5 @@
 import React from "react";
-import "./People.scss";
+import "./People.css";
 import { Header } from "../../Components";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";

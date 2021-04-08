@@ -19,6 +19,7 @@ const App = () => {
   useFirebaseData();
   const user = useSelector((state) => state.user);
   const [welcome, setWelcome] = useState(true);
+  console.log("Mounted");
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

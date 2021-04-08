@@ -1,6 +1,6 @@
 import React from "react";
 import { AiFillLike } from "react-icons/ai";
-import "./Terms.scss";
+import "./Terms.css";
 import { useHistory, useLocation } from "react-router-dom";
 
 const Terms = () => {
