@@ -9,7 +9,8 @@ import firebase from "../../backend";
 const MenuItems = () => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
-
+  const users = useSelector((state) => state.users);
+  const friends = users?.filter((user_) => user_?.data?.uid !== user?.uid);
   return (
     <div className="menuitems">
       <div
@@ -21,14 +22,14 @@ const MenuItems = () => {
       </div>
       <div className="menuitem" onClick={() => history.push("/messages")}>
         <div>
-          <div className="menuitems__icon__button__badge">5</div>
+          <div className="menuitems__icon__button__badge">{friends.length}</div>
           <Message className="menuitems__icon__message" />
         </div>
-        <h1>Messages</h1>
+        <h1>Possible Chats</h1>
       </div>
       <div className="menuitem" onClick={() => history.push("/people")}>
         <div>
-          <div className="menuitems__icon__button__badge">5</div>
+          <div className="menuitems__icon__button__badge">{friends.length}</div>
           <IoIosPeople className="menuitems__icon__message__friends" />
         </div>
         <h1>People</h1>

@@ -60,7 +60,6 @@ const Post = ({ post, setShowNotification }) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-
     likes.forEach((like) => {
       if (like.data.userEmail === user?.email) {
         setLiked(true);

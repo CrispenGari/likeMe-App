@@ -3,6 +3,7 @@ import { Like } from "../../Components";
 
 import "./Likes.css";
 const Likes = ({ setOpenLike, likes }) => {
+  console.log(likes[0]);
   return (
     <div className="likes">
       <h1>
