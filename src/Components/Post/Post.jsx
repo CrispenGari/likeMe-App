@@ -23,7 +23,6 @@ import useSound from "use-sound";
 
 const Post = ({ post, setShowNotification }) => {
   const [likes, setLikes] = useState([]);
-  const [liked, setLiked] = useState(false);
   const [open, setOpen] = useState(false);
   const [openLike, setOpenLike] = useState(false);
   const [comment, setComment] = useState("");
@@ -34,7 +33,6 @@ const Post = ({ post, setShowNotification }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [play] = useSound(boopSfx);
   const [playLike] = useSound(like);
-
   const openPop = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,12 +43,12 @@ const Post = ({ post, setShowNotification }) => {
   const openChat = () => {
     history.replace(`/chat/${post?.data?.userId}`);
   };
-
   useEffect(() => {
     setPostTime(timeFunct(post?.data?.timestamp));
   }, [post]);
 
   useEffect(() => {
+    console.log("EffectRuns");
     const unsubscribe = firebase.db
       .collection("posts")
       .doc(post?.id)
@@ -60,15 +58,12 @@ const Post = ({ post, setShowNotification }) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-    likes.forEach((like) => {
-      if (like.data.userEmail === user?.email) {
-        setLiked(true);
-      }
-    });
+
     return () => {
       unsubscribe();
     };
-  }, [post?.id, likes, user?.email]);
+  }, [post?.id]);
+
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
@@ -98,8 +93,8 @@ const Post = ({ post, setShowNotification }) => {
         comment: comment,
         timestamp: fb.firestore.FieldValue.serverTimestamp(),
       })
-      .then(() => console.clear())
-      .catch((error) => console.clear())
+      .then(() => {})
+      .catch((error) => console.log(error))
       .finally(() => {
         setComment("");
         play();
@@ -120,9 +115,8 @@ const Post = ({ post, setShowNotification }) => {
         .collection("likes")
         .doc(userLike)
         .delete()
-        .then(() => console.clear())
-        .catch((error) => console.log(error))
-        .finally(() => setLiked(false));
+        .then(() => {})
+        .catch((error) => console.log(error));
     } else {
       // add it to the database
       firebase.db
@@ -134,10 +128,9 @@ const Post = ({ post, setShowNotification }) => {
           userAvatar: user?.photoURL,
           username: user?.displayName,
         })
-        .then(() => console.clear())
+        .then(() => {})
         .catch((error) => console.log(error))
         .finally(() => {
-          setLiked(true);
           playLike();
         });
     }
@@ -278,7 +271,8 @@ const Post = ({ post, setShowNotification }) => {
               onClick={handleLike}
               className="post__icon__button__like"
             >
-              {liked ? (
+              {likes.filter((like) => like.data.userEmail === user?.email)
+                .length !== 0 ? (
                 <Favorite className="post__icon__like" />
               ) : (
                 <FavoriteBorder className="post__icon__unlike" />
