@@ -2,56 +2,42 @@
 
 THIS IS A SOCIAL DATING APP THAT ALLOWS USERS TO POST THEIR RELATIONSHIP STATUS AND BE ABLE TO FIND THEIR PARTNERS. THIS APPLICATION WAS DEVELOPED FOR TESTING PURPOSES ONLY.
 
-THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
+### LikeMe App
+
+- Check the deployed version [LIKEME](https://likeme-a104d.web.app/)
+  THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
 
 <p align="center">
-
+<img src="https://img.shields.io/static/v1?label=language&message=css&color=critical"/>
+<img src="https://img.shields.io/static/v1?label=language&message=html&color=blueviolet"/>
+<img src="https://img.shields.io/static/v1?label=language&message=javascript&color=orange"/>
+<img src="https://img.shields.io/static/v1?label=language&message=node&color=success"/>
+<img src="https://img.shields.io/static/v1?label=framework&message=react&color=9cf"/>
+</p>
+<p align="center">
+<img src="https://img.shields.io/static/v1?label=package&message=redux&color=purple"/>
+<img src="https://img.shields.io/static/v1?label=package&message=react-redux&color=red"/>
+<img src="https://img.shields.io/static/v1?label=package&message=material-ui/core&color=pink"/>
+<img src="https://img.shields.io/static/v1?label=package&message=material-ui/icons&color=gray"/>
+<img src="https://img.shields.io/static/v1?label=package&message=material-ui/lab&color=yellow"/>
+<img src="https://img.shields.io/static/v1?label=package&message=axios&color=orange"/>
+<img src="https://img.shields.io/static/v1?label=package&message=react-router-dom&color=green"/>
+<img src="https://img.shields.io/static/v1?label=package&message=react-icons&color=purple"/>
+<img src="https://img.shields.io/static/v1?label=package&message=react-text-truncate&color=green"/>
+<img src="https://img.shields.io/static/v1?label=package&message=use-sound&color=blue"/>
+<img src="https://img.shields.io/static/v1?label=package&message=firebase&color=purple"/>
+<img src="https://img.shields.io/static/v1?label=package&message=react-dom&color=lightseagreen"/>
+<img src="https://img.shields.io/static/v1?label=package&message=uuid&color=red"/>
 </p>
 
 ### App interface
 
 #### 1. Welcome Page
 
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
-#### 1. Welcome Page
-
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
-#### 1. Welcome Page
-
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
-#### 1. Welcome Page
-
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
-#### 1. Welcome Page
-
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
-#### 1. Welcome Page
-
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
-#### 1. Welcome Page
-
 - This is just a welcome page that loads for some seconds.
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-56-18-221.jpg" alt="demo"/> 
 </p>
 
 #### 2. Authentication Page
@@ -59,7 +45,7 @@ THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
 - This page allows users to authenticate using various providers. The authentication is handled using firebase.
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-56-22-234.jpg" alt="demo"/> 
 </p>
 
 #### 3. TnC Page
@@ -67,7 +53,7 @@ THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
 - Terms and condition screen allows users to read terms and conditions for the use of the Application. If they aggree with the tnc they can join.
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2014-20-39-244.jpg" alt="demo"/> 
 </p>
 
 #### 4. Home Page
@@ -76,7 +62,7 @@ THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
 - There's a header where you can navigate to where ever you want to go and a search bar which allows you to search people who joined this app.
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-56-42-975.jpg" alt="demo"/> 
 </p>
 
 #### 5. Profile Page
@@ -84,7 +70,7 @@ THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
 - Profile page is nothing, it shows the profile of the selected user, if the user selected is the current user then there are more options for logging out of the app. It also shows the selected users posts
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-57-09-887.jpg" alt="demo"/> 
 </p>
 
 #### 9. Messages Page
@@ -100,7 +86,7 @@ THIS APPLICATION IS USING A LOT OF TECHNOLOGIES WHICH ARE:
 - This is where you can find all the users that are currently using this application
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-57-18-518.jpg" alt="demo"/> 
 </p>
 
 #### 11. Message Chat
@@ -110,13 +96,13 @@ This is nothing but a regular social chat that allows users to send messages pri
 ##### 11.1
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-59-55-222.jpg" alt="demo"/> 
 </p>
 
 ##### 11.2
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2014-00-15-229.jpg" alt="demo"/> 
 </p>
 
 #### 12. Status or Fleets
@@ -124,7 +110,7 @@ This is nothing but a regular social chat that allows users to send messages pri
 - Users can also post fleets or status, and these last only for **24 hrs** if they are not deleted.
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-57-33-965.jpg" alt="demo"/> 
 </p>
 
 #### 13. Posting a pictures
@@ -132,7 +118,7 @@ This is nothing but a regular social chat that allows users to send messages pri
 - Users are allowed to post pictures, and select their current status as well as posting caption, disabling their current location is also the part of posting a picture.
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-59-19-029.jpg" alt="demo"/> 
 </p>
 
 #### 13. Posts
@@ -143,4 +129,16 @@ This is nothing but a regular social chat that allows users to send messages pri
 
 <p align="center">
     <img src="" alt="demo"/> 
+</p>
+
+##### 13.1 Comments Of the Post
+
+<p align="center">
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-57-58-506.jpg" alt="demo"/> 
+</p>
+
+##### 13.1 Likes Of the Post
+
+<p align="center">
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-58-04-057.jpg" alt="demo"/> 
 </p>
