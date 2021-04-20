@@ -78,7 +78,7 @@ THIS IS A SOCIAL DATING APP THAT ALLOWS USERS TO POST THEIR RELATIONSHIP STATUS 
 - This is where you can find different possible chats
 
 <p align="center">
-    <img src="" alt="demo"/> 
+    <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2014-29-36-366.jpg" alt="demo"/> 
 </p>
 
 #### 10. Users Page
@@ -127,10 +127,6 @@ This is nothing but a regular social chat that allows users to send messages pri
 - users are allowed to comment, view likes
 - if the users is the owner of the post he can delete the post
 
-<p align="center">
-    <img src="" alt="demo"/> 
-</p>
-
 ##### 13.1 Comments Of the Post
 
 <p align="center">
@@ -142,3 +138,8 @@ This is nothing but a regular social chat that allows users to send messages pri
 <p align="center">
     <img src="https://github.com/CrispenGari/like-me-App/blob/main/pics/bandicam%202021-04-20%2013-58-04-057.jpg" alt="demo"/> 
 </p>
+
+### Credits
+
+- [Stuckoverflow](https//www.stackoverflow.com/)
+- [All People Who was testing the app]()
