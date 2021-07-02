@@ -9,10 +9,13 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { GrTwitter } from "react-icons/gr";
 import { TiMessages } from "react-icons/ti";
+import Register from "../../Components/Register/Register";
+import Login from "../../Components/Login/Login";
 
 const Auth = () => {
   const [error, setError] = useState("");
   document.title = `LikeMe • Authentication`;
+  const [hasAccount, setHasAccount] = useState(true);
 
   const login = (type) => {
     firebase.auth
@@ -52,12 +55,16 @@ const Auth = () => {
     <div className="auth">
       <div className="auth__main">
         <h1>
-          <AiFillLike className="auth__like__icon" />
+          <AiFillLike className="auth__like__me__icon" />
           <span>M</span>
           <span>e</span>
         </h1>
-
-        <p>
+        {!hasAccount ? (
+          <Register setHasAccount={setHasAccount} />
+        ) : (
+          <Login setHasAccount={setHasAccount} />
+        )}
+        {/* <p>
           Welcome to the <span>LikeMe</span>, where you will find your love
           partner.
         </p>
@@ -84,7 +91,7 @@ const Auth = () => {
           By using this application, you are automatically accepting the terms
           and conditions. <Link to="/terms">Terms and Conditions</Link>
         </small>
-        <small>Developed by Crispen Gari</small>
+        <small>Developed by Crispen Gari</small>*/}
       </div>
     </div>
   );

@@ -85,21 +85,15 @@
 .auth__main > h1 {
   display: flex;
   align-items: center;
+  /* background-image: linear-gradient(to right, orange, lightseagreen, green);
+  background-clip: text; */
+  color: transparent !important;
 }
-.auth__main > h1 > span {
-  font-size: 25px !important;
-}
-.auth__main > h1 > span:last-child {
-  color: orange !important;
-}
-.auth__main > h1 > span:first-of-type {
-  color: green !important;
-}
-.auth__like__icon {
-  color: lightseagreen !important;
+
+.auth__like__me__icon {
   font-size: 45px !important;
-  animation: rotate-animation 3s linear infinite !important;
   margin-right: 5px;
+  color: transparent !important;
 }
 
 .auth__main > p {
@@ -107,10 +101,9 @@
   text-align: center;
 }
 .auth__main > p > span {
-  color: lightseagreen !important;
   font-weight: bold;
   letter-spacing: 1px;
-  animation: ease-animation infinite linear 1s;
+  /* animation: ease-animation infinite linear 1s; */
 }
 .auth__message {
   display: flex;

@@ -15,22 +15,7 @@
   position: relative;
 }
 
-.header__left > h1 {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.header__left > h1 > span {
-  font-size: 25px !important;
-}
-.header__left > h1 > span:last-child {
-  color: orange !important;
-}
-.header__left > h1 > span:first-of-type {
-  color: green !important;
-}
 .header__left > h1 > .header__like__icon {
-  color: lightseagreen !important;
   font-size: 40px !important;
   animation: rotate-animation 3s linear infinite !important;
   margin-right: 5px;
