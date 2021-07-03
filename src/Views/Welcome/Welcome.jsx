@@ -1,27 +1,26 @@
 import React from "react";
 import "./Welcome.css";
-import { AiFillLike } from "react-icons/ai";
-const Welcome = () => {
+import { useHistory } from "react-router-dom";
+const Welcome = ({ setWelcome }) => {
   document.title = `LikeMe • Welcome`;
-
+  const history = useHistory();
+  const next = () => {
+    setWelcome(false);
+  };
   return (
     <div className="welcome">
       <div className="welcome__main">
-        <div className="welcome__loading">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <p>
-          Welcome to the <span>LikeMe</span>, where you will find your love
-          partner.
-        </p>
-        <h1>
-          <AiFillLike className="welcome__like__icon" />
-          <span>M</span>
-          <span>e</span>
-        </h1>
+        <p>Welcome to our application where you will find your love partner.</p>
+        <h1>LIKE ME</h1>
+        <button onClick={next}>CONTINUE</button>
         <small>Developed by Crispen Gari</small>
+        <p>
+          By using this application you are automatically accepting{" "}
+          <span onClick={() => history.push("/terms")}>
+            Terms and Conditions
+          </span>
+          .
+        </p>
       </div>
     </div>
   );

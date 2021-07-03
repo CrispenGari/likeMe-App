@@ -15,28 +15,30 @@ import { useSelector } from "react-redux";
 import { useFirebaseData } from "./hooks";
 const App = () => {
   // USE THE HOOK useFirebaseData
-
   useFirebaseData();
-  const user = useSelector((state) => state.user);
   const [welcome, setWelcome] = useState(true);
-  console.log("Mounted");
-
+  const user = useSelector((state) => state.user);
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    if (user) {
       setWelcome(false);
-    }, 2000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    }
   }, []);
 
   if (welcome) {
     return (
       <div className="app">
-        <Welcome />
+        <Router>
+          <Switch>
+            <Route path="/terms">
+              <Terms />
+            </Route>
+            <Welcome path="/" setWelcome={setWelcome} />
+          </Switch>
+        </Router>
       </div>
     );
-  } else if (user) {
+  }
+  if (user) {
     return (
       <div className="app">
         <Router>
@@ -65,9 +67,6 @@ const App = () => {
       <div className="app">
         <Router>
           <Switch>
-            <Route path="/terms">
-              <Terms />
-            </Route>
             <Route path="/">
               <Auth />
             </Route>

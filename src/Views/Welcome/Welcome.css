@@ -9,89 +9,60 @@
   place-items: center;
   background-color: white;
 }
-.welcome__main > p {
-  text-transform: capitalize;
-}
-.welcome__main > p > span {
-  color: lightseagreen !important;
-  font-weight: bold;
-  letter-spacing: 1px;
-  animation: ease-animation infinite linear 1s;
-}
-
-.welcome__loading {
+.welcome__main {
   display: flex;
   justify-content: center;
-  width: fit-content;
-  height: fit-content;
-}
-
-.welcome__loading > div {
-  width: 10px;
-  height: 10px;
-  margin: 3rem 0.2rem;
-  background: lightseagreen;
-  border-radius: 50%;
-  animation: loading-animation 0.6s infinite alternate;
-}
-.welcome__main {
-  width: 100%;
-  max-width: 500px;
-  display: grid;
-  place-items: center;
+  background-color: white;
+  flex-direction: column;
   padding: 10px;
   border-radius: 5px;
-  height: 60vh;
-}
-.welcome__loading > div:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.welcome__loading > div:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-.welcome__main > h1 {
-  display: flex;
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
   align-items: center;
 }
-.welcome__main > h1 > span {
-  font-size: 25px !important;
+p {
+  font-size: 0.9rem;
+  text-align: center;
 }
-.welcome__main > h1 > span:last-child {
-  color: orange !important;
+.welcome__main > h1 {
+  margin-top: 50px;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    lime,
+    black,
+    orange,
+    red
+  );
+  font-size: 1.5rem !important;
+  color: transparent;
+  background-clip: text;
+  width: fit-content;
+  margin: 50px auto;
 }
-.welcome__main > h1 > span:first-of-type {
-  color: green !important;
+.welcome__main button {
+  width: 60%;
+  border: 1px solid lightseagreen;
+  border-radius: 5px;
+  padding: 5px;
+  background: transparent;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 20px auto;
 }
-.welcome__like__icon {
-  color: lightseagreen !important;
-  font-size: 45px !important;
-  animation: rotate-animation 3s linear infinite !important;
-  margin-right: 5px;
+.welcome__main button:hover {
+  background: linear-gradient(to right, lightseagreen, lime, white);
 }
-@keyframes rotate-animation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.welcome__main p:last-of-type {
+  margin: 20px auto;
 }
-@keyframes ease-animation {
-  from {
-    transform: scale(1.01);
-    opacity: 1;
-  }
-  to {
-    transform: scale(1);
-    opacity: 0.6;
-    color: orange !important;
-  }
+.welcome__main p:last-of-type > span {
+  color: lightseagreen;
+  cursor: pointer;
 }
-@keyframes loading-animation {
-  to {
-    opacity: 0.1;
-    transform: translate3d(0, -10px, 0);
-  }
+
+.welcome__main p:last-of-type > span:hover {
+  text-decoration: underline;
 }
