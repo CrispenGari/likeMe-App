@@ -1,7 +1,7 @@
 import "./Register.css";
 import { useRef, useState, useEffect } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
-const Register = ({ setHasAccount }) => {
+const Register = ({ setCardToMount }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -24,6 +24,8 @@ const Register = ({ setHasAccount }) => {
     } else {
       setConfPasswordError("");
     }
+
+    setCardToMount("profile");
   };
   useEffect(() => {
     if (password && password.length < 6) {
@@ -141,11 +143,11 @@ const Register = ({ setHasAccount }) => {
         <p>{confPasswordError}</p>
       </div>
       <button type="submit" onClick={createAccount}>
-        CREATE ACCOUNT
+        CONTINUE
       </button>
       <div className="register__bottom">
         <p>Already have an account?</p>
-        <button onClick={() => setHasAccount(true)}>LOGIN</button>
+        <button onClick={() => setCardToMount("login")}>LOGIN</button>
       </div>
     </form>
   );

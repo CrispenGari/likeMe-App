@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import "./Login.css";
-const Login = ({ setHasAccount }) => {
+const Login = ({ setCardToMount }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [password, setPassword] = useState("");
@@ -63,8 +63,8 @@ const Login = ({ setHasAccount }) => {
       </button>
       <div className="login__bottom">
         <p>New user to this App?</p>
-        <button onClick={() => setHasAccount(false)}>
-          CREATE A NEW ACCOUNT
+        <button onClick={() => setCardToMount("register")}>
+          CREATE ACCOUNT
         </button>
       </div>
     </form>
