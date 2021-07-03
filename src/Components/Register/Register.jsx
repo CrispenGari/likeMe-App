@@ -10,10 +10,8 @@ const Register = ({ setHasAccount }) => {
   const [showConfPassword, setShowConfPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [confPasswordError, setConfPasswordError] = useState("");
-
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +21,8 @@ const Register = ({ setHasAccount }) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setConfPasswordError("the two password must match.");
+    } else {
+      setConfPasswordError("");
     }
   };
   useEffect(() => {
@@ -32,7 +32,6 @@ const Register = ({ setHasAccount }) => {
       setPasswordMessage("");
     }
     const expression = RegExp(/[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+/gim);
-
     if (email && !expression.test(email)) {
       setEmailError("invalid email address.");
     } else {
@@ -139,7 +138,7 @@ const Register = ({ setHasAccount }) => {
             />
           )}
         </div>
-        <p>{passwordError}</p>
+        <p>{confPasswordError}</p>
       </div>
       <button type="submit" onClick={createAccount}>
         CREATE ACCOUNT

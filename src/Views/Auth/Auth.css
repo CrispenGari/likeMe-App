@@ -10,6 +10,21 @@
   align-items: center;
   box-shadow: 2px 2px 2px 2px lightgray;
   padding: 10px;
+  flex-direction: column;
+}
+.auth > h1 {
+  margin-top: 50px;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    lime,
+    black,
+    orange,
+    red
+  );
+  font-size: 1.5rem !important;
+  color: transparent;
+  background-clip: text;
 }
 .auth::-webkit-scrollbar {
   display: none;
@@ -26,21 +41,6 @@
   max-width: 500px;
   margin: 10px auto;
 }
-.auth__main > h1 {
-  display: flex;
-  background: linear-gradient(to right, red, yellow, blue);
-  background-clip: text;
-  color: transparent;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.auth__like__me__icon {
-  color: lightseagreen !important;
-  /* font-size: 30px; */
-}
-
 @media only screen and (max-width: 769px) {
   .auth {
     padding: 0;
@@ -55,144 +55,3 @@
     flex-direction: column;
   }
 }
-/* .auth {
- 
-}
-.auth__main > small {
-  text-align: center;
-}
-.auth__main > small > a {
-  color: lightseagreen !important;
-  text-decoration: none !important;
-}
-.auth__main > p.auth__error {
-  color: red !important;
-  text-align: center;
-  font-style: italic;
-}
-
-.auth__main > button {
-  background-color: #141414;
-  border: none;
-  color: #ffffff;
-  outline: none;
-  padding: 5px 40px;
-  position: relative;
-  cursor: pointer;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between !important;
-  width: 200px;
-}
-.auth__main > button::before,
-.auth__main > button::after {
-  border: 0 solid transparent;
-  transition: all 0.3s;
-  content: "";
-  height: 0;
-  position: absolute;
-  width: 24px;
-  border-radius: 5px;
-}
-.auth__main > button::before {
-  border-top: 2px solid lightseagreen;
-  right: 0;
-  top: -4px;
-}
-
-.auth__main > button::after {
-  border-bottom: 2px solid lightseagreen;
-  bottom: -4px;
-  left: 0;
-}
-
-.auth__main > button:hover::before,
-.auth__main > button:hover::after {
-  width: 100%;
-}
-.auth__main > button:hover {
-  background-color: orange !important;
-}
-.auth__main > button:active {
-  background-color: green !important;
-}
-.auth__main {
-  padding: 10px;
-  border-radius: 5px;
-  background-color: white;
-  width: 100%;
-  max-width: 500px;
-  display: grid;
-  place-items: center;
-  padding: 10px;
-  border-radius: 5px;
-  height: 60vh;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
-}
-.auth__main > h1 {
-  display: flex;
-  align-items: center;
-   background-image: linear-gradient(to right, orange, lightseagreen, green);
-  background-clip: text; 
-  color: transparent !important;
-}
-
-.auth__like__me__icon {
-  font-size: 45px !important;
-  margin-right: 5px;
-  color: transparent !important;
-}
-
-.auth__main > p {
-  text-transform: capitalize;
-  text-align: center;
-}
-.auth__main > p > span {
-  font-weight: bold;
-  letter-spacing: 1px;
-
-}
-.auth__message {
-  display: flex;
-  align-items: flex-start;
-  border-radius: 5px;
-  padding: 5px;
-  background: yellowgreen;
-  width: 80% !important;
-  margin: 5px auto;
-}
-.auth__message__icon {
-  color: limegreen;
-  margin-right: 5px;
-  font-size: 30px !important;
-}
-.auth__message > p {
-  font-size: 12px !important;
-  user-select: none;
-  flex: 1;
-}
-.auth__message > p > strong {
-  font-size: 12px !important;
-  color: white;
-  text-decoration: underline !important;
-}
-@keyframes rotate-animation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes ease-animation {
-  from {
-    transform: scale(1.01);
-    opacity: 1;
-  }
-  to {
-    transform: scale(1);
-    opacity: 0.6;
-    color: orange !important;
-  }
-} */
