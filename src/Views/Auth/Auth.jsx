@@ -15,7 +15,7 @@ import Login from "../../Components/Login/Login";
 const Auth = () => {
   const [error, setError] = useState("");
   document.title = `LikeMe • Authentication`;
-  const [hasAccount, setHasAccount] = useState(true);
+  const [hasAccount, setHasAccount] = useState(!true);
 
   const login = (type) => {
     firebase.auth
@@ -54,16 +54,18 @@ const Auth = () => {
   return (
     <div className="auth">
       <div className="auth__main">
-        <h1>
-          <AiFillLike className="auth__like__me__icon" />
-          <span>M</span>
-          <span>e</span>
-        </h1>
         {!hasAccount ? (
           <Register setHasAccount={setHasAccount} />
         ) : (
           <Login setHasAccount={setHasAccount} />
         )}
+
+        {/* <h1>
+          <AiFillLike className="auth__like__me__icon" />
+          <span>M</span>
+          <span>e</span>
+        </h1>
+        */}
         {/* <p>
           Welcome to the <span>LikeMe</span>, where you will find your love
           partner.

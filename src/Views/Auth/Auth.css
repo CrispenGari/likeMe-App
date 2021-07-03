@@ -4,11 +4,59 @@
   user-zoom: none;
   height: 100vh;
   overflow-x: hidden !important;
-  overflow-y: hidden !important;
+  overflow-y: scroll !important;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px 2px 2px lightgray;
+  padding: 10px;
+}
+.auth::-webkit-scrollbar {
+  display: none;
+}
+.auth__main {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
+}
+.auth__main > h1 {
+  display: flex;
+  background: linear-gradient(to right, red, yellow, blue);
+  background-clip: text;
+  color: transparent;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth__like__me__icon {
+  color: lightseagreen !important;
+  /* font-size: 30px; */
+}
+
+@media only screen and (max-width: 769px) {
+  .auth {
+    padding: 0;
+    background: white;
+  }
+  .auth__main {
+    width: 100% !important;
+    border: none;
+    box-shadow: unset;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+/* .auth {
+ 
 }
 .auth__main > small {
   text-align: center;
@@ -85,8 +133,8 @@
 .auth__main > h1 {
   display: flex;
   align-items: center;
-  /* background-image: linear-gradient(to right, orange, lightseagreen, green);
-  background-clip: text; */
+   background-image: linear-gradient(to right, orange, lightseagreen, green);
+  background-clip: text; 
   color: transparent !important;
 }
 
@@ -103,7 +151,7 @@
 .auth__main > p > span {
   font-weight: bold;
   letter-spacing: 1px;
-  /* animation: ease-animation infinite linear 1s; */
+
 }
 .auth__message {
   display: flex;
@@ -147,4 +195,4 @@
     opacity: 0.6;
     color: orange !important;
   }
-}
+} */

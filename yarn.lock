@@ -6230,11 +6230,6 @@ ignore@^5.1.4:
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.1.8.tgz"
   integrity sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
 
-image-downloader@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.npmjs.org/image-downloader/-/image-downloader-4.0.2.tgz"
-  integrity sha512-lk3kQ5dwGMZz2Q1UHAFVOhTLW73lV55s5DSM4rDPttEKtRrf9yEWxwRlXp9xIr7owvTeIEAc4VCPAghunlNxzQ==
-
 immer@8.0.1:
   version "8.0.1"
   resolved "https://registry.npmjs.org/immer/-/immer-8.0.1.tgz"
@@ -9749,11 +9744,6 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
-react-fast-marquee@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/react-fast-marquee/-/react-fast-marquee-1.1.1.tgz"
-  integrity sha512-4XM0kqD0UZ8v1b+u44xMdSlhAND6WYn+5IDpoEHMf5GOGU2X9I3C1tWGUoxs9aAWF90KJ3mYEAr2DJkty2LATg==
-
 react-icons@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.2.0.tgz"
@@ -9879,11 +9869,6 @@ react-scripts@4.0.3:
     workbox-webpack-plugin "5.1.4"
   optionalDependencies:
     fsevents "^2.1.3"
-
-react-smooth-marquee@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/react-smooth-marquee/-/react-smooth-marquee-1.0.0.tgz"
-  integrity sha1-sp+Ot7L8n+pxrp692wTUK25nVnA=
 
 react-text-truncate@^0.16.0:
   version "0.16.0"
