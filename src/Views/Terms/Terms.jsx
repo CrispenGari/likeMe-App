@@ -11,15 +11,8 @@ const Terms = () => {
   return (
     <div className="termsandconditions">
       <div className="termsandconditions__app__logo">
-        <h1>
-          <AiFillLike className="auth__like__icon" />
-          <span>M</span>
-          <span>e</span>
-        </h1>
-        <p>
-          Welcome to the <span>LikeMe</span>, where you will find your love
-          partner.
-        </p>
+        <h1>LIKE ME</h1>
+        <p>Welcome to our application where you will find your love partner.</p>
       </div>
       <div className="termsandconditions__body">
         <h1>Terms of Service</h1>
@@ -28,7 +21,7 @@ const Terms = () => {
         with each other. By using this app, you agree that we can show you ads
         that we think will be relevant to you and your interests. We use your
         personal data <strong>(that you provide to us)</strong> to help
-        determine which ads to show you.{" "}
+        determine which ads to show you.
         <p>
           We don't sell your personal data to advertisers, and we don't share
           information that directly identifies you (such as your name, email
@@ -52,7 +45,7 @@ const Terms = () => {
             <li>Your Posts</li>
             <li>Your Followers and Followings</li>
             <li>
-              The location of you post <strong>you didn't hide it</strong>
+              The location of you post <strong>(if you didn't hide it)</strong>
             </li>
           </ul>
         </p>
@@ -67,13 +60,7 @@ const Terms = () => {
       <div className="termsandconditions__buttons">
         <div className=""></div>
         <div className="termsandconditions__buttons__left">
-          <button
-            onClick={() => {
-              window.location.href = "/";
-            }}
-          >
-            Reject
-          </button>
+          <button onClick={() => history.replace("/")}>Reject</button>
           <button onClick={() => history.push("/")}>Accept</button>
         </div>
       </div>
