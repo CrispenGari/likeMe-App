@@ -80,6 +80,9 @@
   margin: 10px auto;
   color: white;
 }
+.login__input__form--error {
+  border: 1px solid red;
+}
 
 .login > button:hover {
   background: linear-gradient(to right, lightseagreen, lime, white);

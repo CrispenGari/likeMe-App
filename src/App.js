@@ -12,10 +12,11 @@ import {
   People,
 } from "./Views";
 import { useSelector } from "react-redux";
-import { useFirebaseData } from "./hooks";
+import { useUserFetch } from "./hooks";
 const App = () => {
   // USE THE HOOK useFirebaseData
-  useFirebaseData();
+  // useFirebaseData();
+  useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);
   useEffect(() => {
@@ -23,9 +24,7 @@ const App = () => {
       setWelcome(false);
     }
   }, [user]);
-
   console.log(user);
-
   if (welcome) {
     return (
       <div className="app">
@@ -35,20 +34,6 @@ const App = () => {
               <Terms />
             </Route>
             <Welcome path="/" setWelcome={setWelcome} />
-          </Switch>
-        </Router>
-      </div>
-    );
-  }
-
-  if (user) {
-    return (
-      <div className="app">
-        <Router>
-          <Switch>
-            <Route path="/">
-              <Auth />
-            </Route>
           </Switch>
         </Router>
       </div>
