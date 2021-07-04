@@ -57,11 +57,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__left">
-        <h1 onClick={() => history.push("/")}>
-          <AiFillLike className="header__like__icon" />
-          <span>M</span>
-          <span>e</span>
-        </h1>
+        <h1 onClick={() => history.push("/")}>LIKE ME</h1>
       </div>
       <div className="header__center">
         <div className="header__search">
