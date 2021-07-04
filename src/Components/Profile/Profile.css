@@ -25,7 +25,21 @@
   width: 150px !important;
   height: 150px !important;
   cursor: pointer;
-  border: 2px solid lightseagreen;
+}
+.profile__avatar__container__cover {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.profile__progress {
+  width: 150px !important;
+  height: 150px !important;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  top: 0;
 }
 .profile__avatar__container > button {
   width: fit-content !important;
@@ -78,6 +92,10 @@
 .profiles__input > p {
   font-size: 0.8rem;
   color: red;
+}
+.profile__input > p {
+  color: red !important;
+  text-align: start;
 }
 .profiles__input label > span {
   color: red;

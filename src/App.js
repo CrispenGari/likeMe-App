@@ -22,7 +22,9 @@ const App = () => {
     if (user) {
       setWelcome(false);
     }
-  }, []);
+  }, [user]);
+
+  console.log(user);
 
   if (welcome) {
     return (
@@ -33,6 +35,20 @@ const App = () => {
               <Terms />
             </Route>
             <Welcome path="/" setWelcome={setWelcome} />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
+
+  if (user) {
+    return (
+      <div className="app">
+        <Router>
+          <Switch>
+            <Route path="/">
+              <Auth />
+            </Route>
           </Switch>
         </Router>
       </div>

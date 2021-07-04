@@ -7,17 +7,24 @@ import Profile from "../../Components/Profile/Profile";
 const Auth = () => {
   document.title = `LikeMe • Authentication`;
   const [cardToMount, setCardToMount] = useState("login");
-
+  const [credentials, setCredentials] = useState({});
   return (
     <div className="auth">
       <h1>LIKE ME</h1>
       <div className="auth__main">
         {cardToMount === "register" ? (
-          <Register setCardToMount={setCardToMount} />
+          <Register
+            setCardToMount={setCardToMount}
+            setCredentials={setCredentials}
+          />
         ) : cardToMount === "login" ? (
           <Login setCardToMount={setCardToMount} />
         ) : (
-          <Profile setCardToMount={setCardToMount} />
+          <Profile
+            setCardToMount={setCardToMount}
+            setCredentials={setCredentials}
+            credentials={credentials}
+          />
         )}
       </div>
     </div>

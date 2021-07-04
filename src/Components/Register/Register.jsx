@@ -1,31 +1,43 @@
 import "./Register.css";
 import { useRef, useState, useEffect } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
-const Register = ({ setCardToMount }) => {
+const Register = ({ setCardToMount, setCredentials }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
-  const phoneRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [confPasswordError, setConfPasswordError] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const createAccount = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setConfPasswordError("the two password must match.");
+      return setConfPasswordError("the two password must match.");
     } else {
       setConfPasswordError("");
     }
 
-    setCardToMount("profile");
+    if (!emailError && !passwordMessage && !confPasswordError) {
+      setCredentials({
+        email,
+        password,
+      });
+      console.log(setCredentials);
+      setEmail("");
+      setPassword("");
+
+      setConfirmPassword("");
+      setEmailError("");
+      setShowPassword(false);
+      setShowConfPassword(false);
+      setCardToMount("profile");
+      setConfPasswordError("");
+    }
   };
   useEffect(() => {
     if (password && password.length < 6) {
@@ -39,7 +51,7 @@ const Register = ({ setCardToMount }) => {
     } else {
       setEmailError("");
     }
-  }, [email, phoneNumber, password]);
+  }, [email, password]);
 
   return (
     <form className="register" onSubmit={createAccount}>
@@ -53,26 +65,11 @@ const Register = ({ setCardToMount }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             ref={emailRef}
-            type="text"
+            type="email"
             placeholder="email"
           />
         </div>
         <p>{emailError}</p>
-      </div>
-      <div className="register__input">
-        <label>
-          phone <span>?</span>
-        </label>
-        <div className="register__input__field">
-          <input
-            ref={phoneRef}
-            type="text"
-            placeholder="phone number (optional)"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </div>
-        <p>{phoneError}</p>
       </div>
       <div className="register__input">
         <label>

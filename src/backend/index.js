@@ -1,4 +1,10 @@
 import firebase from "firebase";
+// import "firebase/storage";
+// import "firebase/auth";
+// import "firebase/firestore";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const firebaseConfig = {
   apiKey: "AIzaSyAvKDtDctNsp0HNmRkQmQRpCWC0kgy0Xns",
@@ -22,8 +28,5 @@ const _ = {
   auth,
   db,
   storage,
-  googleAuthProvider,
-  facebookProvider,
-  twitterAuthProvider,
 };
 export default _;
