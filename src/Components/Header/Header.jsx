@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { Avatar, IconButton, Popover } from "@material-ui/core";
 import { Search, Message, Menu } from "@material-ui/icons";
-import { AiFillLike } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { IoIosPeople } from "react-icons/io";
 import { useHistory } from "react-router-dom";
