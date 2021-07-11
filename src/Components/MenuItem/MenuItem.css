@@ -1,0 +1,98 @@
+.menuitem {
+  display: flex;
+  justify-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  user-zoom: none;
+  border-bottom: 1px solid lightgray;
+  padding: 15px 2px;
+  width: 200px;
+  right: -250px;
+  position: relative;
+}
+.menuitem > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+.menuitem__avatar {
+  width: 50px !important;
+  height: 50px !important;
+  cursor: pointer !important;
+  background-color: red !important;
+}
+.menuitem > div > h1 {
+  font-size: 0.9rem !important;
+  color: black;
+  font-weight: 500;
+}
+.menuitem > div > p {
+  color: gray;
+  font-size: 0.7rem;
+}
+.menuitem--without-user {
+  padding: 10px 0;
+  align-items: center;
+}
+.menuitem__icon {
+  color: gray;
+  font-size: 1.5rem;
+}
+
+.menuitem__icon__button__badge {
+  position: relative;
+}
+.menuitem__icon__button__badge > span {
+  position: absolute;
+  background-color: lightseagreen;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+  font-size: 0.6rem;
+  color: white;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+}
+.menuitem__icon__button__badge > span.menuitem__icon__button__badge__dot {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  top: 0;
+  right: 0;
+}
+.menuitem:last-of-type {
+  border-bottom: none;
+}
+.menuitem:first-of-type {
+  animation: menu-item-animation 0.2s ease-in 0.5s 1 alternate forwards;
+}
+.menuitem:nth-of-type(1) {
+  animation: menu-item-animation 0.4s ease-in 0.5s 1 alternate forwards;
+}
+.menuitem:nth-of-type(2) {
+  animation: menu-item-animation 0.6s ease-in 0.5s 1 alternate forwards;
+}
+.menuitem:nth-of-type(3) {
+  animation: menu-item-animation 0.8s ease-in 0.5s 1 alternate forwards;
+}
+.menuitem:nth-of-type(4) {
+  animation: menu-item-animation 1s ease-in 0.5s 1 alternate forwards;
+}
+.menuitem:nth-of-type(5) {
+  animation: menu-item-animation 1.2s ease-in 0.5s 1 alternate forwards;
+}
+
+@keyframes menu-item-animation {
+  from {
+    right: -200px;
+  }
+  to {
+    right: 0px;
+  }
+}

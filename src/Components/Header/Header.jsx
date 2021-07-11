@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { Avatar, IconButton, Popover } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import { Search, Message, Menu } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { IoIosPeople } from "react-icons/io";
 import { useHistory } from "react-router-dom";
-import { MenuItems } from "../../Components";
+import { Menu as MenuContainer } from "../../Components";
+
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestionsResults, setSuggestionsResults] = useState([]);
@@ -13,10 +14,11 @@ const Header = () => {
   const users = useSelector((state) => state.users);
   // All people except me are friends in this case
   const [friends, setFriends] = useState([]);
+
+  const [open, setOpen] = useState(false);
   const history = useHistory();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const openPop = (event) => {
-    setAnchorEl(event.currentTarget);
+  const openMenu = () => {
+    setOpen(!open);
   };
 
   // This method will open the profile of the selected friend
@@ -122,25 +124,11 @@ const Header = () => {
           <IconButton
             className="header__right__icon__button header__icon__button__menu"
             title="Menu"
-            onClick={openPop}
+            onClick={openMenu}
           >
             <Menu className="header__icon__message__menu" />
           </IconButton>
-          <Popover
-            open={Boolean(anchorEl)}
-            anchorEl={anchorEl}
-            onClose={() => setAnchorEl(null)}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "center",
-            }}
-          >
-            <MenuItems />
-          </Popover>
+          {open ? <MenuContainer open={open} /> : null}
         </div>
       </div>
     </div>

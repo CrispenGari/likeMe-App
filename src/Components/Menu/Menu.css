@@ -1,0 +1,28 @@
+.menu {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  right: 0;
+  padding: 10px 0;
+  height: fit-content;
+  border-top: 1px solid lightgray;
+  z-index: 10;
+  border-bottom-left-radius: 5px;
+  display: none;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  animation: menu-animation 1s ease-in 500ms 1 alternate forwards;
+}
+.menu-open {
+  display: flex;
+}
+
+@keyframes menu-animation {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
