@@ -18,23 +18,22 @@ const Form = ({ setShowForm, setShowNotification }) => {
   const user = useSelector((state) => state.user);
   const hashTags = useSelector((state) => state.hashTags);
   const [caption, setCaption] = useState("");
+  const imageInputRef = useRef(null);
   const [suggestionsResults, setSuggestionsResults] = useState([]);
   const [category, setCategory] = useState("single");
   const [progress, setProgress] = useState(0);
   const [posting, setPosting] = useState(false);
-  const [image, setImage] = useState(null);
   const textInputRef = useRef(null);
-  const [preview, setPreview] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [allowLocationToBeDetected, setAllowLocationToBeDetected] = useState(
-    true
-  );
+  const [image, setImage] = useState(null);
+  const [allowLocationToBeDetected, setAllowLocationToBeDetected] =
+    useState(true);
   const [play] = useSound(boopSfx);
   useEffect(() => {
     if (progress === 100) {
       setPosting(false);
       setImage(null);
-      setPreview(null);
+
       play();
       setShowForm(false);
       setAllowLocationToBeDetected(true);
@@ -50,13 +49,11 @@ const Form = ({ setShowForm, setShowNotification }) => {
   }, []);
 
   const removePhoto = () => {
-    setPreview(null);
     setImage(null);
   };
   const closeForm = () => {
     setPosting(false);
     setImage(null);
-    setPreview(null);
     setShowForm(false);
     setCaption("");
     setProgress(0);
@@ -64,25 +61,17 @@ const Form = ({ setShowForm, setShowNotification }) => {
     setSuggestionsResults([]);
     setAllowLocationToBeDetected(true);
   };
-  useEffect(() => {
-    if (!image) {
-      setPreview(null);
-      return;
-    }
-    const objectUrl = URL.createObjectURL(image);
-    setPreview(objectUrl);
-    // free memory when ever this component is unmounted
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
 
-  const handleChange = (event) => {
-    event.preventDefault();
-    if (event.target.files[0]) {
-      setImage(event.target.files[0]);
-    } else {
-      setImage(null);
+  const handleChange = (e) => {
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
     }
+    reader.onload = (event) => {
+      setImage(event.target.result);
+    };
   };
+
   const select = (suggestion) => {
     let wordBins = caption.split(" ");
     wordBins.pop();
@@ -201,6 +190,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
           className="form__avatar"
           src={user?.photoURL}
           alt={user.displayName}
+          title={user.displayName}
         />
         <div className="form__input">
           <textarea
@@ -227,7 +217,11 @@ const Form = ({ setShowForm, setShowNotification }) => {
           </div>
           <p className="form__words__limit">{caption?.length}/150 characters</p>
         </div>
-        <IconButton className="form__close__button" onClick={closeForm}>
+        <IconButton
+          title="close"
+          className="form__close__button"
+          onClick={closeForm}
+        >
           <AiFillCloseCircle className="form__close__button__icon" />
         </IconButton>
       </div>
@@ -270,7 +264,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
               )}
             </IconButton>
             <img
-              src={preview}
+              src={image}
               alt="post-preview"
               className="form__post__preview__image"
             />
@@ -282,6 +276,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
           className="form__select"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          title="status"
         >
           {["Single", "In Relationship", "Complicated", "Searching"].map(
             (status, index) => {
@@ -294,7 +289,11 @@ const Form = ({ setShowForm, setShowNotification }) => {
           )}
         </select>
         <label htmlFor="post__picture">
-          <IconButton component="span" className="post__iconButton">
+          <IconButton
+            onClick={() => imageInputRef.current.click()}
+            className="post__iconButton"
+            title="pictures"
+          >
             <PhotoCamera className="post__icon" />
           </IconButton>
           <input
@@ -302,11 +301,12 @@ const Form = ({ setShowForm, setShowNotification }) => {
             id="post__picture"
             accept="image/*"
             multiple={false}
-            className="post__input--hidden"
+            ref={imageInputRef}
+            hidden
             onChange={handleChange}
           />
         </label>
-        <button type="submit" onClick={post}>
+        <button type="submit" onClick={post} title="post">
           Post
         </button>
       </div>

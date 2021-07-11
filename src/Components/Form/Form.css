@@ -70,6 +70,7 @@
   border-radius: 5px;
   padding: 10px;
   height: fit-content;
+  font-size: 16px;
 }
 .form__input > textarea::-webkit-scrollbar {
   display: none;
@@ -77,6 +78,7 @@
 .form__input::-webkit-scrollbar {
   display: none;
 }
+
 .form__avatar {
   width: 40px !important;
   height: 40px !important;
@@ -95,6 +97,10 @@
   background: #fafafa;
   outline: none;
   border: none;
+  border: 1px solid lightseagreen;
+  padding: 2px 5px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 .form__controls > button {
   width: 100px;
@@ -213,7 +219,7 @@
 }
 .form__image__container {
   width: 100%;
-  max-width: 45vh !important;
+  max-width: 45vw !important;
   border-radius: 5px;
   position: relative;
 }
