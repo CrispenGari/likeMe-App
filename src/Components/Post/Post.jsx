@@ -174,36 +174,16 @@ const Post = ({ post, setShowNotification }) => {
             <h1 onClick={openProfile}>
               {post?.data?.userId === user?.uid
                 ? "You"
-                : String(post?.data?.username).split(/\s/).join("_")}{" "}
+                : String(post?.data?.username).split(/\s/).join("_")}
               <HiBadgeCheck className="post__high__badge" />
-            </h1>{" "}
+            </h1>
             <small>•</small> <small>{postTime}</small>
           </div>
-          <p
-            className={`post__category__badge ${
-              post?.data?.category === "complicated"
-                ? "post__category__badge--complicated"
-                : post?.data?.category === "searching"
-                ? "post__category__badge--searching"
-                : post?.data?.category === "single"
-                ? "post__category__badge--single"
-                : ""
-            }`}
-          >
-            {"• " + post?.data?.category}
-          </p>
-          <p>
-            {post?.data?.caption.split(" ").map((cap, i) => {
-              if (cap.startsWith("#")) {
-                return (
-                  <span key={i} className="post__hash__tag">
-                    {cap}
-                  </span>
-                );
-              } else {
-                return <span key={i}>{cap}</span>;
-              }
-            })}
+          <p className={`post__category__badge`}>
+            <span className="post__location">
+              {post?.data?.location?.split(", ")[1]}
+            </span>
+            {" • " + post?.data?.category}
           </p>
         </div>
         <div>
@@ -233,9 +213,21 @@ const Post = ({ post, setShowNotification }) => {
       </div>
       <div className="post__center">
         <div className="post__center__likes" onDoubleClick={handleLike}></div>
-        <img src={post?.data?.imageURL} alt="post" />
+        <img src={post?.data?.imageURL} alt="post" loading="lazy" />
       </div>
-      <p className="post__location">{post?.data?.location}</p>
+      <p className="post__caption">
+        {post?.data?.caption.split(" ").map((cap, i) => {
+          if (cap.startsWith("#")) {
+            return (
+              <span key={i} className="post__hash__tag">
+                {cap}
+              </span>
+            );
+          } else {
+            return <span key={i}>{cap}</span>;
+          }
+        })}
+      </p>
       <div className="post__bottom">
         <div className="post__bottom__buttons">
           <div className="post__bottom__button__container">
@@ -296,7 +288,7 @@ const Post = ({ post, setShowNotification }) => {
             post
           </button>
         </div>
-        <div className="post__buttom__comment__container">
+        <div className="post__bottom__comment__container">
           {comments?.length > 0 ? (
             <button onClick={() => setOpen(true)}>Read Comments</button>
           ) : (

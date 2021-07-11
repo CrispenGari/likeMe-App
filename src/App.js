@@ -12,10 +12,10 @@ import {
   People,
 } from "./Views";
 import { useSelector } from "react-redux";
-import { useUserFetch } from "./hooks";
+import { useUserFetch, useFirebaseData } from "./hooks";
 const App = () => {
   // USE THE HOOK useFirebaseData
-  // useFirebaseData();
+  useFirebaseData();
   useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);

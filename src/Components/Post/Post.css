@@ -15,8 +15,9 @@
   align-items: center;
   cursor: pointer;
   overflow-y: hidden;
-  /* scroll-snap-align: start; */
+  scroll-snap-align: end;
   flex: 1 !important;
+
   /* max-width: 100px !important; */
 }
 .post__comments__modal {
@@ -25,9 +26,9 @@
   display: grid !important;
   place-items: center !important;
 }
-.post:hover {
+/* .post:hover {
   opacity: 0.9 !important;
-}
+} */
 .post__avatar {
   cursor: pointer;
 }
@@ -122,6 +123,7 @@
   border: none;
   border-radius: 5px;
   background: #fafafa;
+  font-family: 0.9rem;
 }
 .post__bottom__comment__input > button {
   width: 80px;
@@ -171,7 +173,7 @@
 }
 .post__hash__tag {
   text-decoration: underline;
-  color: lightseagreen !important;
+  color: cornflowerblue !important;
   font-weight: 500;
   cursor: pointer;
 }
@@ -180,12 +182,13 @@
   align-items: center;
 }
 .post__info > div > h1 {
-  color: lightseagreen !important;
-  font-size: 16px;
-  padding-bottom: 3px;
+  color: #3e3e3e !important;
+  font-size: 1rem;
+  padding-bottom: 1px;
   align-items: center;
   cursor: pointer;
   text-transform: lowercase !important;
+  font-weight: 500;
 }
 .post__info > div > h1:hover {
   text-decoration: underline;
@@ -196,8 +199,9 @@
   padding-bottom: 5px;
 }
 .post__high__badge {
-  color: green !important;
+  color: cornflowerblue !important;
   font-size: 14px;
+  margin-left: 5px;
 }
 .post__icon__button__message {
   width: fit-content !important;
@@ -209,19 +213,19 @@
 }
 .post__icon__like,
 .post__icon__unlike__number {
-  color: purple !important;
+  color: gray !important;
   font-size: 20px !important;
 }
 .post__icon__unlike {
-  color: purple !important;
+  color: gray !important;
   font-size: 20px !important;
 }
 .post__icon__message {
-  color: green !important;
+  color: gray !important;
   font-size: 20px !important;
 }
 .post__icon__download {
-  color: orange !important;
+  color: cornflowerblue !important;
   font-size: 20px !important;
 }
 .post__icon__comments {
@@ -232,11 +236,11 @@
   color: gray;
   margin-left: 3px;
 }
-.post__buttom__comment__container {
+.post__bottom__comment__container {
   display: flex;
   flex-direction: column;
 }
-.post__buttom__comment__container > button {
+.post__bottom__comment__container > button {
   background: lightseagreen;
   color: white;
   outline: none;
@@ -248,8 +252,8 @@
   cursor: pointer;
   position: relative;
 }
-.post__buttom__comment__container > button::before,
-.post__buttom__comment__container > button::after {
+.post__bottom__comment__container > button::before,
+.post__bottom__comment__container > button::after {
   border: 0 solid transparent;
   transition: all 0.3s;
   content: "";
@@ -258,61 +262,56 @@
   width: 24px;
   border-radius: 5px;
 }
-.post__buttom__comment__container > button::before {
+.post__bottom__comment__container > button::before {
   border-top: 2px solid black;
   right: 0;
   top: -4px;
 }
 
-.post__buttom__comment__container > button::after {
+.post__bottom__comment__container > button::after {
   border-bottom: 2px solid black;
   bottom: -4px;
   left: 0;
 }
 
-.post__buttom__comment__container > button:hover::before,
-.post__buttom__comment__container > button:hover::after {
+.post__bottom__comment__container > button:hover::before,
+.post__bottom__comment__container > button:hover::after {
   width: 100%;
 }
-.post__buttom__comment__container > button:hover {
+.post__bottom__comment__container > button:hover {
   background-color: orange !important;
 }
-.post__buttom__comment__container > button:active {
+.post__bottom__comment__container > button:active {
   background-color: green !important;
 }
 .post__category__badge {
-  font-weight: bold !important;
-  color: red !important;
+  font-weight: 500 !important;
+  color: cornflowerblue !important;
+  display: flex;
+  align-items: center;
 }
-.post__category__badge--complicated {
-  color: orange !important;
-}
-.post__category__badge--searching {
-  color: blue !important;
-}
-.post__category__badge--single {
-  color: green !important;
-}
-.post__info > p {
+.post__caption {
   display: flex;
   flex-wrap: wrap;
+  padding: 5px 0;
 }
-.post__info > p > span {
+.post__caption > span {
   margin-right: 4px;
 }
-.post__buttom__comment__container > h1 {
+.post__bottom__comment__container > h1 {
   text-align: center;
-  color: orange;
+  color: #3e3e3e;
   padding: 5px;
+  font-size: 0.9rem;
 }
-p.post__location {
-  margin: 2px 0;
+span.post__location {
   user-select: none;
   text-transform: inherit;
-  color: limegreen;
-  padding: 2px 0;
+  color: gray;
   text-align: center;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-right: 5px;
 }
 .post__bottom__button__container {
   display: flex;
@@ -324,10 +323,10 @@ p.post__location {
   user-select: none;
   user-zoom: none;
   margin-left: 5px !important;
+  font-size: 0.8rem;
 }
 @media only screen and (max-width: 768px) {
   .post__info > div > h1 {
     font-size: 14px !important;
-    padding-bottom: 3px;
   }
 }
