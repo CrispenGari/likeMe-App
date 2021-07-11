@@ -10,7 +10,6 @@ export { default as SidebarRight } from "./SidebarRight/SidebarRight";
 export { default as Person } from "./Person/Person";
 export { default as Message } from "./Message/Message";
 export { default as PostOptions } from "./PostOptions/PostOptions";
-export { default as MenuItems } from "./MenuItems/MenuItems";
 export { default as Fleets } from "./Fleets/Fleets";
 export { default as Fleet } from "./Fleet/Fleet";
 export { default as Likes } from "./Likes/Likes";

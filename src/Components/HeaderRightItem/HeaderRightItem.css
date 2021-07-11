@@ -1,0 +1,57 @@
+.header__item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  user-zoom: none;
+  width: 70px;
+}
+.header__item > div > p {
+  color: gray;
+  font-size: 0.7rem;
+  display: none;
+}
+.header__item > div > h1 {
+  font-size: 0.6rem;
+  font-weight: 500;
+}
+.header__item__avatar {
+  width: 30px !important;
+  height: 30px !important;
+}
+.header__item__icon__button__badge {
+  position: relative;
+}
+.header__item__icon__button__badge > span {
+  position: absolute;
+  background-color: lightseagreen;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+  font-size: 0.6rem;
+  color: white;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+}
+
+.header__item__icon__button__badge
+  > span.header__item__icon__button__badge__dot {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  top: 0;
+  right: 0;
+}
+
+.header__item__icon {
+  color: gray;
+  font-size: 1.5rem;
+}
+.header__item--without-user {
+}

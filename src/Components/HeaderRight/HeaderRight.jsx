@@ -1,31 +1,30 @@
-import "./Menu.css";
-import React from "react";
-import MenuItem from "../MenuItem/MenuItem";
+import "./HeaderRight.css";
+import HeaderRightItem from "../HeaderRightItem/HeaderRightItem";
 import { IoIosPeople } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
 import { RiChatSmile3Line } from "react-icons/ri";
-const Menu = ({ open }) => {
+const HeaderRight = () => {
   return (
-    <div className={"menu"}>
-      <MenuItem withUser subTitle="open your profile" />
-      <MenuItem
+    <div className="header__right">
+      <HeaderRightItem withUser subTitle="open your profile" />
+      <HeaderRightItem
         title="chats"
         Icon={RiChatSmile3Line}
         subTitle="open your chats"
       />
-      <MenuItem
+      <HeaderRightItem
         title="friends"
         Icon={IoIosPeople}
         subTitle="discover new friends"
       />
-      <MenuItem
+      <HeaderRightItem
         title="settings"
         Icon={AiOutlineSetting}
         subTitle="open your settings"
         dot
       />
-      <MenuItem
+      <HeaderRightItem
         title="sign out"
         Icon={MdPowerSettingsNew}
         subTitle="sign out of the app"
@@ -35,4 +34,4 @@ const Menu = ({ open }) => {
   );
 };
 
-export default Menu;
+export default HeaderRight;

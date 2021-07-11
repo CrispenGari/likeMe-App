@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { IoIosPeople } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import { Menu as MenuContainer } from "../../Components";
+import HeaderRight from "../HeaderRight/HeaderRight";
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -81,45 +82,8 @@ const Header = () => {
       </div>
       <div className="header__right">
         <div className="header__right__control__container">
-          <IconButton
-            onClick={() => history.push("/messages")}
-            className="header__right__icon__button"
-            title="messages"
-          >
-            {users?.length - 1 > 0 && (
-              <div className="header__icon__button__badge">
-                {
-                  // all chats
-                  users?.length - 1
-                }
-              </div>
-            )}
-            <Message className="header__icon__message" />
-          </IconButton>
-          <IconButton
-            className="header__right__icon__button"
-            title="people"
-            onClick={() => history.push("/people")}
-          >
-            {users?.length - 1 > 0 && (
-              <div className="header__icon__button__badge">
-                {
-                  // all users excluding me
-                  users?.length - 1
-                }
-              </div>
-            )}
-            <IoIosPeople className="header__icon__message__friends" />
-          </IconButton>
-          <Avatar
-            className="header__right__avatar"
-            alt={user?.displayName}
-            src={user.photoURL}
-            onClick={() => history.push(`/profile/${user?.uid}`)}
-            title="profile"
-          />
+          <HeaderRight />
         </div>
-
         <div className="header__right__menu__container">
           <IconButton
             className="header__right__icon__button header__icon__button__menu"
