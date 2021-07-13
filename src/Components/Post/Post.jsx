@@ -48,7 +48,6 @@ const Post = ({ post, setShowNotification }) => {
   }, [post]);
 
   useEffect(() => {
-    console.log("EffectRuns");
     const unsubscribe = firebase.db
       .collection("posts")
       .doc(post?.id)
@@ -58,7 +57,6 @@ const Post = ({ post, setShowNotification }) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-
     return () => {
       unsubscribe();
     };

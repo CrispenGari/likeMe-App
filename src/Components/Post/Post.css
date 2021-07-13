@@ -14,11 +14,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  overflow-y: hidden;
-  scroll-snap-align: end;
+  /* overflow-y: hidden;
+  scroll-snap-align: end; */
   flex: 1 !important;
-
-  /* max-width: 100px !important; */
 }
 .post__comments__modal {
   width: 100vw !important;

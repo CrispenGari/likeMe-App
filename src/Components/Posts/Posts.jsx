@@ -16,6 +16,7 @@ const Posts = () => {
   return (
     <>
       <div className="posts">
+        <Fleets />
         {posts.map((post, i) => (
           <Post key={i} post={post} setShowNotification={setShowNotification} />
         ))}

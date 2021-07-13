@@ -12,8 +12,8 @@
   height: 40px !important;
   background: black !important;
   position: absolute !important;
-  bottom: 10px !important;
-  left: 10px;
+  bottom: 25px !important;
+  left: 25px;
   z-index: 12;
 }
 .home__create__post__icon {

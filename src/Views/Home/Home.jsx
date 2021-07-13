@@ -44,8 +44,8 @@ const Home = () => {
       >
         <IoIosCreate className="home__create__post__icon" />
       </IconButton>
-      <SidebarRight />
-      <Sidebar />
+      {/* <SidebarRight />
+      <Sidebar /> */}
     </div>
   );
 };

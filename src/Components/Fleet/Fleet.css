@@ -1,11 +1,60 @@
 .fleet {
   margin: 0px 5px;
   cursor: pointer;
+  position: relative;
+  background-color: lightgray;
+  width: 100px;
+  height: 140px;
+  min-width: 100px;
+  border-radius: 5px;
+  animation: fleet-animation 2s ease 0s infinite alternate forwards;
 }
-
 .fleet__avatar {
-  border: 3px solid lightseagreen !important;
+  width: 50px !important;
+  height: 50px !important;
+  border: 2px solid cornflowerblue !important;
+  top: 60%;
+  left: 40%;
 }
-.fleet__avatar--nofleets {
-  border: none !important;
+.fleet__avatar__container {
+  position: relative !important;
+  width: fit-content;
+  height: fit-content;
+  top: 60%;
+  left: 40%;
+  border-radius: 50%;
+}
+.fleet__avatar__container > .fleet__avatar {
+  left: 0px;
+}
+.fleet__avatar__container > button {
+  position: absolute !important;
+  bottom: 6px !important;
+  right: 6px !important;
+  background: cornflowerblue !important;
+  color: white !important;
+  padding: 3px !important;
+  cursor: pointer !important;
+}
+.fleet__avatar__icon {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.fleet > img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100px;
+  height: 140px;
+  border-radius: 5px;
+  -webkit-user-drag: none;
+  object-fit: cover;
+}
+@keyframes fleet-animation {
+  from {
+    background-image: linear-gradient(to right, lightgray, rgb(155, 150, 150));
+  }
+  to {
+    background-image: linear-gradient(to left, lightgray, rgb(155, 150, 150));
+  }
 }

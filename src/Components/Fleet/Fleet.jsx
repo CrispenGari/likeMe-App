@@ -1,47 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Fleet.css";
-import { Avatar } from "@material-ui/core";
-import { useSelector } from "react-redux";
-const Fleet = ({ user, setCurrentFleets, openOthersFleets }) => {
-  const fleets = useSelector((state) => state.fleets);
-  const [userFleets, setUserFleets] = useState([]);
-  const openFleets = () => {
-    setCurrentFleets(
-      fleets
-        ?.filter((fleet) => {
-          return user?.data?.uid === fleet?.data?.userId;
-        })
-        .sort((a, b) => {
-          const date1 = new Date(a?.data?.timestamp?.toDate());
-          const date2 = new Date(b?.data?.timestamp?.toDate());
-          return date1 - date2;
-        })
+import { Avatar, IconButton } from "@material-ui/core";
+import { IoAdd } from "react-icons/io5";
+const Fleet = ({ isUserMe, user }) => {
+  if (isUserMe) {
+    return (
+      <div className="fleet">
+        <img
+          src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg"
+          alt=""
+        />
+        <div className="fleet__avatar__container">
+          <Avatar
+            className="fleet__avatar"
+            src={user?.photoURL}
+            alt={user?.displayName}
+          />
+          <IconButton title="add">
+            <IoAdd className="fleet__avatar__icon" />
+          </IconButton>
+        </div>
+      </div>
     );
-    openOthersFleets();
-  };
-  useEffect(() => {
-    setUserFleets(
-      fleets?.filter((fleet) => {
-        return user?.data?.uid === fleet?.data?.userId;
-      })
-    );
-  }, [fleets, user?.data?.uid]);
+  }
   return (
     <div className="fleet">
-      {userFleets?.length === 0 ? (
-        <Avatar
-          className="fleet__avatar--nofleets"
-          src={user?.data?.photoURL}
-          alt={user?.data?.displayName}
-        />
-      ) : (
-        <Avatar
-          className="fleet__avatar"
-          src={userFleets[userFleets?.length - 1]?.data?.fleetURL}
-          alt={user?.data?.displayName}
-          onClick={openFleets}
-        />
-      )}
+      <Avatar className="fleet__avatar" />
     </div>
   );
 };
