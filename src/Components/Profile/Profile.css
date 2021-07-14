@@ -46,6 +46,8 @@
   height: fit-content !important;
   padding: 5px !important;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
 }
 .profile__btn__icon {
   color: cornflowerblue !important;
@@ -66,6 +68,8 @@
   font-size: 0.9rem;
   cursor: pointer;
   margin: 5px auto;
+  display: flex;
+  justify-content: center;
 }
 .profiles__buttons button:last-child {
   width: 60%;
@@ -78,8 +82,11 @@
   cursor: pointer;
   margin: 5px auto;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 .profiles__buttons > button:hover {
+  color: white;
   background: linear-gradient(to right, lightseagreen, lime, white);
 }
 

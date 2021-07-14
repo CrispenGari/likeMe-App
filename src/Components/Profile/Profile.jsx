@@ -13,18 +13,21 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [loadingCreate, setLoadingCreate] = useState(false);
 
   const createAccount = (e) => {
     e.preventDefault();
     if (username.length < 5) {
       return setUsernameError("username must contain at least 5 characters");
     }
+    setLoadingCreate(true);
     firebase.db
       .collection("users")
       .where("displayName", "==", username)
       .get()
       .then((doc) => {
         if (doc.docs.length > 0) {
+          setLoadingCreate(false);
           setUsernameError("the username is already taken by someone.");
         } else {
           setUsernameError("");
@@ -33,6 +36,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
             username: username,
           };
           if (!userCredentials.email && !userCredentials.password) {
+            setLoadingCreate(false);
             return;
           }
           if (image) {
@@ -65,23 +69,25 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
                             photoURL: url,
                           })
                           .then(() => {
-                            const { displayName, email, photoURL } =
+                            setCredentials({});
+                            setImage(null);
+                            setProgress(0);
+                            setUsernameError("");
+                            setUsername("");
+                            const { displayName, email, photoURL, uid } =
                               authUser.user;
-                            firebase.db.collection("users").add({
+                            firebase.db.collection("users").doc(uid).set({
                               displayName: displayName,
                               email: email,
                               photoURL: photoURL,
                               phoneNumber: null,
                             });
+                            setCardToMount("login");
                           });
                       })
                       .catch((error) => setUsernameError(error.message))
                       .finally(() => {
-                        setCredentials({});
-                        setImage(null);
-                        setProgress(0);
-                        setUsernameError("");
-                        setUsername("");
+                        setLoadingCreate(false);
                       });
                   });
               }
@@ -99,22 +105,24 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
                     photoURL: null,
                   })
                   .then(() => {
-                    const { displayName, email, photoURL } = authUser.user;
-                    firebase.db.collection("users").add({
+                    setCredentials({});
+                    setImage(null);
+                    setProgress(0);
+                    setUsernameError("");
+                    setUsername("");
+                    const { displayName, email, photoURL, uid } = authUser.user;
+                    firebase.db.collection("users").doc(uid).set({
                       displayName: displayName,
                       email: email,
                       photoURL: photoURL,
                       phoneNumber: null,
                     });
+                    setCardToMount("login");
                   });
               })
               .catch((error) => setUsernameError(error.message))
               .finally(() => {
-                setCredentials({});
-                setImage(null);
-                setProgress(0);
-                setUsernameError("");
-                setUsername("");
+                setLoadingCreate(false);
               });
           }
         }
@@ -124,10 +132,12 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const handleChange = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
+      setLoading(true);
       reader.readAsDataURL(e.target.files[0]);
     }
     reader.onload = (event) => {
       setImage(event.target.result);
+      setLoading(false);
     };
   };
   return (
@@ -146,13 +156,12 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
           />
           {progress ? (
             <div className="profile__progress">
-              <CircularProgress
-                className="profile__avatar__progress"
-                variant="determinate"
-                value={progress}
-                color="secondary"
-                size={30}
-              />
+              <ActivityIndicator />
+            </div>
+          ) : null}
+          {loading ? (
+            <div className="profile__progress">
+              <ActivityIndicator />
             </div>
           ) : null}
         </div>
@@ -192,7 +201,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
       </div>
       <div className="profiles__buttons">
         <button type="submit" onClick={createAccount}>
-          CREATE ACCOUNT
+          CREATE ACCOUNT {loadingCreate ? <ActivityIndicator /> : null}
         </button>
         <button type="submit" onClick={() => setCardToMount("register")}>
           GO BACK

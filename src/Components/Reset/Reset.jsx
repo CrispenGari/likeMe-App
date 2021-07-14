@@ -17,7 +17,7 @@ const Reset = ({ setCardToMount }) => {
       firebase.auth
         .sendPasswordResetEmail(email)
         .then(() => {
-          setLoading(true);
+          setLoading(false);
           setError("");
           setMessage(
             `The reset password link has been sent to ${email}. Please check your email and reset your password to login.`
@@ -25,7 +25,8 @@ const Reset = ({ setCardToMount }) => {
           setEmail("");
         })
         .catch((error) => {
-          setLoading(true);
+          setLoading(false);
+          setMessage("");
           setError(error.message);
         });
     } else {

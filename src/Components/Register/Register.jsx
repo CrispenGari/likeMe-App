@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";
+import firebase from "../../backend";
 const Register = ({ setCardToMount, setCredentials }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -39,18 +40,29 @@ const Register = ({ setCardToMount, setCredentials }) => {
     }
 
     if (!emailError && !passwordMessage && !confPasswordError) {
-      setCredentials({
-        email,
-        password,
-      });
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setEmailError("");
-      setShowPassword(false);
-      setShowConfPassword(false);
-      setCardToMount("profile");
-      setConfPasswordError("");
+      firebase.db
+        .collection("users")
+        .where("email", "==", email)
+        .get()
+        .then((doc) => {
+          if (doc.docs.length > 0) {
+            setEmailError("the email is already taken by someone.");
+            return;
+          } else {
+            setCredentials({
+              email,
+              password,
+            });
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+            setEmailError("");
+            setShowPassword(false);
+            setShowConfPassword(false);
+            setCardToMount("profile");
+            setConfPasswordError("");
+          }
+        });
     }
   };
   useEffect(() => {
