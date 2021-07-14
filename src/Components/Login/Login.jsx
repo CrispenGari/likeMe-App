@@ -3,6 +3,7 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { CgLock } from "react-icons/cg";
 import { HiOutlineMail } from "react-icons/hi";
 import firebase from "../../backend";
+import { ActivityIndicator } from "../Common";
 import "./Login.css";
 const Login = ({ setCardToMount }) => {
   const emailRef = useRef(null);
@@ -11,9 +12,11 @@ const Login = ({ setCardToMount }) => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const login = (e) => {
     e.preventDefault();
     if (email && password) {
+      setLoading(true);
       firebase.auth
         .signInWithEmailAndPassword(email, password)
         .then((authUser) => {
@@ -24,6 +27,9 @@ const Login = ({ setCardToMount }) => {
         .catch((error) => {
           setPassword("");
           setError(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -83,7 +89,7 @@ const Login = ({ setCardToMount }) => {
         <p>{error}</p>
       </div>
       <button type="submit" onClick={login}>
-        LOGIN
+        LOGIN {!loading ? null : <ActivityIndicator />}
       </button>
       <p
         onClick={() => setCardToMount("reset")}

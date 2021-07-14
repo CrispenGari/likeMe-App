@@ -55,3 +55,8 @@
     flex-direction: column;
   }
 }
+@media only screen and (orientation: landscape) {
+  .auth {
+    padding-top: 90px;
+  }
+}

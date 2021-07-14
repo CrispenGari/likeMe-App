@@ -7,7 +7,7 @@ import Reset from "../../Components/Reset/Reset";
 
 const Auth = () => {
   document.title = `LikeMe • Authentication`;
-  const [cardToMount, setCardToMount] = useState("reset");
+  const [cardToMount, setCardToMount] = useState("login");
   const [credentials, setCredentials] = useState({});
   return (
     <div className="auth">

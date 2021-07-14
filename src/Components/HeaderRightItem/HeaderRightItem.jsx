@@ -11,8 +11,8 @@ const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
     return (
       <div
         className="header__item"
-        title={user?.displayName}
         onClick={firebase.auth.signOut()}
+        title={user?.displayName}
       >
         <Avatar
           className="header__item__avatar"
