@@ -3,6 +3,8 @@ import { AiFillCamera } from "react-icons/ai";
 import { Avatar, IconButton, CircularProgress } from "@material-ui/core";
 import { useRef, useState } from "react";
 import firebase from "../../backend";
+import { ActivityIndicator } from "../../Components/Common";
+import { BsPersonCheck } from "react-icons/bs";
 
 const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const inputRef = useRef(null);
@@ -10,6 +12,8 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const [usernameError, setUsernameError] = useState("");
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   const createAccount = (e) => {
     e.preventDefault();
     if (username.length < 5) {
@@ -130,6 +134,10 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
     <form className="profile">
       <h1>Create a public profile</h1>
       <div className="profile__avatar__container">
+        <p className="profile__input__message">
+          This profile picture will be visible to everyone. Setting it is
+          optional.
+        </p>
         <div className="profile__avatar__container__cover">
           <Avatar
             className="profile__avatar"
@@ -164,7 +172,15 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
         </IconButton>
       </div>
       <div className="profile__input">
-        <div className="profile__input__field">
+        <p className="profile__input__message">
+          This username will be public and visible to everyone.
+        </p>
+        <div
+          className={`profile__input__field ${
+            usernameError ? "profile__input__field--error" : ""
+          }`}
+        >
+          <BsPersonCheck className="login__input__icon" />
           <input
             value={username}
             onChange={(e) => setUsername(e.target.value)}

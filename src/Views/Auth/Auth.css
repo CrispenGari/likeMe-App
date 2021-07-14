@@ -13,7 +13,7 @@
   flex-direction: column;
 }
 .auth > h1 {
-  margin-top: 50px;
+  margin-top: 90px;
   background: linear-gradient(
     to right,
     lightseagreen,
@@ -55,7 +55,7 @@
     flex-direction: column;
   }
 }
-@media only screen and (orientation: landscape) {
+@media only screen and (max-width: 700px) and (orientation: landscape) {
   .auth {
     padding-top: 90px;
   }

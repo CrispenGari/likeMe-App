@@ -1,6 +1,8 @@
 import "./Register.css";
 import { useRef, useState, useEffect } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
+import { HiOutlineMail } from "react-icons/hi";
+import { CgLock } from "react-icons/cg";
 const Register = ({ setCardToMount, setCredentials }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -27,10 +29,8 @@ const Register = ({ setCardToMount, setCredentials }) => {
         email,
         password,
       });
-      console.log(setCredentials);
       setEmail("");
       setPassword("");
-
       setConfirmPassword("");
       setEmailError("");
       setShowPassword(false);
@@ -61,6 +61,7 @@ const Register = ({ setCardToMount, setCredentials }) => {
           email <span>*</span>
         </label>
         <div className="register__input__field">
+          <HiOutlineMail className="login__input__icon" />
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -76,6 +77,7 @@ const Register = ({ setCardToMount, setCredentials }) => {
           password <span>*</span>
         </label>
         <div className="register__input__field">
+          <CgLock className="login__input__icon" />
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -110,6 +112,7 @@ const Register = ({ setCardToMount, setCredentials }) => {
           confirm password <span>*</span>
         </label>
         <div className="register__input__field">
+          <CgLock className="login__input__icon" />
           <input
             ref={confirmPasswordRef}
             type="password"
