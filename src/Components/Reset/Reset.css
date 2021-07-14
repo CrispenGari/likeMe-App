@@ -1,27 +1,33 @@
-.login {
+.reset {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 20px;
 }
-.login h1 {
+
+.reset h1 {
   font-weight: 500;
   font-size: 1.01rem;
   text-transform: uppercase;
   margin: auto;
   width: 100%;
   text-align: center;
-  padding-bottom: 2px;
+  padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
   margin-bottom: 10px;
 }
-.login__input {
+.reset__input {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
 }
-.login__input__field {
+.reset__input p {
+  user-select: none;
+  text-align: start;
+  margin-bottom: 5px;
+}
+.reset__input__field {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,7 +37,7 @@
   padding-right: 10px;
   padding-left: 10px;
 }
-.login__input__field input {
+.reset__input__field input {
   flex: 1;
   outline: none;
   border: none;
@@ -39,17 +45,14 @@
   padding: 8px 10px;
   font-size: 1rem;
 }
-.login__input__field__icon {
+.reset__input__icon {
+  font-size: 1.5rem;
   color: gray;
-  cursor: pointer;
-  font-size: 1.3rem;
 }
-.login__input > p {
-  font-size: 0.8rem;
-  color: red;
+.reset__input__form--error {
+  border: 1px solid red;
 }
-
-.login > button {
+.reset > button {
   width: 60%;
   border: 1px solid lightseagreen;
   border-radius: 5px;
@@ -58,11 +61,11 @@
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
-  margin: 10px auto;
+  margin: 20px auto;
   display: flex;
   justify-content: center;
 }
-.login__bottom {
+.reset__bottom {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,8 +74,7 @@
   width: 100%;
   padding: 5px;
 }
-
-.login__bottom > button {
+.reset__bottom > button {
   width: 60%;
   border: 1px solid transparent;
   border-radius: 5px;
@@ -86,35 +88,19 @@
   display: flex;
   justify-content: center;
 }
-.login__input__icon {
-  font-size: 1.5rem;
-  color: gray;
+p.reset__message {
+  color: cornflowerblue;
+  font-weight: 500;
 }
-.login__input__form--error {
-  border: 1px solid red;
-}
-
-.login > button:hover {
-  background: linear-gradient(to right, lightseagreen, lime, white);
+.reset > button:hover {
   color: white;
+  background: linear-gradient(to right, lightseagreen, lime, white);
 }
 
-.login__bottom > button:hover {
+.reset__bottom > button:hover {
   border: 1px solid lightseagreen;
   background: linear-gradient(to left, lightseagreen, lime, white);
 }
-
-p.login__forgot__password {
-  padding: 30px 0;
-  color: lightseagreen;
-  cursor: pointer;
-}
-p.login__forgot__password:hover {
-  text-decoration: underline;
-}
-@media only screen and (max-width: 769px) {
-  .login {
-    border: none;
-    box-shadow: unset;
-  }
+p.reset__error {
+  color: red;
 }

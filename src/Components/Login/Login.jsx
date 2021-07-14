@@ -85,7 +85,12 @@ const Login = ({ setCardToMount }) => {
       <button type="submit" onClick={login}>
         LOGIN
       </button>
-      <p className="login__forgot__password">Forgot password?</p>
+      <p
+        onClick={() => setCardToMount("reset")}
+        className="login__forgot__password"
+      >
+        Forgot password?
+      </p>
       <div className="login__bottom">
         <p>New user to this App?</p>
         <button onClick={() => setCardToMount("register")}>

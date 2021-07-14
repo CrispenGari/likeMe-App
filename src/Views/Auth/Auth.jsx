@@ -3,10 +3,11 @@ import "./Auth.css";
 import Register from "../../Components/Register/Register";
 import Login from "../../Components/Login/Login";
 import Profile from "../../Components/Profile/Profile";
+import Reset from "../../Components/Reset/Reset";
 
 const Auth = () => {
   document.title = `LikeMe • Authentication`;
-  const [cardToMount, setCardToMount] = useState("login");
+  const [cardToMount, setCardToMount] = useState("reset");
   const [credentials, setCredentials] = useState({});
   return (
     <div className="auth">
@@ -19,6 +20,8 @@ const Auth = () => {
           />
         ) : cardToMount === "login" ? (
           <Login setCardToMount={setCardToMount} />
+        ) : cardToMount === "reset" ? (
+          <Reset setCardToMount={setCardToMount} />
         ) : (
           <Profile
             setCardToMount={setCardToMount}
