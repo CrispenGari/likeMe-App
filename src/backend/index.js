@@ -23,9 +23,11 @@ const app =
 const auth = app.auth();
 const db = app.firestore();
 const storage = app.storage();
+const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 const _ = {
   auth,
   db,
   storage,
+  timestamp,
 };
 export default _;

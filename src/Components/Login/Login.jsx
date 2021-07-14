@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
+import { CgLock } from "react-icons/cg";
+import { HiOutlineMail } from "react-icons/hi";
 import firebase from "../../backend";
 import "./Login.css";
 const Login = ({ setCardToMount }) => {
@@ -34,6 +36,7 @@ const Login = ({ setCardToMount }) => {
             error && "login__input__form--error"
           }`}
         >
+          <HiOutlineMail className="login__input__icon" />
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -49,6 +52,7 @@ const Login = ({ setCardToMount }) => {
             error && "login__input__form--error"
           }`}
         >
+          <CgLock className="login__input__icon" />
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -81,6 +85,7 @@ const Login = ({ setCardToMount }) => {
       <button type="submit" onClick={login}>
         LOGIN
       </button>
+      <p className="login__forgot__password">Forgot password?</p>
       <div className="login__bottom">
         <p>New user to this App?</p>
         <button onClick={() => setCardToMount("register")}>

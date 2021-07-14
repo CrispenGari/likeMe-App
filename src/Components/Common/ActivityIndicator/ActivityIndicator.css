@@ -1,0 +1,15 @@
+.activity__indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid lightseagreen;
+  animation: rotate 1.5s ease 0s infinite alternate forwards;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

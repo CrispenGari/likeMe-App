@@ -2,13 +2,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
+import firebase from "../../backend";
 import "./HeaderRightItem.css";
 const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
   if (withUser) {
     return (
-      <div className="header__item" title={user?.displayName}>
+      <div
+        className="header__item"
+        title={user?.displayName}
+        onClick={firebase.auth.signOut()}
+      >
         <Avatar
           className="header__item__avatar"
           src={user?.photoURL}
