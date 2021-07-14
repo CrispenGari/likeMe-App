@@ -107,8 +107,3 @@
     box-shadow: unset;
   }
 }
-
-@media only screen and (orientation: landscape) {
-  .register {
-  }
-}
