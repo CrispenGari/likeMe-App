@@ -9,8 +9,13 @@ const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
   const user = useSelector((state) => state.user);
   if (withUser) {
     return (
-      <div className="header__item" title={user?.displayName}>
-        <button onClick={() => firebase.auth.signOut()}>Logout</button>
+      <div
+        className="header__item"
+        title={user?.displayName}
+        onClick={() => {
+          history.push(`/profile/${user?.uid}`);
+        }}
+      >
         <Avatar
           className="header__item__avatar"
           src={user?.photoURL}

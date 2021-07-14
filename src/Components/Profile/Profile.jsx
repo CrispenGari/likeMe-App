@@ -1,6 +1,6 @@
 import "./Profile.css";
 import { AiFillCamera } from "react-icons/ai";
-import { Avatar, IconButton, CircularProgress } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import { useRef, useState } from "react";
 import firebase from "../../backend";
 import { ActivityIndicator } from "../../Components/Common";
