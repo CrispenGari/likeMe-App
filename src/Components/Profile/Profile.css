@@ -47,6 +47,9 @@
   padding: 5px !important;
   margin-top: 10px;
 }
+.profile__btn__icon {
+  color: cornflowerblue !important;
+}
 .profiles__buttons {
   display: flex;
   width: 100%;
@@ -128,6 +131,9 @@
 p.profile__input__message {
   color: lightseagreen !important;
   margin-bottom: 5px;
+}
+.profile__input__field--error {
+  border: 1px solid red;
 }
 @media only screen and (min-width: 600px) {
   .profile h1 {

@@ -49,6 +49,7 @@
 .register__input > p {
   font-size: 0.8rem;
   color: red;
+  text-align: start;
 }
 .register__input label > span {
   color: red !important;
@@ -98,7 +99,8 @@
   border: 1px solid lightseagreen;
   background: linear-gradient(to left, lightseagreen, lime, white);
 }
-.profile__input__field--error {
+
+.register__input__field--error {
   border: 1px solid red;
 }
 @media only screen and (max-width: 769px) {

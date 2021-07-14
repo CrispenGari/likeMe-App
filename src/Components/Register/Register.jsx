@@ -18,6 +18,20 @@ const Register = ({ setCardToMount, setCredentials }) => {
 
   const createAccount = (e) => {
     e.preventDefault();
+
+    if (!email) {
+      setEmailError("email is required.");
+      return;
+    } else {
+      setConfPasswordError("");
+    }
+    if (!password) {
+      setPasswordMessage("password is required.");
+      return;
+    }
+    if (!confirmPassword) {
+      setConfPasswordError("password is required");
+    }
     if (password !== confirmPassword) {
       return setConfPasswordError("the two password must match.");
     } else {
@@ -51,7 +65,10 @@ const Register = ({ setCardToMount, setCredentials }) => {
     } else {
       setEmailError("");
     }
-  }, [email, password]);
+    if (confirmPassword) {
+      setConfPasswordError("");
+    }
+  }, [email, password, confirmPassword]);
 
   return (
     <form className="register" onSubmit={createAccount}>
@@ -60,7 +77,11 @@ const Register = ({ setCardToMount, setCredentials }) => {
         <label>
           email <span>*</span>
         </label>
-        <div className="register__input__field">
+        <div
+          className={`register__input__field ${
+            emailError && "register__input__field--error"
+          }`}
+        >
           <HiOutlineMail className="login__input__icon" />
           <input
             value={email}
@@ -76,7 +97,11 @@ const Register = ({ setCardToMount, setCredentials }) => {
         <label>
           password <span>*</span>
         </label>
-        <div className="register__input__field">
+        <div
+          className={`register__input__field ${
+            passwordMessage && "register__input__field--error"
+          }`}
+        >
           <CgLock className="login__input__icon" />
           <input
             value={password}
@@ -111,7 +136,11 @@ const Register = ({ setCardToMount, setCredentials }) => {
         <label>
           confirm password <span>*</span>
         </label>
-        <div className="register__input__field">
+        <div
+          className={`register__input__field ${
+            confPasswordError && "register__input__field--error"
+          }`}
+        >
           <CgLock className="login__input__icon" />
           <input
             ref={confirmPasswordRef}
