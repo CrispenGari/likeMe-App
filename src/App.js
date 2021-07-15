@@ -10,21 +10,37 @@ import {
   Chat,
   Terms,
   People,
+  Landing,
 } from "./Views";
 import { useSelector } from "react-redux";
 import { useUserFetch, useFirebaseData } from "./hooks";
+import Settings from "./Views/Settings/Settings";
 const App = () => {
   // USE THE HOOK useFirebaseData
   useFirebaseData();
   useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    //  Wait for some seconds for the user session to load.
+    const intervalId = setInterval(() => {
+      setLoading(false);
+    }, 1000);
     if (user) {
       setWelcome(false);
     }
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [user]);
-  console.log(user);
+  if (loading) {
+    return (
+      <div className="app">
+        <Landing />
+      </div>
+    );
+  }
   if (welcome) {
     return (
       <div className="app">
@@ -55,6 +71,9 @@ const App = () => {
             </Route>
             <Route path="/chat/:uid" exact>
               <Chat />
+            </Route>
+            <Route path="/setttings">
+              <Settings />
             </Route>
             <Route path="/">
               <Home />

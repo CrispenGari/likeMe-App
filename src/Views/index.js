@@ -6,3 +6,5 @@ export { default as Messages } from "./Messages/Messages";
 export { default as Chat } from "./Chat/Chat ";
 export { default as Terms } from "./Terms/Terms";
 export { default as People } from "./People/People";
+export { default as Settings } from "./Settings/Settings";
+export { default as Landing } from "./Landing/Landing";
