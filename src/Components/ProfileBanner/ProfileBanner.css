@@ -20,6 +20,18 @@
   height: 70px;
   padding: 20px;
 }
+.profile__banner__username__banner {
+  width: 70%;
+  margin: 0px auto;
+}
+.profile__banner__username__banner > h1 {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: white;
+}
+.profile__banner__username__banner > p {
+  color: whitesmoke;
+}
 .profile__banner__avatar {
   width: 120px !important;
   height: 120px !important;
@@ -27,8 +39,15 @@
   border: 3px solid cornflowerblue;
   cursor: pointer;
 }
+.profile__banner__logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
-.profile__banner > h1 {
+.profile__banner__logo > h1 {
   color: white;
   user-select: none;
   margin-top: -80px;
@@ -37,6 +56,9 @@
   text-shadow: 2px 2px cornflowerblue;
   font-weight: 700;
   font-size: 1.7rem;
+}
+.profile__banner__logo > p {
+  color: whitesmoke;
 }
 .profile__banner > button {
   position: absolute !important;
@@ -62,7 +84,5 @@
   .profile__banner__container {
     height: 50px;
     padding: 20px;
-  }
-  .profile__banner > button {
   }
 }

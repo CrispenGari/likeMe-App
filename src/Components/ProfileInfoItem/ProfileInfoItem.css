@@ -1,0 +1,32 @@
+.profile__info__item {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  margin: 5px;
+  align-items: center;
+  padding: 5px;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.profile__info__item__top {
+  display: flex;
+  align-items: center;
+}
+.profile__info__item__top > h1 {
+  font-size: 0.9rem;
+  width: fit-content;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 5px;
+}
+.profile__info__item > p {
+  font-size: 0.8rem;
+  color: gray;
+}
+.profile__info__item__icon {
+  color: cornflowerblue;
+}

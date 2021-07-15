@@ -25,7 +25,17 @@ const ProfileBanner = () => {
 
   return (
     <div className="profile__banner">
-      <h1>LIKEME</h1>
+      <div className="profile__banner__logo">
+        <h1>LIKEME</h1>
+        <p>@username</p>
+        <div className="profile__banner__username__banner">
+          <p>
+            I'm single and searching. Looking for a serious relationship and
+            settle down.
+          </p>
+        </div>
+      </div>
+
       <button>Edit</button>
       <div className="profile__banner__container">
         <Avatar

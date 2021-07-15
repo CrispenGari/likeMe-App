@@ -41,3 +41,13 @@ textarea {
 .app::-webkit-scrollbar {
   display: none;
 }
+
+/* GLOBAL STYLES FOR ELEMENTS */
+
+.span__global__clickable {
+  color: rgb(84, 140, 243);
+  cursor: pointer;
+}
+.span__global__clickable:hover {
+  text-decoration: underline;
+}

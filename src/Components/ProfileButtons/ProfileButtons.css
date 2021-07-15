@@ -4,6 +4,7 @@
   max-width: 600px;
   padding: 10px;
   justify-content: center;
+  margin: 0px auto;
 }
 
 .profile__buttons button {
@@ -16,4 +17,25 @@
   cursor: pointer;
   text-align: center;
   justify-content: center;
+  background-color: white;
+  margin: 0px 10px;
+  background-color: lightseagreen;
+  color: white;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.profile__buttons button:last-child {
+  background-color: white;
+  color: black;
+  border: 1px solid cornflowerblue;
+}
+.profile__buttons button:hover {
+  color: white;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
 }
