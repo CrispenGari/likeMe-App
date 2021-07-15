@@ -7,8 +7,8 @@ import ProfilePostsNavItem from "../ProfilePostsNavItem/ProfilePostsNavItem";
 const ProfilePostNav = () => {
   return (
     <div className="profile__posts__nav">
-      <ProfilePostsNavItem title="photos" Icon={IoMdPhotos} />
-      <ProfilePostsNavItem active title="most liked" Icon={GiSelfLove} />
+      <ProfilePostsNavItem active title="photos" Icon={IoMdPhotos} />
+      <ProfilePostsNavItem title="most liked" Icon={GiSelfLove} />
       <ProfilePostsNavItem title="tags" Icon={CgHashtag} />
     </div>
   );

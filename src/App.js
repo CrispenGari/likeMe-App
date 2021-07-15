@@ -18,21 +18,13 @@ import Settings from "./Views/Settings/Settings";
 const App = () => {
   // USE THE HOOK useFirebaseData
   useFirebaseData();
-  useUserFetch();
+  const { loading } = useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    //  Wait for some seconds for the user session to load.
-    const intervalId = setInterval(() => {
-      setLoading(false);
-    }, 1500);
     if (user) {
       setWelcome(false);
     }
-    return () => {
-      clearInterval(intervalId);
-    };
   }, [user]);
   if (loading) {
     return (

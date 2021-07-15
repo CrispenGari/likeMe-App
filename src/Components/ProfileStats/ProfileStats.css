@@ -1,0 +1,24 @@
+.profile__stats {
+  display: flex;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0px auto;
+  justify-content: center;
+  user-select: none;
+}
+.profile__stats__item {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profile__stats__item > h1 {
+  font-size: 0.9rem;
+}
+.profile__stats__item > p {
+  font-size: 0.7rem;
+  color: gray;
+  text-transform: lowercase;
+}

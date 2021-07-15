@@ -1,10 +1,11 @@
 import React from "react";
 import "./Profile.css";
-import { useParams } from "react-router-dom";
 import { Header } from "../../Components";
-import { useSelector } from "react-redux";
 import ProfilePosts from "../../Components/ProfilePosts/ProfilePosts";
 import ProfileBanner from "../../Components/ProfileBanner/ProfileBanner";
+import ProfileStats from "../../Components/ProfileStats/ProfileStats";
+import ProfileButtons from "../../Components/ProfileButtons/ProfileButtons";
+
 const Profile = () => {
   React.useLayoutEffect(() => {
     document.title = `likeme • profile `;
@@ -17,6 +18,8 @@ const Profile = () => {
       </div>
       <div className="profile__main">
         <ProfileBanner />
+        <ProfileStats />
+        <ProfileButtons />
         <ProfilePosts />
       </div>
     </div>
