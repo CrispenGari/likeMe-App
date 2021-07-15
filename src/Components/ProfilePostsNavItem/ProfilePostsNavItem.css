@@ -1,0 +1,38 @@
+.profile__post__nav__item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.profile__post__nav__item > h1 {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.profile__post__nav__item__active {
+  border-bottom: 3px solid cornflowerblue;
+}
+.profile__post__nav__item__icon {
+  color: gray;
+  font-size: 1.3rem;
+  margin-left: 10px;
+}
+
+.profile__post__nav__item:hover {
+  background-image: linear-gradient(to right, cornflowerblue, black);
+}
+.profile__post__nav__item:hover h1 {
+  color: white;
+}
+.profile__post__nav__item:hover > .profile__post__nav__item__icon {
+  color: white;
+}
+@media only screen and (max-width: 700px) {
+  .profile__post__nav__item {
+    flex-direction: column-reverse;
+  }
+}

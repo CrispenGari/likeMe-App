@@ -3,6 +3,7 @@ import "./Profile.css";
 import { useParams } from "react-router-dom";
 import { Header } from "../../Components";
 import { useSelector } from "react-redux";
+import ProfilePosts from "../../Components/ProfilePosts/ProfilePosts";
 import ProfileBanner from "../../Components/ProfileBanner/ProfileBanner";
 const Profile = () => {
   React.useLayoutEffect(() => {
@@ -11,11 +12,11 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      
       <div className="profile__header">
         <Header />
       </div>
       <ProfileBanner />
+      <ProfilePosts />
     </div>
   );
 };

@@ -26,7 +26,7 @@ const App = () => {
     //  Wait for some seconds for the user session to load.
     const intervalId = setInterval(() => {
       setLoading(false);
-    }, 1000);
+    }, 1500);
     if (user) {
       setWelcome(false);
     }
