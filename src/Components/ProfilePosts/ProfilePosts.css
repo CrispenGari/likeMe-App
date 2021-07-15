@@ -1,0 +1,19 @@
+.profile__posts {
+  width: 100%;
+  display: flex;
+  max-width: 600px;
+  flex-direction: column;
+  margin: 0px auto;
+}
+.profile__posts__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 1;
+  max-height: 50vh;
+}
+.profile__posts__container::-webkit-scrollbar {
+  display: none;
+}

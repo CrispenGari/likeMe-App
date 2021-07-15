@@ -15,8 +15,10 @@ const Profile = () => {
       <div className="profile__header">
         <Header />
       </div>
-      <ProfileBanner />
-      <ProfilePosts />
+      <div className="profile__main">
+        <ProfileBanner />
+        <ProfilePosts />
+      </div>
     </div>
   );
 };

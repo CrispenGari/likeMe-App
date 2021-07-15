@@ -1,0 +1,75 @@
+.profile__post {
+  width: 130px;
+  height: 150px;
+  position: relative;
+  margin: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+}
+.profile__post img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.profile__posts__like {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.profile__posts__like__icon {
+  font-size: 1.9rem;
+  color: cornflowerblue;
+}
+.profile__posts__like > small {
+  color: white;
+  font-weight: bold;
+}
+.profile__post__image__cover {
+  position: absolute;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.3);
+  width: 130px;
+  height: 150px;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+}
+.profile__post__date {
+  position: absolute;
+  z-index: 4;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+.profile__post__date > small {
+  padding: 3px;
+  font-size: 0.7rem;
+}
+.profile__post:hover {
+  transform: scale(1.05);
+}
+.profile__post:hover > .profile__post__date {
+  display: flex;
+}
+
+.profile__post:hover > .profile__post__image__cover > .profile__posts__like {
+  display: flex !important;
+}
+
+/* AT SMALLER MOBILES SHOW LIKES BY DEFAULT */
+@media only screen and (max-width: 400px) {
+  .profile__posts__like {
+    display: flex !important;
+  }
+}
