@@ -13,15 +13,12 @@
 }
 .form__posting {
   position: absolute;
-  background: rgba(0, 0, 0, 0);
-  width: 96%;
-  height: 90%;
   z-index: 5;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   user-select: none;
-  border-radius: 5px;
-  padding: 20%;
 }
 .form__top {
   display: flex;
@@ -38,29 +35,7 @@
   margin-left: 10px;
   max-height: 100px;
 }
-.form__input__suggestions {
-  position: absolute;
-  top: 100%;
-  width: 50%;
-  background-color: #fafafa;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  user-select: none;
-  z-index: 500;
-}
-.form__hash__tag {
-  background-color: white;
-  padding: 5px;
-  width: 100%;
-  cursor: pointer;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.form__hash__tag:nth-child(even) {
-  background-color: #fafafa;
-}
+
 .form__input > textarea {
   flex: 1;
   resize: none;
@@ -104,106 +79,34 @@
 }
 .form__controls > button {
   width: 100px;
-  background: lightseagreen;
   outline: none;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 3px 10px;
   text-align: center;
-  color: white;
+  background: white;
   border: none;
   font-weight: bolder;
   border-radius: 5px;
   position: relative;
-}
-.post__icon {
-  font-size: 25px !important;
-  color: green !important;
-}
-.post__iconButton {
-  background-color: #fafafa !important;
-}
-
-.form__controls > button::before,
-.form__controls > button::after {
-  border: 0 solid transparent;
-  transition: all 0.3s;
-  content: "";
-  height: 0;
-  position: absolute;
-  width: 24px;
-  border-radius: 5px;
-}
-.form__controls > button::before {
-  border-top: 2px solid black;
-  right: 0;
-  top: -4px;
-}
-
-.form__controls > button::after {
-  border-bottom: 2px solid black;
-  bottom: -4px;
-  left: 0;
-}
-
-.form__controls > button:hover::before,
-.form__controls > button:hover::after {
-  width: 100%;
-}
-.form__controls > button:hover {
-  background-color: orange !important;
-}
-.form__controls > button:active {
-  background-color: green !important;
-}
-
-.form__hash__tag:hover {
-  background: lightseagreen !important;
-  color: white !important;
-  cursor: pointer !important;
-}
-.form__hash__tag:active {
-  background: orange !important;
-  color: white !important;
-  cursor: pointer !important;
-}
-.form__hash__tag:hover > small,
-.form__hash__tag:hover > h1,
-.form__hash__tag:active > small,
-.form__hash__tag:active > h1 {
-  color: white !important;
-}
-.form__hash__tag:active {
-  color: white !important;
-}
-.form__posting__loading {
+  border: 1px solid cornflowerblue;
   display: flex;
   justify-content: center;
-  width: fit-content;
-  height: fit-content;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+  align-items: center;
 }
-.form__posting__loading > div {
-  width: 10px;
-  height: 10px;
-  margin: 3rem 0.2rem;
-  background: lightseagreen;
-  border-radius: 50%;
-  animation: loading-animation 0.6s infinite alternate;
+.post__icon {
+  font-size: 1.5rem !important;
+  color: cornflowerblue !important;
 }
-.form__posting__loading > div:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.form__posting__loading > div:nth-child(3) {
-  animation-delay: 0.4s;
-}
-.form__posting > h1 {
-  background: lightseagreen;
-  padding: 3px 20px;
+.form__controls > button:hover {
   color: white;
-  border-radius: 5px;
-  font-weight: normal !important;
-  font-size: 13px !important;
-  font-weight: normal !important;
+  background-image: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
 }
 .form__post__preview {
   display: flex;
@@ -211,11 +114,6 @@
   flex-direction: column;
   align-items: center;
   user-select: none;
-}
-.form__post__preview > h1 {
-  font-size: 15px;
-  color: lightseagreen;
-  margin-bottom: 10px;
 }
 .form__image__container {
   width: 100%;
@@ -233,24 +131,24 @@
 }
 .form__image__delete__icon {
   color: white !important;
-}
-.form__image__locationOff__icon {
-  color: white !important;
-}
-.form__image__locationOn__icon {
-  color: limegreen !important;
+  font-size: 1rem !important;
 }
 .form__image__delete__button,
 .form__image__location__button {
   position: absolute !important;
   top: 10px !important;
   right: 10px !important;
+  padding: 5px !important;
   background: rgba(0, 0, 0, 0.8) !important;
-  z-index: 100 !important;
+  z-index: 5 !important;
 }
 .form__image__location__button {
-  top: 70px !important;
+  top: 50px !important;
+  z-index: 5 !important;
+  color: white !important;
+  font-size: 1rem !important;
 }
+
 .form__close__button {
   width: fit-content !important;
   height: fit-content !important;

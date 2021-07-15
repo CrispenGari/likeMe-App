@@ -1,53 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import useSound from "use-sound";
-import {
-  Delete,
-  PhotoCamera,
-  LocationOn,
-  LocationOff,
-} from "@material-ui/icons";
+import { AiFillCamera } from "react-icons/ai";
+import { MdDelete, MdLocationOn, MdLocationOff } from "react-icons/md";
+
 import { useSelector } from "react-redux";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { ActivityIndicator } from "../Common";
 import "./Form.css";
 import firebase from "../../backend";
-import fb from "firebase";
-import locationAxios from "../../data/location";
-import boopSfx from "../../sounds/post1.wav";
-const Form = ({ setShowForm, setShowNotification }) => {
+const Form = ({ setShowForm }) => {
   const user = useSelector((state) => state.user);
-  const hashTags = useSelector((state) => state.hashTags);
   const [caption, setCaption] = useState("");
   const imageInputRef = useRef(null);
-  const [suggestionsResults, setSuggestionsResults] = useState([]);
   const [category, setCategory] = useState("single");
-  const [progress, setProgress] = useState(0);
-  const [posting, setPosting] = useState(false);
+  const [progress, setProgress] = useState(2);
+  const [detectLocation, setDetectLocation] = useState(false);
+
+  const [posting, setPosting] = useState(!false);
   const textInputRef = useRef(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
   const [image, setImage] = useState(null);
-  const [allowLocationToBeDetected, setAllowLocationToBeDetected] =
-    useState(true);
-  const [play] = useSound(boopSfx);
-  useEffect(() => {
-    if (progress === 100) {
-      setPosting(false);
-      setImage(null);
-
-      play();
-      setShowForm(false);
-      setAllowLocationToBeDetected(true);
-      setShowNotification(true);
-    }
-  }, [progress, setShowForm, setShowNotification, play]);
-
-  useEffect(() => {
-    (async () => {
-      const _location = await locationAxios.get("");
-      setCurrentLocation(_location.data);
-    })();
-  }, []);
-
   const removePhoto = () => {
     setImage(null);
   };
@@ -58,8 +30,6 @@ const Form = ({ setShowForm, setShowNotification }) => {
     setCaption("");
     setProgress(0);
     setCategory("single");
-    setSuggestionsResults([]);
-    setAllowLocationToBeDetected(true);
   };
 
   const handleChange = (e) => {
@@ -72,115 +42,8 @@ const Form = ({ setShowForm, setShowNotification }) => {
     };
   };
 
-  const select = (suggestion) => {
-    let wordBins = caption.split(" ");
-    wordBins.pop();
-    wordBins.push(`${suggestion.name}`);
-
-    const finalCaption = wordBins.join(" ");
-    setCaption(finalCaption);
-    setSuggestionsResults([]);
-    textInputRef.current.focus();
-  };
-  const suggest = () => {
-    if (caption.split(" ").pop().length === 0) {
-      setSuggestionsResults([]);
-    }
-    if (caption.split(" ").pop().startsWith("#")) {
-      textInputRef.current.style.color = "lightseagreen";
-      textInputRef.current.style.fontWeight = "bold";
-    } else {
-      textInputRef.current.style.color = "black";
-      textInputRef.current.style.fontWeight = "normal";
-    }
-    search(caption.split(" ").pop());
-  };
-  const search = (query) => {
-    if (query.length > 0) {
-      const res = hashTags
-        .filter((___hashTag) => {
-          const exp = new RegExp(`^${query}`, "gi");
-          return ___hashTag.name.match(exp);
-        })
-        .splice(0, 3);
-      setSuggestionsResults(res);
-      if (res.length === 0) {
-        setSuggestionsResults(
-          hashTags
-            .filter((___hashTag) => ___hashTag.name.indexOf(query) !== -1)
-            .splice(0, 3)
-        );
-      }
-    }
-  };
-
   const post = (event) => {
     event.preventDefault();
-
-    if (image) {
-      const uploadTask = firebase.storage
-        .ref(`images/${image.name}`)
-        .put(image);
-
-      let wordBins = caption.split(" ");
-      let __hashTags = [];
-      wordBins.forEach((tag) => {
-        if (tag.startsWith("#")) {
-          __hashTags.push(tag);
-        }
-      });
-      __hashTags.forEach((tag) => {
-        if (hashTags.indexOf(tag) === -1) {
-          firebase.db.collection("hashtags").add({
-            name: tag,
-            tag: "trending",
-          });
-        }
-      });
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-          setPosting(true);
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          firebase.storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then((url) => {
-              // Post an image
-              firebase.db.collection("posts").add({
-                username: user?.displayName,
-                userAvatar: user?.photoURL,
-                userEmail: user?.email,
-                phoneNumber: user?.phoneNumber,
-                userId: user?.uid,
-                category: category,
-                imageURL: url,
-                caption: caption,
-                timestamp: fb.firestore.FieldValue.serverTimestamp(),
-                location: allowLocationToBeDetected
-                  ? `${currentLocation?.country}(${String(
-                      currentLocation?.country_code
-                    ).toLowerCase()}), ${currentLocation?.region} • ${
-                      currentLocation?.city
-                    }`
-                  : null,
-              });
-            });
-        }
-      );
-    }
-    setCaption("");
-    setProgress(0);
-    setCategory("single");
   };
 
   return (
@@ -195,26 +58,11 @@ const Form = ({ setShowForm, setShowNotification }) => {
         <div className="form__input">
           <textarea
             maxLength="150"
-            onKeyUp={suggest}
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
             ref={textInputRef}
-            placeholder={`Write something about your self ${
-              user.displayName.split(" ")[0]
-            }...`}
+            placeholder={`Write something about your self ${user.displayName}...`}
           ></textarea>
-          <div className="form__input__suggestions">
-            {suggestionsResults.map((suggestion, i) => (
-              <div
-                key={i}
-                className="form__hash__tag"
-                onClick={() => select(suggestion)}
-              >
-                <h1>{suggestion.name}</h1>
-                <small>{suggestion.tag}</small>
-              </div>
-            ))}
-          </div>
           <p className="form__words__limit">{caption?.length}/150 characters</p>
         </div>
         <IconButton
@@ -227,41 +75,25 @@ const Form = ({ setShowForm, setShowNotification }) => {
       </div>
       {image && (
         <div className="form__post__preview">
-          {posting && (
+          {progress ? (
             <div className="form__posting">
-              <h1>{`Posting... ${progress} %`}</h1>
-              <div className="form__posting__loading">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
+              <ActivityIndicator size={25} />
             </div>
-          )}
-          <h1>Post Preview</h1>
+          ) : null}
           <div className="form__image__container">
             <IconButton
               className="form__image__delete__button"
-              title="delete"
+              title="remove"
               onClick={removePhoto}
             >
-              <Delete className="form__image__delete__icon" />
+              <MdDelete className="form__image__delete__icon" />
             </IconButton>
             <IconButton
+              onClick={() => setDetectLocation((prev) => !prev)}
               className="form__image__location__button"
-              title={
-                allowLocationToBeDetected
-                  ? "Turn Off Location"
-                  : "Turn On Location"
-              }
-              onClick={() =>
-                setAllowLocationToBeDetected(!allowLocationToBeDetected)
-              }
+              title={detectLocation ? "location on" : "location off"}
             >
-              {allowLocationToBeDetected ? (
-                <LocationOn className="form__image__locationOn__icon" />
-              ) : (
-                <LocationOff className="form__image__locationOff__icon" />
-              )}
+              {detectLocation ? <MdLocationOn /> : <MdLocationOff />}
             </IconButton>
             <img
               src={image}
@@ -278,7 +110,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
           onChange={(e) => setCategory(e.target.value)}
           title="status"
         >
-          {["Single", "In Relationship", "Complicated", "Searching"].map(
+          {["single", "dating", "complicated", "searching"].map(
             (status, index) => {
               return (
                 <option value={status.toLocaleLowerCase()} key={index}>
@@ -294,7 +126,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
             className="post__iconButton"
             title="pictures"
           >
-            <PhotoCamera className="post__icon" />
+            <AiFillCamera className="post__icon" />
           </IconButton>
           <input
             type="file"
@@ -307,7 +139,7 @@ const Form = ({ setShowForm, setShowNotification }) => {
           />
         </label>
         <button type="submit" onClick={post} title="post">
-          Post
+          Post {posting ? <ActivityIndicator size={15} /> : null}
         </button>
       </div>
     </form>
