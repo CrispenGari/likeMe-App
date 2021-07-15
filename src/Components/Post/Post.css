@@ -291,7 +291,8 @@
 .post__caption {
   display: flex;
   flex-wrap: wrap;
-  padding: 5px 0;
+  padding: 10px 10px;
+  width: 100%;
 }
 .post__caption > span {
   margin-right: 4px;

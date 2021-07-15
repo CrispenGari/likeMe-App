@@ -4,22 +4,32 @@ import useSound from "use-sound";
 import { AiFillCamera } from "react-icons/ai";
 import { MdDelete, MdLocationOn, MdLocationOff } from "react-icons/md";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ActivityIndicator } from "../Common";
 import "./Form.css";
 import firebase from "../../backend";
+import helperFunctions from "../../utils/helperfunctions";
+import { v4 as uuid_v4 } from "uuid";
+import actions from "../../actions";
 const Form = ({ setShowForm }) => {
   const user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+  /* LOCAL STATE AND REFS */
   const [caption, setCaption] = useState("");
   const imageInputRef = useRef(null);
   const [category, setCategory] = useState("single");
-  const [progress, setProgress] = useState(2);
+  const [progress, setProgress] = useState(0);
   const [detectLocation, setDetectLocation] = useState(false);
-
-  const [posting, setPosting] = useState(!false);
+  const [posting, setPosting] = useState(false);
   const textInputRef = useRef(null);
   const [image, setImage] = useState(null);
+
+  const [hashTag, setHashTag] = useState([]);
+  const [mentions, setMentions] = useState([]);
+
+  // FUNCTIONS
   const removePhoto = () => {
     setImage(null);
   };
@@ -41,9 +51,59 @@ const Form = ({ setShowForm }) => {
       setImage(event.target.result);
     };
   };
-
   const post = (event) => {
     event.preventDefault();
+    if (image) {
+      setPosting(true);
+      const hashTags = helperFunctions.findHashTags(caption);
+      const mentions = helperFunctions.findMentions(caption);
+      helperFunctions.addHashTag(hashTags);
+      const postImageName = `${uuid_v4(10)}_${user?.uid}`;
+      const task = firebase.storage
+        .ref("posts/" + postImageName)
+        .putString(image, "data_url");
+      task.on(
+        "state_changed",
+        (observer) => {
+          setProgress((observer.bytesTransferred / observer.totalBytes) * 100);
+        },
+        (error) => {
+          console.error(error);
+        },
+        () => {
+          firebase.storage
+            .ref("posts")
+            .child(postImageName)
+            .getDownloadURL()
+            .then((url) => {
+              firebase.db
+                .collection("posts")
+                .doc(postImageName)
+                .set({
+                  imageURL: url,
+                  caption: caption,
+                  displayName: user?.displayName,
+                  photoURL: user?.photoURL,
+                  email: user?.email,
+                  phoneNumber: user?.phoneNumber,
+                  timestamp: firebase.timestamp,
+                  category: category,
+                })
+                .finally(() => {
+                  // Do the refetch post
+                  const [posts, hashtags] =
+                    helperFunctions.refetchPostsHashtags();
+
+                  console.log(posts, hashtags);
+                  // dispatch(actions.setHashTags(hashTags));
+                  // dispatch(actions.setPosts(posts));
+                  closeForm();
+                  return;
+                });
+            });
+        }
+      );
+    }
   };
 
   return (

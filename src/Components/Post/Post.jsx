@@ -38,14 +38,18 @@ const Post = ({ post, setShowNotification }) => {
   };
 
   const openProfile = () => {
-    history.push(`/profile/${post?.data?.userId}`);
+    history.push(`/profile/${post?.userId}`);
   };
   const openChat = () => {
-    history.replace(`/chat/${post?.data?.userId}`);
+    history.replace(`/chat/${post?.userId}`);
   };
   useEffect(() => {
-    setPostTime(timeFunct(post?.data?.timestamp));
+    setPostTime(timeFunct(post?.timestamp));
   }, [post]);
+
+  const openTag = (cap) => {
+    console.log(cap);
+  };
 
   useEffect(() => {
     const unsubscribe = firebase.db
@@ -163,25 +167,27 @@ const Post = ({ post, setShowNotification }) => {
       <div className="post__top">
         <Avatar
           className="post__avatar"
-          src={post?.data?.userAvatar}
-          alt={post?.data?.username}
+          src={post?.photoURL}
+          alt={post?.displayName}
           onClick={openProfile}
         />
         <div className="post__info">
           <div>
             <h1 onClick={openProfile}>
-              {post?.data?.userId === user?.uid
+              {post?.displayName === user?.displayName
                 ? "You"
-                : String(post?.data?.username).split(/\s/).join("_")}
+                : post?.displayName}
               <HiBadgeCheck className="post__high__badge" />
             </h1>
             <small>•</small> <small>{postTime}</small>
           </div>
           <p className={`post__category__badge`}>
-            <span className="post__location">
-              {post?.data?.location?.split(", ")[1]}
-            </span>
-            {" • " + post?.data?.category}
+            {post?.location && (
+              <span className="post__location">
+                {post?.location?.split(", ")[1] + " • "}
+              </span>
+            )}
+            {post?.category}
           </p>
         </div>
         <div>
@@ -211,13 +217,17 @@ const Post = ({ post, setShowNotification }) => {
       </div>
       <div className="post__center">
         <div className="post__center__likes" onDoubleClick={handleLike}></div>
-        <img src={post?.data?.imageURL} alt="post" loading="lazy" />
+        <img src={post?.imageURL} alt="post" loading="lazy" />
       </div>
       <p className="post__caption">
-        {post?.data?.caption.split(" ").map((cap, i) => {
-          if (cap.startsWith("#")) {
+        {post?.caption.split(" ").map((cap, i) => {
+          if (cap.startsWith("#") || cap.startsWith("@")) {
             return (
-              <span key={i} className="post__hash__tag">
+              <span
+                onClick={() => openTag(cap)}
+                key={i}
+                className="post__hash__tag"
+              >
                 {cap}
               </span>
             );
@@ -242,7 +252,7 @@ const Post = ({ post, setShowNotification }) => {
               title="message"
               onClick={openChat}
               // You can not text yourself
-              disabled={user?.uid === post?.data?.userId}
+              disabled={user?.uid === post?.userId}
             >
               <Message className="post__icon__message" />
             </IconButton>

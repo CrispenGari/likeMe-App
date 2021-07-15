@@ -6,90 +6,74 @@ import actions from "../../actions";
 const useFirebaseData = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = firebase.db
+    firebase.db
       .collection("posts")
       .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
+      .get()
+      .then((posts) => {
         dispatch(
           actions.setPosts(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+            posts.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
           )
         );
       });
-    return () => {
-      unsubscribe();
-    };
   }, [dispatch]);
+  // useEffect(() => {
+  //   const unsubscribe = firebase.db
+  //     .collection("messages")
+  //     .orderBy("timestamp", "asc")
+  //     .onSnapshot((snapshot) => {
+  //       dispatch(
+  //         actions.setMessages(
+  //           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+  //         )
+  //       );
+  //     });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [dispatch]);
   useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("messages")
-      .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) => {
-        dispatch(
-          actions.setMessages(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          )
-        );
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
-  useEffect(() => {
-    const unsubscribe = firebase.db
+    firebase.db
       .collection("hashtags")
-      .onSnapshot((snapshot) => {
-        dispatch(actions.setHashTags(snapshot.docs.map((doc) => doc.data())));
+      .get()
+      .then((hashtags) => {
+        dispatch(
+          actions.setHashTags(
+            hashtags.docs.map((doc) => ({ id: doc?.id, ...doc.data() }))
+          )
+        );
       });
-
-    return () => {
-      unsubscribe();
-    };
   }, [dispatch]);
   useEffect(() => {
-    const unsubscribe = firebase.db
+    firebase.db
       .collection("users")
       .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
+      .get()
+      .then((users) => {
         dispatch(
           actions.setUsers(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+            users.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
           )
         );
       });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
-  useEffect(() => {
-    const unsubscribe = firebase.auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        dispatch(actions.setUser(authUser));
-      } else {
-        dispatch(actions.setUser(null));
-      }
-    });
-    return () => {
-      unsubscribe();
-    };
   }, [dispatch]);
 
-  useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("fleets")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        dispatch(
-          actions.setFleets(
-            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-          )
-        );
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const unsubscribe = firebase.db
+  //     .collection("fleets")
+  //     .orderBy("timestamp", "desc")
+  //     .onSnapshot((snapshot) => {
+  //       dispatch(
+  //         actions.setFleets(
+  //           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+  //         )
+  //       );
+  //     });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [dispatch]);
   return;
 };
 

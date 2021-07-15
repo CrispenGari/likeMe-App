@@ -6,7 +6,7 @@ import { IoIosCreate } from "react-icons/io";
 import { IconButton } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 const Home = () => {
-  const [showForm, setShowForm] = useState(!false);
+  const [showForm, setShowForm] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   // document.title = "LikeMe • Home • posts";
   return (
@@ -18,8 +18,7 @@ const Home = () => {
           setShowForm={setShowForm}
         />
       )}
-      {/* <Posts /> */}
-
+      <Posts />
       <IconButton
         className="home__create__post"
         title="new post"
