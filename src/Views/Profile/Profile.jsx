@@ -13,11 +13,11 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="profile">
-      <div className="profile__header">
+    <div className="profile__view">
+      <div className="profile__view__header">
         <Header />
       </div>
-      <div className="profile__main">
+      <div className="profile__view__main">
         <ProfileBanner />
         <ProfileStats />
         <ProfileButtons />

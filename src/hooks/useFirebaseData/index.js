@@ -45,19 +45,6 @@ const useFirebaseData = () => {
         );
       });
   }, [dispatch]);
-  useEffect(() => {
-    firebase.db
-      .collection("users")
-      .orderBy("timestamp", "desc")
-      .get()
-      .then((users) => {
-        dispatch(
-          actions.setUsers(
-            users.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          )
-        );
-      });
-  }, [dispatch]);
   return;
 };
 

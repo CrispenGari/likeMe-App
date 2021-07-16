@@ -1,4 +1,4 @@
-.profile {
+.profile__view {
   width: 100%;
   overflow: hidden;
   flex: 1;
@@ -8,16 +8,16 @@
   user-zoom: none;
   height: 100%;
 }
-.profile__header {
+.profile__view__header {
   position: sticky;
   width: 100%;
   z-index: 10;
 }
-.profile__main {
+.profile__view__main {
   overflow-x: hidden;
   overflow-y: scroll;
   padding-bottom: 50px;
 }
-.profile__main::-webkit-scrollbar {
+.profile__view__main::-webkit-scrollbar {
   display: none;
 }

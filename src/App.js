@@ -15,9 +15,11 @@ import {
 import { useSelector } from "react-redux";
 import { useUserFetch, useFirebaseData } from "./hooks";
 import Settings from "./Views/Settings/Settings";
+import useFetchUsers from "./hooks/useFetchUsers";
 const App = () => {
   // USE THE HOOK useFirebaseData
   useFirebaseData();
+  useFetchUsers();
   const { loading } = useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);

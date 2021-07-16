@@ -2,7 +2,10 @@ import React, { useRef } from "react";
 import "./Fleet.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import { IoAdd } from "react-icons/io5";
-const Fleet = ({ isUserMe, user, setFleetImage, fleets }) => {
+import { useSelector } from "react-redux";
+
+const Fleet = ({ isUserMe, user, setFleetImage }) => {
+  const allFleets = useSelector((state) => state.fleets);
   const handleChange = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -13,10 +16,14 @@ const Fleet = ({ isUserMe, user, setFleetImage, fleets }) => {
     };
   };
   const inputRef = useRef(null);
+
+  const fleets = allFleets?.filter(
+    (fleet) => fleet.displayName === user?.displayName
+  );
   if (isUserMe) {
     return (
       <div className="fleet">
-        <img src={fleets[0]?.fleetURL} alt="" />
+        {fleets[0]?.fleetURL ? <img src={fleets[0]?.fleetURL} alt="" /> : null}
         <input
           type="file"
           ref={inputRef}
@@ -40,7 +47,14 @@ const Fleet = ({ isUserMe, user, setFleetImage, fleets }) => {
   }
   return (
     <div className="fleet">
-      <Avatar className="fleet__avatar" />
+      {fleets[0]?.fleetURL ? <img src={fleets[0]?.fleetURL} alt="" /> : null}
+      <div className="fleet__avatar__container">
+        <Avatar
+          className="fleet__avatar"
+          src={user?.photoURL}
+          alt={user?.displayName}
+        />
+      </div>
     </div>
   );
 };
