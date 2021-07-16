@@ -195,6 +195,7 @@
   color: gray;
   margin-left: 5px;
   padding-bottom: 5px;
+  font-size: 0.8rem;
 }
 .post__high__badge {
   color: cornflowerblue !important;

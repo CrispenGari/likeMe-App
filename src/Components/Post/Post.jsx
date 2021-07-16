@@ -16,18 +16,20 @@ import { useSelector } from "react-redux";
 import firebase from "../../backend";
 import fb from "firebase";
 import { useHistory } from "react-router-dom";
-import timeFunct from "../../utils/time";
 import boopSfx from "../../sounds/post1.wav";
 import like from "../../sounds/like.mp3";
 import useSound from "use-sound";
-
+import helperFunctions from "../../utils/helperfunctions";
 const Post = ({ post, setShowNotification }) => {
+  const time = helperFunctions.timeString(
+    helperFunctions.timestampToTime(post.timestamp)
+  );
   const [likes, setLikes] = useState([]);
   const [open, setOpen] = useState(false);
   const [openLike, setOpenLike] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const [postTime, setPostTime] = useState("");
+
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,9 +45,6 @@ const Post = ({ post, setShowNotification }) => {
   const openChat = () => {
     history.replace(`/chat/${post?.userId}`);
   };
-  useEffect(() => {
-    setPostTime(timeFunct(post?.timestamp));
-  }, [post]);
   const openTag = (cap) => {
     console.log(cap);
   };
@@ -178,7 +177,7 @@ const Post = ({ post, setShowNotification }) => {
                 : post?.displayName}
               <HiBadgeCheck className="post__high__badge" />
             </h1>
-            <small>•</small> <small>{postTime}</small>
+            <small>•</small> <small>{time}</small>
           </div>
           <p className={`post__category__badge`}>
             {post?.location && (

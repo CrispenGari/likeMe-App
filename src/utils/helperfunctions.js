@@ -21,9 +21,9 @@ const getMonthAndYear = (timestamp) => {
 const timeString = (timestampObject, timestamp) => {
   const { days, hours, minutes, seconds } = timestampObject;
   if (days === 0) {
-    if (hours == 0) {
-      if (minutes == 0) {
-        if (seconds == 0) {
+    if (hours === 0) {
+      if (minutes === 0) {
+        if (seconds === 0) {
           return "now";
         } else {
           return `${seconds} sec ago`;

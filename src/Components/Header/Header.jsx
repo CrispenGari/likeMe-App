@@ -92,7 +92,7 @@ const Header = () => {
           >
             <Menu className="header__icon__message__menu" />
           </IconButton>
-          {open ? <MenuContainer open={open} /> : null}
+          {open ? <MenuContainer setOpen={setOpen} /> : null}
         </div>
       </div>
     </div>

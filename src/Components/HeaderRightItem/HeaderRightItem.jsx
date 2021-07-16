@@ -6,6 +6,7 @@ import firebase from "../../backend";
 import "./HeaderRightItem.css";
 const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
   const history = useHistory();
+
   const user = useSelector((state) => state.user);
   if (withUser) {
     return (
@@ -32,6 +33,11 @@ const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
     <div
       className={`header__item ${!withUser && "header__item--without-user"}`}
       title={title}
+      onClick={() => {
+        if (title === "sign out") {
+          firebase.auth.signOut();
+        }
+      }}
     >
       <div className="header__item__icon__button__badge">
         {dot ? (

@@ -3,13 +3,21 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
-const MenuItem = ({ withUser, title, Icon, subTitle, dot }) => {
+import firebase from "../../backend";
+const MenuItem = ({ withUser, title, Icon, subTitle, dot, setOpen }) => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
 
   if (withUser) {
     return (
-      <div className="menuitem" title={user?.displayName}>
+      <div
+        className="menuitem"
+        title={user?.displayName}
+        onClick={() => {
+          history.push(`/profile/${user?.uid}`);
+          setOpen(false);
+        }}
+      >
         <Avatar
           className="menuitem__avatar"
           src={user?.photoURL}
@@ -26,6 +34,12 @@ const MenuItem = ({ withUser, title, Icon, subTitle, dot }) => {
     <div
       className={`menuitem ${!withUser && "menuitem--without-user"}`}
       title={title}
+      onClick={() => {
+        if (title === "sign out") {
+          firebase.auth.signOut();
+        }
+        setOpen(false);
+      }}
     >
       <div className="menuitem__icon__button__badge">
         {dot ? (

@@ -4,8 +4,8 @@ import { AiFillHeart } from "react-icons/ai";
 import helperFunctions from "../../utils/helperfunctions";
 
 const ProfilePost = ({ post }) => {
-  console.log(
-    helperFunctions.timeString(helperFunctions.timestampToTime(post.timestamp))
+  const time = helperFunctions.timeString(
+    helperFunctions.timestampToTime(post.timestamp)
   );
   return (
     <div className="profile__post">
@@ -18,7 +18,7 @@ const ProfilePost = ({ post }) => {
 
       <img loading="lazy" src={post?.imageURL} alt={post?.displayName} />
       <div className="profile__post__date">
-        <small>3 Jan 2020</small>
+        <small>{time}</small>
       </div>
     </div>
   );
