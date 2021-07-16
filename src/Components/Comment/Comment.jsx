@@ -4,7 +4,6 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { HiBadgeCheck } from "react-icons/hi";
 import { Delete } from "@material-ui/icons";
 import firebase from "../../backend";
-import timeFunct from "../../utils/time";
 const Comment = ({ comment, postId }) => {
   const deleteComment = () => {
     firebase.db
@@ -35,7 +34,7 @@ const Comment = ({ comment, postId }) => {
         <IconButton className="comment__delete__button" onClick={deleteComment}>
           <Delete className="comment__delete__icon" />
         </IconButton>{" "}
-        <small>• {timeFunct(comment?.data?.timestamp)}</small>
+        <small>• time</small>
       </div>
     </div>
   );
