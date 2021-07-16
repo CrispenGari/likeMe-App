@@ -90,13 +90,6 @@ const Form = ({ setShowForm }) => {
                   category: category,
                 })
                 .finally(() => {
-                  // Do the refetch post
-                  const [posts, hashtags] =
-                    helperFunctions.refetchPostsHashtags();
-
-                  console.log(posts, hashtags);
-                  // dispatch(actions.setHashTags(hashTags));
-                  // dispatch(actions.setPosts(posts));
                   closeForm();
                   return;
                 });

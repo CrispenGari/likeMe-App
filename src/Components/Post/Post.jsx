@@ -46,7 +46,6 @@ const Post = ({ post, setShowNotification }) => {
   useEffect(() => {
     setPostTime(timeFunct(post?.timestamp));
   }, [post]);
-
   const openTag = (cap) => {
     console.log(cap);
   };

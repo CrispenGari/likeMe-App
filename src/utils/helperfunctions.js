@@ -1,5 +1,32 @@
 import firebase from "../backend";
 
+const calcDays = (numberOfDays) => Number.parseInt(numberOfDays);
+const calcHours = (numberHours) => Number.parseInt(numberHours);
+const calcMinutes = (numberOfMinutes) => Number.parseInt(numberOfMinutes);
+
+const calcSeconds = (numberOfSeconds) => Number.parseInt(numberOfSeconds);
+
+const timestampToTime = (timestamp) => {
+  const timestampSeconds = timestamp.seconds * 1000;
+
+  const numberOfDays =
+    (new Date().getTime() - new Date(timestampSeconds).getTime()) /
+    (60 * 60 * 1000 * 24);
+  const numberOfHours =
+    (new Date().getTime() - new Date(timestampSeconds).getTime()) /
+    (60 * 60 * 1000);
+  const numberOfMinutes =
+    (new Date().getTime() - new Date(timestampSeconds).getTime()) / (1000 * 60);
+  const numberOfSeconds =
+    (new Date().getTime() - new Date(timestampSeconds).getTime()) / 1000;
+  return {
+    days: calcDays(numberOfDays),
+    hours: calcHours(numberOfHours) - 24 * calcDays(numberOfDays),
+    minutes: calcMinutes(numberOfMinutes) - 60 * calcHours(numberOfHours),
+    seconds: calcSeconds(numberOfSeconds) - 60 * calcMinutes(numberOfMinutes),
+  };
+};
+
 const findHashTags = (caption) => {
   const exp = new RegExp(/#[a-zA-Z0-9]+/gim);
   return caption.match(exp);
@@ -50,5 +77,6 @@ const helperFunctions = {
   findMentions,
   addHashTag,
   refetchPostsHashtags,
+  timestampToTime,
 };
 export default helperFunctions;

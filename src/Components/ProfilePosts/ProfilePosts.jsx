@@ -11,14 +11,9 @@ const ProfilePosts = () => {
     <div className="profile__posts">
       <ProfilePostNav />
       <div className="profile__posts__container">
-        {posts
-          .map((post) => ({
-            id: post.id,
-            ...post.data,
-          }))
-          ?.map((post) => (
-            <ProfilePost key={post?.id} post={post} />
-          ))}
+        {posts?.map((post) => (
+          <ProfilePost key={post?.id} post={post} />
+        ))}
       </div>
     </div>
   );
