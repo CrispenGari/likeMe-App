@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import { Snackbar } from "@material-ui/core";
 import FleetPreview from "../FleetPreview/FleetPreview";
+import useFleetFetch from "../../hooks/useFleetFetch";
 const Posts = () => {
+  useFleetFetch();
   const posts = useSelector((state) => state.posts);
   const [fleetImage, setFleetImage] = useState(null);
   const [showNotification, setShowNotification] = useState(!true);

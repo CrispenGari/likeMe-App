@@ -2,12 +2,11 @@
   margin: 0px 5px;
   cursor: pointer;
   position: relative;
-  background-color: lightgray;
+  background-color: #f5f5f5;
   width: 100px;
   height: 140px;
   min-width: 100px;
   border-radius: 5px;
-  animation: fleet-animation 2s ease 0s infinite alternate forwards;
 }
 .fleet__avatar {
   width: 50px !important;
@@ -49,12 +48,4 @@
   border-radius: 5px;
   -webkit-user-drag: none;
   object-fit: cover;
-}
-@keyframes fleet-animation {
-  from {
-    background-image: linear-gradient(to right, lightgray, rgb(155, 150, 150));
-  }
-  to {
-    background-image: linear-gradient(to left, lightgray, rgb(155, 150, 150));
-  }
 }

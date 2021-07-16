@@ -58,22 +58,6 @@ const useFirebaseData = () => {
         );
       });
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   const unsubscribe = firebase.db
-  //     .collection("fleets")
-  //     .orderBy("timestamp", "desc")
-  //     .onSnapshot((snapshot) => {
-  //       dispatch(
-  //         actions.setFleets(
-  //           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-  //         )
-  //       );
-  //     });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, [dispatch]);
   return;
 };
 

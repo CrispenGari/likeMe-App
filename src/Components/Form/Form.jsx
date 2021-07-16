@@ -65,7 +65,9 @@ const Form = ({ setShowForm }) => {
       task.on(
         "state_changed",
         (observer) => {
-          setProgress((observer.bytesTransferred / observer.totalBytes) * 100);
+          setProgress(
+            ((observer.bytesTransferred / observer.totalBytes) * 100).toFixed(0)
+          );
         },
         (error) => {
           console.error(error);
@@ -130,7 +132,7 @@ const Form = ({ setShowForm }) => {
         <div className="form__post__preview">
           {progress ? (
             <div className="form__posting">
-              <ActivityIndicator size={25} />
+              <ActivityIndicator size={40} content={`${progress}%`} />
             </div>
           ) : null}
           <div className="form__image__container">
