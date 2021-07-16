@@ -8,7 +8,6 @@ const Fleets = ({ setFleetImage }) => {
   const myFleets = fleets?.filter(
     (fleet) => fleet.displayName === user?.displayName
   );
-
   return (
     <div className="fleets">
       <Fleet

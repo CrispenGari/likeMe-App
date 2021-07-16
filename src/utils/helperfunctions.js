@@ -113,6 +113,16 @@ const refetchPostsHashtags = () => {
     .then((posts) => posts.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
   return [posts, hashtags];
 };
+
+const deletePost = (postsURL, collectionName, post) => {
+  // DELETE A POST FROM A DATABASE AS WELL AS STORAGE
+  firebase.db
+    .collection(collectionName)
+    .doc(post?.id)
+    .delete()
+    .then(() => firebase.storage.refFromURL(postsURL).delete());
+};
+
 const helperFunctions = {
   findHashTags,
   findMentions,
@@ -120,5 +130,6 @@ const helperFunctions = {
   refetchPostsHashtags,
   timestampToTime,
   timeString,
+  deletePost,
 };
 export default helperFunctions;
