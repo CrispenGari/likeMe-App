@@ -1,14 +1,55 @@
 import firebase from "../backend";
 
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const getMonthAndYear = (timestamp) => {
+  const dateObject = new Date(timestamp?.toDate());
+  return `${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
+};
+const timeString = (timestampObject, timestamp) => {
+  const { days, hours, minutes, seconds } = timestampObject;
+  if (days === 0) {
+    if (hours == 0) {
+      if (minutes == 0) {
+        if (seconds == 0) {
+          return "now";
+        } else {
+          return `${seconds} sec ago`;
+        }
+      } else {
+        return `${minutes} min ago`;
+      }
+    } else {
+      return `${hours} ${hours === 1 ? "hr" : "hrs"} ago`;
+    }
+  } else if (days >= 7) {
+    const weekCount = Math.floor(days / 7);
+    return `${weekCount} ${weekCount === 1 ? "wk" : "wks"} ago`;
+  } else if (days > 30) {
+    return getMonthAndYear(timestamp);
+  } else {
+    return `${days} ${days === 1 ? "d" : "days"} ago`;
+  }
+};
+
 const calcDays = (numberOfDays) => Number.parseInt(numberOfDays);
 const calcHours = (numberHours) => Number.parseInt(numberHours);
 const calcMinutes = (numberOfMinutes) => Number.parseInt(numberOfMinutes);
-
 const calcSeconds = (numberOfSeconds) => Number.parseInt(numberOfSeconds);
-
 const timestampToTime = (timestamp) => {
   const timestampSeconds = timestamp.seconds * 1000;
-
   const numberOfDays =
     (new Date().getTime() - new Date(timestampSeconds).getTime()) /
     (60 * 60 * 1000 * 24);
@@ -78,5 +119,6 @@ const helperFunctions = {
   addHashTag,
   refetchPostsHashtags,
   timestampToTime,
+  timeString,
 };
 export default helperFunctions;
