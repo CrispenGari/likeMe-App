@@ -3,7 +3,7 @@
   flex-direction: column;
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 500px !important;
   margin: 10px auto;
   background: white;
   padding: 10px;

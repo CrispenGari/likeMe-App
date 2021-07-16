@@ -4,8 +4,10 @@ import { Post, Fleets } from "../../Components";
 import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import { Snackbar } from "@material-ui/core";
+import FleetPreview from "../FleetPreview/FleetPreview";
 const Posts = () => {
   const posts = useSelector((state) => state.posts);
+  const [fleetImage, setFleetImage] = useState(null);
   const [showNotification, setShowNotification] = useState(!true);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -16,7 +18,15 @@ const Posts = () => {
   return (
     <>
       <div className="posts">
-        <Fleets />
+        <Fleets setFleetImage={setFleetImage} />
+        {fleetImage ? (
+          <FleetPreview
+            image={fleetImage}
+            setFleetImage={setFleetImage}
+            fleetImage={fleetImage}
+          />
+        ) : null}
+
         {posts.map((post, i) => (
           <Post key={i} post={post} setShowNotification={setShowNotification} />
         ))}

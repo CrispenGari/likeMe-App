@@ -7,6 +7,15 @@
   border-top: 3px solid cornflowerblue;
   border-bottom: 3px solid lime;
   margin: 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.activity__indicator > p {
+  color: cornflowerblue;
+  font-size: 0.7rem;
+  animation: none !important;
 }
 @keyframes rotate {
   from {

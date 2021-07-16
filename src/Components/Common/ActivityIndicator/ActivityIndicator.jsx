@@ -1,6 +1,6 @@
 import "./ActivityIndicator.css";
 import React from "react";
-const ActivityIndicator = ({ size }) => {
+const ActivityIndicator = ({ size, content }) => {
   return (
     <div
       className="activity__indicator"
@@ -12,7 +12,9 @@ const ActivityIndicator = ({ size }) => {
             }
           : {}
       }
-    ></div>
+    >
+      <p>{content ? content : null}</p>
+    </div>
   );
 };
 export default ActivityIndicator;
