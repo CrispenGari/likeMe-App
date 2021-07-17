@@ -19,11 +19,14 @@ import { useHistory } from "react-router-dom";
 import boopSfx from "../../sounds/post1.wav";
 import like from "../../sounds/like.mp3";
 import useSound from "use-sound";
+import { ActivityIndicator } from "../Common";
 import helperFunctions from "../../utils/helperfunctions";
 const Post = ({ post, setShowNotification }) => {
   const time = helperFunctions.timeString(
     helperFunctions.timestampToTime(post.timestamp)
   );
+  const [postSize, setPostSize] = useState(null);
+
   const [likes, setLikes] = useState([]);
   const [open, setOpen] = useState(false);
   const [openLike, setOpenLike] = useState(false);
@@ -49,6 +52,9 @@ const Post = ({ post, setShowNotification }) => {
     console.log(cap);
   };
 
+  useEffect(() => {
+    helperFunctions.postSize(post?.imageURL).then((res) => setPostSize(res));
+  }, [post]);
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
@@ -243,7 +249,9 @@ const Post = ({ post, setShowNotification }) => {
             >
               <GetApp className="post__icon__download" />
             </IconButton>
-            <p className="post__bottom__size">3 mb</p>
+            <div className="post__bottom__size">
+              {postSize === null ? <ActivityIndicator size={5} /> : postSize}
+            </div>
           </div>
           <div className="post__bottom__button__container">
             <IconButton
