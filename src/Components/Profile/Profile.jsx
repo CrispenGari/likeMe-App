@@ -65,7 +65,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
                       .then((authUser) => {
                         authUser.user
                           .updateProfile({
-                            displayName: username,
+                            displayName: username.trim().toLowerCase(),
                             photoURL: url,
                           })
                           .then(() => {
@@ -101,7 +101,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
               .then((authUser) => {
                 authUser.user
                   .updateProfile({
-                    displayName: username,
+                    displayName: username.trim().toLowerCase(),
                     photoURL: null,
                   })
                   .then(() => {

@@ -15,7 +15,7 @@ const Reset = ({ setCardToMount }) => {
     if (email) {
       setLoading(true);
       firebase.auth
-        .sendPasswordResetEmail(email)
+        .sendPasswordResetEmail(email.trim().toLocaleLowerCase())
         .then(() => {
           setLoading(false);
           setError("");

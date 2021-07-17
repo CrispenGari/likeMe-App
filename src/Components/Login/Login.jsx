@@ -18,7 +18,7 @@ const Login = ({ setCardToMount }) => {
     if (email && password) {
       setLoading(true);
       firebase.auth
-        .signInWithEmailAndPassword(email, password)
+        .signInWithEmailAndPassword(email.trim().toLowerCase(), password)
         .then((authUser) => {
           setError("");
           setEmail("");

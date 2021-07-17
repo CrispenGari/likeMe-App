@@ -32,7 +32,11 @@ const Posts = () => {
         ) : null}
 
         {posts.map((post, i) => (
-          <Post key={i} post={post} setShowNotification={setShowNotification} />
+          <Post
+            key={post?.id}
+            post={post}
+            setShowNotification={setShowNotification}
+          />
         ))}
         <Snackbar
           open={showNotification}

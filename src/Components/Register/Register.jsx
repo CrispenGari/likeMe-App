@@ -50,8 +50,8 @@ const Register = ({ setCardToMount, setCredentials }) => {
             return;
           } else {
             setCredentials({
-              email,
-              password,
+              email: email.trim().toLocaleLowerCase(),
+              password: password.trim().toLocaleLowerCase(),
             });
             setEmail("");
             setPassword("");
