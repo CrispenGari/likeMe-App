@@ -243,6 +243,7 @@ const Post = ({ post, setShowNotification }) => {
             >
               <GetApp className="post__icon__download" />
             </IconButton>
+            <p className="post__bottom__size">36.4 kb</p>
           </div>
           <div className="post__bottom__button__container">
             <IconButton
@@ -262,7 +263,7 @@ const Post = ({ post, setShowNotification }) => {
             <IconButton className="post__icon__button__message" title="comment">
               <FaComments className="post__icon__comments" />
             </IconButton>
-            <h1>{comments.length}</h1>
+            <p>{comments.length}</p>
           </div>
           <div className="post__bottom__button__container">
             <IconButton
@@ -276,7 +277,7 @@ const Post = ({ post, setShowNotification }) => {
                 <FavoriteBorder className="post__icon__unlike" />
               )}
             </IconButton>
-            <h1 onClick={() => setOpenLike(true)}>{likes.length}</h1>
+            <p onClick={() => setOpenLike(true)}>{likes.length}</p>
           </div>
         </div>
         <div className="post__bottom__comment__input">
