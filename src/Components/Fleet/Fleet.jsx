@@ -23,7 +23,11 @@ const Fleet = ({ isUserMe, user, setFleetImage }) => {
   if (isUserMe) {
     return (
       <div className="fleet">
-        {fleets[0]?.fleetURL ? <img src={fleets[0]?.fleetURL} alt="" /> : null}
+        {user?.photoURL ? (
+          <img src={fleets[0]?.fleetURL ?? user?.photoURL} alt="" />
+        ) : fleets[0]?.fleetURL ? (
+          <img src={fleets[0]?.fleetURL} alt="" />
+        ) : null}
         <input
           type="file"
           ref={inputRef}
@@ -32,7 +36,11 @@ const Fleet = ({ isUserMe, user, setFleetImage }) => {
           multiple={false}
           onChange={handleChange}
         />
-        <div className="fleet__avatar__container">
+        <div
+          className={`fleet__avatar__container ${
+            fleets?.length > 0 ? "fleet__avatar--with-fleet" : ""
+          }`}
+        >
           <Avatar
             className="fleet__avatar"
             src={user?.photoURL}
@@ -47,10 +55,18 @@ const Fleet = ({ isUserMe, user, setFleetImage }) => {
   }
   return (
     <div className="fleet">
-      {fleets[0]?.fleetURL ? <img src={fleets[0]?.fleetURL} alt="" /> : null}
-      <div className="fleet__avatar__container">
+      {user?.photoURL ? (
+        <img src={fleets[0]?.fleetURL ?? user?.photoURL} alt="" />
+      ) : fleets[0]?.fleetURL ? (
+        <img src={fleets[0]?.fleetURL} alt="" />
+      ) : null}
+      <div
+        className={`fleet__avatar__container ${
+          fleets?.length > 0 ? "fleet__avatar--with-fleet" : ""
+        }`}
+      >
         <Avatar
-          className="fleet__avatar"
+          className={`fleet__avatar`}
           src={user?.photoURL}
           alt={user?.displayName}
         />

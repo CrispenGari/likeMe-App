@@ -243,7 +243,7 @@ const Post = ({ post, setShowNotification }) => {
             >
               <GetApp className="post__icon__download" />
             </IconButton>
-            <p className="post__bottom__size">36.4 kb</p>
+            <p className="post__bottom__size">3 mb</p>
           </div>
           <div className="post__bottom__button__container">
             <IconButton

@@ -12,9 +12,24 @@
 .fleet__avatar {
   width: 50px !important;
   height: 50px !important;
-  border: 2px solid cornflowerblue !important;
   top: 60%;
   left: 40%;
+}
+
+.fleet__avatar__container {
+  border: 2px solid cornflowerblue;
+}
+.fleet__avatar--with-fleet {
+  border: 3px solid cornflowerblue;
+  animation: fleet-animation 1s ease 0s infinite alternate forwards;
+}
+@keyframes fleet-animation {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 .fleet__avatar__container {
   position: relative !important;

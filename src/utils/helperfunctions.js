@@ -1,5 +1,22 @@
 import firebase from "../backend";
 
+const postSize = async (url) => {
+  const { size } = await firebase.storage.refFromURL(url).getMetadata();
+  if (size) {
+    const kb = size / 1024; // bytes
+    const mb = kb / 1024;
+    const gb = mb / 1024;
+    if (Math.round(gb) > 0) {
+      return gb.toFixed(2) + " gb";
+    }
+    if (Math.round(mb) > 0) {
+      return mb.toFixed(2) + " mb";
+    }
+    return kb.toFixed(2) + " kb";
+  }
+  // return size;
+};
+
 const months = [
   "Jan",
   "Feb",
@@ -131,5 +148,6 @@ const helperFunctions = {
   timestampToTime,
   timeString,
   deletePost,
+  postSize,
 };
 export default helperFunctions;

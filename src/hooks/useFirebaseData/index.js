@@ -13,7 +13,10 @@ const useFirebaseData = () => {
       .then((posts) => {
         dispatch(
           actions.setPosts(
-            posts.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+            posts.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
           )
         );
       });
