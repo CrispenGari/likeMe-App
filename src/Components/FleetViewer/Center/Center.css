@@ -1,0 +1,55 @@
+.center {
+  flex: 1;
+  position: relative;
+  margin: 10px;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  padding-bottom: 10px;
+}
+.center > img {
+  width: 100%;
+  object-fit: contain;
+  border: none !important;
+  -webkit-user-drag: none;
+  height: 65vh;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.center__controls {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 5;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 5px;
+}
+.center__controls > div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3px;
+  align-items: center;
+  flex-direction: column;
+}
+.center__controls > div > button {
+  padding: 5px !important;
+  cursor: pointer !important;
+}
+.center__controls__stats {
+  font-size: 0.9rem;
+  color: white;
+  user-zoom: none;
+  user-select: none;
+}
+.center__controls__icon__share {
+  color: lightseagreen;
+}
+.center__controls__icon__download {
+  color: cornflowerblue;
+}

@@ -1,0 +1,29 @@
+.fleet__viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.fleet__viewer__container {
+  background: #f5f5f5;
+  padding: 0 !important;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px !important;
+  height: 100%;
+  max-height: 90vh;
+  outline: none !important;
+  display: flex;
+  flex-direction: column;
+}
+.fleet__viewer__header {
+  position: static;
+  top: 0;
+}
+.fleet__viewer__bottom {
+}
+.fleet__viewer__center {
+  flex: 1;
+}
