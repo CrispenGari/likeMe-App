@@ -1,0 +1,47 @@
+.fleet__viewer__input {
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+}
+.fleet__viewer__input > input {
+  flex: 1;
+  border-radius: 999px !important;
+  outline: none;
+  border: none;
+  margin-right: 5px;
+  background: #f5f5f5;
+  font-family: 0.9rem;
+  padding: 10px;
+  font-size: 0.8rem;
+}
+.fleet__viewer__input > button {
+  width: 100px;
+  outline: none;
+  cursor: pointer !important;
+  padding: 3px 10px;
+  text-align: center;
+  background: white;
+  border: none;
+  font-weight: bolder;
+  border-radius: 5px;
+  position: relative;
+  border: 1px solid cornflowerblue;
+  display: flex;
+  justify-content: center;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+  align-items: center;
+}
+.fleet__viewer__input > button:hover {
+  color: white;
+  background-image: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}

@@ -113,6 +113,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .post__bottom__comment__input > input {
   flex: 1;

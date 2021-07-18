@@ -11,13 +11,14 @@
   align-items: center;
   padding: 0px;
   padding-bottom: 10px;
+  height: 100%;
 }
 .center > img {
   width: 100%;
   object-fit: contain;
   border: none !important;
   -webkit-user-drag: none;
-  height: 65vh;
+  height: 60vh;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -26,7 +27,7 @@
   position: absolute;
   background: rgba(0, 0, 0, 0.8);
   z-index: 5;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
   border-radius: 5px;
 }
@@ -52,4 +53,27 @@
 }
 .center__controls__icon__download {
   color: cornflowerblue;
+}
+.center__controls__icon__delete {
+  color: orange;
+}
+.center__caption {
+  font-size: 0.9rem;
+  user-select: none;
+  margin-top: 5px;
+  text-align: start;
+  padding: 0px 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .center > img {
+    height: 50vh;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .center__controls {
+    top: 10px;
+    right: 10px;
+  }
 }

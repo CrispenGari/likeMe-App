@@ -23,6 +23,8 @@
   top: 0;
 }
 .fleet__viewer__bottom {
+  position: sticky;
+  bottom: 0;
 }
 .fleet__viewer__center {
   flex: 1;
