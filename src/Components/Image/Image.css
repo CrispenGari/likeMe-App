@@ -31,6 +31,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  max-height: 50vh !important;
 }
 .image__close__button__icon {
   color: #ffa500;
