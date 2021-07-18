@@ -1,0 +1,18 @@
+.viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -10px;
+  justify-content: center;
+}
+.viewer__avatar {
+  width: 25px !important;
+  height: 25px !important;
+}
+.viewer > p {
+  font-size: 0.6rem;
+  display: none;
+}
+.viewer:nth-child(1) {
+  margin-left: 0;
+}

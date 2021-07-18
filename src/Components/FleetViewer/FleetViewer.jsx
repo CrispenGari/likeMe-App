@@ -6,6 +6,7 @@ import Header from "./Header/Header";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import Viewers from "./Viewers/Viewers";
 
 const FleetViewer = ({ displayName, setDisplayName }) => {
   const fleets = useSelector((state) => state.fleets).filter(
@@ -14,22 +15,20 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
   const [currentFleetIndex, setCurrentFleetIndex] = React.useState(0);
   const currentUser = useSelector((state) => state.user);
   const [fleetProgress, setFleetProgress] = React.useState(0);
-  // useEffect(() => {
-  //   const timeoutId = setInterval(() => {
-  //     setFleetProgress((prev) => prev + 500);
-  //   }, 500);
-  //   if (fleetProgress / 500 === 5) {
-  //     setFleetProgress(0);
-  //     if (fleets?.length - 1 === currentFleetIndex) {
-  //       setDisplayName("");
-  //     } else {
-  //       setCurrentFleetIndex((prev) => prev + 1);
-  //     }
-  //   }
-  //   return () => {
-  //     clearInterval(timeoutId);
-  //   };
-  // }, [fleets, fleetProgress]);
+
+  useEffect(() => {
+    const timeoutId = setInterval(() => {
+      setFleetProgress((prev) => prev + 500);
+    }, 500);
+    if (fleetProgress / 500 === 5) {
+      setFleetProgress(0);
+    }
+    return () => {
+      clearInterval(timeoutId);
+    };
+  }, [fleetProgress]);
+
+  console.log(fleetProgress);
   return (
     <Modal
       open={displayName !== "" && fleets?.length > 0}
@@ -63,7 +62,7 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
             />
           </div>
         ) : (
-          <h1>Your fleet</h1>
+          <Viewers />
         )}
       </div>
     </Modal>
