@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
+
 import { Avatar, IconButton, Popover, Modal } from "@material-ui/core";
 import {
   FavoriteBorder,
@@ -20,18 +21,20 @@ import boopSfx from "../../sounds/post1.wav";
 import like from "../../sounds/like.mp3";
 import useSound from "use-sound";
 import { ActivityIndicator } from "../Common";
+import Image from "../Image/Image";
 import helperFunctions from "../../utils/helperfunctions";
 const Post = ({ post, setShowNotification }) => {
   const time = helperFunctions.timeString(
     helperFunctions.timestampToTime(post.timestamp)
   );
   const [postSize, setPostSize] = useState(null);
-
+  const [openPicture, setOpenPicture] = useState(false);
   const [likes, setLikes] = useState([]);
   const [open, setOpen] = useState(false);
   const [openLike, setOpenLike] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [image, setImage] = useState(null);
 
   const user = useSelector((state) => state.user);
   const history = useHistory();
@@ -141,9 +144,14 @@ const Post = ({ post, setShowNotification }) => {
         });
     }
   };
-
   return (
     <div className="post">
+      <Image
+        image={image}
+        setImage={setImage}
+        open={openPicture}
+        setOpen={setOpenPicture}
+      />
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -174,6 +182,12 @@ const Post = ({ post, setShowNotification }) => {
           src={post?.photoURL}
           alt={post?.displayName}
           onClick={openProfile}
+          onMouseEnter={() => {
+            setTimeout(() => {
+              setImage({ ...post, picture: "avatar" });
+              setOpenPicture(true);
+            }, 1500);
+          }}
         />
         <div className="post__info">
           <div>
@@ -219,7 +233,19 @@ const Post = ({ post, setShowNotification }) => {
           </Popover>
         </div>
       </div>
-      <div className="post__center">
+      <div
+        className="post__center"
+        onClick={() => {
+          setImage({ ...post, picture: "post" });
+          setOpenPicture(true);
+        }}
+        onMouseEnter={() => {
+          setTimeout(() => {
+            setImage({ ...post, picture: "post" });
+            setOpenPicture(true);
+          }, 1500);
+        }}
+      >
         <div className="post__center__likes" onDoubleClick={handleLike}></div>
         <img src={post?.imageURL} alt="post" loading="lazy" />
       </div>
