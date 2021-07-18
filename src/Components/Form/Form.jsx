@@ -90,6 +90,7 @@ const Form = ({ setShowForm }) => {
                   phoneNumber: user?.phoneNumber,
                   timestamp: firebase.timestamp,
                   category: category,
+                  userId: user?.uid,
                 })
                 .finally(() => {
                   closeForm();

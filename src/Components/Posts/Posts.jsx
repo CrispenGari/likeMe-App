@@ -7,7 +7,6 @@ import { Snackbar } from "@material-ui/core";
 import FleetPreview from "../FleetPreview/FleetPreview";
 import useFleetFetch from "../../hooks/useFleetFetch";
 import { useEffect } from "react";
-import Image from "../Image/Image";
 const Posts = () => {
   useFleetFetch();
   const posts = useSelector((state) => state.posts);
@@ -33,7 +32,7 @@ const Posts = () => {
         ) : null}
 
         {posts.map((post, i) => {
-          if ((i + 1) % 5 == 0) {
+          if ((i + 1) % 5 === 0) {
             return (
               <>
                 <Fleets

@@ -37,7 +37,7 @@ const ProfileBanner = () => {
       />
       <div className="profile__banner__logo">
         <h1>LIKEME</h1>
-        <p>@username</p>
+        <p>@{user?.displayName}</p>
         <div className="profile__banner__username__banner">
           <p>
             I'm single and searching. Looking for a serious relationship and
