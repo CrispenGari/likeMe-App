@@ -4,7 +4,7 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { IoAdd } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
-const Fleet = ({ isUserMe, user, setFleetImage }) => {
+const Fleet = ({ isUserMe, user, setFleetImage, setDisplayName }) => {
   const allFleets = useSelector((state) => state.fleets);
   const handleChange = (e) => {
     const reader = new FileReader();
@@ -22,7 +22,7 @@ const Fleet = ({ isUserMe, user, setFleetImage }) => {
   );
   if (isUserMe) {
     return (
-      <div className="fleet">
+      <div className="fleet" onClick={() => setDisplayName(user?.displayName)}>
         {user?.photoURL ? (
           <img src={fleets[0]?.fleetURL ?? user?.photoURL} alt="" />
         ) : fleets[0]?.fleetURL ? (
@@ -54,7 +54,7 @@ const Fleet = ({ isUserMe, user, setFleetImage }) => {
     );
   }
   return (
-    <div className="fleet">
+    <div className="fleet" onClick={() => setDisplayName(user?.displayName)}>
       {user?.photoURL ? (
         <img src={fleets[0]?.fleetURL ?? user?.photoURL} alt="" />
       ) : fleets[0]?.fleetURL ? (

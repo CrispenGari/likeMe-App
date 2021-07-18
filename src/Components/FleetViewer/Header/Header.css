@@ -56,7 +56,6 @@
 .fleet__header__top > div > span {
   display: flex;
   border-radius: 999px;
-  width: 50%;
   background: lightseagreen;
 }
 .fleet__header__bottom__icon {
