@@ -14,22 +14,22 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
   const [currentFleetIndex, setCurrentFleetIndex] = React.useState(0);
 
   const [fleetProgress, setFleetProgress] = React.useState(0);
-  useEffect(() => {
-    const timeoutId = setInterval(() => {
-      setFleetProgress((prev) => prev + 500);
-    }, 500);
-    if (fleetProgress / 500 === 5) {
-      setFleetProgress(0);
-      if (fleets?.length - 1 === currentFleetIndex) {
-        setDisplayName("");
-      } else {
-        setCurrentFleetIndex((prev) => prev + 1);
-      }
-    }
-    return () => {
-      clearInterval(timeoutId);
-    };
-  }, [fleets, fleetProgress]);
+  // useEffect(() => {
+  //   const timeoutId = setInterval(() => {
+  //     setFleetProgress((prev) => prev + 500);
+  //   }, 500);
+  //   if (fleetProgress / 500 === 5) {
+  //     setFleetProgress(0);
+  //     if (fleets?.length - 1 === currentFleetIndex) {
+  //       setDisplayName("");
+  //     } else {
+  //       setCurrentFleetIndex((prev) => prev + 1);
+  //     }
+  //   }
+  //   return () => {
+  //     clearInterval(timeoutId);
+  //   };
+  // }, [fleets, fleetProgress]);
   return (
     <Modal
       open={displayName !== "" && fleets?.length > 0}

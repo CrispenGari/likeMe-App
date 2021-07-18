@@ -35,16 +35,25 @@
   user-select: none;
   user-zoom: none;
 }
-.fleet__info > time {
-  font-weight: 0.8rem;
+.fleet__info span {
+  font-size: 0.8rem !important;
   color: gray;
 }
 .fleet__header__avatar {
   width: 40px !important;
   height: 40px !important;
   cursor: pointer !important;
+  border: 3px solid cornflowerblue;
+  animation: fleet-animation 1s ease 0s infinite alternate forwards;
 }
-
+@keyframes fleet-animation {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 .fleet__header__top > div {
   display: flex;
   flex: 1;
