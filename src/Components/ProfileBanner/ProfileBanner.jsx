@@ -5,10 +5,14 @@ import { useEffect } from "react";
 
 import firebase from "../../backend";
 import { useParams } from "react-router-dom";
+import Image from "../Image/Image";
 
 const ProfileBanner = () => {
   const [user, setUser] = useState(null);
   const { uid } = useParams();
+  const [image, setImage] = useState(null);
+  const [openPicture, setOpenPicture] = useState(false);
+
   useEffect(() => {
     if (uid)
       firebase.db
@@ -25,6 +29,12 @@ const ProfileBanner = () => {
 
   return (
     <div className="profile__banner">
+      <Image
+        image={image}
+        setImage={setImage}
+        open={openPicture}
+        setOpen={setOpenPicture}
+      />
       <div className="profile__banner__logo">
         <h1>LIKEME</h1>
         <p>@username</p>
@@ -42,6 +52,16 @@ const ProfileBanner = () => {
           src={user?.photoURL}
           alt={user?.displayName}
           className="profile__banner__avatar"
+          onClick={() => {
+            setImage({ imageURL: user?.photoURL, picture: "post" });
+            setOpenPicture(true);
+          }}
+          onMouseEnter={() => {
+            setTimeout(() => {
+              setImage({ imageURL: user?.photoURL, picture: "post" });
+              setOpenPicture(true);
+            }, 1500);
+          }}
         />
       </div>
     </div>
