@@ -32,13 +32,31 @@ const Posts = () => {
           />
         ) : null}
 
-        {posts.map((post, i) => (
-          <Post
-            key={post?.id}
-            post={post}
-            setShowNotification={setShowNotification}
-          />
-        ))}
+        {posts.map((post, i) => {
+          if ((i + 1) % 5 == 0) {
+            return (
+              <>
+                <Fleets
+                  setFleetImage={setFleetImage}
+                  title="Have you seen this?"
+                />
+                <Post
+                  key={post?.id}
+                  post={post}
+                  setShowNotification={setShowNotification}
+                />
+              </>
+            );
+          } else {
+            return (
+              <Post
+                key={post?.id}
+                post={post}
+                setShowNotification={setShowNotification}
+              />
+            );
+          }
+        })}
         <Snackbar
           open={showNotification}
           autoHideDuration={3000}

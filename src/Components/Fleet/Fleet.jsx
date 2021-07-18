@@ -3,7 +3,6 @@ import "./Fleet.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import { IoAdd } from "react-icons/io5";
 import { useSelector } from "react-redux";
-
 const Fleet = ({ isUserMe, user, setFleetImage, setDisplayName }) => {
   const allFleets = useSelector((state) => state.fleets);
   const handleChange = (e) => {
