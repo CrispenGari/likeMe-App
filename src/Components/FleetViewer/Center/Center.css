@@ -22,7 +22,29 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.center > button {
+  padding: 5px !important;
+  cursor: pointer !important;
+}
+.center > button:first-child {
+  position: absolute !important;
+  top: 50% !important;
+  z-index: 7 !important;
+  background-color: cornflowerblue !important;
+  color: white !important;
+  left: 10px !important;
+}
+.center > button:nth-child(2) {
+  position: absolute !important;
+  top: 50% !important;
+  z-index: 7 !important;
+  right: 10px !important;
+  background-color: cornflowerblue !important;
+  color: white !important;
+}
+.center__controls__icon__nav {
+  color: white !important;
+}
 .center__controls {
   position: absolute;
   background: rgba(0, 0, 0, 0.8);

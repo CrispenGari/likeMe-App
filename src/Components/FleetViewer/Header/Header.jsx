@@ -10,27 +10,13 @@ const Header = ({
   fleets,
   setCurrentFleetIndex,
   currentFleetIndex,
-  setFleetProgress,
-  fleetProgress,
 }) => {
   const user = useSelector((state) => state.users).filter(
     (user) => fleets[currentFleetIndex]?.displayName === user?.displayName
   )[0];
-
   const currentUser = useSelector((state) => state.user);
   return (
     <div className="fleet__header">
-      <div className="fleet__header__top">
-        {fleets?.map((fleet) => (
-          <div key={fleet?.id}>
-            <span
-              style={{
-                width: `${fleetProgress / 5000}%`,
-              }}
-            ></span>
-          </div>
-        ))}
-      </div>
       <div className="fleet__header__bottom">
         <div className="fleet__header__bottom__left">
           <Avatar
@@ -61,7 +47,13 @@ const Header = ({
           <IconButton title="more">
             <FiMoreVertical className="fleet__header__bottom__icon" />
           </IconButton>
-          <IconButton title="close" onClick={() => setDisplayName("")}>
+          <IconButton
+            title="close"
+            onClick={() => {
+              setDisplayName("");
+              setCurrentFleetIndex(0);
+            }}
+          >
             <AiFillCloseCircle className="form__close__button__icon" />
           </IconButton>
         </div>

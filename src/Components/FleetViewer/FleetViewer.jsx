@@ -7,6 +7,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Viewers from "./Viewers/Viewers";
+import { ActivityIndicator } from "../Common";
 
 const FleetViewer = ({ displayName, setDisplayName }) => {
   const fleets = useSelector((state) => state.fleets).filter(
@@ -14,57 +15,48 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
   );
   const [currentFleetIndex, setCurrentFleetIndex] = React.useState(0);
   const currentUser = useSelector((state) => state.user);
-  const [fleetProgress, setFleetProgress] = React.useState(0);
-
-  useEffect(() => {
-    const timeoutId = setInterval(() => {
-      setFleetProgress((prev) => prev + 500);
-    }, 500);
-    if (fleetProgress / 500 === 5) {
-      setFleetProgress(0);
-    }
-    return () => {
-      clearInterval(timeoutId);
-    };
-  }, [fleetProgress]);
-
-  console.log(fleetProgress);
   return (
     <Modal
       open={displayName !== "" && fleets?.length > 0}
-      onClose={() => setDisplayName("")}
+      onClose={() => {
+        setDisplayName("");
+        setCurrentFleetIndex(0);
+      }}
       className="fleet__viewer"
     >
-      <div className="fleet__viewer__container">
-        <div className="fleet__viewer__header">
-          <Header
-            setFleetProgress={setFleetProgress}
-            fleetProgress={fleetProgress}
-            setDisplayName={setDisplayName}
-            fleets={fleets}
-            setCurrentFleetIndex={setCurrentFleetIndex}
-            currentFleetIndex={currentFleetIndex}
-          />
-        </div>
-        <div className="fleet__viewer__center">
-          <Center
-            fleets={fleets}
-            setCurrentFleetIndex={setCurrentFleetIndex}
-            currentFleetIndex={currentFleetIndex}
-          />
-        </div>
-        {fleets[currentFleetIndex]?.displayName !== currentUser?.displayName ? (
-          <div className="fleet__viewer__bottom">
-            <Input
+      {fleets ? (
+        <div className="fleet__viewer__container">
+          <div className="fleet__viewer__header">
+            <Header
+              setDisplayName={setDisplayName}
               fleets={fleets}
               setCurrentFleetIndex={setCurrentFleetIndex}
               currentFleetIndex={currentFleetIndex}
             />
           </div>
-        ) : (
-          <Viewers />
-        )}
-      </div>
+          <div className="fleet__viewer__center">
+            <Center
+              fleets={fleets}
+              setCurrentFleetIndex={setCurrentFleetIndex}
+              currentFleetIndex={currentFleetIndex}
+            />
+          </div>
+          {fleets[currentFleetIndex]?.displayName !==
+          currentUser?.displayName ? (
+            <div className="fleet__viewer__bottom">
+              <Input
+                fleets={fleets}
+                setCurrentFleetIndex={setCurrentFleetIndex}
+                currentFleetIndex={currentFleetIndex}
+              />
+            </div>
+          ) : (
+            <Viewers />
+          )}
+        </div>
+      ) : (
+        <ActivityIndicator />
+      )}
     </Modal>
   );
 };
