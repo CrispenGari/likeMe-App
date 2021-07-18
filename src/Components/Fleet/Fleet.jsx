@@ -22,11 +22,19 @@ const Fleet = ({ isUserMe, user, setFleetImage, setDisplayName }) => {
   );
   if (isUserMe) {
     return (
-      <div className="fleet" onClick={() => setDisplayName(user?.displayName)}>
+      <div className="fleet">
         {user?.photoURL ? (
-          <img src={fleets[0]?.fleetURL ?? user?.photoURL} alt="" />
+          <img
+            src={fleets[0]?.fleetURL ?? user?.photoURL}
+            alt=""
+            onClick={() => setDisplayName(user?.displayName)}
+          />
         ) : fleets[0]?.fleetURL ? (
-          <img src={fleets[0]?.fleetURL} alt="" />
+          <img
+            src={fleets[0]?.fleetURL}
+            alt=""
+            onClick={() => setDisplayName(user?.displayName)}
+          />
         ) : null}
         <input
           type="file"
@@ -45,6 +53,7 @@ const Fleet = ({ isUserMe, user, setFleetImage, setDisplayName }) => {
             className="fleet__avatar"
             src={user?.photoURL}
             alt={user?.displayName}
+            onClick={() => setDisplayName(user?.displayName)}
           />
           <IconButton title="add" onClick={() => inputRef.current.click()}>
             <IoAdd className="fleet__avatar__icon" />

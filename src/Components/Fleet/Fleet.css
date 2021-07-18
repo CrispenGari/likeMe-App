@@ -50,6 +50,7 @@
   color: white !important;
   padding: 3px !important;
   cursor: pointer !important;
+  z-index: 10;
 }
 .fleet__avatar__icon {
   font-size: 1rem;
