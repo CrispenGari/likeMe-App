@@ -17,6 +17,7 @@ const Header = ({
     (user) => fleets[currentFleetIndex]?.displayName === user?.displayName
   )[0];
 
+  const currentUser = useSelector((state) => state.user);
   return (
     <div className="fleet__header">
       <div className="fleet__header__top">
@@ -38,7 +39,13 @@ const Header = ({
             className="fleet__header__avatar"
           />
           <div className="fleet__info">
-            <p>@{fleets[currentFleetIndex]?.displayName}</p>
+            <p>
+              @
+              {currentUser?.displayName ===
+              fleets[currentFleetIndex]?.displayName
+                ? "you"
+                : fleets[currentFleetIndex]?.displayName}
+            </p>
             {fleets[currentFleetIndex]?.timestamp ? (
               <span>
                 {helperFunctions.timeString(

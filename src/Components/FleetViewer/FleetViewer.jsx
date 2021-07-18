@@ -12,7 +12,7 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
     (fleet) => fleet?.displayName === displayName
   );
   const [currentFleetIndex, setCurrentFleetIndex] = React.useState(0);
-
+  const currentUser = useSelector((state) => state.user);
   const [fleetProgress, setFleetProgress] = React.useState(0);
   // useEffect(() => {
   //   const timeoutId = setInterval(() => {
@@ -54,13 +54,17 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
             currentFleetIndex={currentFleetIndex}
           />
         </div>
-        <div className="fleet__viewer__bottom">
-          <Input
-            fleets={fleets}
-            setCurrentFleetIndex={setCurrentFleetIndex}
-            currentFleetIndex={currentFleetIndex}
-          />
-        </div>
+        {fleets[currentFleetIndex]?.displayName !== currentUser?.displayName ? (
+          <div className="fleet__viewer__bottom">
+            <Input
+              fleets={fleets}
+              setCurrentFleetIndex={setCurrentFleetIndex}
+              currentFleetIndex={currentFleetIndex}
+            />
+          </div>
+        ) : (
+          <h1>Your fleet</h1>
+        )}
       </div>
     </Modal>
   );

@@ -3,7 +3,10 @@ import "./Comments.css";
 import { Comment } from "../../Components";
 
 const Comments = React.forwardRef(
-  ({ setOpen, comments, postId, postComment, setComment, comment }, ref) => {
+  (
+    { open, setOpen, comments, postId, postComment, setComment, comment },
+    ref
+  ) => {
     return (
       <div className="comments" ref={ref}>
         <h1>
