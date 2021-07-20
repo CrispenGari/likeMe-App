@@ -196,7 +196,10 @@
   height: fit-content !important;
   padding: 8px !important;
 }
-.post__icon__like,
+.post__icon__like {
+  color: #e44753 !important;
+  font-size: 20px !important;
+}
 .post__icon__unlike__number {
   color: gray !important;
   font-size: 20px !important;

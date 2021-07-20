@@ -17,9 +17,6 @@ import { useSelector } from "react-redux";
 import firebase from "../../backend";
 import fb from "firebase";
 import { useHistory } from "react-router-dom";
-import boopSfx from "../../sounds/post1.wav";
-import like from "../../sounds/like.mp3";
-import useSound from "use-sound";
 import { ActivityIndicator } from "../Common";
 import Image from "../Image/Image";
 import helperFunctions from "../../utils/helperfunctions";
@@ -39,8 +36,6 @@ const Post = ({ post, setShowNotification }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [play] = useSound(boopSfx);
-  const [playLike] = useSound(like);
   const openPop = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -54,19 +49,18 @@ const Post = ({ post, setShowNotification }) => {
   const openTag = (cap) => {
     console.log(cap);
   };
-
   useEffect(() => {
     helperFunctions.postSize(post?.imageURL).then((res) => setPostSize(res));
   }, [post]);
+
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
       .doc(post?.id)
       .collection("likes")
-      .onSnapshot((snapshot) => {
-        setLikes(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-        );
+      .orderBy("timestamp", "desc")
+      .onSnapshot((likes) => {
+        setLikes(likes.docs.map((like) => ({ id: like.id, ...like.data() })));
       });
     return () => {
       unsubscribe();
@@ -84,11 +78,11 @@ const Post = ({ post, setShowNotification }) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-
     return () => {
       unsubscribe();
     };
   }, [post?.id]);
+
   const postComment = () => {
     firebase.db
       .collection("posts")
@@ -106,26 +100,26 @@ const Post = ({ post, setShowNotification }) => {
       .catch((error) => console.log(error))
       .finally(() => {
         setComment("");
-        play();
       });
   };
   const handleLike = () => {
-    let userLike = "";
+    let likeId = "";
     likes.forEach((like) => {
-      if (like?.data.userEmail === user?.email) {
-        userLike = like?.id;
+      if (like?.userId === user?.uid) {
+        likeId = like?.id;
       }
     });
-    if (userLike) {
+    if (likeId) {
       // remove it from the database
       firebase.db
         .collection("posts")
         .doc(post?.id)
         .collection("likes")
-        .doc(userLike)
+        .doc(likeId)
         .delete()
         .then(() => {})
         .catch((error) => console.log(error));
+      return;
     } else {
       // add it to the database
       firebase.db
@@ -133,15 +127,16 @@ const Post = ({ post, setShowNotification }) => {
         .doc(post?.id)
         .collection("likes")
         .add({
-          userEmail: user?.email,
-          userAvatar: user?.photoURL,
-          username: user?.displayName,
+          email: user?.email,
+          photoURL: user?.photoURL,
+          displayName: user?.displayName,
+          timestamp: firebase.timestamp,
+          userId: user?.uid,
         })
         .then(() => {})
         .catch((error) => console.log(error))
-        .finally(() => {
-          playLike();
-        });
+        .finally(() => {});
+      return;
     }
   };
   return (
@@ -239,14 +234,8 @@ const Post = ({ post, setShowNotification }) => {
           setImage({ ...post, picture: "post" });
           setOpenPicture(true);
         }}
-        onMouseEnter={() => {
-          setTimeout(() => {
-            setImage({ ...post, picture: "post" });
-            setOpenPicture(true);
-          }, 1500);
-        }}
       >
-        <div className="post__center__likes" onDoubleClick={handleLike}></div>
+        <div className="post__center__likes"></div>
         <img src={post?.imageURL} alt="post" loading="lazy" />
       </div>
       <p className="post__caption">
@@ -304,8 +293,8 @@ const Post = ({ post, setShowNotification }) => {
               onClick={handleLike}
               className="post__icon__button__like"
             >
-              {likes.filter((like) => like.data.userEmail === user?.email)
-                .length !== 0 ? (
+              {likes.filter((like) => like?.email === user?.email).length !==
+              0 ? (
                 <Favorite className="post__icon__like" />
               ) : (
                 <FavoriteBorder className="post__icon__unlike" />
