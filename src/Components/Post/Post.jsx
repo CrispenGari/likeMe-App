@@ -32,7 +32,7 @@ const Post = ({ post, setShowNotification }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [image, setImage] = useState(null);
-
+  const [openComments, setOpenComments] = useState(true);
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -147,21 +147,9 @@ const Post = ({ post, setShowNotification }) => {
         open={openPicture}
         setOpen={setOpenPicture}
       />
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        className="post__comments__modal"
-      >
-        <Comments
-          comments={comments}
-          setComment={setComment}
-          setOpen={setOpen}
-          postComment={postComment}
-          comment={comment}
-        />
-      </Modal>
+
+      <Comments openComments={openComments} setOpenComments={setOpenComments} />
+
       <Modal
         open={openLike}
         onClose={() => setOpenLike(false)}

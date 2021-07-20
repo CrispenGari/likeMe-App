@@ -1,59 +1,67 @@
 .comment {
   display: flex;
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  user-select: none;
-  user-zoom: none;
-  background-color: white;
-  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 5px;
 }
 .comment__top {
   display: flex;
-  justify-content: flex-start;
-  flex: 1;
 }
-.comment:nth-child(odd) {
-  background-color: #fafafa;
+.comment__top > div > p {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 5px;
+  background-color: lightblue;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+.comment__username {
+  font-weight: 500;
+  margin-bottom: 3px;
+  user-select: none;
+  user-zoom: none;
 }
 .comment__avatar {
-  width: 30px !important;
-  height: 30px !important;
+  width: 25px !important;
+  height: 25px !important;
+  cursor: pointer !important;
 }
-.comment__info {
-  margin-left: 5px;
-  flex: 1;
-}
-.comment__info > h1 {
-  font-size: 12px;
-  cursor: pointer;
-  color: lightseagreen !important;
-}
-.comment__info > p {
-  font-size: 12px !important;
-}
-.comment__high__badge {
-  color: green !important;
-}
-.comment__delete__button {
-  width: fit-content !important;
-  height: fit-content !important;
-  padding: 5px !important;
-  background: #fafafa;
-}
-.comment__delete__icon {
-  color: orange !important;
-  font-size: 18px !important;
-}
-.comment__bottom {
+.comment__controls {
   display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
   justify-content: space-between;
+  padding: 0 10px;
+  user-select: none;
 }
-.comment__bottom > small {
-  color: gray !important;
-  font-size: 12px !important;
+.comment__icon__like {
+  color: #e44753 !important;
+  font-size: 15px !important;
+}
+.comment__icon {
+  font-size: 15px !important;
+}
+
+.comment__controls__right {
+  display: flex;
+  align-items: center;
+}
+.comment__controls__right > button {
+  padding: 5px !important;
+  margin-left: 10px !important;
+}
+.comment__controls__right > time {
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: 500;
+}
+.comment__controls > p {
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.comment__controls > p > span {
+  margin-right: 3px;
 }

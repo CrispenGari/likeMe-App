@@ -6,6 +6,8 @@
   flex-direction: column;
   background: white;
   border-bottom: 1px solid lightgray;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .fleet__header__top {
   display: flex;
