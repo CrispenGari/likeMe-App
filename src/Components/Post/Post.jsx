@@ -190,7 +190,9 @@ const Post = ({ post, setShowNotification }) => {
               {post?.displayName === user?.displayName
                 ? "You"
                 : post?.displayName}
-              <HiBadgeCheck className="post__high__badge" />
+              {post?.userVerified ? (
+                <HiBadgeCheck className="post__high__badge" />
+              ) : null}
             </h1>
             <small>•</small> <small>{time}</small>
           </div>

@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Home.css";
 import { Header, Posts, Form } from "../../Components";
 
 import { IoIosCreate } from "react-icons/io";
 import { IconButton } from "@material-ui/core";
 const Home = () => {
-  const [showForm, setShowForm] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
-  // document.title = "LikeMe • Home • posts";
+  const [showForm, setShowForm] = React.useState(false);
+
+  React.useLayoutEffect(() => {
+    document.title = "LikeMe • Home • posts";
+  }, []);
+
+  React.useEffect(() => {
+    return () => {
+      setShowForm(false);
+    };
+  }, []);
+
   return (
     <div className="home">
       <Header />
-      {showForm && (
-        <Form
-          setShowNotification={setShowNotification}
-          setShowForm={setShowForm}
-        />
-      )}
+      {showForm && <Form setShowForm={setShowForm} />}
 
       <Posts />
       <IconButton

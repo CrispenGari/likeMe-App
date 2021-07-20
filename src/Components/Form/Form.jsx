@@ -14,7 +14,9 @@ import { v4 as uuid_v4 } from "uuid";
 import actions from "../../actions";
 const Form = ({ setShowForm }) => {
   const user = useSelector((state) => state.user);
-
+  const currentUser = useSelector((state) => state.users)?.find(
+    (_user) => _user?.id === user?.uid
+  );
   const dispatch = useDispatch();
   /* LOCAL STATE AND REFS */
   const [caption, setCaption] = useState("");
@@ -91,6 +93,7 @@ const Form = ({ setShowForm }) => {
                   timestamp: firebase.timestamp,
                   category: category,
                   userId: user?.uid,
+                  userVerified: currentUser?.userVerified ?? false,
                 })
                 .finally(() => {
                   closeForm();

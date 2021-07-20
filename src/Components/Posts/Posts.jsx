@@ -34,22 +34,18 @@ const Posts = () => {
         {posts.map((post, i) => {
           if ((i + 1) % 5 === 0) {
             return (
-              <>
+              <React.Fragment key={i}>
                 <Fleets
                   setFleetImage={setFleetImage}
                   title="Have you seen this?"
                 />
-                <Post
-                  key={post?.id}
-                  post={post}
-                  setShowNotification={setShowNotification}
-                />
-              </>
+                <Post post={post} setShowNotification={setShowNotification} />
+              </React.Fragment>
             );
           } else {
             return (
               <Post
-                key={post?.id}
+                key={i}
                 post={post}
                 setShowNotification={setShowNotification}
               />
