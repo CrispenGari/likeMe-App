@@ -14,6 +14,7 @@
 .header__input__center {
   display: flex;
   flex-direction: column;
+  display: none;
 }
 .header__input__center > p {
   font-size: 0.7rem;
@@ -25,6 +26,9 @@
   justify-content: center;
   align-items: center;
 }
+.header__input__avatar {
+  border: 2px solid cornflowerblue;
+}
 .header__input__center__avatars > .header__input__avatar {
   margin-left: -10px !important;
   width: 30px !important;
@@ -33,6 +37,8 @@
 .comment__info p {
   font-size: 0.9rem;
   font-weight: 500;
+  align-items: center;
+  display: flex;
 }
 .comment__info {
   display: flex;

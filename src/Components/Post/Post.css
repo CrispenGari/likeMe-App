@@ -251,13 +251,13 @@
   border-radius: 5px;
 }
 .post__bottom__comment__container > button::before {
-  border-top: 2px solid black;
+  border-top: 2px solid cornflowerblue;
   right: 0;
   top: -4px;
 }
 
 .post__bottom__comment__container > button::after {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid cornflowerblue;
   bottom: -4px;
   left: 0;
 }
@@ -267,10 +267,11 @@
   width: 100%;
 }
 .post__bottom__comment__container > button:hover {
-  background-color: orange !important;
-}
-.post__bottom__comment__container > button:active {
-  background-color: green !important;
+  background-image: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
 }
 
 .post__category__badge {
@@ -292,7 +293,8 @@
   text-align: center;
   color: #3e3e3e;
   padding: 5px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 500;
 }
 span.post__location {
   user-select: none;

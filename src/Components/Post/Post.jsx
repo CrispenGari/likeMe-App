@@ -15,26 +15,30 @@ import { FaComments } from "react-icons/fa";
 import { Comments, PostOptions, Likes } from "../../Components";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
-import fb from "firebase";
 import { useHistory } from "react-router-dom";
 import { ActivityIndicator } from "../Common";
 import Image from "../Image/Image";
 import helperFunctions from "../../utils/helperfunctions";
 const Post = ({ post, setShowNotification }) => {
   const time = helperFunctions.timeString(
-    helperFunctions.timestampToTime(post.timestamp)
+    helperFunctions.timestampToTime(post?.timestamp)
+  );
+  const user = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.users)?.find(
+    (_user) => _user?.id === user?.uid
   );
   const [postSize, setPostSize] = useState(null);
   const [openPicture, setOpenPicture] = useState(false);
   const [likes, setLikes] = useState([]);
-  const [open, setOpen] = useState(false);
   const [openLike, setOpenLike] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [image, setImage] = useState(null);
-  const [openComments, setOpenComments] = useState(true);
-  const user = useSelector((state) => state.user);
+  const [openComments, setOpenComments] = useState(false);
   const history = useHistory();
+
+  const [posting, setPosting] = useState(false);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openPop = (event) => {
     setAnchorEl(event.currentTarget);
@@ -75,7 +79,7 @@ const Post = ({ post, setShowNotification }) => {
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         setComments(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
         );
       });
     return () => {
@@ -83,23 +87,27 @@ const Post = ({ post, setShowNotification }) => {
     };
   }, [post?.id]);
 
-  const postComment = () => {
+  const postComment = (e) => {
+    e.preventDefault();
+    setPosting(true);
     firebase.db
       .collection("posts")
       .doc(post?.id)
       .collection("comments")
       .add({
-        username: user?.displayName,
-        userEmail: user?.email,
-        userId: user.uid,
-        userAvatar: user?.photoURL,
+        email: user?.email,
+        photoURL: user?.photoURL,
+        displayName: user?.displayName,
+        timestamp: firebase.timestamp,
+        userId: user?.uid,
         comment: comment,
-        timestamp: fb.firestore.FieldValue.serverTimestamp(),
+        userVerified: currentUser?.userVerified ?? false,
       })
       .then(() => {})
       .catch((error) => console.log(error))
       .finally(() => {
         setComment("");
+        setPosting(false);
       });
   };
   const handleLike = () => {
@@ -148,17 +156,12 @@ const Post = ({ post, setShowNotification }) => {
         setOpen={setOpenPicture}
       />
 
-      <Comments openComments={openComments} setOpenComments={setOpenComments} />
-
-      <Modal
-        open={openLike}
-        onClose={() => setOpenLike(false)}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        className="post__comments__modal"
-      >
-        <Likes likes={likes} setOpenLike={setOpenLike} />
-      </Modal>
+      <Comments
+        post={post}
+        comments={comments}
+        openComments={openComments}
+        setOpenComments={setOpenComments}
+      />
       <div className="post__top">
         <Avatar
           className="post__avatar"
@@ -176,7 +179,7 @@ const Post = ({ post, setShowNotification }) => {
           <div>
             <h1 onClick={openProfile}>
               {post?.displayName === user?.displayName
-                ? "You"
+                ? "you"
                 : post?.displayName}
               {post?.userVerified ? (
                 <HiBadgeCheck className="post__high__badge" />
@@ -271,7 +274,7 @@ const Post = ({ post, setShowNotification }) => {
           </div>
           <div
             className="post__bottom__button__container"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpenComments(true)}
           >
             <IconButton className="post__icon__button__message" title="comment">
               <FaComments className="post__icon__comments" />
@@ -293,7 +296,7 @@ const Post = ({ post, setShowNotification }) => {
             <p onClick={() => setOpenLike(true)}>{likes.length}</p>
           </div>
         </div>
-        <div className="post__bottom__comment__input">
+        <form className="post__bottom__comment__input">
           <input
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -304,13 +307,13 @@ const Post = ({ post, setShowNotification }) => {
                 : "Type your comment..."
             }
           />
-          <button disabled={!comment} onClick={postComment}>
-            post
+          <button type="submit" disabled={!comment} onClick={postComment}>
+            post {posting ? <ActivityIndicator size={15} /> : null}
           </button>
-        </div>
+        </form>
         <div className="post__bottom__comment__container">
           {comments?.length > 0 ? (
-            <button onClick={() => setOpen(true)}>Read Comments</button>
+            <button onClick={() => setOpenComments(true)}>Read Comments</button>
           ) : (
             <h1>No Comments</h1>
           )}

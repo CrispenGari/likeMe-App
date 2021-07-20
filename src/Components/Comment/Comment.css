@@ -2,9 +2,18 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
+  width: 100% !important;
 }
 .comment__top {
   display: flex;
+}
+.comment__top > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.comment__top > div > p {
+  flex: 1;
 }
 .comment__top > div > p {
   display: flex;
@@ -21,11 +30,14 @@
   margin-bottom: 3px;
   user-select: none;
   user-zoom: none;
+  display: flex;
+  align-items: center;
 }
 .comment__avatar {
   width: 25px !important;
   height: 25px !important;
   cursor: pointer !important;
+  border: 2px solid cornflowerblue;
 }
 .comment__controls {
   display: flex;
@@ -49,7 +61,7 @@
   padding: 5px !important;
   margin-left: 10px !important;
 }
-.comment__controls__right > time {
+.comment__controls__right > div {
   font-size: 0.8rem;
   color: gray;
   font-weight: 500;
@@ -64,4 +76,19 @@
 }
 .comment__controls > p > span {
   margin-right: 3px;
+}
+.comment__controls > p > span:last-child {
+  text-align: start !important;
+  display: none;
+}
+
+.comment__caption {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 100%;
+}
+.comment__caption > span {
+  margin-right: 4px;
+  font-size: 0.8rem;
 }

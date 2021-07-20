@@ -1,18 +1,34 @@
 import "./Header.css";
 import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
-import { FiMoreVertical } from "react-icons/fi";
+import { HiBadgeCheck } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import helperFunctions from "../../../utils/helperfunctions";
 import { useSelector } from "react-redux";
-const Header = () => {
+const Header = ({ setOpenComments, post }) => {
+  const user = useSelector((state) => state.user);
+  const time = helperFunctions.timeString(
+    helperFunctions.timestampToTime(post.timestamp)
+  );
+
   return (
     <div className="header__input">
       <div className="header__input__left">
-        <Avatar className="header__input__avatar" />
+        <Avatar
+          src={post?.photoURL}
+          alt={post?.displayName}
+          className="header__input__avatar"
+        />
         <div className="comment__info">
-          <p>@username's post</p>
-          <span>time</span>
+          <p>
+            {post?.displayName === user?.displayName
+              ? "@you"
+              : "@" + post?.displayName + "'s post"}
+            {post?.userVerified ? (
+              <HiBadgeCheck className="post__high__badge" />
+            ) : null}{" "}
+          </p>
+          <span>{time}</span>
         </div>
       </div>
       <div className="header__input__center">
@@ -27,7 +43,7 @@ const Header = () => {
         </div>
       </div>
       <div className="header__input__right">
-        <IconButton title="close">
+        <IconButton title="close" onClick={() => setOpenComments(false)}>
           <AiFillCloseCircle className="form__close__button__icon" />
         </IconButton>
       </div>

@@ -36,6 +36,9 @@ const getMonthAndYear = (timestamp) => {
   return `${months[dateObject.getMonth()]} ${dateObject.getFullYear()}`;
 };
 const timeString = (timestampObject, timestamp) => {
+  if (!timestampObject && !timestamp) {
+    return;
+  }
   const { days, hours, minutes, seconds } = timestampObject;
   if (days === 0) {
     if (hours === 0) {
@@ -66,7 +69,10 @@ const calcHours = (numberHours) => Number.parseInt(numberHours);
 const calcMinutes = (numberOfMinutes) => Number.parseInt(numberOfMinutes);
 const calcSeconds = (numberOfSeconds) => Number.parseInt(numberOfSeconds);
 const timestampToTime = (timestamp) => {
-  const timestampSeconds = timestamp.seconds * 1000;
+  if (!timestamp) {
+    return;
+  }
+  const timestampSeconds = timestamp?.seconds * 1000;
   const numberOfDays =
     (new Date().getTime() - new Date(timestampSeconds).getTime()) /
     (60 * 60 * 1000 * 24);

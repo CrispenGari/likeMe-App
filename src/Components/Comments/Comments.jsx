@@ -4,7 +4,7 @@ import { Comment } from "../../Components";
 import { Modal } from "@material-ui/core";
 import Header from "./Header/Header";
 import Input from "./Input/Input";
-const Comments = ({ openComments, setOpenComments }) => {
+const Comments = ({ post, openComments, setOpenComments, comments }) => {
   return (
     <Modal
       className="comments"
@@ -12,22 +12,13 @@ const Comments = ({ openComments, setOpenComments }) => {
       onClose={() => setOpenComments(false)}
     >
       <div className="comments__container">
-        <Header />
+        <Header post={post} setOpenComments={setOpenComments} />
         <div className="comments__lists">
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
+          {comments?.map((comment) => (
+            <Comment post={post} comment={comment} key={comment?.id} />
+          ))}
         </div>
-        <Input />
+        <Input post={post} />
       </div>
     </Modal>
   );
