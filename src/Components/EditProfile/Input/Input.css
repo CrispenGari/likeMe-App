@@ -17,7 +17,8 @@
   border-radius: 5px;
 }
 .edit__profile__input__container > input,
-.edit__profile__input__container > select {
+.edit__profile__input__container > select,
+.edit__profile__input__container > textarea {
   flex: 1;
   outline: none;
   border: none;
@@ -25,6 +26,12 @@
   font-size: 0.9rem;
   background-color: transparent;
   caret-color: cornflowerblue;
+}
+.edit__profile__input__container > textarea {
+  resize: none !important;
+}
+.edit__profile__input__container > textarea::-webkit-scrollbar {
+  display: none !important;
 }
 
 .edit__profile__input__container:focus-within {
@@ -37,8 +44,16 @@
 .edit__profile__twins > div:last-of-type {
   margin-left: 10px;
 }
-.edit__profile__input > p.error {
+.edit__profile__input > p.error,
+p.edit__input__help {
   text-align: start;
+}
+.edit__input__help {
+  font-size: 0.8rem;
+  color: cornflowerblue;
+}
+.edit__profile__twins.edit__profile__single__tinny > div {
+  margin-left: unset !important;
 }
 
 @media only screen and (max-width: 320px) {

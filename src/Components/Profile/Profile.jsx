@@ -167,6 +167,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
         </div>
         <IconButton
           className="profile__btn"
+          title="open pictures"
           onClick={() => inputRef.current.click()}
         >
           <input
