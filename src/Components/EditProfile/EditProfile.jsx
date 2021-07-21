@@ -3,20 +3,32 @@ import { useState, useRef } from "react";
 import "./EditProfile.css";
 import Input from "./Input/Input";
 import Avatar from "./Avatar/Avatar";
+import { BsPersonCheck } from "react-icons/bs";
+import { IoMdEyeOff, IoMdEye } from "react-icons/io";
+import { HiOutlineMail } from "react-icons/hi";
+import { CgLock } from "react-icons/cg";
 
 const EditProfile = () => {
   const genders = ["male", "female", "gay", "lesbian"];
 
   const statuses = ["single", "dating", "complicated", "searching"];
 
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+  const currentPasswordRef = useRef(null);
   const inputRef = useRef(null);
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-
   const [changePassword, setChangePassword] = useState(true);
 
   const [birthday, setBirthday] = useState("");
@@ -59,13 +71,15 @@ const EditProfile = () => {
           placeholder="first name"
           label="first name"
           value={firstName}
-          setValue={firstName}
+          setValue={setFirstName}
+          IconLeft={BsPersonCheck}
         />
         <Input
           placeholder="last name"
           label="last name"
           value={lastName}
           setValue={setLastName}
+          IconLeft={BsPersonCheck}
         />
       </div>
       <div className="edit__profile__twins">
@@ -75,6 +89,7 @@ const EditProfile = () => {
           value={username}
           setValue={setUsername}
           inputError={usernameError}
+          IconLeft={BsPersonCheck}
         />
         <Input
           placeholder="email"
@@ -82,6 +97,7 @@ const EditProfile = () => {
           value={email}
           setValue={setEmail}
           inputError={emailError}
+          IconLeft={HiOutlineMail}
         />
       </div>
       <div className="edit__profile__twins">
@@ -147,6 +163,11 @@ const EditProfile = () => {
           label="current password"
           value={currentPassword}
           setValue={setCurrentPassword}
+          IconRight={showCurrentPassword ? IoMdEye : IoMdEyeOff}
+          IconLeft={CgLock}
+          customRef={currentPasswordRef}
+          setShowPasswordIcon={setShowCurrentPassword}
+          type="password"
         />
       </div>
       <div className="edit__profile__twins">
@@ -155,16 +176,26 @@ const EditProfile = () => {
           label="new password"
           value={newPassword}
           setValue={setNewPassword}
+          IconRight={showNewPassword ? IoMdEye : IoMdEyeOff}
+          IconLeft={CgLock}
+          customRef={passwordRef}
+          setShowPasswordIcon={setShowNewPassword}
+          type="password"
         />
         <Input
           placeholder="confirm new password"
           label="confirm new password"
           value={confirmNewPassword}
           setValue={setConfirmNewPassword}
+          IconRight={showConfPassword ? IoMdEye : IoMdEyeOff}
+          IconLeft={CgLock}
+          customRef={confirmPasswordRef}
+          setShowPasswordIcon={setShowConfPassword}
+          type="password"
         />
       </div>
       <div className="edit__buttons">
-        <button>save</button>
+        <button type="submit">save</button>
         <button>cancel</button>
       </div>
     </form>

@@ -37,7 +37,7 @@ const Avatar = ({ inputRef, handleChange, image, progress, loading }) => {
           type="file"
           ref={inputRef}
           hidden
-          accept="images/*"
+          accept="image/*"
           multiple={false}
           onChange={handleChange}
         />

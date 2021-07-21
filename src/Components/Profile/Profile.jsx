@@ -174,7 +174,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
             type="file"
             ref={inputRef}
             hidden
-            accept="images/*"
+            accept="image/*"
             multiple={false}
             onChange={handleChange}
           />
