@@ -3,10 +3,11 @@ import { useState, useRef } from "react";
 import "./EditProfile.css";
 import Input from "./Input/Input";
 import Avatar from "./Avatar/Avatar";
-import { BsPersonCheck } from "react-icons/bs";
+import { BsPersonCheck, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";
+import { IconButton } from "@material-ui/core";
 
 const EditProfile = () => {
   const genders = ["male", "female", "gay", "lesbian"];
@@ -29,7 +30,7 @@ const EditProfile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-  const [changePassword, setChangePassword] = useState(true);
+  const [changePassword, setChangePassword] = useState(false);
 
   const [birthday, setBirthday] = useState("");
   const [bestFriend, setBestFriend] = useState("");
@@ -155,45 +156,54 @@ const EditProfile = () => {
         inputRef={inputRef}
         loading={loading}
       />
-      <h2>Change Password</h2>
+      <div className="edit__password__section">
+        Change Password
+        <IconButton onClick={() => setChangePassword((prev) => !prev)}>
+          {changePassword ? <BsChevronUp /> : <BsChevronDown />}
+        </IconButton>
+      </div>
 
-      <div className="edit__profile__twins edit__profile__single__tinny">
-        <Input
-          placeholder="current password"
-          label="current password"
-          value={currentPassword}
-          setValue={setCurrentPassword}
-          IconRight={showCurrentPassword ? IoMdEye : IoMdEyeOff}
-          IconLeft={CgLock}
-          customRef={currentPasswordRef}
-          setShowPasswordIcon={setShowCurrentPassword}
-          type="password"
-        />
-      </div>
-      <div className="edit__profile__twins">
-        <Input
-          placeholder="new password"
-          label="new password"
-          value={newPassword}
-          setValue={setNewPassword}
-          IconRight={showNewPassword ? IoMdEye : IoMdEyeOff}
-          IconLeft={CgLock}
-          customRef={passwordRef}
-          setShowPasswordIcon={setShowNewPassword}
-          type="password"
-        />
-        <Input
-          placeholder="confirm new password"
-          label="confirm new password"
-          value={confirmNewPassword}
-          setValue={setConfirmNewPassword}
-          IconRight={showConfPassword ? IoMdEye : IoMdEyeOff}
-          IconLeft={CgLock}
-          customRef={confirmPasswordRef}
-          setShowPasswordIcon={setShowConfPassword}
-          type="password"
-        />
-      </div>
+      {changePassword ? (
+        <div className="edit__profile__password__expandable">
+          <div className="edit__profile__twins edit__profile__single__tinny">
+            <Input
+              placeholder="current password"
+              label="current password"
+              value={currentPassword}
+              setValue={setCurrentPassword}
+              IconRight={showCurrentPassword ? IoMdEye : IoMdEyeOff}
+              IconLeft={CgLock}
+              customRef={currentPasswordRef}
+              setShowPasswordIcon={setShowCurrentPassword}
+              type="password"
+            />
+          </div>
+          <div className="edit__profile__twins">
+            <Input
+              placeholder="new password"
+              label="new password"
+              value={newPassword}
+              setValue={setNewPassword}
+              IconRight={showNewPassword ? IoMdEye : IoMdEyeOff}
+              IconLeft={CgLock}
+              customRef={passwordRef}
+              setShowPasswordIcon={setShowNewPassword}
+              type="password"
+            />
+            <Input
+              placeholder="confirm new password"
+              label="confirm new password"
+              value={confirmNewPassword}
+              setValue={setConfirmNewPassword}
+              IconRight={showConfPassword ? IoMdEye : IoMdEyeOff}
+              IconLeft={CgLock}
+              customRef={confirmPasswordRef}
+              setShowPasswordIcon={setShowConfPassword}
+              type="password"
+            />
+          </div>
+        </div>
+      ) : null}
       <div className="edit__buttons">
         <button type="submit">save</button>
         <button>cancel</button>
