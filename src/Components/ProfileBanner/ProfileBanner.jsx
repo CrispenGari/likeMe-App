@@ -56,12 +56,6 @@ const ProfileBanner = () => {
             setImage({ imageURL: user?.photoURL, picture: "post" });
             setOpenPicture(true);
           }}
-          onMouseEnter={() => {
-            setTimeout(() => {
-              setImage({ imageURL: user?.photoURL, picture: "post" });
-              setOpenPicture(true);
-            }, 1500);
-          }}
         />
       </div>
     </div>

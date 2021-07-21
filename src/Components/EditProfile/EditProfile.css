@@ -6,6 +6,9 @@
   max-width: 600px;
   background-color: white;
   margin: 10px auto;
+  opacity: 0.5;
+  position: relative;
+  animation: edit-profile-animation 2s ease-in-out 0s 1 alternate forwards;
 }
 .edit__profile > h1,
 .edit__profile > div.edit__password__section {
@@ -86,5 +89,16 @@
   to {
     opacity: 1;
     right: 0px;
+  }
+}
+
+@keyframes edit-profile-animation {
+  from {
+    opacity: 0.5;
+    top: -800px;
+  }
+  to {
+    opacity: 1;
+    top: 0px;
   }
 }

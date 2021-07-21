@@ -9,7 +9,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";
 import { IconButton } from "@material-ui/core";
 
-const EditProfile = () => {
+const EditProfile = ({ setEditProfile }) => {
   const genders = ["male", "female", "gay", "lesbian"];
 
   const statuses = ["single", "dating", "complicated", "searching"];
@@ -63,6 +63,9 @@ const EditProfile = () => {
     };
   };
 
+  const saveChanges = (e) => {
+    e.preventDefault();
+  };
   return (
     <form className="edit__profile">
       <h1>Edit your profile</h1>
@@ -205,8 +208,10 @@ const EditProfile = () => {
         </div>
       ) : null}
       <div className="edit__buttons">
-        <button type="submit">save</button>
-        <button>cancel</button>
+        <button type="submit" onClick={saveChanges}>
+          save
+        </button>
+        <button onClick={() => setEditProfile(false)}>cancel</button>
       </div>
     </form>
   );
