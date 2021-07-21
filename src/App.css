@@ -51,3 +51,6 @@ textarea {
 .span__global__clickable:hover {
   text-decoration: underline;
 }
+.error {
+  color: red;
+}

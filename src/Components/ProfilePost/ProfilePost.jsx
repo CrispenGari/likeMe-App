@@ -24,12 +24,6 @@ const ProfilePost = ({ post }) => {
           setImage({ ...post, picture: "post" });
           setOpenPicture(true);
         }}
-        onMouseEnter={() => {
-          setTimeout(() => {
-            setImage({ ...post, picture: "post" });
-            setOpenPicture(true);
-          }, 1500);
-        }}
       >
         <div className="profile__posts__like">
           <AiFillHeart className="profile__posts__like__icon" />

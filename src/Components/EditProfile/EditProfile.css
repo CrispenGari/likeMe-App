@@ -1,0 +1,15 @@
+.edit__profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  max-width: 600px;
+  background-color: white;
+  margin: 10px auto;
+}
+.edit__profile > h1 {
+  font-weight: 500;
+  padding: 10px;
+  border-bottom: 1px solid lightblue;
+  font-size: 0.9rem;
+}
