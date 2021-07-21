@@ -45,6 +45,7 @@ const Input = ({
           <textarea
             value={value}
             placeholder={placeholder}
+            maxLength="100"
             onChange={(e) => setValue(e.target.value)}
           ></textarea>
         ) : (

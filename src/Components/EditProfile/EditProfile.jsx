@@ -145,7 +145,7 @@ const EditProfile = () => {
           value={bio}
           setValue={setBio}
           isBio
-          help={"36 characters of 100"}
+          help={`${bio?.length} character(s) of 100`}
         />
       </div>
 
