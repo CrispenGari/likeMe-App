@@ -8,9 +8,21 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";
 import { IconButton } from "@material-ui/core";
-
+import { useSelector } from "react-redux";
+import firebase from "../../backend";
+import {
+  usernameExp,
+  emailExp,
+  surnameExpression,
+  nameExpression,
+} from "../../utils/regularExpressions";
 const EditProfile = ({ setEditProfile }) => {
   const genders = ["male", "female", "gay", "lesbian"];
+
+  const user = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.users).find(
+    (_user) => user?.id === _user?.uid
+  );
 
   const statuses = ["single", "dating", "complicated", "searching"];
 
@@ -18,7 +30,7 @@ const EditProfile = ({ setEditProfile }) => {
   const confirmPasswordRef = useRef(null);
   const currentPasswordRef = useRef(null);
   const inputRef = useRef(null);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(currentUser?.displayName ?? "");
   const [usernameError, setUsernameError] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
@@ -34,23 +46,29 @@ const EditProfile = ({ setEditProfile }) => {
 
   const [birthday, setBirthday] = useState("");
   const [bestFriend, setBestFriend] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [bestFriendError, setBestFriendError] = useState("");
+
+  const [phoneNumber, setPhoneNumber] = useState(
+    currentUser?.phoneNumber ?? ""
+  );
   const [bio, setBio] = useState("");
 
   const [firstName, setFirstName] = useState("");
   const [firstNameError, setFirstNameError] = useState("");
+
   const [lastName, setLastName] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [gender, setGender] = useState(genders[0]);
   const [status, setStatus] = useState(statuses[0]);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(currentUser?.email ?? "");
   const [emailError, setEmailError] = useState("");
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(currentUser?.photoURL ?? null);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-
+  // ^(?=[a-zA-Z0-9._]{7,20}$)(?!.*[_.]{2})[^_.].*[^_.]$
   const handleChange = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -65,6 +83,84 @@ const EditProfile = ({ setEditProfile }) => {
 
   const saveChanges = (e) => {
     e.preventDefault();
+
+    console.log(
+      firstName,
+      lastName,
+      username,
+      email,
+      status,
+      gender,
+      phoneNumber,
+      bestFriend,
+      birthday,
+      bio,
+      image
+    );
+
+    console.log(firstName !== "" && nameExpression.test(firstName) === false);
+    console.log();
+    if (
+      (firstName !== "" && nameExpression.test(firstName) === false) === true
+    ) {
+      setFirstNameError("invalid first name!");
+      return;
+    } else {
+      setFirstNameError("");
+    }
+    if (lastName !== "" && !surnameExpression.test(lastName) === false) {
+      setLastNameError("invalid last name!");
+      return;
+    } else {
+      setLastNameError("");
+    }
+    if (usernameExp.test(username) === false) {
+      setUsernameError("invalid username!");
+      return;
+    } else {
+      setUsernameError("");
+    }
+
+    if (emailExp.test(email) === false) {
+      setEmailError("invalid email address!");
+      return;
+    } else {
+      setEmailError("");
+    }
+    if (bestFriend !== "" && usernameExp.test(setBestFriendError) === false) {
+      setBestFriendError("invalid best friend username!");
+      return;
+    } else {
+      setBestFriendError("");
+    }
+    if (username !== currentUser?.displayName || email !== currentUser?.email) {
+      setLoading(true);
+      firebase.db
+        .collection("users")
+        .where("displayName", "==", username)
+        .get()
+        .then((doc) => {
+          if (doc.docs.length > 0) {
+            setUsernameError("username is already taken!");
+            return;
+          } else {
+            setUsernameError("");
+          }
+        });
+      firebase.db
+        .collection("users")
+        .where("email", "==", email)
+        .get()
+        .then((doc) => {
+          if (doc.docs.length > 0) {
+            setEmailError("email is already taken!");
+            return;
+          } else {
+            setEmailError("");
+          }
+        })
+        .finally(() => setLoading(false));
+    }
   };
   return (
     <form className="edit__profile">
@@ -77,6 +173,7 @@ const EditProfile = ({ setEditProfile }) => {
           value={firstName}
           setValue={setFirstName}
           IconLeft={BsPersonCheck}
+          inputError={firstNameError}
         />
         <Input
           placeholder="last name"
@@ -84,6 +181,7 @@ const EditProfile = ({ setEditProfile }) => {
           value={lastName}
           setValue={setLastName}
           IconLeft={BsPersonCheck}
+          inputError={lastNameError}
         />
       </div>
       <div className="edit__profile__twins">
@@ -132,6 +230,7 @@ const EditProfile = ({ setEditProfile }) => {
           label="best friend"
           value={bestFriend}
           setValue={setBestFriend}
+          inputError={bestFriendError}
         />
       </div>
       <div className="edit__profile__twins">

@@ -145,7 +145,11 @@ const Comment = ({ comment, post }) => {
               {deleteLoading ? (
                 <ActivityIndicator size={10} />
               ) : (
-                <IconButton title="delete" onClick={deleteComment}>
+                <IconButton
+                  disabled={user?.uid !== comment?.userId}
+                  title="delete"
+                  onClick={deleteComment}
+                >
                   <Delete className="comment__icon" />
                 </IconButton>
               )}

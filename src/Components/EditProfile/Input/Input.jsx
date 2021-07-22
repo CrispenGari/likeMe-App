@@ -22,7 +22,11 @@ const Input = ({
   return (
     <div className="edit__profile__input">
       <label htmlFor="editInput">{label}</label>
-      <div className="edit__profile__input__container">
+      <div
+        className={`edit__profile__input__container ${
+          inputError ? "edit__profile__input__container--error" : ""
+        }`}
+      >
         {IconLeft ? (
           <IconLeft className="edit__profile__input__icon__left" />
         ) : null}

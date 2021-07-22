@@ -17,6 +17,10 @@
   border-radius: 5px;
   align-items: center;
   padding: 0px 10px;
+  border: 1px solid transparent;
+}
+.edit__profile__input__container--error {
+  border: 1px solid red;
 }
 .edit__profile__input__container > input,
 .edit__profile__input__container > select,
