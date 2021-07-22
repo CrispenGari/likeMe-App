@@ -42,6 +42,18 @@ const setHashTags = (value) => {
     value: value,
   };
 };
+const setBanners = (value) => {
+  return {
+    type: constants.SET_BANNERS,
+    value: value,
+  };
+};
+const setProfileTab = (value) => {
+  return {
+    type: constants.SET_PROFILE_TAB,
+    value: value,
+  };
+};
 
 const actions = {
   setUser,
@@ -51,6 +63,8 @@ const actions = {
   setHashTags,
   setLikes,
   setFleets,
+  setBanners,
+  setProfileTab,
 };
 
 export default actions;

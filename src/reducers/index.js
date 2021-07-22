@@ -5,6 +5,8 @@ import user from "./userReducer";
 import hashTags from "./hashTagsReducer";
 import users from "./usersReducer";
 import fleets from "./fleetsReducer";
+import banners from "./bannersReducer";
+import profileTab from "./profileTabReducer";
 
 const rootReducers = combineReducers({
   messages,
@@ -13,6 +15,8 @@ const rootReducers = combineReducers({
   hashTags,
   users,
   fleets,
+  banners,
+  profileTab,
 });
 
 export default rootReducers;
