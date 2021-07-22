@@ -115,7 +115,7 @@ const ProfileBanner = () => {
         banner
           ? {
               backgroundImage: `url("${banner}")`,
-              backgroundColor: "green",
+              backgroundColor: "#4364A0",
             }
           : {}
       }
