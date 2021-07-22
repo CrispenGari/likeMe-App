@@ -13,20 +13,28 @@
   object-fit: cover;
   border-radius: 5px;
 }
-.profile__posts__like {
+.profile__posts__like__comment {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   display: none;
+  justify-content: space-around;
+  width: 100%;
+}
+.profile__posts__like__comment > div {
+  display: flex;
+  align-items: center;
 }
 .profile__posts__like__icon {
   font-size: 1.9rem;
+  color: #e44753;
+}
+.profile__posts__comments__icon {
+  font-size: 1.9rem;
   color: cornflowerblue;
 }
-.profile__posts__like > small {
+.profile__posts__like__comment > div > small {
   color: white;
   font-weight: bold;
+  margin-left: 5px;
 }
 .profile__post__image__cover {
   position: absolute;
@@ -63,13 +71,15 @@
   display: flex;
 }
 
-.profile__post:hover > .profile__post__image__cover > .profile__posts__like {
+.profile__post:hover
+  > .profile__post__image__cover
+  > .profile__posts__like__comment {
   display: flex !important;
 }
 
 /* AT SMALLER MOBILES SHOW LIKES BY DEFAULT */
 @media only screen and (max-width: 400px) {
-  .profile__posts__like {
+  .profile__posts__like__comment {
     display: flex !important;
   }
 }

@@ -6,7 +6,10 @@ import ProfilePostNav from "../ProfilePostsNav/ProfilePostsNav";
 import ProfilePost from "../ProfilePost/ProfilePost";
 
 const ProfilePosts = () => {
-  const posts = useSelector((state) => state.posts);
+  const user = useSelector((state) => state.user);
+  const posts = useSelector((state) => state.posts).filter(
+    (post) => post?.userId === user?.uid
+  );
   return (
     <div className="profile__posts">
       <ProfilePostNav />
