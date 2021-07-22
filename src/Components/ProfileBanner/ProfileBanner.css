@@ -11,6 +11,10 @@
   flex-direction: column;
   align-items: center;
   min-height: 40vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
 }
 .profile__banner__container {
   background-color: cornflowerblue;
@@ -60,8 +64,14 @@
 .profile__banner__logo > p {
   color: whitesmoke;
 }
-.profile__banner > button {
+.profile__banner__buttons__container {
   position: absolute !important;
+  bottom: 35px;
+  z-index: 2;
+  right: 10px;
+  display: flex;
+}
+.profile__banner__buttons__container > button {
   background: linear-gradient(to bottom, cornflowerblue, black);
   color: white;
   border: none;
@@ -72,9 +82,42 @@
   font-weight: 500;
   font-size: 1rem;
   border-radius: 5px;
-  bottom: 35px;
-  z-index: 2;
-  right: 10px;
+}
+.profile__banner__buttons__container > div {
+  display: flex;
+}
+.profile__banner__buttons__container > div > button {
+  width: 80px;
+  outline: none;
+  cursor: pointer !important;
+  padding: 3px 10px;
+  text-align: center;
+  border: none;
+  font-weight: bolder;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+  align-items: center;
+  margin-left: 10px;
+  background-color: lightseagreen;
+  color: white;
+}
+.profile__banner__buttons__container > div > button:last-child {
+  background-color: white;
+  color: black;
+  border: 1px solid cornflowerblue;
+}
+.profile__banner__buttons__container > div > button:hover {
+  color: white;
+  background-image: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
 }
 @media only screen and (max-width: 600px) {
   .profile__banner__avatar {
