@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   flex: 1;
-  padding: 10px;
+  padding: 5px 8px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
@@ -12,9 +12,17 @@
 .profile__post__nav__item > h1 {
   font-size: 0.8rem;
   font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
 }
 .profile__post__nav__item__active {
   border-bottom: 3px solid cornflowerblue;
+  background-image: linear-gradient(to right, cornflowerblue, black);
+}
+.profile__post__nav__item__active > h1,
+.profile__post__nav__item__active > .profile__post__nav__item__icon {
+  color: white !important;
 }
 .profile__post__nav__item__icon {
   color: gray;
@@ -34,5 +42,11 @@
 @media only screen and (max-width: 700px) {
   .profile__post__nav__item {
     flex-direction: column-reverse;
+  }
+  .profile__post__nav__item > h1 {
+    font-size: 0.75rem;
+  }
+  .profile__post__nav__item__icon {
+    font-size: 1.2rem;
   }
 }
