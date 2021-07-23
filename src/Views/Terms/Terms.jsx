@@ -1,6 +1,7 @@
 import React from "react";
 import "./Terms.css";
 import { useHistory, useLocation } from "react-router-dom";
+import { logos } from "../../utils/logos";
 
 const Terms = () => {
   const history = useHistory();
@@ -10,7 +11,9 @@ const Terms = () => {
   return (
     <div className="termsandconditions">
       <div className="termsandconditions__app__logo">
-        <h1>LIKE ME</h1>
+        {/* <h1>LIKE ME</h1> */}
+
+        <img src={logos.header_logo} alt="" />
         <p>Welcome to our application where you will find your love partner.</p>
       </div>
       <div className="termsandconditions__body">
@@ -35,6 +38,7 @@ const Terms = () => {
           content. The services we provide Our mission is to give people the
           power to build community and bring the world closer together.
         </p>
+        <img src={logos.main_logo} alt="" />
         <p>
           <h2>Application</h2>
           This application will allow all the users that are using this
@@ -52,8 +56,8 @@ const Terms = () => {
           If you agree with these terms and Conditions Click the{" "}
           <strong> Agree Button</strong>, and go ahead and Authenticate to the
           Application. If you don't agree with these terms and conditions click
-          the
-          <strong>Reject Button</strong>.<h5>~~Developed By Crispen Gari</h5>
+          the <strong>Reject Button</strong>.
+          <h5>~~Developed By Crispen Gari</h5>
         </p>
       </div>
       <div className="termsandconditions__buttons">

@@ -1,6 +1,9 @@
 import React from "react";
 import "./Welcome.css";
 import { useHistory } from "react-router-dom";
+
+import { logos } from "../../utils/logos";
+
 const Welcome = ({ setWelcome }) => {
   document.title = `LikeMe • Welcome`;
   const history = useHistory();
@@ -11,7 +14,9 @@ const Welcome = ({ setWelcome }) => {
     <div className="welcome">
       <div className="welcome__main">
         <p>Welcome to our application where you will find your love partner.</p>
-        <h1>LIKE ME</h1>
+        {/* <h1>LIKE ME</h1> */}
+
+        <img src={logos.main_logo} alt="" />
         <button onClick={next}>CONTINUE</button>
         <small>Developed by Crispen Gari</small>
         <p>

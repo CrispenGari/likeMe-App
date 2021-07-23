@@ -7,27 +7,25 @@
 
 .termsandconditions__app__logo {
   padding: 10px;
-  border-radius: 5px;
-  background-color: white;
   width: 100%;
   max-width: 500px;
   display: grid;
   place-items: center;
-  border-radius: 5px;
   margin: 0px auto;
+  border-bottom: 1px solid lightblue;
+}
+.termsandconditions__app__logo img {
+  width: 200px;
+  -webkit-user-drag: none;
+}
+.termsandconditions img {
+  width: 200px;
+  -webkit-user-drag: none;
+  margin: 10px auto;
 }
 .termsandconditions__app__logo > h1 {
   margin-top: 20px;
-  background: linear-gradient(
-    to right,
-    lightseagreen,
-    lime,
-    black,
-    orange,
-    red
-  );
   font-size: 1.5rem !important;
-  color: transparent;
   background-clip: text;
   width: fit-content;
   margin: 50px auto;
@@ -40,31 +38,14 @@
   margin: auto;
 }
 .termsandconditions__body h1 {
-  background: linear-gradient(
-    to right,
-    lightseagreen,
-    lime,
-    black,
-    orange,
-    red
-  );
   font-size: 1.5rem !important;
-  color: transparent;
   background-clip: text;
   width: fit-content;
   margin: 10px 0;
 }
 .termsandconditions__body h2 {
-  background: linear-gradient(
-    to right,
-    lightseagreen,
-    lime,
-    black,
-    orange,
-    red
-  );
   font-size: 1rem !important;
-  color: transparent;
+
   background-clip: text;
   width: fit-content;
   margin: 10px 0;
@@ -85,10 +66,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-color: white;
+
   padding: 10px;
   border-radius: 5px;
-  background-color: white;
+
   width: 100%;
   max-width: 500px;
   border-radius: 5px;
