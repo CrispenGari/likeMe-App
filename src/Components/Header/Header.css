@@ -15,6 +15,12 @@
   position: relative;
 }
 
+.header__left > img {
+  width: 100px;
+  object-fit: contain;
+  cursor: pointer;
+  -webkit-user-drag: none !important;
+}
 .header__left > h1 {
   background: linear-gradient(
     to right,
@@ -28,6 +34,7 @@
   color: transparent;
   background-clip: text;
   cursor: pointer;
+  display: none;
 }
 
 .header__center {
@@ -191,6 +198,9 @@
   .header {
     padding: 10px 5px;
   }
+  .header__left > img {
+    width: 90px;
+  }
 }
 @media only screen and (min-width: 768px) {
   .header__right__control__container {
@@ -202,5 +212,8 @@
   }
   .header__right__menu__container {
     display: none !important;
+  }
+  .header {
+    padding: 10px 50px;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Fleets.css";
 import { Fleet } from "../../Components";
 import { useSelector } from "react-redux";

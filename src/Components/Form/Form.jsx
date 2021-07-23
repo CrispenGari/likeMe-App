@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
-import useSound from "use-sound";
+
 import { AiFillCamera } from "react-icons/ai";
 import { MdDelete, MdLocationOn, MdLocationOff } from "react-icons/md";
 
@@ -11,7 +11,7 @@ import "./Form.css";
 import firebase from "../../backend";
 import helperFunctions from "../../utils/helperfunctions";
 import { v4 as uuid_v4 } from "uuid";
-import actions from "../../actions";
+
 const Form = ({ setShowForm }) => {
   const user = useSelector((state) => state.user);
   const currentUser = useSelector((state) => state.users)?.find(

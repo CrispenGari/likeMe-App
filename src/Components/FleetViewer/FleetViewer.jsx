@@ -5,7 +5,6 @@ import Center from "./Center/Center";
 import Header from "./Header/Header";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import Viewers from "./Viewers/Viewers";
 import { ActivityIndicator } from "../Common";
 

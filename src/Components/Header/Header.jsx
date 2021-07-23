@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { Avatar, IconButton } from "@material-ui/core";
-import { Search, Message, Menu } from "@material-ui/icons";
+import { IconButton } from "@material-ui/core";
+import { Search, Menu } from "@material-ui/icons";
 import { useSelector } from "react-redux";
-import { IoIosPeople } from "react-icons/io";
+
 import { useHistory } from "react-router-dom";
 import { Menu as MenuContainer } from "../../Components";
 import HeaderRight from "../HeaderRight/HeaderRight";
-
+import { logos } from "../../utils/logos";
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestionsResults, setSuggestionsResults] = useState([]);
@@ -59,6 +59,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__left">
+        <img onClick={() => history.push("/")} src={logos.header_logo} alt="" />
         <h1 onClick={() => history.push("/")}>LIKE ME</h1>
       </div>
       <div className="header__center">

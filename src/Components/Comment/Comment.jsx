@@ -29,7 +29,7 @@ const Comment = ({ comment, post }) => {
     return () => {
       unsubscribe();
     };
-  }, [post?.id]);
+  }, [post?.id, comment?.id]);
   const handleLike = () => {
     let likeId = "";
     likes.forEach((like) => {
