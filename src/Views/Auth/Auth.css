@@ -59,10 +59,13 @@
     align-items: center;
     flex-direction: column;
   }
+  .auth > img {
+    width: 130px;
+  }
 }
 @media only screen and (max-width: 700px) and (orientation: landscape) {
   .auth {
-    padding-top: 90px;
+    padding-top: 150px;
   }
 
   .auth > img {
