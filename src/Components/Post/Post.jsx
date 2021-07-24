@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 import { ActivityIndicator } from "../Common";
 import Image from "../Image/Image";
 import helperFunctions from "../../utils/helperfunctions";
+import { v4 as uuid_v4 } from "uuid";
 const Post = ({ post, setShowNotification }) => {
   const time = helperFunctions.timeString(
     helperFunctions.timestampToTime(post?.timestamp)
@@ -45,10 +46,10 @@ const Post = ({ post, setShowNotification }) => {
   };
 
   const openProfile = () => {
-    history.push(`/profile/${post?.userId}`);
+    history.push(`/profile/${post?.userId}/${uuid_v4()}`);
   };
   const openChat = () => {
-    history.replace(`/chat/${post?.userId}`);
+    history.replace(`/chat/${post?.userId}/${uuid_v4()}`);
   };
   const openTag = (cap) => {
     console.log(cap);
@@ -167,8 +168,7 @@ const Post = ({ post, setShowNotification }) => {
           className="post__avatar"
           src={post?.photoURL}
           alt={post?.displayName}
-          onClick={openProfile}
-          onMouseEnter={() => {
+          onClick={() => {
             setTimeout(() => {
               setImage({ ...post, picture: "avatar" });
               setOpenPicture(true);

@@ -6,7 +6,6 @@ import firebase from "../../backend";
 import { ActivityIndicator } from "../../Components/Common";
 import { BsPersonCheck } from "react-icons/bs";
 import { usernameExp } from "../../utils/regularExpressions";
-import { logos } from "../../utils/logos";
 const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const inputRef = useRef(null);
   const [username, setUsername] = useState("");

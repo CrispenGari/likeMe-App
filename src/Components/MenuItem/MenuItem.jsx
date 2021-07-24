@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 import firebase from "../../backend";
+import { v4 as uuid_v4 } from "uuid";
 const MenuItem = ({ withUser, title, Icon, subTitle, dot, setOpen }) => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
@@ -14,7 +15,7 @@ const MenuItem = ({ withUser, title, Icon, subTitle, dot, setOpen }) => {
         className="menuitem"
         title={user?.displayName}
         onClick={() => {
-          history.push(`/profile/${user?.uid}`);
+          history.push(`/profile/${user?.uid}/${uuid_v4()}`);
           setOpen(false);
         }}
       >

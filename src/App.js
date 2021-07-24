@@ -57,7 +57,7 @@ const App = () => {
       <div className="app">
         <Router>
           <Switch>
-            <Route path="/profile/:uid" exact>
+            <Route path="/profile/:uid/:randomId" exact>
               <Profile />
             </Route>
             <Route path="/messages">
@@ -66,10 +66,10 @@ const App = () => {
             <Route path="/people">
               <People />
             </Route>
-            <Route path="/chat/:uid" exact>
+            <Route path="/chat/:uid/:randomId" exact>
               <Chat />
             </Route>
-            <Route path="/setttings">
+            <Route path="/settings">
               <Settings />
             </Route>
             <Route path="/">

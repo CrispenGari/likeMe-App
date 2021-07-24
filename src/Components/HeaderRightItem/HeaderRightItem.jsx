@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 import firebase from "../../backend";
 import "./HeaderRightItem.css";
+import { v4 as uuid_v4 } from "uuid";
 const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
   const history = useHistory();
 
@@ -14,7 +15,7 @@ const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
         className="header__item"
         title={user?.displayName}
         onClick={() => {
-          history.push(`/profile/${user?.uid}`);
+          history.push(`/profile/${user?.uid}/${uuid_v4()}`);
         }}
       >
         <Avatar

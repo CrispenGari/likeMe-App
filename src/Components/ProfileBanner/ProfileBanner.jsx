@@ -9,11 +9,14 @@ import Image from "../Image/Image";
 import { useSelector } from "react-redux";
 import { v4 as uuid_v4 } from "uuid";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const ProfileBanner = () => {
   const inputRef = useRef(null);
+
+  const { uid } = useParams();
   const user = useSelector((state) => state.user);
   const currentUser = useSelector((state) => state.users)?.find(
-    (_user) => _user?.id === user?.uid
+    (_user) => _user?.id === uid
   );
 
   const [image, setImage] = useState(null);
@@ -153,25 +156,27 @@ const ProfileBanner = () => {
         multiple={false}
         onChange={handleChange}
       />
-      <div className="profile__banner__buttons__container">
-        {String(banner)?.startsWith("data:image/") ? (
-          <div>
-            <button title="change background" onClick={cancel}>
-              Cancel
+      {uid === user?.uid ? (
+        <div className="profile__banner__buttons__container">
+          {String(banner)?.startsWith("data:image/") ? (
+            <div>
+              <button title="change background" onClick={cancel}>
+                Cancel
+              </button>
+              <button title="change background" onClick={changeBanner}>
+                Save
+              </button>
+            </div>
+          ) : (
+            <button
+              title="change background"
+              onClick={() => inputRef.current.click()}
+            >
+              Edit
             </button>
-            <button title="change background" onClick={changeBanner}>
-              Save
-            </button>
-          </div>
-        ) : (
-          <button
-            title="change background"
-            onClick={() => inputRef.current.click()}
-          >
-            Edit
-          </button>
-        )}
-      </div>
+          )}
+        </div>
+      ) : null}
 
       <div className="profile__banner__container">
         <Avatar
