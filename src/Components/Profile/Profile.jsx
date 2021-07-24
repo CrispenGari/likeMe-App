@@ -6,7 +6,7 @@ import firebase from "../../backend";
 import { ActivityIndicator } from "../../Components/Common";
 import { BsPersonCheck } from "react-icons/bs";
 import { usernameExp } from "../../utils/regularExpressions";
-
+import { logos } from "../../utils/logos";
 const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const inputRef = useRef(null);
   const [username, setUsername] = useState("");
@@ -20,8 +20,11 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
     e.preventDefault();
     if (usernameExp.test(username) === false) {
       return setUsernameError("invalid username!");
+    } else {
+      setUsernameError("");
     }
     setLoadingCreate(true);
+
     firebase.db
       .collection("users")
       .where("displayName", "==", username)
@@ -205,6 +208,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
         <button type="submit" onClick={createAccount}>
           CREATE ACCOUNT {loadingCreate ? <ActivityIndicator /> : null}
         </button>
+        <div />
         <button type="submit" onClick={() => setCardToMount("register")}>
           GO BACK
         </button>

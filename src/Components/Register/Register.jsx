@@ -28,10 +28,8 @@ const Register = ({ setCardToMount, setCredentials }) => {
     }
     if (emailExp.test(email) === true) {
       setEmailError("");
-      console.log("Valid", email);
     } else {
-      console.log("Invalid", email);
-      setEmailError("invalid email address.");
+      return setEmailError("invalid email address.");
     }
     if (!password) {
       setPasswordMessage("password is required.");
@@ -49,7 +47,6 @@ const Register = ({ setCardToMount, setCredentials }) => {
     } else {
       setConfPasswordError("");
     }
-
     if (!emailError && !passwordMessage && !confPasswordError) {
       firebase.db
         .collection("users")
@@ -57,11 +54,9 @@ const Register = ({ setCardToMount, setCredentials }) => {
         .get()
         .then((doc) => {
           if (doc.docs.length > 0) {
-            console.log(doc.docs.length);
             setEmailError("the email is already taken by someone.");
             return;
           } else {
-            return;
             setCredentials({
               email: email.trim().toLocaleLowerCase(),
               password: password.trim().toLocaleLowerCase(),
@@ -72,8 +67,8 @@ const Register = ({ setCardToMount, setCredentials }) => {
             setEmailError("");
             setShowPassword(false);
             setShowConfPassword(false);
-            setCardToMount("profile");
             setConfPasswordError("");
+            setCardToMount("profile");
           }
         });
     }
