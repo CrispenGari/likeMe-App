@@ -15,6 +15,17 @@
   border-bottom: 1px solid lightgray;
   margin-bottom: 10px;
 }
+.login__avatar__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.login__avatar {
+  width: 80px !important;
+  height: 80px !important;
+  margin: 10px auto !important;
+  border: 2px solid cornflowerblue;
+}
 .login__input {
   width: 100%;
   display: flex;

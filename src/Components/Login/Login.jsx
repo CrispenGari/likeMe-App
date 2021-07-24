@@ -1,10 +1,13 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { CgLock } from "react-icons/cg";
 import { HiOutlineMail } from "react-icons/hi";
 import firebase from "../../backend";
 import { ActivityIndicator } from "../Common";
 import "./Login.css";
+import { Avatar } from "@material-ui/core";
+import { logos } from "../../utils/logos";
+import { emailExp } from "../../utils/regularExpressions";
 const Login = ({ setCardToMount }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -13,6 +16,8 @@ const Login = ({ setCardToMount }) => {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [localUser, setLocalUser] = useState(null);
+
   const login = (e) => {
     e.preventDefault();
     if (email && password) {
@@ -33,9 +38,40 @@ const Login = ({ setCardToMount }) => {
         });
     }
   };
+  React.useEffect(() => {
+    let mounted = true;
+    if (emailExp.test(email)) {
+      firebase.db
+        .collection("users")
+        .where("email", "==", email.trim().toLowerCase())
+        .get()
+        .then((user) => {
+          if (user.docs.length !== 0 && mounted) {
+            setLocalUser({ id: user?.docs[0]?.id, ...user?.docs[0]?.data() });
+          } else {
+            setLocalUser(null);
+          }
+        });
+    } else {
+      setLocalUser(null);
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [email]);
   return (
     <form className="login" onSubmit={login}>
       <h1>Login</h1>
+
+      <div className="login__avatar__container">
+        <Avatar
+          alt={localUser ? localUser?.displayName : "LikeMe"}
+          src={localUser ? localUser?.photoURL : logos.main_logo}
+          className="login__avatar"
+        />
+        <p>{localUser?.displayName}</p>
+      </div>
+
       <div className="login__input">
         <div
           className={`login__input__field ${

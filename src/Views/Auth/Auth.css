@@ -16,6 +16,7 @@
   -webkit-user-drag: none;
   cursor: pointer;
   width: 150px;
+  display: none;
 }
 .auth > h1 {
   margin-top: 90px;

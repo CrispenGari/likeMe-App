@@ -4,6 +4,7 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";
 import firebase from "../../backend";
+import { emailExp } from "../../utils/regularExpressions";
 const Register = ({ setCardToMount, setCredentials }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -19,19 +20,29 @@ const Register = ({ setCardToMount, setCredentials }) => {
 
   const createAccount = (e) => {
     e.preventDefault();
-
     if (!email) {
       setEmailError("email is required.");
       return;
     } else {
-      setConfPasswordError("");
+      setEmailError("");
+    }
+    if (emailExp.test(email) === true) {
+      setEmailError("");
+      console.log("Valid", email);
+    } else {
+      console.log("Invalid", email);
+      setEmailError("invalid email address.");
     }
     if (!password) {
       setPasswordMessage("password is required.");
       return;
+    } else {
+      setPasswordMessage("");
     }
     if (!confirmPassword) {
-      setConfPasswordError("password is required");
+      return setConfPasswordError("password is required");
+    } else {
+      setConfPasswordError("");
     }
     if (password !== confirmPassword) {
       return setConfPasswordError("the two password must match.");
@@ -42,13 +53,15 @@ const Register = ({ setCardToMount, setCredentials }) => {
     if (!emailError && !passwordMessage && !confPasswordError) {
       firebase.db
         .collection("users")
-        .where("email", "==", email)
+        .where("email", "==", email.toLowerCase())
         .get()
         .then((doc) => {
           if (doc.docs.length > 0) {
+            console.log(doc.docs.length);
             setEmailError("the email is already taken by someone.");
             return;
           } else {
+            return;
             setCredentials({
               email: email.trim().toLocaleLowerCase(),
               password: password.trim().toLocaleLowerCase(),
@@ -65,22 +78,6 @@ const Register = ({ setCardToMount, setCredentials }) => {
         });
     }
   };
-  useEffect(() => {
-    if (password && password.length < 6) {
-      setPasswordMessage("password must have at least 6 characters.");
-    } else {
-      setPasswordMessage("");
-    }
-    const expression = RegExp(/[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+/gim);
-    if (email && !expression.test(email)) {
-      setEmailError("invalid email address.");
-    } else {
-      setEmailError("");
-    }
-    if (confirmPassword) {
-      setConfPasswordError("");
-    }
-  }, [email, password, confirmPassword]);
 
   return (
     <form className="register" onSubmit={createAccount}>

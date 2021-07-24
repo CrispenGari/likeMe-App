@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import firebase from "../../backend";
 import { ActivityIndicator } from "../../Components/Common";
 import { BsPersonCheck } from "react-icons/bs";
+import { usernameExp } from "../../utils/regularExpressions";
 
 const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   const inputRef = useRef(null);
@@ -17,8 +18,8 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
 
   const createAccount = (e) => {
     e.preventDefault();
-    if (username.length < 5) {
-      return setUsernameError("username must contain at least 5 characters");
+    if (usernameExp.test(username) === false) {
+      return setUsernameError("invalid username!");
     }
     setLoadingCreate(true);
     firebase.db
@@ -28,7 +29,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
       .then((doc) => {
         if (doc.docs.length > 0) {
           setLoadingCreate(false);
-          setUsernameError("the username is already taken by someone.");
+          setUsernameError("the username is already taken by someone!");
         } else {
           setUsernameError("");
           const userCredentials = {
