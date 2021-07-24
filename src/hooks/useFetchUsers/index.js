@@ -6,16 +6,13 @@ import actions from "../../actions";
 const useFetchUsers = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    firebase.db
-      .collection("users")
-      .get()
-      .then((users) => {
-        dispatch(
-          actions.setUsers(
-            users.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          )
-        );
-      });
+    firebase.db.collection("users").onSnapshot((users) => {
+      dispatch(
+        actions.setUsers(
+          users.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        )
+      );
+    });
   }, [dispatch]);
   return;
 };

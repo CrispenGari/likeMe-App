@@ -143,8 +143,7 @@ const ProfileBanner = () => {
         <p>@{currentUser?.displayName}</p>
         <div className="profile__banner__username__banner">
           <p>
-            I'm single and searching. Looking for a serious relationship and
-            settle down.
+            {currentUser?.bio ? currentUser?.bio : "Hello, im new to likeme!"}
           </p>
         </div>
       </div>

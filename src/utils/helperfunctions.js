@@ -27,21 +27,19 @@ const updateProfile = async (
         firebase.db
           .collection("users")
           .doc(id)
-          .update(
-            {
-              status: status,
-              firstName: firstName?.trim()?.toLowerCase(),
-              lastName: lastName?.trim()?.toLowerCase(),
-              email: email?.trim()?.toLowerCase(),
-              gender: gender,
-              birthday: birthday,
-              phoneNumber: phoneNumber?.trim()?.toLowerCase(),
-              bio: bio,
-              displayName: username?.trim()?.toLowerCase(),
-              bestFriend: bestFriend?.trim()?.toLowerCase(),
-            },
-            { merge: true }
-          )
+          .update({
+            status: status,
+            firstName: firstName?.trim()?.toLowerCase(),
+            lastName: lastName?.trim()?.toLowerCase(),
+            email: email?.trim()?.toLowerCase(),
+            gender: gender,
+            birthday: birthday,
+            phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+            bio: bio,
+            displayName: username?.trim()?.toLowerCase(),
+            bestFriend: bestFriend?.trim()?.toLowerCase(),
+            photoURL: image,
+          })
           .then(() => {
             return {
               status: 201,
@@ -68,21 +66,19 @@ const updateProfile = async (
         firebase.db
           .collection("users")
           .doc(id)
-          .update(
-            {
-              status: status,
-              firstName: firstName?.trim()?.toLowerCase(),
-              lastName: lastName?.trim()?.toLowerCase(),
-              email: email?.trim()?.toLowerCase(),
-              gender: gender,
-              birthday: birthday,
-              phoneNumber: phoneNumber?.trim()?.toLowerCase(),
-              bio: bio,
-              displayName: username?.trim()?.toLowerCase(),
-              bestFriend: bestFriend?.trim()?.toLowerCase(),
-            },
-            { merge: true }
-          )
+          .update({
+            status: status,
+            firstName: firstName?.trim()?.toLowerCase(),
+            lastName: lastName?.trim()?.toLowerCase(),
+            email: email?.trim()?.toLowerCase(),
+            gender: gender,
+            birthday: birthday,
+            phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+            bio: bio,
+            displayName: username?.trim()?.toLowerCase(),
+            bestFriend: bestFriend?.trim()?.toLowerCase(),
+            photoURL: image,
+          })
           .then(() => {
             return {
               status: 201,
@@ -103,7 +99,7 @@ const updateProfile = async (
     const uploadTask = firebase.storage
       .ref(`profiles/${childName}`)
       .putString(image, "data_url");
-    await uploadTask.on(
+    uploadTask.on(
       "state_changed",
       (obs) => {
         // Ingnore the observer
@@ -125,41 +121,34 @@ const updateProfile = async (
                 email: email,
               })
               .then(() => {
-                firebase.db
-                  .collection("users")
-                  .doc(id)
-                  .update({
-                    status: status,
-                    firstName: firstName?.trim()?.toLowerCase(),
-                    lastName: lastName?.trim()?.toLowerCase(),
-                    email: email?.trim()?.toLowerCase(),
-                    gender: gender,
-                    birthday: birthday,
-                    phoneNumber: phoneNumber?.trim()?.toLowerCase(),
-                    bio: bio,
-                    displayName: username?.trim()?.toLowerCase(),
-                    bestFriend: bestFriend?.trim()?.toLowerCase(),
-                  })
-                  .then(() => {
-                    firebase.db.collection("profiles").doc(id).set({
-                      profile: url,
-                      timestamp: firebase.timestamp,
-                      displayName: currentUser?.displayName,
-                      email: currentUser?.email,
-                      userId: currentUser?.uid,
-                    });
-                    return {
-                      status: 201,
-                    };
-                  })
-                  .catch((error) => {
-                    return error;
-                  });
+                firebase.db.collection("users").doc(id).update({
+                  status: status,
+                  firstName: firstName?.trim()?.toLowerCase(),
+                  lastName: lastName?.trim()?.toLowerCase(),
+                  email: email?.trim()?.toLowerCase(),
+                  gender: gender,
+                  birthday: birthday,
+                  phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+                  bio: bio,
+                  displayName: username?.trim()?.toLowerCase(),
+                  bestFriend: bestFriend?.trim()?.toLowerCase(),
+                  photoURL: url,
+                });
               })
-              .catch((error) => {
-                return error;
+              .then(() => {
+                firebase.db.collection("profiles").add({
+                  profile: url,
+                  timestamp: firebase.timestamp,
+                  displayName: currentUser?.displayName,
+                  email: currentUser?.email,
+                  userId: currentUser?.id,
+                });
               });
-            return;
+          })
+          .then(() => {
+            return {
+              status: 201,
+            };
           })
           .catch((error) => console.error(error));
       }

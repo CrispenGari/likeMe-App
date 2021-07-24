@@ -21,16 +21,11 @@ import helperFunctions from "../../utils/helperfunctions";
 import { useParams } from "react-router-dom";
 const EditProfile = ({ setEditProfile }) => {
   const genders = ["male", "female", "gay", "lesbian"];
-
   const { uid } = useParams();
-
   const currentUser = useSelector((state) => state.users).find(
     (_user) => _user?.id === uid
   );
-
   const statuses = ["single", "dating", "complicated", "searching"];
-
-  console.log(currentUser?.photoURL);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const currentPasswordRef = useRef(null);
@@ -212,7 +207,11 @@ const EditProfile = ({ setEditProfile }) => {
           image,
           currentUser
         )
-        .finally(() => setLoading(false));
+        .then((res) => {})
+        .finally(() => {
+          setLoading(false);
+          console.log("updated");
+        });
     }
   };
   return (
