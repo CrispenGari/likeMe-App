@@ -67,3 +67,24 @@
   -webkit-user-drag: none !important;
   object-fit: cover;
 }
+.fleet__user__live {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  z-index: 10;
+  border-radius: 50%;
+  right: 0;
+  animation: live-ripple 1s ease-in-out 0s infinite alternate-reverse forwards;
+}
+
+@keyframes live-ripple {
+  from {
+    width: 10px;
+    height: 10px;
+  }
+  to {
+    width: 15px;
+    height: 15px;
+  }
+}

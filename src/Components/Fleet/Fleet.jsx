@@ -48,6 +48,7 @@ const Fleet = ({ isUserMe, user, setFleetImage, setDisplayName }) => {
             fleets?.length > 0 ? "fleet__avatar--with-fleet" : ""
           }`}
         >
+          {/* <div className="fleet__user__live" /> */}
           <Avatar
             className="fleet__avatar"
             src={user?.photoURL}
@@ -73,6 +74,7 @@ const Fleet = ({ isUserMe, user, setFleetImage, setDisplayName }) => {
           fleets?.length > 0 ? "fleet__avatar--with-fleet" : ""
         }`}
       >
+        {/* <div className="fleet__user__live" /> */}
         <Avatar
           className={`fleet__avatar`}
           src={user?.photoURL}
