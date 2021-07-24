@@ -27,11 +27,6 @@ const ProfilePostNav = () => {
         Icon={GiKnightBanner}
       />
       <ProfilePostsNavItem
-        active={profileTab === profileTabs.MOST_LIKED}
-        title="most liked"
-        Icon={GiSelfLove}
-      />
-      <ProfilePostsNavItem
         title="tags"
         active={profileTab === profileTabs.TAGS}
         Icon={CgHashtag}

@@ -82,7 +82,15 @@ const ProfilePost = ({ post }) => {
         </div>
       </div>
 
-      <img loading="lazy" src={post?.imageURL} alt={post?.displayName} />
+      <img
+        loading="lazy"
+        src={
+          post?.imageURL
+            ? post?.imageURL
+            : post?.banner || post?.profile || post?.tag
+        }
+        alt={post?.displayName}
+      />
       <div className="profile__post__date">
         <small>{time}</small>
       </div>

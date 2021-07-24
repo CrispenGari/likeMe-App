@@ -15,7 +15,11 @@ const Image = ({ image, setImage, open, setOpen }) => {
     >
       <div className="image__viewer__container">
         <img
-          src={image?.picture === "post" ? image?.imageURL : image?.photoURL}
+          src={
+            image?.picture === "post"
+              ? image?.imageURL || image?.banner || image?.profile || image?.tag
+              : image?.photoURL || image?.profile || image?.tag
+          }
           alt=""
         />
         <IconButton
