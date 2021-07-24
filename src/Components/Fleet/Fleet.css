@@ -64,6 +64,6 @@
   height: 140px;
   border: none !important;
   border-radius: 5px;
-  -webkit-user-drag: none;
+  -webkit-user-drag: none !important;
   object-fit: cover;
 }
