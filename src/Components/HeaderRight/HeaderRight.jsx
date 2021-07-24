@@ -1,6 +1,6 @@
 import "./HeaderRight.css";
 import HeaderRightItem from "../HeaderRightItem/HeaderRightItem";
-import { IoIosPeople } from "react-icons/io";
+import { IoIosPeople, IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
 import { RiChatSmile3Line } from "react-icons/ri";
@@ -12,11 +12,19 @@ const HeaderRight = () => {
         title="chats"
         Icon={RiChatSmile3Line}
         subTitle="open your chats"
+        content={3}
       />
       <HeaderRightItem
         title="friends"
         Icon={IoIosPeople}
         subTitle="discover new friends"
+        content={9}
+      />
+      <HeaderRightItem
+        title="notifications"
+        Icon={IoMdNotificationsOutline}
+        subTitle="new notifications"
+        content={1}
       />
       <HeaderRightItem
         title="settings"

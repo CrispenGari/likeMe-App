@@ -217,3 +217,8 @@
     padding: 10px 50px;
   }
 }
+@media only screen and (max-width: 800px) {
+  .header {
+    padding: 10px 20px;
+  }
+}

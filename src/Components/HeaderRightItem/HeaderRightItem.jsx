@@ -5,7 +5,7 @@ import { Avatar } from "@material-ui/core";
 import firebase from "../../backend";
 import "./HeaderRightItem.css";
 import { v4 as uuid_v4 } from "uuid";
-const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
+const HeaderRightItem = ({ content, withUser, title, Icon, subTitle, dot }) => {
   const history = useHistory();
 
   const user = useSelector((state) => state.user);
@@ -46,7 +46,7 @@ const HeaderRightItem = ({ withUser, title, Icon, subTitle, dot }) => {
             className={dot && "header__item__icon__button__badge__dot"}
           ></span>
         ) : (
-          <span>10</span>
+          <span>{content}</span>
         )}
         <Icon className="header__item__icon" />
       </div>

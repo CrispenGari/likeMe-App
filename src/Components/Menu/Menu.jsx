@@ -1,7 +1,7 @@
 import "./Menu.css";
 import React from "react";
 import MenuItem from "../MenuItem/MenuItem";
-import { IoIosPeople } from "react-icons/io";
+import { IoIosPeople, IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
 import { RiChatSmile3Line } from "react-icons/ri";
@@ -14,12 +14,21 @@ const Menu = ({ setOpen }) => {
         Icon={RiChatSmile3Line}
         subTitle="open your chats"
         setOpen={setOpen}
+        content={3}
       />
       <MenuItem
         title="friends"
         Icon={IoIosPeople}
         subTitle="discover new friends"
         setOpen={setOpen}
+        content={9}
+      />
+      <MenuItem
+        title="notifications"
+        Icon={IoMdNotificationsOutline}
+        subTitle="notifications"
+        setOpen={setOpen}
+        content={1}
       />
       <MenuItem
         title="settings"

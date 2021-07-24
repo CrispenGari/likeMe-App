@@ -5,7 +5,15 @@ import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 import firebase from "../../backend";
 import { v4 as uuid_v4 } from "uuid";
-const MenuItem = ({ withUser, title, Icon, subTitle, dot, setOpen }) => {
+const MenuItem = ({
+  content,
+  withUser,
+  title,
+  Icon,
+  subTitle,
+  dot,
+  setOpen,
+}) => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
 
@@ -46,7 +54,7 @@ const MenuItem = ({ withUser, title, Icon, subTitle, dot, setOpen }) => {
         {dot ? (
           <span className={dot && "menuitem__icon__button__badge__dot"}></span>
         ) : (
-          <span>10</span>
+          <span>{content}</span>
         )}
         <Icon className="menuitem__icon" />
       </div>

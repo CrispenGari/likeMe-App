@@ -86,6 +86,9 @@
 .menuitem:nth-of-type(5) {
   animation: menu-item-animation 1.2s ease-in 0.5s 1 alternate forwards;
 }
+.menuitem:nth-of-type(6) {
+  animation: menu-item-animation 1.4s ease-in 0.5s 1 alternate forwards;
+}
 
 @keyframes menu-item-animation {
   from {
