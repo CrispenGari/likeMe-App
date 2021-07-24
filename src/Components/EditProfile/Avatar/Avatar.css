@@ -1,0 +1,9 @@
+.edit__profile__avatar__buttons {
+  display: flex;
+  width: 100px;
+  justify-content: space-evenly;
+}
+.edit__profile__avatar__buttons > button {
+  padding: 10px !important;
+  font-size: 1.5rem !important;
+}

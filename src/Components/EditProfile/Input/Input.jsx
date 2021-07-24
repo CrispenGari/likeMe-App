@@ -60,6 +60,7 @@ const Input = ({
             placeholder={placeholder}
             autoFocus={focus ?? false}
             ref={customRef}
+            spellCheck={false}
           />
         )}
         {IconRight ? (

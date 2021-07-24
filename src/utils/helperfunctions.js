@@ -16,7 +16,7 @@ const updateProfile = async (
 ) => {
   const { id } = currentUser;
   if (image === null) {
-    await firebase.currentUser
+    await firebase.auth.currentUser
       .updateProfile({
         displayName: username?.trim()?.toLowerCase(),
         photoURL: image,

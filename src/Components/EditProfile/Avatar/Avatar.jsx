@@ -3,8 +3,19 @@ import React from "react";
 import { AiFillCamera } from "react-icons/ai";
 import { Avatar as A, IconButton } from "@material-ui/core";
 import { ActivityIndicator } from "../../Common";
+import { FiCameraOff } from "react-icons/fi";
+const Avatar = ({
+  inputRef,
+  handleChange,
+  image,
+  progress,
+  loading,
+  setImage,
+}) => {
+  const removeProfile = () => {
+    setImage(null);
+  };
 
-const Avatar = ({ inputRef, handleChange, image, progress, loading }) => {
   return (
     <div className="profile__avatar__container">
       <p className="profile__input__message">
@@ -28,21 +39,26 @@ const Avatar = ({ inputRef, handleChange, image, progress, loading }) => {
           </div>
         ) : null}
       </div>
-      <IconButton
-        className="profile__btn"
-        title="open pictures"
-        onClick={() => inputRef.current.click()}
-      >
-        <input
-          type="file"
-          ref={inputRef}
-          hidden
-          accept="image/*"
-          multiple={false}
-          onChange={handleChange}
-        />
-        <AiFillCamera className="profile__btn__icon" />
-      </IconButton>
+      <div className="edit__profile__avatar__buttons">
+        <IconButton
+          className="profile__btn"
+          title="open pictures"
+          onClick={() => inputRef.current.click()}
+        >
+          <input
+            type="file"
+            ref={inputRef}
+            hidden
+            accept="image/*"
+            multiple={false}
+            onChange={handleChange}
+          />
+          <AiFillCamera className="profile__btn__icon" />
+        </IconButton>
+        <IconButton onClick={removeProfile} title="remove profile">
+          <FiCameraOff />
+        </IconButton>
+      </div>
     </div>
   );
 };

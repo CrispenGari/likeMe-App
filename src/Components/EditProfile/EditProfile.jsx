@@ -78,7 +78,6 @@ const EditProfile = ({ setEditProfile }) => {
   const [image, setImage] = useState(currentUser?.photoURL ?? null);
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-  // ^(?=[a-zA-Z0-9._]{7,20}$)(?!.*[_.]{2})[^_.].*[^_.]$
   const handleChange = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -185,7 +184,10 @@ const EditProfile = ({ setEditProfile }) => {
           null,
           currentUser
         )
-        .finally(() => setLoading(false));
+        .finally(() => {
+          setLoading(false);
+          setEditProfile(false);
+        });
     } else {
       // put the image to the storage
       // create a profiles collection
@@ -210,7 +212,7 @@ const EditProfile = ({ setEditProfile }) => {
         .then((res) => {})
         .finally(() => {
           setLoading(false);
-          console.log("updated");
+          setEditProfile(false);
         });
     }
   };
@@ -310,6 +312,7 @@ const EditProfile = ({ setEditProfile }) => {
         image={image}
         inputRef={inputRef}
         loading={loading}
+        setImage={setImage}
       />
       <div className="edit__password__section">
         Change Password
