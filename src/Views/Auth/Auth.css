@@ -38,15 +38,12 @@
 .auth__main {
   display: flex;
   justify-content: center;
-  background-color: white;
   flex-direction: column;
-  padding: 10px;
-  box-shadow: 2px 2px 2px 2px lightgray;
-  border-radius: 5px;
   width: 100%;
   max-width: 500px;
   margin: 10px auto;
 }
+
 @media only screen and (max-width: 769px) {
   .auth {
     padding: 0;

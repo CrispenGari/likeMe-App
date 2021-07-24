@@ -3,6 +3,20 @@
   flex-direction: column;
   width: 100%;
   padding: 10px;
+  animation: profile-card-animation 1s ease-in-out 0s 1 alternate forwards;
+  position: relative;
+  right: -1000px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-radius: 5px;
+}
+@keyframes profile-card-animation {
+  from {
+    right: -1000px;
+  }
+  to {
+    right: 0px;
+  }
 }
 .profile h1 {
   font-weight: 500;
@@ -153,5 +167,12 @@ p.profile__input__message {
   .profile h1 {
     padding: 10px !important;
     margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 769px) {
+  .profile {
+    border: none;
+    box-shadow: unset;
   }
 }

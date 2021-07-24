@@ -3,6 +3,21 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  animation: login-card-animation 1s ease-in-out 0s 1 alternate forwards;
+  position: relative;
+  top: -700px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-radius: 5px;
+}
+
+@keyframes login-card-animation {
+  from {
+    top: -700px;
+  }
+  to {
+    top: 0px;
+  }
 }
 .login h1 {
   font-weight: 500;

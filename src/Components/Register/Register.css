@@ -2,6 +2,21 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  animation: register-card-animation 1s ease-in-out 0s 1 alternate forwards;
+  position: relative;
+  bottom: -700px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-radius: 5px;
+  padding: 10px;
+}
+@keyframes register-card-animation {
+  from {
+    bottom: -700px;
+  }
+  to {
+    bottom: 0px;
+  }
 }
 .register h1 {
   font-weight: 500;

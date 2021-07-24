@@ -3,6 +3,20 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  animation: reset-card-animation 1s ease-in-out 0s 1 alternate forwards;
+  position: relative;
+  left: -1000px;
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px lightgray;
+  border-radius: 5px;
+}
+@keyframes reset-card-animation {
+  from {
+    left: -1000px;
+  }
+  to {
+    left: 0px;
+  }
 }
 
 .reset h1 {
@@ -103,4 +117,10 @@ p.reset__message {
 }
 p.reset__error {
   color: red;
+}
+@media only screen and (max-width: 769px) {
+  .reset {
+    border: none;
+    box-shadow: unset;
+  }
 }
