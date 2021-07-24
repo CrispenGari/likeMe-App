@@ -8,6 +8,8 @@ const constants = {
   SET_FLEETS: "SET_FLEETS",
   SET_BANNERS: "SET_BANNERS",
   SET_PROFILE_TAB: "SET_PROFILE_TAB",
+  SET_PROFILES: "SET_PROFILES",
+  SET_TAGED_PHOTOS: "SET_TAGED_PHOTOS",
 };
 
 export default constants;

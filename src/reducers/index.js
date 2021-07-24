@@ -7,7 +7,7 @@ import users from "./usersReducer";
 import fleets from "./fleetsReducer";
 import banners from "./bannersReducer";
 import profileTab from "./profileTabReducer";
-
+import profiles from "./setProfilesReducer";
 const rootReducers = combineReducers({
   messages,
   posts,
@@ -17,6 +17,7 @@ const rootReducers = combineReducers({
   fleets,
   banners,
   profileTab,
+  profiles,
 });
 
 export default rootReducers;

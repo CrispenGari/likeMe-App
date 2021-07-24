@@ -9,8 +9,7 @@ const useFirebaseData = () => {
     firebase.db
       .collection("posts")
       .orderBy("timestamp", "desc")
-      .get()
-      .then((posts) => {
+      .onSnapshot((posts) => {
         dispatch(
           actions.setPosts(
             posts.docs.map((doc) => ({

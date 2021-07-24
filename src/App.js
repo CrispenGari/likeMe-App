@@ -16,13 +16,14 @@ import { useSelector } from "react-redux";
 import { useUserFetch, useFirebaseData } from "./hooks";
 import Settings from "./Views/Settings/Settings";
 import useFetchUsers from "./hooks/useFetchUsers";
-import { useFetchBanners } from "./hooks";
+import { useFetchBanners, useFetchProfiles } from "./hooks";
 
 const App = () => {
   // USE THE HOOK useFirebaseData
   useFirebaseData();
   useFetchUsers();
   useFetchBanners();
+  useFetchProfiles();
   const { loading } = useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);

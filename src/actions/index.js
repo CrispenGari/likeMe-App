@@ -54,6 +54,12 @@ const setProfileTab = (value) => {
     value: value,
   };
 };
+const setProfiles = (value) => {
+  return {
+    type: constants.SET_PROFILES,
+    value: value,
+  };
+};
 
 const actions = {
   setUser,
@@ -65,6 +71,7 @@ const actions = {
   setFleets,
   setBanners,
   setProfileTab,
+  setProfiles,
 };
 
 export default actions;

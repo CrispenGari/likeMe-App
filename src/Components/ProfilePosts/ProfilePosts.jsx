@@ -16,8 +16,10 @@ const ProfilePosts = () => {
   const banners = useSelector((state) => state.banners).filter(
     (banner) => banner?.userId === uid
   );
+  const profiles = useSelector((state) => state.profiles)?.filter(
+    (profile) => profile?.userId === uid
+  );
   const tags = [];
-  const profiles = [];
 
   const displayPost =
     profileTab === profileTabs.PHOTOS
