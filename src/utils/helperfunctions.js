@@ -1,4 +1,171 @@
 import firebase from "../backend";
+import { v4 as uuid_v4 } from "uuid";
+const updateProfile = async (
+  firstName,
+  lastName,
+  username,
+  email,
+  status,
+  gender,
+  phoneNumber,
+  bestFriend,
+  birthday,
+  bio,
+  image,
+  currentUser
+) => {
+  const { id } = currentUser;
+  if (image === null) {
+    await firebase.currentUser
+      .updateProfile({
+        displayName: username?.trim()?.toLowerCase(),
+        photoURL: image,
+        phoneNumber: phoneNumber,
+        email: email,
+      })
+      .then(() => {
+        firebase.db
+          .collection("users")
+          .doc(id)
+          .update(
+            {
+              status: status,
+              firstName: firstName?.trim()?.toLowerCase(),
+              lastName: lastName?.trim()?.toLowerCase(),
+              email: email?.trim()?.toLowerCase(),
+              gender: gender,
+              birthday: birthday,
+              phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+              bio: bio,
+              displayName: username?.trim()?.toLowerCase(),
+              bestFriend: bestFriend?.trim()?.toLowerCase(),
+            },
+            { merge: true }
+          )
+          .then(() => {
+            return {
+              status: 201,
+            };
+          })
+          .catch((error) => {
+            return error;
+          });
+      })
+      .catch((error) => {
+        return error;
+      });
+    return;
+  }
+  if (String(image).startsWith("http") === true) {
+    await firebase.auth.currentUser
+      .updateProfile({
+        displayName: username?.trim()?.toLowerCase(),
+        photoURL: image,
+        phoneNumber: phoneNumber,
+        email: email,
+      })
+      .then(() => {
+        firebase.db
+          .collection("users")
+          .doc(id)
+          .update(
+            {
+              status: status,
+              firstName: firstName?.trim()?.toLowerCase(),
+              lastName: lastName?.trim()?.toLowerCase(),
+              email: email?.trim()?.toLowerCase(),
+              gender: gender,
+              birthday: birthday,
+              phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+              bio: bio,
+              displayName: username?.trim()?.toLowerCase(),
+              bestFriend: bestFriend?.trim()?.toLowerCase(),
+            },
+            { merge: true }
+          )
+          .then(() => {
+            return {
+              status: 201,
+            };
+          })
+          .catch((error) => {
+            return error;
+          });
+      })
+      .catch((error) => {
+        return error;
+      });
+    return;
+  } else {
+    // upload image to the storage
+
+    const childName = `${username?.trim().toLowerCase()}_${uuid_v4()}`;
+    const uploadTask = firebase.storage
+      .ref(`profiles/${childName}`)
+      .putString(image, "data_url");
+    await uploadTask.on(
+      "state_changed",
+      (obs) => {
+        // Ingnore the observer
+      },
+      (error) => {
+        console.error(error);
+      },
+      () => {
+        firebase.storage
+          .ref("profiles")
+          .child(childName)
+          .getDownloadURL()
+          .then((url) => {
+            firebase.auth.currentUser
+              .updateProfile({
+                displayName: username?.trim()?.toLowerCase(),
+                photoURL: url,
+                phoneNumber: phoneNumber,
+                email: email,
+              })
+              .then(() => {
+                firebase.db
+                  .collection("users")
+                  .doc(id)
+                  .update({
+                    status: status,
+                    firstName: firstName?.trim()?.toLowerCase(),
+                    lastName: lastName?.trim()?.toLowerCase(),
+                    email: email?.trim()?.toLowerCase(),
+                    gender: gender,
+                    birthday: birthday,
+                    phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+                    bio: bio,
+                    displayName: username?.trim()?.toLowerCase(),
+                    bestFriend: bestFriend?.trim()?.toLowerCase(),
+                  })
+                  .then(() => {
+                    firebase.db.collection("profiles").doc(id).set({
+                      profile: url,
+                      timestamp: firebase.timestamp,
+                      displayName: currentUser?.displayName,
+                      email: currentUser?.email,
+                      userId: currentUser?.uid,
+                    });
+                    return {
+                      status: 201,
+                    };
+                  })
+                  .catch((error) => {
+                    return error;
+                  });
+              })
+              .catch((error) => {
+                return error;
+              });
+            return;
+          })
+          .catch((error) => console.error(error));
+      }
+    );
+  }
+};
 
 const postSize = async (url) => {
   const { size } = await firebase.storage.refFromURL(url).getMetadata();
@@ -155,5 +322,6 @@ const helperFunctions = {
   timeString,
   deletePost,
   postSize,
+  updateProfile,
 };
 export default helperFunctions;

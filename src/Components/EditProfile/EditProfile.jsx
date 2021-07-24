@@ -15,22 +15,29 @@ import {
   emailExp,
   surnameExpression,
   nameExpression,
+  phoneNumberExpression,
 } from "../../utils/regularExpressions";
+import helperFunctions from "../../utils/helperfunctions";
+import { useParams } from "react-router-dom";
 const EditProfile = ({ setEditProfile }) => {
   const genders = ["male", "female", "gay", "lesbian"];
 
-  const user = useSelector((state) => state.user);
+  const { uid } = useParams();
+
   const currentUser = useSelector((state) => state.users).find(
-    (_user) => user?.id === _user?.uid
+    (_user) => _user?.id === uid
   );
 
   const statuses = ["single", "dating", "complicated", "searching"];
 
+  console.log(currentUser?.photoURL);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const currentPasswordRef = useRef(null);
   const inputRef = useRef(null);
-  const [username, setUsername] = useState(currentUser?.displayName ?? "");
+  const [username, setUsername] = useState(
+    currentUser?.displayName ? currentUser?.displayName : ""
+  );
   const [usernameError, setUsernameError] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
@@ -44,20 +51,29 @@ const EditProfile = ({ setEditProfile }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [changePassword, setChangePassword] = useState(false);
 
-  const [birthday, setBirthday] = useState("");
-  const [bestFriend, setBestFriend] = useState("");
+  const [birthday, setBirthday] = useState(
+    currentUser?.birthday ? currentUser?.birthday : ""
+  );
+  const [bestFriend, setBestFriend] = useState(
+    currentUser?.bestFriend ? currentUser?.bestFriend : ""
+  );
 
   const [bestFriendError, setBestFriendError] = useState("");
 
+  const [phoneNumberError, setPhoneNumberError] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(
     currentUser?.phoneNumber ?? ""
   );
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState(currentUser?.bio ? currentUser?.bio : "");
 
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState(
+    currentUser?.firstName ? currentUser?.firstName : ""
+  );
   const [firstNameError, setFirstNameError] = useState("");
 
-  const [lastName, setLastName] = useState("");
+  const [lastName, setLastName] = useState(
+    currentUser?.lastName ? currentUser?.lastName : ""
+  );
   const [lastNameError, setLastNameError] = useState("");
   const [gender, setGender] = useState(genders[0]);
   const [status, setStatus] = useState(statuses[0]);
@@ -65,7 +81,6 @@ const EditProfile = ({ setEditProfile }) => {
   const [emailError, setEmailError] = useState("");
 
   const [image, setImage] = useState(currentUser?.photoURL ?? null);
-  const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   // ^(?=[a-zA-Z0-9._]{7,20}$)(?!.*[_.]{2})[^_.].*[^_.]$
@@ -80,26 +95,17 @@ const EditProfile = ({ setEditProfile }) => {
       setLoading(false);
     };
   };
-
   const saveChanges = (e) => {
     e.preventDefault();
-
-    console.log(
-      firstName,
-      lastName,
-      username,
-      email,
-      status,
-      gender,
-      phoneNumber,
-      bestFriend,
-      birthday,
-      bio,
-      image
-    );
-
-    console.log(firstName !== "" && nameExpression.test(firstName) === false);
-    console.log();
+    if (
+      phoneNumber !== "" &&
+      phoneNumberExpression.test(phoneNumber) === false
+    ) {
+      setPhoneNumberError("invalid phone number!");
+      return;
+    } else {
+      setPhoneNumberError("");
+    }
     if (
       (firstName !== "" && nameExpression.test(firstName) === false) === true
     ) {
@@ -108,7 +114,7 @@ const EditProfile = ({ setEditProfile }) => {
     } else {
       setFirstNameError("");
     }
-    if (lastName !== "" && !surnameExpression.test(lastName) === false) {
+    if (lastName !== "" && surnameExpression.test(lastName) === false) {
       setLastNameError("invalid last name!");
       return;
     } else {
@@ -127,29 +133,17 @@ const EditProfile = ({ setEditProfile }) => {
     } else {
       setEmailError("");
     }
-    if (bestFriend !== "" && usernameExp.test(setBestFriendError) === false) {
+    if (bestFriend !== "" && usernameExp.test(bestFriend) === false) {
       setBestFriendError("invalid best friend username!");
       return;
     } else {
       setBestFriendError("");
     }
-    if (username !== currentUser?.displayName || email !== currentUser?.email) {
+    if (email?.trim()?.toLowerCase() !== currentUser?.email) {
       setLoading(true);
       firebase.db
         .collection("users")
-        .where("displayName", "==", username)
-        .get()
-        .then((doc) => {
-          if (doc.docs.length > 0) {
-            setUsernameError("username is already taken!");
-            return;
-          } else {
-            setUsernameError("");
-          }
-        });
-      firebase.db
-        .collection("users")
-        .where("email", "==", email)
+        .where("email", "==", email?.trim()?.toLowerCase())
         .get()
         .then((doc) => {
           if (doc.docs.length > 0) {
@@ -159,6 +153,65 @@ const EditProfile = ({ setEditProfile }) => {
             setEmailError("");
           }
         })
+        .finally(() => setLoading(false));
+    }
+    if (username?.trim()?.toLowerCase() !== currentUser?.displayName) {
+      setLoading(true);
+      firebase.db
+        .collection("users")
+        .where("displayName", "==", username?.trim()?.toLowerCase())
+        .get()
+        .then((doc) => {
+          if (doc.docs.length > 0) {
+            setUsernameError("username is already taken!");
+            return;
+          } else {
+            setUsernameError("");
+          }
+        })
+        .finally(() => setLoading(false));
+    }
+
+    if (image === null) {
+      // remove the profile
+      setLoading(true);
+      helperFunctions
+        .updateProfile(
+          firstName,
+          lastName,
+          username,
+          email,
+          status,
+          gender,
+          phoneNumber,
+          bestFriend,
+          birthday,
+          bio,
+          null,
+          currentUser
+        )
+        .finally(() => setLoading(false));
+    } else {
+      // put the image to the storage
+      // create a profiles collection
+      // update the profile
+      // do some clean up
+      setLoading(true);
+      helperFunctions
+        .updateProfile(
+          firstName,
+          lastName,
+          username,
+          email,
+          status,
+          gender,
+          phoneNumber,
+          bestFriend,
+          birthday,
+          bio,
+          image,
+          currentUser
+        )
         .finally(() => setLoading(false));
     }
   };
@@ -224,6 +277,7 @@ const EditProfile = ({ setEditProfile }) => {
           label="phone number"
           value={phoneNumber}
           setValue={setPhoneNumber}
+          inputError={phoneNumberError}
         />
         <Input
           placeholder="best friend"
