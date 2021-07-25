@@ -14,7 +14,6 @@ const Info = () => {
     state?.users?.find((_user) => _user?.id === user?.uid)
   );
 
-  console.log(currentUser);
   return (
     <div className="profile__settings__info">
       <div className="profile__settings__info__header">
