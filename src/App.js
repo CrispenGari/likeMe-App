@@ -70,7 +70,7 @@ const App = () => {
             <Route path="/chat/:uid/:randomId" exact>
               <Chat />
             </Route>
-            <Route path="/settings">
+            <Route path="/settings/:uid/:randomId">
               <Settings />
             </Route>
             <Route path="/">

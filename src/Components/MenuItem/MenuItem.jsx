@@ -45,7 +45,7 @@ const MenuItem = ({
       firebase.auth.signOut();
     } else if (title === "notifications") {
     } else if (title === "settings") {
-      history.push("/settings");
+      history.push(`/settings/${user?.uid}/${uuid_v4()}`);
     } else if (title === "notifications") {
     } else if (title === "friends") {
     } else if (title === "chats") {
