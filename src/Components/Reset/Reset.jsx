@@ -5,15 +5,34 @@ import { useState } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import firebase from "../../backend";
 import { ActivityIndicator } from "../Common";
+import { Avatar } from "@material-ui/core";
 const Reset = ({ setCardToMount }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const [localUser, setLocalUser] = useState(null);
+
   const reset = (e) => {
     e.preventDefault();
     if (email) {
       setLoading(true);
+      if (email) {
+        firebase.db
+          .collection("users")
+          .where("email", "==", email.trim().toLowerCase())
+          .get()
+          .then((user) => {
+            if (user.docs.length !== 0) {
+              setLocalUser({ id: user?.docs[0]?.id, ...user?.docs[0]?.data() });
+            } else {
+              setLocalUser(null);
+            }
+          });
+      } else {
+        setLocalUser(null);
+      }
       firebase.auth
         .sendPasswordResetEmail(email.trim().toLocaleLowerCase())
         .then(() => {
@@ -36,6 +55,19 @@ const Reset = ({ setCardToMount }) => {
   return (
     <form className="reset">
       <h1>Reset Password</h1>
+
+      {localUser ? (
+        <div className="login__avatar__container">
+          <p>The reset password link will be sent to this user's email</p>
+          <Avatar
+            alt={localUser ? localUser?.displayName : "LikeMe"}
+            src={localUser ? localUser?.photoURL : null}
+            className="login__avatar"
+          />
+        </div>
+      ) : (
+        localUser
+      )}
       <div className="reset__input">
         <p>Your password reset link will be send to this email.</p>
         <div
@@ -66,6 +98,7 @@ const Reset = ({ setCardToMount }) => {
             setLoading(false);
             setEmail("");
             setCardToMount("login");
+            setLocalUser(null);
           }}
         >
           GO BACK TO LOGIN
