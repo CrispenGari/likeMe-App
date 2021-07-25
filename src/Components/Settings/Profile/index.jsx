@@ -83,7 +83,7 @@ const Profile = () => {
             <p>posts</p>
           </div>
         </div>
-        <button>Logo out</button>
+        <button>Log out</button>
       </div>
     </div>
   );

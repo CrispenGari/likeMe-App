@@ -2,7 +2,7 @@ import "./Settings.css";
 import React from "react";
 import { Header } from "../../Components";
 
-import { Profile, Info, DeleteAccount } from "../../Components/Settings";
+import { Profile, Info, DeleteAccount, Theme } from "../../Components/Settings";
 const Settings = () => {
   return (
     <div className="settings">
@@ -13,6 +13,7 @@ const Settings = () => {
         <Profile />
         <Info />
         <DeleteAccount />
+        <Theme />
       </div>
     </div>
   );

@@ -1,0 +1,100 @@
+.settings__theme {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  margin: 0px auto;
+  user-select: none;
+}
+.settings__theme__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px;
+  align-items: center;
+  border-bottom: 1px solid lightblue;
+}
+.settings__theme__header > h1 {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.settings__theme__header button {
+  border: 1px solid cornflowerblue;
+  padding: 5px !important;
+  color: white;
+  font-size: 1rem;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+.settings__theme__header button:hover {
+  color: white;
+  background: linear-gradient(
+    to left,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+.settings__theme__expandable {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.5;
+  animation: expand-animation 500ms ease-in-out 0s 1 alternate forwards;
+}
+
+.settings__theme__expandable button {
+  width: 100px;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  border: 1px solid cornflowerblue;
+  margin: 10px auto;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.settings__theme__expandable button:hover {
+  color: white;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+.settings__theme__expandable > h1 {
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.settings__theme__expandable > div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.settings__theme__switch {
+  margin: 0px 20px;
+}
+.settings__theme__icons {
+  font-size: 1.5rem;
+}
+.settings__theme__icons--active {
+  color: cornflowerblue;
+}
