@@ -2,7 +2,7 @@ import "./Settings.css";
 import React from "react";
 import { Header } from "../../Components";
 
-import { Profile } from "../../Components/Settings";
+import { Profile, Info } from "../../Components/Settings";
 const Settings = () => {
   return (
     <div className="settings">
@@ -11,6 +11,7 @@ const Settings = () => {
       </div>
       <div className="settings__main">
         <Profile />
+        <Info />
       </div>
     </div>
   );

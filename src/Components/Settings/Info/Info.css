@@ -1,0 +1,112 @@
+.profile__settings__info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  margin: 0px auto;
+  user-select: none;
+}
+.profile__settings__info__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px;
+  align-items: center;
+  border-bottom: 1px solid lightblue;
+}
+.profile__settings__info__header > h1 {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.profile__settings__info__header button {
+  border: 1px solid cornflowerblue;
+  padding: 5px !important;
+  color: white;
+  font-size: 1rem;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+.profile__settings__info__header button:hover {
+  color: white;
+  background: linear-gradient(
+    to left,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+
+.profile__info__expandable {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.5;
+  animation: expand-animation 500ms ease-in-out 0s 1 alternate forwards;
+}
+@keyframes expand-animation {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.profile__info__expandable__twins {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  border-bottom: 1px solid lightgray;
+}
+.profile__info__expandable__twins > p {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.profile__info__expandable__twins > p > span {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.profile__info__expandable button {
+  width: 100px;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  border: 1px solid cornflowerblue;
+  margin: 10px auto;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.profile__info__expandable button:hover {
+  color: white;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .profile__info__expandable__twins {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .profile__info__expandable__twins > p {
+    justify-content: space-between;
+  }
+}
