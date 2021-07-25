@@ -1,0 +1,41 @@
+.settings__edit__profile {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  margin: 0px auto;
+  user-select: none;
+}
+.settings__edit__profile__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px;
+  align-items: center;
+  border-bottom: 1px solid lightblue;
+}
+.settings__edit__profile__header > h1 {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.settings__edit__profile__header button {
+  border: 1px solid cornflowerblue;
+  padding: 5px !important;
+  color: white;
+  font-size: 1rem;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+.settings__edit__profile__header button:hover {
+  color: white;
+  background: linear-gradient(
+    to left,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}

@@ -16,7 +16,7 @@ import {
 } from "../../utils/regularExpressions";
 import helperFunctions from "../../utils/helperfunctions";
 import { useParams } from "react-router-dom";
-const EditProfile = ({ setEditProfile }) => {
+const EditProfile = ({ setEditProfile, noHeader }) => {
   const genders = ["male", "female", "gay", "lesbian"];
   const { uid } = useParams();
   const currentUser = useSelector((state) => state.users).find(
@@ -201,8 +201,10 @@ const EditProfile = ({ setEditProfile }) => {
     }
   };
   return (
-    <form className="edit__profile">
-      <h1>Edit your profile</h1>
+    <form
+      className={`edit__profile ${noHeader ? "edit__profile--settings" : ""}`}
+    >
+      {noHeader === false ? <h1>Edit your profile</h1> : null}
       <div className="edit__profile__twins">
         <Input
           focus={true}

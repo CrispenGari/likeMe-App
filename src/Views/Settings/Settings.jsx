@@ -9,6 +9,7 @@ import {
   Theme,
   DisableAccount,
   Password,
+  EditProfile,
 } from "../../Components/Settings";
 const Settings = () => {
   return (
@@ -19,6 +20,7 @@ const Settings = () => {
       <div className="settings__main">
         <Profile />
         <Info />
+        <EditProfile />
         <DeleteAccount />
         <Theme />
         <DisableAccount />

@@ -81,6 +81,10 @@
   z-index: 1 !important;
   animation: expandable-animation 1s ease 0s 1 alternate forwards;
 }
+.edit__profile--settings {
+  padding: unset;
+  animation-name: opacity-animation !important;
+}
 @keyframes expandable-animation {
   from {
     opacity: 0.5;
@@ -89,6 +93,14 @@
   to {
     opacity: 1;
     right: 0px;
+  }
+}
+@keyframes opacity-animation {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
   }
 }
 
