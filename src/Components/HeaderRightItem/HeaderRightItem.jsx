@@ -30,14 +30,24 @@ const HeaderRightItem = ({ content, withUser, title, Icon, subTitle, dot }) => {
       </div>
     );
   }
+  const navigate = (title) => {
+    if (title === "sign out") {
+      firebase.auth.signOut();
+    } else if (title === "notifications") {
+    } else if (title === "settings") {
+      history.push("/settings");
+    } else if (title === "notifications") {
+    } else if (title === "friends") {
+    } else if (title === "chats") {
+    } else {
+    }
+  };
   return (
     <div
       className={`header__item ${!withUser && "header__item--without-user"}`}
       title={title}
       onClick={() => {
-        if (title === "sign out") {
-          firebase.auth.signOut();
-        }
+        navigate(title);
       }}
     >
       <div className="header__item__icon__button__badge">

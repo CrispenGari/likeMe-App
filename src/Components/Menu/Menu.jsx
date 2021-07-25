@@ -26,7 +26,7 @@ const Menu = ({ setOpen }) => {
       <MenuItem
         title="notifications"
         Icon={IoMdNotificationsOutline}
-        subTitle="notifications"
+        subTitle="open notifications"
         setOpen={setOpen}
         content={1}
       />

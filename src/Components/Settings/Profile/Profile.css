@@ -1,0 +1,128 @@
+.settings__profile {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0px auto;
+  background-color: white;
+  user-select: none;
+  padding-top: 20px;
+  border-bottom: 1px lightblue solid;
+}
+.settings__profile__left__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.settings__profile__left__buttons > button {
+  padding: 5px !important;
+  font-size: 1.5rem !important;
+  margin: 10px;
+}
+.settings__profile__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.settings__profile__avatar {
+  width: 150px !important;
+  cursor: pointer !important;
+  height: 150px !important;
+  border: 3px solid cornflowerblue !important;
+}
+.settings__profile__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px;
+}
+.settings__profile__right > div {
+  display: flex;
+  justify-content: space-evenly;
+}
+.settings__profile__stats__item {
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.settings__profile__stats__item > h1 {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.settings__profile__stats__item > p {
+  color: gray;
+  font-size: 0.7rem;
+}
+
+.settings__profile__left > button {
+  width: 100px;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+  color: white;
+  border: 1px solid cornflowerblue;
+  margin: 0px auto;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+.settings__profile__left > button:hover {
+  background: linear-gradient(
+    to left,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+
+.settings__profile__right button {
+  width: 100px;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  border: 1px solid cornflowerblue;
+  margin: 0px auto;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.settings__profile__right button:hover {
+  color: white;
+  background: linear-gradient(
+    to right,
+    lightseagreen,
+    cornflowerblue
+  ) !important;
+}
+.settings__profile__right > p {
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+  .settings__profile__avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}

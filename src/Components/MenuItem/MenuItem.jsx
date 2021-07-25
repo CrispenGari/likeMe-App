@@ -39,15 +39,26 @@ const MenuItem = ({
       </div>
     );
   }
+
+  const navigate = (title) => {
+    if (title === "sign out") {
+      firebase.auth.signOut();
+    } else if (title === "notifications") {
+    } else if (title === "settings") {
+      history.push("/settings");
+    } else if (title === "notifications") {
+    } else if (title === "friends") {
+    } else if (title === "chats") {
+    } else {
+    }
+    setOpen(false);
+  };
   return (
     <div
       className={`menuitem ${!withUser && "menuitem--without-user"}`}
       title={title}
       onClick={() => {
-        if (title === "sign out") {
-          firebase.auth.signOut();
-        }
-        setOpen(false);
+        navigate(title);
       }}
     >
       <div className="menuitem__icon__button__badge">
