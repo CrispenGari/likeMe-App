@@ -8,6 +8,7 @@ import {
   DeleteAccount,
   Theme,
   DisableAccount,
+  Password,
 } from "../../Components/Settings";
 const Settings = () => {
   return (
@@ -21,6 +22,7 @@ const Settings = () => {
         <DeleteAccount />
         <Theme />
         <DisableAccount />
+        <Password />
       </div>
     </div>
   );
