@@ -7,7 +7,11 @@ import { ActivityIndicator } from "../Common";
 import "./Login.css";
 import { Avatar } from "@material-ui/core";
 import { logos } from "../../utils/logos";
-import { emailExp } from "../../utils/regularExpressions";
+import {
+  emailExp,
+  phoneNumberExpression,
+  usernameExp,
+} from "../../utils/regularExpressions";
 const Login = ({ setCardToMount }) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -18,20 +22,33 @@ const Login = ({ setCardToMount }) => {
   const [loading, setLoading] = useState(false);
   const [localUser, setLocalUser] = useState(null);
 
+  const [loginType, setLoginType] = useState("email");
+
   const login = (e) => {
     e.preventDefault();
-    if (email && password) {
+    if (emailExp.test(email)) {
+      setLoginType("email");
+    } else if (phoneNumberExpression.test(email)) {
+      setLoginType("phoneNumber");
+    } else if (usernameExp.test(email)) {
+      setLoginType("displayName");
+    } else {
+      setLoginType("displayName");
+    }
+    const localEmail = localUser?.email;
+    if (localEmail && password) {
       setLoading(true);
       firebase.auth
-        .signInWithEmailAndPassword(email.trim().toLowerCase(), password)
+        .signInWithEmailAndPassword(localEmail.trim().toLowerCase(), password)
         .then((authUser) => {
           setError("");
           setEmail("");
           setPassword("");
+          setLocalUser(null);
         })
         .catch((error) => {
           setPassword("");
-          setError(error.message);
+          setError("invalid credentials!");
         })
         .finally(() => {
           setLoading(false);
@@ -41,9 +58,18 @@ const Login = ({ setCardToMount }) => {
   React.useEffect(() => {
     let mounted = true;
     if (emailExp.test(email)) {
+      setLoginType("email");
+    } else if (phoneNumberExpression.test(email)) {
+      setLoginType("phoneNumber");
+    } else if (usernameExp.test(email)) {
+      setLoginType("displayName");
+    } else {
+      setLoginType("displayName");
+    }
+    if (email) {
       firebase.db
         .collection("users")
-        .where("email", "==", email.trim().toLowerCase())
+        .where(loginType, "==", email.trim().toLowerCase())
         .get()
         .then((user) => {
           if (user.docs.length !== 0 && mounted) {
@@ -58,7 +84,7 @@ const Login = ({ setCardToMount }) => {
     return () => {
       mounted = false;
     };
-  }, [email]);
+  }, [email, loginType]);
   return (
     <form className="login" onSubmit={login}>
       <h1>Login</h1>
@@ -66,7 +92,7 @@ const Login = ({ setCardToMount }) => {
       <div className="login__avatar__container">
         <Avatar
           alt={localUser ? localUser?.displayName : "LikeMe"}
-          src={localUser ? localUser?.photoURL : logos.main_logo}
+          src={localUser ? localUser?.photoURL : null}
           className="login__avatar"
         />
         <p>{localUser?.displayName}</p>
@@ -84,7 +110,7 @@ const Login = ({ setCardToMount }) => {
             onChange={(e) => setEmail(e.target.value)}
             ref={emailRef}
             type="email"
-            placeholder="email"
+            placeholder="username, email or phone number"
           />
         </div>
       </div>
