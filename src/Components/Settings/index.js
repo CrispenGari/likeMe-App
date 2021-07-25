@@ -5,3 +5,4 @@ export { default as Theme } from "./Theme";
 export { default as DisableAccount } from "./DisableAccount";
 export { default as Password } from "./Password";
 export { default as EditProfile } from "./EditProfile";
+export { default as ResetPassword } from "./ResetPassword";

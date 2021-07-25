@@ -10,6 +10,7 @@ import {
   DisableAccount,
   Password,
   EditProfile,
+  ResetPassword,
 } from "../../Components/Settings";
 const Settings = () => {
   return (
@@ -25,6 +26,7 @@ const Settings = () => {
         <Theme />
         <DisableAccount />
         <Password />
+        <ResetPassword />
       </div>
     </div>
   );
