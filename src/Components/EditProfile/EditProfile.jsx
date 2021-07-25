@@ -56,10 +56,14 @@ const EditProfile = ({ setEditProfile, noHeader }) => {
   const [lastNameError, setLastNameError] = useState("");
   const [gender, setGender] = useState(genders[0]);
   const [status, setStatus] = useState(statuses[0]);
-  const [email, setEmail] = useState(currentUser?.email ?? "");
+  const [email, setEmail] = useState(
+    currentUser?.email ? currentUser?.email : ""
+  );
   const [emailError, setEmailError] = useState("");
 
-  const [image, setImage] = useState(currentUser?.photoURL ?? null);
+  const [image, setImage] = useState(
+    currentUser?.photoURL ? currentUser?.photoUR : null
+  );
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const handleChange = (e) => {

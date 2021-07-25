@@ -5,23 +5,30 @@ import { AiFillCamera } from "react-icons/ai";
 import { ActivityIndicator } from "../../Common";
 import { FiCameraOff } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import firebase from "../../../backend";
 
 const Profile = () => {
   const inputRef = React.useRef(null);
-
+  const history = useHistory();
+  const { uid } = useParams();
   const user = useSelector((state) => state.user);
-
   const currentUser = useSelector((state) =>
     state?.users?.find((_user) => _user?.id === user?.uid)
   );
-  const [image, setImage] = useState(currentUser?.photoURL ?? null);
+  const [image, setImage] = useState(
+    currentUser?.photoURL ? currentUser?.photoURL : null
+  );
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-
   const removeProfile = () => {
     setImage(null);
   };
 
+  const logout = () => {
+    history.replace("/");
+    firebase.auth.signOut();
+  };
   const handleChange = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -33,6 +40,20 @@ const Profile = () => {
       setLoading(false);
     };
   };
+
+  const posts = useSelector((state) => state.posts).filter(
+    (post) => post?.userId === uid
+  );
+  const banners = useSelector((state) => state.banners).filter(
+    (banner) => banner?.userId === uid
+  );
+  const profiles = useSelector((state) => state.profiles)?.filter(
+    (profile) => profile?.userId === uid
+  );
+  const tags = [];
+
+  const displayPost = [...posts, ...banners, ...profiles, ...tags];
+
   return (
     <div className="settings__profile">
       <div className="settings__profile__left">
@@ -79,11 +100,11 @@ const Profile = () => {
             <p>likes</p>
           </div>
           <div className="settings__profile__stats__item">
-            <h1>324</h1>
+            <h1>{displayPost?.length}</h1>
             <p>posts</p>
           </div>
         </div>
-        <button>Log out</button>
+        <button onClick={logout}>Log out</button>
       </div>
     </div>
   );

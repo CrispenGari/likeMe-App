@@ -6,8 +6,10 @@ import { HiOutlineMail } from "react-icons/hi";
 import firebase from "../../../../backend";
 import { ActivityIndicator } from "../../../Common";
 import { Avatar } from "@material-ui/core";
+import { useSelector } from "react-redux";
 const Reset = () => {
-  const [email, setEmail] = useState("");
+  const user = useSelector((state) => state.user);
+  const [email, setEmail] = useState(user?.email ? user?.email : "");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
