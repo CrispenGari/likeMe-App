@@ -7,22 +7,100 @@ import { FiCameraOff } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import firebase from "../../../backend";
+import { v4 as uuid_v4 } from "uuid";
 
 const Profile = () => {
   const inputRef = React.useRef(null);
   const history = useHistory();
   const { uid } = useParams();
-  const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   const currentUser = useSelector((state) =>
     state?.users?.find((_user) => _user?.id === uid)
   );
+
+  const updateOnlyProfile = async () => {
+    setLoading(true);
+    if (image === null) {
+      await firebase.auth.currentUser
+        .updateProfile({
+          photoURL: image,
+        })
+        .then(() => {
+          firebase.db
+            .collection("users")
+            .doc(uid)
+            .update({
+              photoURL: image,
+            })
+            .then(() => {})
+            .catch((error) => {
+              return error;
+            });
+        })
+        .catch((error) => {
+          return error;
+        })
+        .finally(() => setLoading(false));
+      return;
+    }
+    if (String(image).startsWith("http") === true) {
+      return; // No changes made
+    } else {
+      const childName = `${currentUser?.displayName
+        ?.trim()
+        .toLowerCase()}_${uuid_v4()}`;
+      const uploadTask = firebase.storage
+        .ref(`profiles/${childName}`)
+        .putString(image, "data_url");
+      await uploadTask.on(
+        "state_changed",
+        (obs) => {
+          // Ingnore the observer
+        },
+        (error) => {
+          console.error(error);
+        },
+        () => {
+          firebase.storage
+            .ref("profiles")
+            .child(childName)
+            .getDownloadURL()
+            .then((url) => {
+              firebase.auth.currentUser
+                .updateProfile({
+                  photoURL: url,
+                })
+                .then(() => {
+                  firebase.db.collection("users").doc(uid).update({
+                    photoURL: url,
+                  });
+                })
+                .then(() => {
+                  firebase.db.collection("profiles").add({
+                    profile: url,
+                    timestamp: firebase.timestamp,
+                    displayName: currentUser?.displayName,
+                    email: currentUser?.email,
+                    userId: currentUser?.id,
+                  });
+                });
+            })
+            .then(() => {
+              return {
+                status: 201,
+              };
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+        }
+      );
+    }
+  };
 
   const [image, setImage] = useState(
     currentUser?.photoURL ? currentUser?.photoURL : null
   );
 
-  const [loading, setLoading] = useState(false);
-  const [loadingUpdate, setLoadingUpdate] = useState(false);
   const removeProfile = () => {
     setImage(null);
   };
@@ -62,16 +140,24 @@ const Profile = () => {
   return (
     <div className="settings__profile">
       <div className="settings__profile__left">
-        <Avatar
-          className="settings__profile__avatar"
-          src={image ? image : null}
-          onClick={() => inputRef.current.click()}
-        />
+        <div>
+          {loading ? (
+            <div className="settings__profile__left__loading">
+              <ActivityIndicator size={20} />
+            </div>
+          ) : null}
+          <Avatar
+            className="settings__profile__avatar"
+            src={image ? image : null}
+            onClick={() => inputRef.current.click()}
+          />
+        </div>
         <div className="settings__profile__left__buttons">
           <IconButton
             className="profile__btn"
             title="open pictures"
             onClick={() => inputRef.current.click()}
+            disabled={Boolean(loading)}
           >
             <input
               type="file"
@@ -83,11 +169,15 @@ const Profile = () => {
             />
             <AiFillCamera className="profile__btn__icon" />
           </IconButton>
-          <IconButton onClick={removeProfile} title="remove profile">
+          <IconButton
+            disabled={Boolean(loading)}
+            onClick={removeProfile}
+            title="remove profile"
+          >
             <FiCameraOff />
           </IconButton>
         </div>
-        <button>update</button>
+        <button onClick={updateOnlyProfile}>update</button>
       </div>
       <div className="settings__profile__right">
         <p>@{currentUser?.displayName}</p>
@@ -109,7 +199,9 @@ const Profile = () => {
             <p>posts</p>
           </div>
         </div>
-        <button onClick={logout}>Log out</button>
+        <button onClick={logout} disabled={Boolean(loading)}>
+          Log out
+        </button>
       </div>
     </div>
   );

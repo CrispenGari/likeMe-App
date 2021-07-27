@@ -26,6 +26,12 @@
   justify-content: center;
   align-items: center;
 }
+.settings__profile__left > div {
+  width: fit-content !important;
+  height: fit-content !important;
+  border-radius: 50% !important;
+  position: relative;
+}
 .settings__profile__avatar {
   width: 150px !important;
   cursor: pointer !important;
@@ -120,6 +126,20 @@
   font-weight: 500;
 }
 
+.settings__profile__left__loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(112, 75, 75, 0.5);
+  border-radius: 50% !important;
+  display: flex;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 @media only screen and (max-width: 600px) {
   .settings__profile__avatar {
     width: 100px !important;
