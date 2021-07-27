@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./EditProfile.css";
 import Input from "./Input/Input";
 import Avatar from "./Avatar/Avatar";
@@ -204,6 +204,9 @@ const EditProfile = ({ setEditProfile, noHeader }) => {
         });
     }
   };
+  useEffect(() => {
+    setImage(currentUser?.photoURL ? currentUser?.photoURL : null);
+  }, [currentUser]);
   return (
     <form
       className={`edit__profile ${noHeader ? "edit__profile--settings" : ""}`}

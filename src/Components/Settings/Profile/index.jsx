@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import { AiFillCamera } from "react-icons/ai";
@@ -14,11 +14,13 @@ const Profile = () => {
   const { uid } = useParams();
   const user = useSelector((state) => state.user);
   const currentUser = useSelector((state) =>
-    state?.users?.find((_user) => _user?.id === user?.uid)
+    state?.users?.find((_user) => _user?.id === uid)
   );
+
   const [image, setImage] = useState(
     currentUser?.photoURL ? currentUser?.photoURL : null
   );
+
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const removeProfile = () => {
@@ -54,6 +56,9 @@ const Profile = () => {
 
   const displayPost = [...posts, ...banners, ...profiles, ...tags];
 
+  useEffect(() => {
+    setImage(currentUser?.photoURL ? currentUser?.photoURL : null);
+  }, [currentUser]);
   return (
     <div className="settings__profile">
       <div className="settings__profile__left">
