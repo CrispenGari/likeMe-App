@@ -28,8 +28,6 @@ const Register = ({ setCardToMount }) => {
 
   const createAccount = (e) => {
     e.preventDefault();
-    console.log(email, password, confirmPassword, username);
-
     if (!email) {
       setEmailError("email is required.");
       return;
@@ -132,6 +130,7 @@ const Register = ({ setCardToMount }) => {
                       setShowConfPassword(false);
                       setConfPasswordError("");
                       setLoading(false);
+                      setCardToMount("login");
                       (async () => {
                         await history.replace(
                           `/additional-information/${uid}/${uuid_v4()}`

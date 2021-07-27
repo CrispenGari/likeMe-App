@@ -18,6 +18,7 @@ import { useUserFetch, useFirebaseData } from "./hooks";
 import Settings from "./Views/Settings/Settings";
 import useFetchUsers from "./hooks/useFetchUsers";
 import { useFetchBanners, useFetchProfiles } from "./hooks";
+import firebase from "./backend";
 
 const App = () => {
   // USE THE HOOK useFirebaseData
@@ -41,6 +42,7 @@ const App = () => {
       </div>
     );
   }
+
   if (welcome) {
     return (
       <div className="app">
@@ -55,6 +57,7 @@ const App = () => {
       </div>
     );
   }
+  // If the user is new then they should give us more info about themselves
   if (user) {
     return (
       <div className="app">
