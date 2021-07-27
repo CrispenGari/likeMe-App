@@ -4,48 +4,64 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { CgLock } from "react-icons/cg";
 import { IconButton } from "@material-ui/core";
+import firebase from "../../../backend";
+import { ActivityIndicator } from "../../Common";
 
 import "./Password.css";
+import { useHistory } from "react-router-dom";
 const ChangePassword = () => {
+  const history = useHistory();
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
-  const currentPasswordRef = useRef(null);
-
-  const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
-
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
   const [changePassword, setChangePassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const changePasswordHandler = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (newPassword !== confirmNewPassword) {
+      setPasswordError("the two passwords must match!");
+      setLoading(false);
+      return;
+    }
+    firebase.auth.currentUser
+      .updatePassword(newPassword)
+      .then(() => {
+        setChangePassword(false);
+        setPasswordError("");
+        history.push("/");
+        firebase.auth.signOut();
+      })
+      .catch((error) => setPasswordError(error?.message))
+      .finally(() => setLoading(false));
+  };
 
   return (
-    <div className="settings__edit__password">
+    <form onSubmit={changePasswordHandler} className="settings__edit__password">
       <div className="settings__edit__password__header">
         <h1> Change Password</h1>
         <IconButton onClick={() => setChangePassword((prev) => !prev)}>
           {changePassword ? <BsChevronUp /> : <BsChevronDown />}
         </IconButton>
       </div>
-
       {changePassword ? (
         <div className="settings__edit__password__expandable">
-          <div className="settings__edit__twins settings__edit__single__tinny">
-            <Input
-              placeholder="current password"
-              label="current password"
-              value={currentPassword}
-              setValue={setCurrentPassword}
-              IconRight={showCurrentPassword ? IoMdEye : IoMdEyeOff}
-              IconLeft={CgLock}
-              customRef={currentPasswordRef}
-              setShowPasswordIcon={setShowCurrentPassword}
-              type="password"
-            />
-          </div>
+          {loading ? (
+            <div className="settings__edit__password__loading">
+              <ActivityIndicator size={30} />
+            </div>
+          ) : null}
+
+          <p>
+            By changing password action we will sign you out so that you will
+            login with new password to prove your identity!
+          </p>
           <div className="settings__edit__twins">
             <Input
               placeholder="new password"
@@ -57,6 +73,7 @@ const ChangePassword = () => {
               customRef={passwordRef}
               setShowPasswordIcon={setShowNewPassword}
               type="password"
+              inputError={passwordError}
             />
             <Input
               placeholder="confirm new password"
@@ -68,12 +85,13 @@ const ChangePassword = () => {
               customRef={confirmPasswordRef}
               setShowPasswordIcon={setShowConfPassword}
               type="password"
+              inputError={passwordError}
             />
           </div>
-          <button>change</button>
+          <button type="submit">change</button>
         </div>
       ) : null}
-    </div>
+    </form>
   );
 };
 

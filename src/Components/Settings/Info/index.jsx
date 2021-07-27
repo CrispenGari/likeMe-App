@@ -6,7 +6,7 @@ import "./Info.css";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
-const Info = () => {
+const Info = ({ setExpandProfile }) => {
   const [expand, setExpand] = useState(false);
   const user = useSelector((state) => state.user);
 
@@ -72,7 +72,14 @@ const Info = () => {
               <span> {currentUser?.bestFriend}</span>
             </p>
           </div>
-          <button>Edit</button>
+          <button
+            onClick={() => {
+              setExpand(false);
+              setExpandProfile(true);
+            }}
+          >
+            Edit
+          </button>
         </div>
       ) : null}
     </div>

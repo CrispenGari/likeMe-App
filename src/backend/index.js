@@ -24,10 +24,13 @@ const auth = app.auth();
 const db = app.firestore();
 const storage = app.storage();
 const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+const EmailProvider = new firebase.auth.EmailAuthProvider();
 const _ = {
   auth,
   db,
   storage,
   timestamp,
+  EmailProvider,
 };
 export default _;

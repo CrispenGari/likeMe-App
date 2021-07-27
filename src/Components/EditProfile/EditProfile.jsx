@@ -15,10 +15,12 @@ import {
   phoneNumberExpression,
 } from "../../utils/regularExpressions";
 import helperFunctions from "../../utils/helperfunctions";
-import { useParams } from "react-router-dom";
-const EditProfile = ({ setEditProfile, noHeader }) => {
+import { useParams, useLocation } from "react-router-dom";
+const EditProfile = ({ setEditProfile, noHeader, closeEditProfile }) => {
   const genders = ["male", "female", "gay", "lesbian"];
   const { uid } = useParams();
+
+  const location = useLocation();
   const currentUser = useSelector((state) => state.users).find(
     (_user) => _user?.id === uid
   );
@@ -210,6 +212,7 @@ const EditProfile = ({ setEditProfile, noHeader }) => {
   return (
     <form
       className={`edit__profile ${noHeader ? "edit__profile--settings" : ""}`}
+      onSubmit={(e) => e.preventDefault()}
     >
       {noHeader === false ? <h1>Edit your profile</h1> : null}
       <div className="edit__profile__twins">
@@ -311,7 +314,17 @@ const EditProfile = ({ setEditProfile, noHeader }) => {
         <button type="submit" onClick={saveChanges}>
           save
         </button>
-        <button onClick={() => setEditProfile(false)}>cancel</button>
+        <button
+          onClick={() => {
+            if (location?.pathname?.startsWith("/settings")) {
+              closeEditProfile();
+            } else {
+              setEditProfile(false);
+            }
+          }}
+        >
+          cancel
+        </button>
       </div>
     </form>
   );

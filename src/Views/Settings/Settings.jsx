@@ -13,6 +13,8 @@ import {
   ResetPassword,
 } from "../../Components/Settings";
 const Settings = () => {
+  const [expandProfile, setExpandProfile] = React.useState(false);
+
   return (
     <div className="settings">
       <div className="settings__header">
@@ -20,8 +22,8 @@ const Settings = () => {
       </div>
       <div className="settings__main">
         <Profile />
-        <Info />
-        <EditProfile />
+        <Info setExpandProfile={setExpandProfile} />
+        <EditProfile expand={expandProfile} setExpand={setExpandProfile} />
         <DeleteAccount />
         <Theme />
         <DisableAccount />
