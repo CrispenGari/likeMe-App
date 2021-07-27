@@ -11,6 +11,7 @@ import {
   Terms,
   People,
   Landing,
+  AdditionalInfo,
 } from "./Views";
 import { useSelector } from "react-redux";
 import { useUserFetch, useFirebaseData } from "./hooks";
@@ -32,6 +33,8 @@ const App = () => {
       setWelcome(false);
     }
   }, [user]);
+
+  return <AdditionalInfo />;
   if (loading) {
     return (
       <div className="app">
@@ -72,6 +75,9 @@ const App = () => {
             </Route>
             <Route path="/settings/:uid/:randomId">
               <Settings />
+            </Route>
+            <Route path="/additional-information/:uid/:randomId">
+              <AdditionalInfo />
             </Route>
             <Route path="/">
               <Home />

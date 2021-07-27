@@ -43,7 +43,7 @@ const EditProfile = ({ setEditProfile, noHeader, closeEditProfile }) => {
 
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(
-    currentUser?.phoneNumber ?? ""
+    currentUser?.phoneNumber ? currentUser?.phoneNumber : ""
   );
   const [bio, setBio] = useState(currentUser?.bio ? currentUser?.bio : "");
 

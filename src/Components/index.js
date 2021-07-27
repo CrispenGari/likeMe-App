@@ -15,3 +15,4 @@ export { default as Fleet } from "./Fleet/Fleet";
 export { default as Likes } from "./Likes/Likes";
 export { default as Like } from "./Like/Like";
 export { default as Menu } from "./Menu/Menu";
+export { default as MoreInfo } from "./MoreInfo/MoreInfo";

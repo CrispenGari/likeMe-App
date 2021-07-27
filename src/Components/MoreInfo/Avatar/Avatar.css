@@ -1,0 +1,48 @@
+.more__info__avatar__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid lightblue;
+  padding: 10px 0;
+}
+.more__info__avatar__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  margin-top: 10px;
+}
+.more__info__avatar__buttons > button {
+  padding: 5px !important;
+}
+.more__info__avatar__buttons > button:first-of-type {
+  color: cornflowerblue !important;
+}
+.more__info__avatar__container__cover {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.more__info__input__message {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: lightseagreen;
+}
+.more__info__avatar {
+  width: 150px !important;
+  height: 150px !important;
+  cursor: pointer;
+  border: 2px solid cornflowerblue;
+}
+.more__info__progress {
+  width: 150px !important;
+  height: 150px !important;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  top: 0;
+}

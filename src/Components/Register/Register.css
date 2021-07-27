@@ -81,6 +81,10 @@
   font-size: 0.9rem;
   cursor: pointer;
   margin: 20px auto;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: row;
 }
 .register__bottom {
   display: flex;
@@ -103,7 +107,11 @@
   font-size: 0.9rem;
   cursor: pointer;
   margin: 5px auto;
-  color: white;
+  color: white !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: row;
 }
 
 .register > button:hover {

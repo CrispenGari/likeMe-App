@@ -4,9 +4,14 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";
 import firebase from "../../backend";
-import { emailExp } from "../../utils/regularExpressions";
+import { emailExp, usernameExp } from "../../utils/regularExpressions";
+import Input from "./Input";
+import { BsPersonCheck } from "react-icons/bs";
+import { ActivityIndicator } from "../Common";
+import { useHistory } from "react-router-dom";
+import { v4 as uuid_v4 } from "uuid";
 const Register = ({ setCardToMount, setCredentials }) => {
-  const emailRef = useRef(null);
+  const history = useHistory();
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -17,19 +22,30 @@ const Register = ({ setCardToMount, setCredentials }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const createAccount = (e) => {
     e.preventDefault();
+    console.log(email, password, confirmPassword, username);
+
     if (!email) {
       setEmailError("email is required.");
       return;
     } else {
       setEmailError("");
     }
+
     if (emailExp.test(email) === true) {
       setEmailError("");
     } else {
       return setEmailError("invalid email address.");
+    }
+    if (usernameExp.test(username) === false) {
+      return setUsernameError("invalid username!");
+    } else {
+      setUsernameError("");
     }
     if (!password) {
       setPasswordMessage("password is required.");
@@ -47,7 +63,13 @@ const Register = ({ setCardToMount, setCredentials }) => {
     } else {
       setConfPasswordError("");
     }
-    if (!emailError && !passwordMessage && !confPasswordError) {
+
+    if (
+      !emailError &&
+      !passwordMessage &&
+      !confPasswordError &&
+      !usernameError
+    ) {
       firebase.db
         .collection("users")
         .where("email", "==", email.toLowerCase())
@@ -55,21 +77,70 @@ const Register = ({ setCardToMount, setCredentials }) => {
         .then((doc) => {
           if (doc.docs.length > 0) {
             setEmailError("the email is already taken by someone.");
+            setLoading(false);
             return;
           } else {
             setCredentials({
               email: email.trim().toLocaleLowerCase(),
               password: password.trim().toLocaleLowerCase(),
             });
-            setEmail("");
-            setPassword("");
-            setConfirmPassword("");
-            setEmailError("");
-            setShowPassword(false);
-            setShowConfPassword(false);
-            setConfPasswordError("");
-            setCardToMount("profile");
           }
+        })
+        .then(() => {
+          firebase.db
+            .collection("users")
+            .where("displayName", "==", username.trim().toLocaleLowerCase())
+            .get()
+            .then((users) => {
+              if (users.docs.length > 0) {
+                setLoading(false);
+                setUsernameError("the username is already taken by someone!");
+                return;
+              } else {
+                setUsernameError("");
+              }
+            });
+        })
+        .then(() => {
+          // No errors create an account with username and password
+
+          firebase.auth
+            .createUserWithEmailAndPassword(
+              email.trim().toLocaleLowerCase(),
+              password.trim().toLocaleLowerCase()
+            )
+            .then((authUser) => {
+              authUser.user
+                .updateProfile({
+                  displayName: username.trim().toLowerCase(),
+                })
+                .then(() => {
+                  const { displayName, email, photoURL, uid } = authUser?.user;
+                  history.push(`/additional-information/${uid}/${uuid_v4()}`);
+                  // firebase.db
+                  //   .collection("users")
+                  //   .doc(uid)
+                  //   .set({
+                  //     displayName: displayName.trim().toLocaleLowerCase(),
+                  //     email: email.trim().toLocaleLowerCase(),
+                  //     photoURL: photoURL,
+                  //     phoneNumber: null,
+                  //   })
+                  //   .finally(() => {
+                  //     setUsernameError("");
+                  //     setUsername("");
+                  //     setEmail("");
+                  //     setPassword("");
+                  //     setConfirmPassword("");
+                  //     setEmailError("");
+                  //     setShowPassword(false);
+                  //     setShowConfPassword(false);
+                  //     setConfPasswordError("");
+                  //     setCardToMount("login");
+                  //     setLoading(false);
+                  //   });
+                });
+            });
         });
     }
   };
@@ -77,106 +148,53 @@ const Register = ({ setCardToMount, setCredentials }) => {
   return (
     <form className="register" onSubmit={createAccount}>
       <h1>Register</h1>
-      <div className="register__input">
-        <label>
-          email <span>*</span>
-        </label>
-        <div
-          className={`register__input__field ${
-            emailError && "register__input__field--error"
-          }`}
-        >
-          <HiOutlineMail className="login__input__icon" />
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            ref={emailRef}
-            type="email"
-            placeholder="email"
-          />
-        </div>
-        <p>{emailError}</p>
-      </div>
-      <div className="register__input">
-        <label>
-          password <span>*</span>
-        </label>
-        <div
-          className={`register__input__field ${
-            passwordMessage && "register__input__field--error"
-          }`}
-        >
-          <CgLock className="login__input__icon" />
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            ref={passwordRef}
-            type="password"
-            placeholder="password"
-          />
-          {!showPassword ? (
-            <IoMdEyeOff
-              title="show password"
-              onClick={() => {
-                passwordRef.current.setAttribute("type", "text");
-                setShowPassword(true);
-              }}
-              className="register__input__field__icon"
-            />
-          ) : (
-            <IoMdEye
-              title="hide password"
-              onClick={() => {
-                passwordRef.current.setAttribute("type", "password");
-                setShowPassword(false);
-              }}
-              className="register__input__field__icon"
-            />
-          )}
-        </div>
-        <p>{passwordMessage}</p>
-      </div>
-      <div className="register__input">
-        <label>
-          confirm password <span>*</span>
-        </label>
-        <div
-          className={`register__input__field ${
-            confPasswordError && "register__input__field--error"
-          }`}
-        >
-          <CgLock className="login__input__icon" />
-          <input
-            ref={confirmPasswordRef}
-            type="password"
-            placeholder="confirm password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          {!showConfPassword ? (
-            <IoMdEyeOff
-              title="show password"
-              onClick={() => {
-                confirmPasswordRef.current.setAttribute("type", "text");
-                setShowConfPassword(true);
-              }}
-              className="register__input__field__icon"
-            />
-          ) : (
-            <IoMdEye
-              title="hide password"
-              onClick={() => {
-                confirmPasswordRef.current.setAttribute("type", "password");
-                setShowConfPassword(false);
-              }}
-              className="register__input__field__icon"
-            />
-          )}
-        </div>
-        <p>{confPasswordError}</p>
-      </div>
+      <Input
+        LeftIcon={HiOutlineMail}
+        type="email"
+        placeholder="email"
+        value={email}
+        focus={true}
+        setValue={setEmail}
+        label="email"
+        inputError={emailError}
+      />
+      <Input
+        LeftIcon={BsPersonCheck}
+        type="text"
+        placeholder="username"
+        value={username}
+        setValue={setUsername}
+        label="username"
+        inputError={usernameError}
+      />
+      <Input
+        LeftIcon={CgLock}
+        type="password"
+        placeholder="password"
+        inputRef={passwordRef}
+        value={password}
+        setValue={setPassword}
+        label="password"
+        RightIcon={!showPassword ? IoMdEyeOff : IoMdEye}
+        rightIconTitle={!showPassword ? "show password" : "hide password"}
+        changeInputType={setShowPassword}
+        inputError={passwordMessage}
+      />
+      <Input
+        LeftIcon={CgLock}
+        type="password"
+        placeholder="confirm password"
+        inputRef={confirmPasswordRef}
+        value={confirmPassword}
+        setValue={setConfirmPassword}
+        label="confirm password"
+        RightIcon={!showConfPassword ? IoMdEyeOff : IoMdEye}
+        rightIconTitle={!showConfPassword ? "show password" : "hide password"}
+        changeInputType={setShowConfPassword}
+        inputError={confPasswordError}
+      />
       <button type="submit" onClick={createAccount}>
-        CONTINUE
+        REGISTER {loading && <ActivityIndicator size={15} />}
       </button>
       <div className="register__bottom">
         <p>Already have an account?</p>
