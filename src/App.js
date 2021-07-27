@@ -34,7 +34,6 @@ const App = () => {
     }
   }, [user]);
 
-  return <AdditionalInfo />;
   if (loading) {
     return (
       <div className="app">
@@ -76,7 +75,7 @@ const App = () => {
             <Route path="/settings/:uid/:randomId">
               <Settings />
             </Route>
-            <Route path="/additional-information/:uid/:randomId">
+            <Route path="/additional-information/:uid/:randomId" exact>
               <AdditionalInfo />
             </Route>
             <Route path="/">

@@ -67,7 +67,6 @@ const EditProfile = ({ setEditProfile, noHeader, closeEditProfile }) => {
     currentUser?.photoURL ? currentUser?.photoUR : null
   );
   const [loading, setLoading] = useState(false);
-  const [loadingUpdate, setLoadingUpdate] = useState(false);
   const handleChange = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {

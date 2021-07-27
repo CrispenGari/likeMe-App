@@ -1,28 +1,25 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "./Avatar";
 import "./MoreInfo.css";
 import { BsPersonCheck } from "react-icons/bs";
-import { HiOutlineMail } from "react-icons/hi";
-import { useSelector } from "react-redux";
 import Input from "../EditProfile/Input/Input";
-import { useParams } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
+import firebase from "../../backend";
+import { v4 as uuid_v4 } from "uuid";
+import { ActivityIndicator } from "../Common";
 import {
-  usernameExp,
-  emailExp,
-  surnameExpression,
   nameExpression,
   phoneNumberExpression,
 } from "../../utils/regularExpressions";
-import helperFunctions from "../../utils/helperfunctions";
 const MoreInfo = () => {
+  const history = useHistory();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const statuses = ["single", "dating", "complicated", "searching"];
   const genders = ["male", "female", "gay", "lesbian"];
   const [birthday, setBirthday] = useState("");
-
+  const currentUser = firebase.auth.currentUser;
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -33,6 +30,7 @@ const MoreInfo = () => {
   const [lastNameError, setLastNameError] = useState("");
   const [gender, setGender] = useState(genders[0]);
   const [status, setStatus] = useState(statuses[0]);
+  const [updateLoading, setUpdateLoading] = useState(false);
 
   const handleChange = (e) => {
     const reader = new FileReader();
@@ -72,23 +70,97 @@ const MoreInfo = () => {
     }
 
     // If we don't have these errors then magic should fire
-    //     if (image) {
-    //         const uploadTask = firebase.storage
-    //           .ref(`profiles/${username}`)
-    //           .putString(image, "data_url");
-    //         uploadTask.on(
-    //           "state_changed",
-    //           (obs) => {
-    //             setProgress((obs.bytesTransferred / obs.totalBytes) * 100);
-    //           },
-    //           (error) => {
-    //             console.error(error);
-    //           },
-    //           () => {
-    //             firebase.storage
-    //               .ref("profiles")
-    //               .child(username)
-    //               .getDownloadURL()
+    setUpdateLoading(true);
+    if (image) {
+      // Post the image to storage
+      const childName = `${currentUser?.displayName
+        ?.trim()
+        .toLowerCase()}_${uuid_v4()}`;
+      const uploadTask = firebase.storage
+        .ref(`profiles/${childName}`)
+        .putString(image, "data_url");
+      uploadTask.on(
+        "state_changed",
+        (obs) => {
+          setProgress((obs.bytesTransferred / obs.totalBytes) * 100);
+        },
+        (error) => {
+          console.error(error);
+        },
+        () => {
+          firebase.storage
+            .ref("profiles")
+            .child(childName)
+            .getDownloadURL()
+            .then((url) => {
+              firebase.auth.currentUser
+                .updateProfile({
+                  photoURL: url,
+                  phoneNumber: phoneNumber,
+                })
+                .then(() => {
+                  firebase.db.collection("users").doc(currentUser?.uid).update({
+                    status: status,
+                    firstName: firstName?.trim()?.toLowerCase(),
+                    lastName: lastName?.trim()?.toLowerCase(),
+                    gender: gender,
+                    birthday: birthday,
+                    phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+                    photoURL: url,
+                  });
+                })
+                .then(() => {
+                  firebase.db.collection("profiles").add({
+                    profile: url,
+                    timestamp: firebase.timestamp,
+                    displayName: currentUser?.displayName,
+                    email: currentUser?.email,
+                    userId: currentUser?.uid,
+                  });
+                });
+            })
+            .finally(() => {
+              setImage(null);
+              setProgress(0);
+              setLoading(false);
+              setUpdateLoading(false);
+              setLastNameError("");
+              setStatus(statuses[0]);
+              setGender(genders[0]);
+              history.replace("/");
+            });
+        }
+      );
+      return;
+    } else {
+      firebase.auth.currentUser
+        .updateProfile({
+          photoURL: null,
+          phoneNumber: phoneNumber,
+        })
+        .then(() => {
+          firebase.db.collection("users").doc(currentUser?.uid).update({
+            status: status,
+            firstName: firstName?.trim()?.toLowerCase(),
+            lastName: lastName?.trim()?.toLowerCase(),
+            gender: gender,
+            birthday: birthday,
+            phoneNumber: phoneNumber?.trim()?.toLowerCase(),
+            photoURL: null,
+          });
+        })
+        .finally(() => {
+          setImage(null);
+          setProgress(0);
+          setLoading(false);
+          setUpdateLoading(false);
+          setLastNameError("");
+          setStatus(statuses[0]);
+          setGender(genders[0]);
+          history.replace("/");
+        });
+    }
+
     //               .then((url) => {
     //                 firebase.auth
     //                   .createUserWithEmailAndPassword(
@@ -228,8 +300,17 @@ const MoreInfo = () => {
         </div>
 
         <div className="more__info__buttons">
-          <button onClick={save}>SAVE</button>
-          <button>NOT NOW</button>
+          <button onClick={save}>
+            SAVE
+            {updateLoading ? <ActivityIndicator size={15} /> : null}
+          </button>
+          <button
+            onClick={async () => {
+              await history.replace("/");
+            }}
+          >
+            NOT NOW
+          </button>
         </div>
       </div>
     </div>

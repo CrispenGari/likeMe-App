@@ -146,7 +146,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
   return (
     <form className="profile">
       <h1>Create a public profile</h1>
-      <div className="profile__avatar__container">
+      {/* <div className="profile__avatar__container">
         <p className="profile__input__message">
           This profile picture will be visible to everyone. Setting it is
           optional.
@@ -183,7 +183,7 @@ const Profile = ({ setCardToMount, credentials, setCredentials }) => {
           />
           <AiFillCamera className="profile__btn__icon" />
         </IconButton>
-      </div>
+      </div> */}
       <div className="profile__input">
         <p className="profile__input__message">
           This username will be public and visible to everyone.

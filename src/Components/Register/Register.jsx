@@ -10,7 +10,7 @@ import { BsPersonCheck } from "react-icons/bs";
 import { ActivityIndicator } from "../Common";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid_v4 } from "uuid";
-const Register = ({ setCardToMount, setCredentials }) => {
+const Register = ({ setCardToMount }) => {
   const history = useHistory();
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -70,20 +70,16 @@ const Register = ({ setCardToMount, setCredentials }) => {
       !confPasswordError &&
       !usernameError
     ) {
+      setLoading(true);
       firebase.db
         .collection("users")
-        .where("email", "==", email.toLowerCase())
+        .where("email", "==", email.trim().toLowerCase())
         .get()
         .then((doc) => {
           if (doc.docs.length > 0) {
-            setEmailError("the email is already taken by someone.");
+            setEmailError("the email is already taken by someone!");
             setLoading(false);
             return;
-          } else {
-            setCredentials({
-              email: email.trim().toLocaleLowerCase(),
-              password: password.trim().toLocaleLowerCase(),
-            });
           }
         })
         .then(() => {
@@ -107,7 +103,7 @@ const Register = ({ setCardToMount, setCredentials }) => {
           firebase.auth
             .createUserWithEmailAndPassword(
               email.trim().toLocaleLowerCase(),
-              password.trim().toLocaleLowerCase()
+              password
             )
             .then((authUser) => {
               authUser.user
@@ -116,29 +112,32 @@ const Register = ({ setCardToMount, setCredentials }) => {
                 })
                 .then(() => {
                   const { displayName, email, photoURL, uid } = authUser?.user;
-                  history.push(`/additional-information/${uid}/${uuid_v4()}`);
-                  // firebase.db
-                  //   .collection("users")
-                  //   .doc(uid)
-                  //   .set({
-                  //     displayName: displayName.trim().toLocaleLowerCase(),
-                  //     email: email.trim().toLocaleLowerCase(),
-                  //     photoURL: photoURL,
-                  //     phoneNumber: null,
-                  //   })
-                  //   .finally(() => {
-                  //     setUsernameError("");
-                  //     setUsername("");
-                  //     setEmail("");
-                  //     setPassword("");
-                  //     setConfirmPassword("");
-                  //     setEmailError("");
-                  //     setShowPassword(false);
-                  //     setShowConfPassword(false);
-                  //     setConfPasswordError("");
-                  //     setCardToMount("login");
-                  //     setLoading(false);
-                  //   });
+                  firebase.db
+                    .collection("users")
+                    .doc(uid)
+                    .set({
+                      displayName: displayName.trim().toLocaleLowerCase(),
+                      email: email.trim().toLocaleLowerCase(),
+                      photoURL: photoURL,
+                      phoneNumber: null,
+                    })
+                    .finally(() => {
+                      setUsernameError("");
+                      setUsername("");
+                      setEmail("");
+                      setPassword("");
+                      setConfirmPassword("");
+                      setEmailError("");
+                      setShowPassword(false);
+                      setShowConfPassword(false);
+                      setConfPasswordError("");
+                      setLoading(false);
+                      (async () => {
+                        await history.replace(
+                          `/additional-information/${uid}/${uuid_v4()}`
+                        );
+                      })();
+                    });
                 });
             });
         });

@@ -1,7 +1,7 @@
 .login {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100% !important;
   padding: 20px;
   animation: login-card-animation 1s ease-in-out 0s 1 alternate forwards;
   position: relative;

@@ -11,8 +11,6 @@
   box-shadow: 2px 2px 2px 2px lightgray;
   padding: 10px;
   flex-direction: column;
-  display: grid;
-  place-items: center;
 }
 .auth > img {
   -webkit-user-drag: none;
