@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import firebase from "../../backend";
 import { useDispatch } from "react-redux";
 

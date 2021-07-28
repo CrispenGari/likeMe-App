@@ -8,4 +8,3 @@ export { default as Terms } from "./Terms/Terms";
 export { default as People } from "./People/People";
 export { default as Settings } from "./Settings/Settings";
 export { default as Landing } from "./Landing/Landing";
-export { default as AdditionalInfo } from "./AdditionalInfo/AdditionalInfo";

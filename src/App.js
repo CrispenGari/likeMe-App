@@ -11,7 +11,6 @@ import {
   Terms,
   People,
   Landing,
-  AdditionalInfo,
 } from "./Views";
 import { useSelector } from "react-redux";
 import {
@@ -24,7 +23,6 @@ import {
 } from "./hooks";
 import Settings from "./Views/Settings/Settings";
 import useFetchUsers from "./hooks/useFetchUsers";
-import firebase from "./backend";
 
 const App = () => {
   const { loading } = useUserFetch();
