@@ -302,6 +302,34 @@ const deletePost = (postsURL, collectionName, post) => {
     .then(() => firebase.storage.refFromURL(postsURL).delete());
 };
 
+const numberFormat = (value) => {
+  if (value >= 1e9) {
+    const fractionPart = `${(value / 1e9).toFixed(1)}`.split(".")[1];
+    if (Number(fractionPart) > 0) {
+      return `${(value / 1e9).toFixed(1)}B`;
+    } else {
+      return `${(value / 1e9).toFixed(0)}B`;
+    }
+  }
+  if (value >= 1e6) {
+    const fractionPart = `${(value / 1e6).toFixed(1)}`.split(".")[1];
+    if (Number(fractionPart) > 0) {
+      return `${(value / 1e6).toFixed(1)}M`;
+    } else {
+      return `${(value / 1e6).toFixed(0)}M`;
+    }
+  }
+  if (value >= 1e3) {
+    const fractionPart = `${(value / 1e3).toFixed(1)}`.split(".")[1];
+    if (Number(fractionPart) > 0) {
+      return `${(value / 1e3).toFixed(1)}K`;
+    } else {
+      return `${(value / 1e3).toFixed(0)}K`;
+    }
+  } else {
+    return `${Number(value)}`;
+  }
+};
 const helperFunctions = {
   findHashTags,
   findMentions,
@@ -312,5 +340,6 @@ const helperFunctions = {
   deletePost,
   postSize,
   updateProfile,
+  numberFormat,
 };
 export default helperFunctions;

@@ -14,21 +14,30 @@ import {
   AdditionalInfo,
 } from "./Views";
 import { useSelector } from "react-redux";
-import { useUserFetch, useFirebaseData } from "./hooks";
+import {
+  useUserFetch,
+  useFirebaseData,
+  useFollowers,
+  useFollowings,
+  useFetchBanners,
+  useFetchProfiles,
+} from "./hooks";
 import Settings from "./Views/Settings/Settings";
 import useFetchUsers from "./hooks/useFetchUsers";
-import { useFetchBanners, useFetchProfiles } from "./hooks";
 import firebase from "./backend";
 
 const App = () => {
+  const { loading } = useUserFetch();
+  const [welcome, setWelcome] = useState(true);
+  const user = useSelector((state) => state.user);
   // USE THE HOOK useFirebaseData
   useFirebaseData();
   useFetchUsers();
   useFetchBanners();
   useFetchProfiles();
-  const { loading } = useUserFetch();
-  const [welcome, setWelcome] = useState(true);
-  const user = useSelector((state) => state.user);
+  useFollowers(user?.uid);
+  useFollowings(user?.uid);
+
   useEffect(() => {
     if (user) {
       setWelcome(false);

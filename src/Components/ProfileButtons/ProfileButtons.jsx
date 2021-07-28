@@ -80,7 +80,6 @@ const ProfileButtons = () => {
       return setLoading(false);
     }
   };
-
   return (
     <div className="profile__buttons">
       <button onClick={followUser}>
