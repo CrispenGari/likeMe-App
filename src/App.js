@@ -78,9 +78,6 @@ const App = () => {
             <Route path="/settings/:uid/:randomId">
               <Settings />
             </Route>
-            <Route path="/additional-information/:uid/:randomId" exact>
-              <AdditionalInfo />
-            </Route>
             <Route path="/">
               <Home />
             </Route>

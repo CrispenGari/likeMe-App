@@ -104,6 +104,7 @@ const Register = ({ setCardToMount }) => {
               password
             )
             .then((authUser) => {
+              const { isNewUser } = authUser.additionalUserInfo;
               authUser.user
                 .updateProfile({
                   displayName: username.trim().toLowerCase(),
@@ -118,6 +119,7 @@ const Register = ({ setCardToMount }) => {
                       email: email.trim().toLocaleLowerCase(),
                       photoURL: photoURL,
                       phoneNumber: null,
+                      isNewUser: isNewUser,
                     })
                     .finally(() => {
                       setUsernameError("");

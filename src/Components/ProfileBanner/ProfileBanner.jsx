@@ -10,14 +10,47 @@ import { useSelector } from "react-redux";
 import { v4 as uuid_v4 } from "uuid";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useFollowers, useFollowings } from "../../hooks";
 const ProfileBanner = () => {
   const inputRef = useRef(null);
-
   const { uid } = useParams();
+  // Fetch followers and followings
+
+  useEffect(() => {
+    firebase.db
+      .collection("users")
+      .doc(uid)
+      .collection("followers")
+      .onSnapshot((followers) => {
+        console.log(
+          followers.docs.map((doc) => ({ id: doc?.id, ...doc.data() }))
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    firebase.db
+      .collection("users")
+      .doc(uid)
+      .collection("followings")
+      .onSnapshot((followings) => {
+        console.log(
+          followings.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      });
+  }, []);
+
+  useEffect(() => console.log("run"), []);
   const user = useSelector((state) => state.user);
   const currentUser = useSelector((state) => state.users)?.find(
     (_user) => _user?.id === uid
   );
+  const followings = useSelector((state) => state.followings);
+  const followers = useSelector((state) => state.followers);
+  console.log(followers, followings);
 
   const [image, setImage] = useState(null);
   const [openPicture, setOpenPicture] = useState(false);

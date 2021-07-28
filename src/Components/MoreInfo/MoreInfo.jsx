@@ -107,6 +107,7 @@ const MoreInfo = () => {
                     birthday: birthday,
                     phoneNumber: phoneNumber?.trim()?.toLowerCase(),
                     photoURL: url,
+                    isNewUser: false,
                   });
                 })
                 .then(() => {
@@ -147,6 +148,7 @@ const MoreInfo = () => {
             birthday: birthday,
             phoneNumber: phoneNumber?.trim()?.toLowerCase(),
             photoURL: null,
+            isNewUser: false,
           });
         })
         .finally(() => {
@@ -160,78 +162,24 @@ const MoreInfo = () => {
           history.replace("/");
         });
     }
-
-    //               .then((url) => {
-    //                 firebase.auth
-    //                   .createUserWithEmailAndPassword(
-    //                     userCredentials.email,
-    //                     userCredentials.password
-    //                   )
-    //                   .then((authUser) => {
-    //                     authUser.user
-    //                       .updateProfile({
-    //                         displayName: username.trim().toLowerCase(),
-    //                         photoURL: url,
-    //                       })
-    //                       .then(() => {
-    //                         setCredentials({});
-    //                         setImage(null);
-    //                         setProgress(0);
-    //                         setUsernameError("");
-    //                         setUsername("");
-    //                         const { displayName, email, photoURL, uid } =
-    //                           authUser.user;
-    //                         firebase.db.collection("users").doc(uid).set({
-    //                           displayName: displayName,
-    //                           email: email,
-    //                           photoURL: photoURL,
-    //                           phoneNumber: null,
-    //                         });
-    //                         setCardToMount("login");
-    //                       });
-    //                   })
-    //                   .catch((error) => setUsernameError(error.message))
-    //                   .finally(() => {
-    //                     setLoadingCreate(false);
-    //                   });
-    //               });
-    //           }
-    //         );
-    //       } else {
-    //         firebase.auth
-    //           .createUserWithEmailAndPassword(
-    //             userCredentials.email,
-    //             userCredentials.password
-    //           )
-    //           .then((authUser) => {
-    //             authUser.user
-    //               .updateProfile({
-    //                 displayName: username.trim().toLowerCase(),
-    //                 photoURL: null,
-    //               })
-    //               .then(() => {
-    //                 setCredentials({});
-    //                 setImage(null);
-    //                 setProgress(0);
-    //                 setUsernameError("");
-    //                 setUsername("");
-    //                 const { displayName, email, photoURL, uid } = authUser.user;
-    //                 firebase.db.collection("users").doc(uid).set({
-    //                   displayName: displayName,
-    //                   email: email,
-    //                   photoURL: photoURL,
-    //                   phoneNumber: null,
-    //                 });
-    //                 setCardToMount("login");
-    //               });
-    //           })
-    //           .catch((error) => setUsernameError(error.message))
-    //           .finally(() => {
-    //             setLoadingCreate(false);
-    //           });
-    //       }
-    //     }
-    //   });
+  };
+  const notNow = async () => {
+    await firebase.db
+      .collection("users")
+      .doc(currentUser?.uid)
+      .update({
+        status: null,
+        firstName: null,
+        lastName: null,
+        gender: null,
+        birthday: null,
+        phoneNumber: null,
+        photoURL: null,
+        isNewUser: false,
+      })
+      .then(() => {})
+      .catch((err) => console.error(err))
+      .finally(() => history.replace("/"));
   };
   return (
     <div className="more__info">
@@ -304,13 +252,7 @@ const MoreInfo = () => {
             SAVE
             {updateLoading ? <ActivityIndicator size={15} /> : null}
           </button>
-          <button
-            onClick={async () => {
-              await history.replace("/");
-            }}
-          >
-            NOT NOW
-          </button>
+          <button onClick={notNow}>NOT NOW</button>
         </div>
       </div>
     </div>
