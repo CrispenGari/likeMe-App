@@ -12,8 +12,7 @@ const useFollowers = (uid) => {
         .doc(uid)
         .collection("followers")
         .orderBy("timestamp", "desc")
-        .get()
-        .then((followers) => {
+        .onSnapshot((followers) => {
           dispatch(
             actions.setFollowers(
               followers.docs.map((doc) => ({

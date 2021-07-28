@@ -1,10 +1,10 @@
 import "./ProfileButtons.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import firebase from "../../backend";
 import { ActivityIndicator } from "../Common";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { SignalCellularConnectedNoInternet4Bar } from "@material-ui/icons";
+import { useFollowers } from "../../hooks";
 
 const ProfileButtons = () => {
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,12 @@ const ProfileButtons = () => {
   const _user = useSelector((state) =>
     state?.users?.find((__user) => __user?.id === uid)
   );
+  // Fetch followers and followings
+  useFollowers(uid);
+  const follower = useSelector((state) =>
+    state.followers?.find((__user) => __user?.id === currentUser?.id)
+  );
+
   const followUser = () => {
     setLoading(true);
     if (_user && currentUser) {
@@ -82,14 +88,17 @@ const ProfileButtons = () => {
   };
   return (
     <div className="profile__buttons">
-      <button onClick={followUser}>
-        follow
-        {loading ? <ActivityIndicator size={15} /> : null}
-      </button>
-      <button onClick={unFollowUser}>
-        unfollow
-        {loading ? <ActivityIndicator size={15} /> : null}
-      </button>
+      {follower ? (
+        <button onClick={unFollowUser}>
+          unfollow
+          {loading ? <ActivityIndicator size={15} /> : null}
+        </button>
+      ) : (
+        <button onClick={followUser} className="profile__button__follow">
+          follow
+          {loading ? <ActivityIndicator size={15} /> : null}
+        </button>
+      )}
     </div>
   );
 };

@@ -9,7 +9,7 @@
 .profile__posts__container {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+justify-content: space-around;
   overflow-x: hidden;
   overflow-y: scroll;
   flex: 1;
