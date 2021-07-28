@@ -60,6 +60,18 @@ const setProfiles = (value) => {
     value: value,
   };
 };
+const setFollowings = (value) => {
+  return {
+    type: constants.SET_FOLLOWINGS,
+    value: value,
+  };
+};
+const setFollowers = (value) => {
+  return {
+    type: constants.SET_FOLLOWERS,
+    value: value,
+  };
+};
 
 const actions = {
   setUser,
@@ -72,6 +84,8 @@ const actions = {
   setBanners,
   setProfileTab,
   setProfiles,
+  setFollowings,
+  setFollowers,
 };
 
 export default actions;

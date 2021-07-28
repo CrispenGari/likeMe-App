@@ -8,6 +8,8 @@ import fleets from "./fleetsReducer";
 import banners from "./bannersReducer";
 import profileTab from "./profileTabReducer";
 import profiles from "./setProfilesReducer";
+import followers from "./followersReducer";
+import followings from "./followingsReducer";
 const rootReducers = combineReducers({
   messages,
   posts,
@@ -18,6 +20,8 @@ const rootReducers = combineReducers({
   banners,
   profileTab,
   profiles,
+  followers,
+  followings,
 });
 
 export default rootReducers;
