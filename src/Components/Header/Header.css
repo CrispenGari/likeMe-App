@@ -20,6 +20,7 @@
   object-fit: contain;
   cursor: pointer;
   -webkit-user-drag: none !important;
+  display: none;
 }
 .header__left > h1 {
   background: linear-gradient(
@@ -34,7 +35,6 @@
   color: transparent;
   background-clip: text;
   cursor: pointer;
-  display: none;
 }
 
 .header__center {

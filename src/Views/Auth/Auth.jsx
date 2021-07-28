@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Auth.css";
 import Register from "../../Components/Register/Register";
 import Login from "../../Components/Login/Login";
-import Profile from "../../Components/Profile/Profile";
 import Reset from "../../Components/Reset/Reset";
 
 import { logos } from "../../utils/logos";

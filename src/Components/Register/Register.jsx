@@ -1,5 +1,5 @@
 import "./Register.css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { CgLock } from "react-icons/cg";

@@ -2,7 +2,7 @@ import "./ProfilePostsNav.css";
 import React from "react";
 import { useSelector } from "react-redux";
 import { IoMdPhotos } from "react-icons/io";
-import { GiSelfLove, GiKnightBanner } from "react-icons/gi";
+import { GiKnightBanner } from "react-icons/gi";
 import { CgHashtag, CgProfile } from "react-icons/cg";
 import ProfilePostsNavItem from "../ProfilePostsNavItem/ProfilePostsNavItem";
 import { profileTabs } from "../../utils/tabs";

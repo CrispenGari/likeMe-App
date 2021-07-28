@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import "./Avatar.css";
 import { AiFillCamera } from "react-icons/ai";
 import { Avatar as A, IconButton } from "@material-ui/core";
