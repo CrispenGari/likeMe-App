@@ -57,4 +57,6 @@ textarea {
 .username__holder {
   display: flex;
   align-items: center;
+  width: fit-content;
+  margin: 0px auto;
 }

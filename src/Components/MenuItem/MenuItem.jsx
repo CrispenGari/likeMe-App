@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 import firebase from "../../backend";
+import { VerifiedBadge } from "../Common";
 import { v4 as uuid_v4 } from "uuid";
 const MenuItem = ({
   content,
@@ -16,6 +17,10 @@ const MenuItem = ({
 }) => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
+
+  const currentUser = useSelector((state) =>
+    state?.users?.find((_user) => _user?.id === user?.uid)
+  );
 
   if (withUser) {
     return (
@@ -33,7 +38,10 @@ const MenuItem = ({
           alt={user?.displayName}
         />
         <div>
-          <h1>{user?.displayName}</h1>
+          <h1 className="username__holder">
+            @{user?.displayName}
+            {currentUser?.userVerified ? <VerifiedBadge /> : null}
+          </h1>
           <p>{subTitle}</p>
         </div>
       </div>
@@ -42,7 +50,7 @@ const MenuItem = ({
 
   const navigate = (title) => {
     if (title === "sign out") {
-      firebase.auth.signOut();
+      firebase.auth.signOut().finally(() => history.replace("/"));
     } else if (title === "notifications") {
     } else if (title === "settings") {
       history.push(`/settings/${user?.uid}/${uuid_v4()}`);

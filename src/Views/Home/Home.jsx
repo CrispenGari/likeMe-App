@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import { Header, Posts, Form } from "../../Components";
+import { Header, Posts, Form, MoreInfo } from "../../Components";
 
 import { IoIosCreate } from "react-icons/io";
 import { IconButton } from "@material-ui/core";
@@ -19,6 +19,9 @@ const Home = () => {
 
   return (
     <div className="home">
+      <div className="home__newuser">
+        <MoreInfo />
+      </div>
       <Header />
       {showForm && <Form setShowForm={setShowForm} />}
 

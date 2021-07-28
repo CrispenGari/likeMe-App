@@ -139,10 +139,12 @@ const ProfileBanner = () => {
           ) : null}
         </div>
         <h1>LIKEME</h1>
-        <p className="username__holder">
-          @{currentUser?.displayName}
-          {currentUser?.userVerified ? <VerifiedBadge /> : null}
-        </p>
+        {currentUser ? (
+          <p className="username__holder">
+            @{currentUser?.displayName}
+            {currentUser?.userVerified ? <VerifiedBadge left={2} /> : null}
+          </p>
+        ) : null}
         <div className="profile__banner__username__banner">
           <p>
             {currentUser?.bio ? currentUser?.bio : "Hello, im new to likeme!"}

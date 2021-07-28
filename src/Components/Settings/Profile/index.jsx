@@ -189,7 +189,7 @@ const Profile = () => {
         <button onClick={updateOnlyProfile}>update</button>
       </div>
       <div className="settings__profile__right">
-        <p>
+        <p className="username__holder">
           @{currentUser?.displayName}
           {currentUser?.userVerified ? <VerifiedBadge /> : null}
         </p>

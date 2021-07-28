@@ -20,3 +20,29 @@
   color: white !important;
   font-size: 1rem !important;
 }
+
+.home__newuser {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  overflow-y: scroll;
+  overflow-x: hidden !important;
+  width: 100vw;
+  height: 100vh;
+}
+.home__newuser::-webkit-scrollbar {
+  display: none !important;
+}
+
+@media only screen and (max-width: 400px) {
+  .home__newuser {
+    padding: 0;
+    background: white;
+  }
+}

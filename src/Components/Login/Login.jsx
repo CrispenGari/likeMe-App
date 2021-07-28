@@ -3,10 +3,10 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import { CgLock } from "react-icons/cg";
 import { HiOutlineMail } from "react-icons/hi";
 import firebase from "../../backend";
-import { ActivityIndicator } from "../Common";
+import { ActivityIndicator, VerifiedBadge } from "../Common";
 import "./Login.css";
 import { Avatar } from "@material-ui/core";
-import { logos } from "../../utils/logos";
+
 import {
   emailExp,
   phoneNumberExpression,
@@ -95,7 +95,12 @@ const Login = ({ setCardToMount }) => {
           src={localUser ? localUser?.photoURL : null}
           className="login__avatar"
         />
-        <p>{localUser?.displayName}</p>
+        {localUser && (
+          <p className="username__holder">
+            @{localUser?.displayName}
+            {localUser?.userVerified ? <VerifiedBadge /> : null}
+          </p>
+        )}
       </div>
 
       <div className="login__input">
