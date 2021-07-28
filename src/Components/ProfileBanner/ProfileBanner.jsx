@@ -2,7 +2,7 @@ import "./ProfileBanner.css";
 import React, { useState } from "react";
 import { Avatar } from "@material-ui/core";
 import { useRef } from "react";
-import { ActivityIndicator } from "../Common";
+import { ActivityIndicator, VerifiedBadge } from "../Common";
 
 import firebase from "../../backend";
 import Image from "../Image/Image";
@@ -139,7 +139,10 @@ const ProfileBanner = () => {
           ) : null}
         </div>
         <h1>LIKEME</h1>
-        <p>@{currentUser?.displayName}</p>
+        <p className="username__holder">
+          @{currentUser?.displayName}
+          {currentUser?.userVerified ? <VerifiedBadge /> : null}
+        </p>
         <div className="profile__banner__username__banner">
           <p>
             {currentUser?.bio ? currentUser?.bio : "Hello, im new to likeme!"}

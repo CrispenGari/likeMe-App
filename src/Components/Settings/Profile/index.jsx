@@ -7,7 +7,11 @@ import { FiCameraOff } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import firebase from "../../../backend";
+import { useFollowers, useFollowings } from "../../../hooks";
+
+import helperFunctions from "../../../utils/helperfunctions";
 import { v4 as uuid_v4 } from "uuid";
+import { VerifiedBadge } from "../../Common";
 
 const Profile = () => {
   const inputRef = React.useRef(null);
@@ -17,6 +21,11 @@ const Profile = () => {
   const currentUser = useSelector((state) =>
     state?.users?.find((_user) => _user?.id === uid)
   );
+
+  useFollowings(uid);
+  useFollowers(uid);
+  const followings = useSelector((state) => state.followings);
+  const followers = useSelector((state) => state.followers);
 
   const updateOnlyProfile = async () => {
     setLoading(true);
@@ -180,14 +189,17 @@ const Profile = () => {
         <button onClick={updateOnlyProfile}>update</button>
       </div>
       <div className="settings__profile__right">
-        <p>@{currentUser?.displayName}</p>
+        <p>
+          @{currentUser?.displayName}
+          {currentUser?.userVerified ? <VerifiedBadge /> : null}
+        </p>
         <div>
           <div className="settings__profile__stats__item">
-            <h1>324</h1>
+            <h1>{helperFunctions.numberFormat(followings?.length)}</h1>
             <p>followings</p>
           </div>
           <div className="settings__profile__stats__item">
-            <h1>324</h1>
+            <h1>{helperFunctions.numberFormat(followers?.length)}</h1>
             <p>followers</p>
           </div>
           <div className="settings__profile__stats__item">
@@ -195,7 +207,7 @@ const Profile = () => {
             <p>likes</p>
           </div>
           <div className="settings__profile__stats__item">
-            <h1>{displayPost?.length}</h1>
+            <h1>{helperFunctions.numberFormat(displayPost?.length)}</h1>
             <p>posts</p>
           </div>
         </div>

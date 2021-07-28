@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
 
-import { Avatar, IconButton, Popover, Modal } from "@material-ui/core";
+import { Avatar, IconButton, Popover } from "@material-ui/core";
 import {
   FavoriteBorder,
   Favorite,
@@ -10,13 +10,12 @@ import {
   GetApp,
 } from "@material-ui/icons";
 
-import { HiBadgeCheck } from "react-icons/hi";
 import { FaComments } from "react-icons/fa";
-import { Comments, PostOptions, Likes } from "../../Components";
+import { Comments, PostOptions } from "../../Components";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
 import { useHistory } from "react-router-dom";
-import { ActivityIndicator } from "../Common";
+import { ActivityIndicator, VerifiedBadge } from "../Common";
 import Image from "../Image/Image";
 import helperFunctions from "../../utils/helperfunctions";
 import { v4 as uuid_v4 } from "uuid";
@@ -181,9 +180,7 @@ const Post = ({ post, setShowNotification }) => {
               {post?.displayName === user?.displayName
                 ? "you"
                 : post?.displayName}
-              {post?.userVerified ? (
-                <HiBadgeCheck className="post__high__badge" />
-              ) : null}
+              {post?.userVerified ? <VerifiedBadge size={14} /> : null}
             </h1>
             <small>•</small> <small>{time}</small>
           </div>

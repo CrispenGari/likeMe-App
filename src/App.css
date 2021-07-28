@@ -54,3 +54,7 @@ textarea {
 .error {
   color: red;
 }
+.username__holder {
+  display: flex;
+  align-items: center;
+}
