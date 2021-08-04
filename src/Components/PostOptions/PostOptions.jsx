@@ -1,42 +1,110 @@
 import React from "react";
 import "./PostOptions.css";
 import { useSelector } from "react-redux";
+import { useFollowings, useFollowers } from "../../hooks";
 import firebase from "../../backend";
 
-const PostOptions = ({ post, setShowNotification, setAnchorEl }) => {
+import helperFunctions from "../../utils/helperfunctions";
+const PostOptions = ({ post, setAnchorEl }) => {
   const user = useSelector((state) => state.user);
-  const deletePost = () => {
-    // DELETE A POST FROM A DATABASE AS WELL AS STORAGE
-    firebase.db
-      .collection("posts")
-      .doc(post?.id)
-      .delete()
-      .then(() =>
-        firebase.storage
-          .ref()
-          .child(
-            `images/${
-              String(post?.data?.imageURL).split("%2F")[1]?.split("?")[0]
-            }`
-          )
-          .delete()
-      )
-      .finally(() => {
-        setShowNotification(true);
-        setAnchorEl(null);
-      });
-  };
 
+  const currentUser = useSelector((state) =>
+    state?.users?.find((__user) => __user?.id === user?.uid)
+  );
+  useFollowings(post?.userId);
+  useFollowers(post?.userId);
+
+  const followers = useSelector((state) => state.followers)?.find(
+    (__user) => __user?.id === user?.uid
+  );
+  const _user = useSelector((state) => state.users)?.find(
+    (__user) => __user?.id === post?.userId
+  );
+
+  const deletePost = () => {
+    helperFunctions.deletePost(post?.imageURL, "posts", post);
+    setAnchorEl(null);
+  };
+  const followUser = () => {
+    if (_user && currentUser) {
+      firebase.db
+        .collection("users")
+        .doc(_user?.id)
+        .collection("followers")
+        .doc(currentUser?.id)
+        .set({
+          displayName: currentUser?.displayName,
+          email: currentUser?.email,
+          userId: currentUser?.id,
+          birthday: currentUser?.birthday ? currentUser?.birthday : null,
+          phoneNumber: currentUser?.phoneNumber
+            ? currentUser?.phoneNumber
+            : null,
+          photoURL: currentUser?.photoURL ? currentUser?.photoURL : null,
+          isVerified: currentUser?.isVerified ? true : false,
+          timestamp: firebase.timestamp,
+        })
+        .catch((error) => console.error(error))
+        .finally(() => {});
+      firebase.db
+        .collection("users")
+        .doc(currentUser?.id)
+        .collection("followings")
+        .doc(_user?.id)
+        .set({
+          displayName: _user?.displayName,
+          email: _user?.email,
+          userId: _user?.id,
+          birthday: _user?.birthday ? _user?.birthday : null,
+          phoneNumber: _user?.phoneNumber ? _user?.phoneNumber : null,
+          photoURL: _user?.photoURL ? _user?.photoURL : null,
+          isVerified: _user?.isVerified ? true : false,
+          timestamp: firebase.timestamp,
+        })
+        .catch((error) => console.error(error))
+        .finally(() => {});
+    } else {
+      return;
+    }
+  };
+  const unFollowUser = () => {
+    if (_user && currentUser) {
+      firebase.db
+        .collection("users")
+        .doc(_user?.id)
+        .collection("followers")
+        .doc(currentUser?.id)
+        .delete()
+        .finally(() => {});
+      firebase.db
+        .collection("users")
+        .doc(currentUser?.id)
+        .collection("followings")
+        .doc(_user?.id)
+        .delete()
+        .finally(() => {});
+    } else {
+      return;
+    }
+  };
   return (
     <div className="postoptions">
-      <button disabled={user?.uid === post?.data?.userId}>Follow</button>
-      <button onClick={deletePost} disabled={user?.uid !== post?.data?.userId}>
+      {Boolean(followers) ? (
+        <button onClick={unFollowUser} disabled={user?.uid === post?.userId}>
+          unfollow
+        </button>
+      ) : (
+        <button onClick={followUser} disabled={user?.uid === post?.userId}>
+          follow
+        </button>
+      )}
+      <button onClick={deletePost} disabled={user?.uid !== post?.userId}>
         Delete
       </button>
-      <button disabled={user?.uid === post?.data?.userId}>
+      <button disabled={user?.uid === post?.userId}>
         Turn On Notifications
       </button>
-      <button disabled={user?.uid === post?.data?.userId}>Mute</button>
+      <button disabled={user?.uid === post?.userId}>Mute</button>
       <hr />
       <button>Share</button>
       <button>Download</button>
