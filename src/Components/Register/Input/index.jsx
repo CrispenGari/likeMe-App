@@ -19,11 +19,7 @@ const Input = ({
       <label>
         {label} <span>*</span>
       </label>
-      <div
-        className={`register__input__field ${
-          inputError && "register__input__field--error"
-        }`}
-      >
+      <div className={`register__input__field`}>
         {LeftIcon ? <LeftIcon className="login__input__icon" /> : null}
         <input
           value={value}

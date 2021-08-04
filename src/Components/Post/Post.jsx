@@ -27,6 +27,9 @@ const Post = ({ post, setShowNotification }) => {
   const currentUser = useSelector((state) => state.users)?.find(
     (_user) => _user?.id === user?.uid
   );
+  const postUser = useSelector((state) =>
+    state?.users?.find((_user) => _user?.id === post?.userId)
+  );
   const [postSize, setPostSize] = useState(null);
   const [openPicture, setOpenPicture] = useState(false);
   const [likes, setLikes] = useState([]);
@@ -86,6 +89,23 @@ const Post = ({ post, setShowNotification }) => {
       unsubscribe();
     };
   }, [post?.id]);
+
+  useEffect(() => {
+    if (
+      Boolean(post?.userVerified) === false &&
+      postUser?.userVerified === true
+    ) {
+      /*
+      IF THE USER IS VERIFIED ALL POST OF THE USER SHOULD BE UPDATED
+      */
+      firebase.db.collection("posts").doc(post.id).set(
+        {
+          userVerified: true,
+        },
+        { merge: true }
+      );
+    }
+  }, [post?.id, postUser]);
 
   const postComment = (e) => {
     e.preventDefault();
@@ -147,6 +167,7 @@ const Post = ({ post, setShowNotification }) => {
       return;
     }
   };
+
   return (
     <div className="post">
       <Image

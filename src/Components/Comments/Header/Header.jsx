@@ -1,10 +1,11 @@
 import "./Header.css";
 import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
-import { HiBadgeCheck } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import helperFunctions from "../../../utils/helperfunctions";
 import { useSelector } from "react-redux";
+import { VerifiedBadge } from "../../Common";
+
 const Header = ({ setOpenComments, post }) => {
   const user = useSelector((state) => state.user);
   const time = helperFunctions.timeString(
@@ -24,9 +25,7 @@ const Header = ({ setOpenComments, post }) => {
             {post?.displayName === user?.displayName
               ? "@you"
               : "@" + post?.displayName + "'s post"}
-            {post?.userVerified ? (
-              <HiBadgeCheck className="post__high__badge" />
-            ) : null}{" "}
+            {post?.userVerified ? <VerifiedBadge /> : null}
           </p>
           <span>{time}</span>
         </div>

@@ -37,7 +37,7 @@ const MenuItem = ({
           src={user?.photoURL}
           alt={user?.displayName}
         />
-        <div>
+        <div className="username__container">
           <h1 className="username__holder">
             @{user?.displayName}
             {currentUser?.userVerified ? <VerifiedBadge /> : null}

@@ -8,7 +8,7 @@ import { FavoriteBorder, Favorite } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import helperFunctions from "../../utils/helperfunctions";
 import { useEffect } from "react";
-import { ActivityIndicator } from "../Common";
+import { ActivityIndicator, VerifiedBadge } from "../Common";
 const Comment = ({ comment, post }) => {
   const [liked, setLiked] = React.useState(false);
   const user = useSelector((state) => state.user);
@@ -107,9 +107,7 @@ const Comment = ({ comment, post }) => {
               {comment?.displayName === user?.displayName
                 ? "you"
                 : comment?.displayName}
-              {comment?.userVerified ? (
-                <HiBadgeCheck className="post__high__badge" />
-              ) : null}
+              {comment?.userVerified ? <VerifiedBadge /> : null}
             </span>
 
             <p className="comment__caption">

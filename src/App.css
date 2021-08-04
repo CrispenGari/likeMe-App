@@ -59,4 +59,6 @@ textarea {
   align-items: center;
   width: fit-content;
   margin: 0px auto;
+  width: fit-content;
+  text-align: start;
 }

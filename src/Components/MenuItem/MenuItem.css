@@ -90,6 +90,16 @@
   animation: menu-item-animation 1.4s ease-in 0.5s 1 alternate forwards;
 }
 
+.username__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+}
+.username__container > h1 {
+  width: 100%;
+  margin-bottom: 3px;
+}
 @keyframes menu-item-animation {
   from {
     right: -200px;

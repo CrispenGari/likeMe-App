@@ -123,9 +123,6 @@
   background: linear-gradient(to left, lightseagreen, lime, white);
 }
 
-.register__input__field--error {
-  border: 1px solid red;
-}
 @media only screen and (max-width: 769px) {
   .register {
     border: none;

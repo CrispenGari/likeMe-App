@@ -30,7 +30,9 @@ const HeaderRightItem = ({ content, withUser, title, Icon, subTitle, dot }) => {
         <div>
           <h1 className="username__holder">
             @{currentUser?.displayName}
-            {currentUser?.userVerified ? <VerifiedBadge left={2} /> : null}
+            {currentUser?.userVerified ? (
+              <VerifiedBadge left={2} size={10} />
+            ) : null}
           </h1>
           <p>{subTitle}</p>
         </div>
