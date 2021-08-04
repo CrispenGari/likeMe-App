@@ -53,6 +53,8 @@ const Login = ({ setCardToMount }) => {
         .finally(() => {
           setLoading(false);
         });
+    } else {
+      setError("invalid credentials!");
     }
   };
   React.useEffect(() => {
@@ -104,11 +106,7 @@ const Login = ({ setCardToMount }) => {
       </div>
 
       <div className="login__input">
-        <div
-          className={`login__input__field ${
-            error && "login__input__form--error"
-          }`}
-        >
+        <div className={`login__input__field`}>
           <HiOutlineMail className="login__input__icon" />
           <input
             value={email}
@@ -120,11 +118,7 @@ const Login = ({ setCardToMount }) => {
         </div>
       </div>
       <div className="login__input">
-        <div
-          className={`login__input__field ${
-            error && "login__input__form--error"
-          }`}
-        >
+        <div className={`login__input__field`}>
           <CgLock className="login__input__icon" />
           <input
             value={password}

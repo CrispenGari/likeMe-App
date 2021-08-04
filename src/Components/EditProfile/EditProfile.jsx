@@ -306,7 +306,6 @@ const EditProfile = ({ setEditProfile, noHeader, closeEditProfile }) => {
         handleChange={handleChange}
         image={image}
         inputRef={inputRef}
-        loading={loading}
         setImage={setImage}
       />
       <div className="edit__buttons">
