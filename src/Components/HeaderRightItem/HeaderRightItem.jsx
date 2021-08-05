@@ -64,9 +64,9 @@ const HeaderRightItem = ({ content, withUser, title, Icon, subTitle, dot }) => {
           <span
             className={dot && "header__item__icon__button__badge__dot"}
           ></span>
-        ) : (
+        ) : Boolean(content) ? (
           <span>{content}</span>
-        )}
+        ) : null}
         <Icon className="header__item__icon" />
       </div>
       <div>

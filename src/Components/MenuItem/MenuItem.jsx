@@ -72,9 +72,9 @@ const MenuItem = ({
       <div className="menuitem__icon__button__badge">
         {dot ? (
           <span className={dot && "menuitem__icon__button__badge__dot"}></span>
-        ) : (
+        ) : Boolean(content) ? (
           <span>{content}</span>
-        )}
+        ) : null}
         <Icon className="menuitem__icon" />
       </div>
       <div>

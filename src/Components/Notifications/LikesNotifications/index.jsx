@@ -4,12 +4,19 @@ import "./LikesNotifications.css";
 import helperFunctions from "../../../utils/helperfunctions";
 import { Favorite } from "@material-ui/icons";
 import { VerifiedBadge } from "../../Common";
+import { useSelector } from "react-redux";
 const LikesNotifications = ({ notification }) => {
+  const user = useSelector((state) => state.user);
+  const openNotification = (notification) => {
+    helperFunctions.readNotification(user, notification);
+  };
+
   return (
     <div
       className={`like__notifications ${
         notification?.viewed ? "" : "new-notification"
       }`}
+      onClick={() => openNotification(notification)}
     >
       <Avatar
         src={notification?.photoURL ? notification?.photoURL : null}

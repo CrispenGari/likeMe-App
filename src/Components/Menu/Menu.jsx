@@ -5,7 +5,12 @@ import { IoIosPeople, IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
 import { RiChatSmile3Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 const Menu = ({ setOpen }) => {
+  const notifications = useSelector((state) =>
+    state.notifications?.filter((notification) => !notification?.viewed)
+  );
+
   return (
     <div className={"menu"}>
       <MenuItem setOpen={setOpen} withUser subTitle="open your profile" />
@@ -28,7 +33,7 @@ const Menu = ({ setOpen }) => {
         Icon={IoMdNotificationsOutline}
         subTitle="open notifications"
         setOpen={setOpen}
-        content={1}
+        content={notifications?.length}
       />
       <MenuItem
         title="settings"

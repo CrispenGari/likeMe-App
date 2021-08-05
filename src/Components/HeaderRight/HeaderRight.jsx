@@ -4,7 +4,11 @@ import { IoIosPeople, IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
 import { RiChatSmile3Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 const HeaderRight = () => {
+  const notifications = useSelector((state) =>
+    state.notifications?.filter((notification) => !notification?.viewed)
+  );
   return (
     <div className="header__right">
       <HeaderRightItem withUser subTitle="open your profile" />
@@ -24,7 +28,7 @@ const HeaderRight = () => {
         title="notifications"
         Icon={IoMdNotificationsOutline}
         subTitle="new notifications"
-        content={1}
+        content={notifications?.length}
       />
       <HeaderRightItem
         title="settings"

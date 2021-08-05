@@ -29,3 +29,68 @@
 .notifications__main::-webkit-scrollbar {
   display: none;
 }
+.notifications__sub__header {
+  position: sticky;
+  width: 100%;
+  z-index: 10;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+  user-select: none;
+  border-bottom: 1px solid lightblue;
+}
+.notifications__sub__header > h1 {
+  font-weight: 500;
+  font-size: 1rem;
+}
+.notifications__sub__header__icon {
+  color: cornflowerblue;
+  font-size: 1.6rem;
+}
+
+.notification__main__no_notifications {
+  padding-bottom: 50px;
+  padding-top: 5px;
+  flex: 1;
+  width: 100%;
+  background-color: white;
+  max-width: 600px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notification__main__no_notifications > div > p {
+  color: gray;
+}
+.notification__main__no__notifications__icon {
+  position: relative;
+  color: gray;
+  font-size: 2rem;
+  top: 0;
+  animation: notification-icon 1s ease 1s infinite alternate-reverse forwards;
+}
+
+.notification__main__no_notifications > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes notification-icon {
+  from {
+    top: 0;
+    color: gray;
+  }
+  to {
+    top: -30px;
+    color: cornflowerblue;
+  }
+}

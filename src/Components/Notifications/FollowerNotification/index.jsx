@@ -4,13 +4,20 @@ import React from "react";
 import "./FollowerNotification.css";
 import { VerifiedBadge } from "../../Common";
 import helperFunctions from "../../../utils/helperfunctions";
+import { useSelector } from "react-redux";
 
 const FollowersNotification = ({ notification }) => {
+  const user = useSelector((state) => state.user);
+  const openNotification = (notification) => {
+    helperFunctions.readNotification(user, notification);
+  };
+
   return (
     <div
       className={`follower__notifications ${
         notification?.viewed ? "" : "new-notification"
       }`}
+      onClick={() => openNotification(notification)}
     >
       <Avatar
         src={notification?.photoURL ? notification?.photoURL : null}
