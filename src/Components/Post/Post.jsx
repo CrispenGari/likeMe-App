@@ -155,7 +155,9 @@ const Post = ({ post, setShowNotification }) => {
         .collection("likes")
         .doc(likeId)
         .delete()
-        .then(() => {})
+        .then(() => {
+          helperFunctions.deleteNotification(user, post, "reaction");
+        })
         .catch((error) => console.log(error));
       return;
     } else {
@@ -178,7 +180,6 @@ const Post = ({ post, setShowNotification }) => {
               "liked your post.",
               post,
               null,
-
               "reaction"
             );
           }

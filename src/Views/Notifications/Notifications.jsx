@@ -19,7 +19,7 @@ const Notifications = () => {
         <Header />
       </div>
       <div className="notifications__sub__header">
-        <h1>Your Notifications</h1>
+        <h1>Notifications</h1>
         <IoMdNotificationsOutline className="notifications__sub__header__icon" />
       </div>
 

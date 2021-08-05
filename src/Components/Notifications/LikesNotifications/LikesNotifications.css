@@ -30,6 +30,9 @@
 }
 .like__notifications__center > p {
   font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .like__notifications__right {
   display: flex;
@@ -57,4 +60,13 @@
 .like__notifications__icon {
   color: #e44753 !important;
   font-size: 1rem !important;
+}
+.like__notifications__center > h1:hover {
+  text-decoration: underline cornflowerblue;
+}
+
+@media only screen and (max-width: 400px) {
+  .like__notifications__center > p {
+    max-width: 150px;
+  }
 }

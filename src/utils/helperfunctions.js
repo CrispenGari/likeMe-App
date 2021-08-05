@@ -331,6 +331,14 @@ const numberFormat = (value) => {
   }
 };
 
+const deleteNotification= (currentUser, post, type)=>{
+  firebase.db
+  .collection("users")
+  .doc(post?.userId)
+  .collection("notifications")
+  .doc(`${type}-${post?.id}-${currentUser?.uid}`)
+  .delete()
+}
 const notifyToWhomItMayConcern = (
   currentUser,
   message,
@@ -339,39 +347,79 @@ const notifyToWhomItMayConcern = (
   type
 ) => {
   if (post !== null) {
-    firebase.db
-      .collection("users")
-      .doc(post?.userId)
-      .collection("notifications")
-      .add({
-        email: currentUser?.email,
-        photoURL: currentUser?.photoURL,
-        displayName: currentUser?.displayName,
-        timestamp: firebase.timestamp,
-        userId: currentUser?.uid,
-        message: `${currentUser?.displayName} ${message}`,
-        postUrl: post?.imageURL,
-        caption: post?.caption,
-        postId: post?.id,
-        userVerified: currentUser?.userVerified ? true : false,
-        type: type,
-        viewed: false,
-      });
+    if (type === "reaction") {
+      firebase.db
+        .collection("users")
+        .doc(post?.userId)
+        .collection("notifications")
+        .doc(`${type}-${post?.id}-${currentUser?.uid}`)
+        .delete()
+        .finally(() => {
+          firebase.db
+            .collection("users")
+            .doc(post?.userId)
+            .collection("notifications")
+            .doc(`${type}-${post?.id}-${currentUser?.uid}`)
+            .set({
+              email: currentUser?.email,
+              photoURL: currentUser?.photoURL,
+              displayName: currentUser?.displayName,
+              timestamp: firebase.timestamp,
+              userId: currentUser?.uid,
+              message: `${currentUser?.displayName} ${message}`,
+              postUrl: post?.imageURL,
+              caption: post?.caption,
+              postId: post?.id,
+              userVerified: currentUser?.userVerified ? true : false,
+              type: type,
+              viewed: false,
+            });
+        });
+    } else {
+      firebase.db
+        .collection("users")
+        .doc(post?.userId)
+        .collection("notifications")
+        .doc(`${type}-${currentUser?.uid}-${uuid_v4()}`)
+        .set({
+          email: currentUser?.email,
+          photoURL: currentUser?.photoURL,
+          displayName: currentUser?.displayName,
+          timestamp: firebase.timestamp,
+          userId: currentUser?.uid,
+          message: `${currentUser?.displayName} ${message}`,
+          postUrl: post?.imageURL,
+          caption: post?.caption,
+          postId: post?.id,
+          userVerified: currentUser?.userVerified ? true : false,
+          type: type,
+          viewed: false,
+        });
+    }
   } else {
     firebase.db
       .collection("users")
       .doc(anotherUser?.id)
       .collection("notifications")
-      .add({
-        email: currentUser?.email,
-        photoURL: currentUser?.photoURL,
-        displayName: currentUser?.displayName,
-        timestamp: firebase.timestamp,
-        userId: currentUser?.uid,
-        message: `${currentUser?.displayName} ${message}`,
-        userVerified: currentUser?.userVerified ? true : false,
-        type: type,
-        viewed: false,
+      .doc(`${type}-${currentUser?.uid}`)
+      .delete()
+      .then(() => {
+        firebase.db
+          .collection("users")
+          .doc(anotherUser?.id)
+          .collection("notifications")
+          .doc(`${type}-${currentUser?.uid}`)
+          .set({
+            email: currentUser?.email,
+            photoURL: currentUser?.photoURL,
+            displayName: currentUser?.displayName,
+            timestamp: firebase.timestamp,
+            userId: currentUser?.uid,
+            message: `${currentUser?.displayName} ${message}`,
+            userVerified: currentUser?.userVerified ? true : false,
+            type: type,
+            viewed: false,
+          });
       });
   }
 };
@@ -400,5 +448,6 @@ const helperFunctions = {
   numberFormat,
   notifyToWhomItMayConcern,
   readNotification,
+  deleteNotification
 };
 export default helperFunctions;

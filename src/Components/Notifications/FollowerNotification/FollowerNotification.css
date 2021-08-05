@@ -30,6 +30,9 @@
 }
 .follower__notifications__center > p {
   font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .follower__notifications__right {
   display: flex;
@@ -39,10 +42,7 @@
   align-items: center;
   width: 70px !important;
 }
-.follower__notifications__right > h1 {
-  text-decoration: underline;
-  color: cornflowerblue;
-}
+
 .follower__notifications__right > p {
   color: gray;
   font-size: 0.7rem;
@@ -83,4 +83,20 @@
 }
 .new-notification {
   background-color: #f5f5f5 !important;
+}
+
+.follower__notifications__button > p {
+  background-color: white;
+  border: 1px solid cornflowerblue;
+  padding: 3px 8px;
+  font-size: 0.78rem;
+  border-radius: 5px;
+}
+.follower__notifications__center > h1:hover {
+  text-decoration: underline cornflowerblue;
+}
+@media only screen and (max-width: 400px) {
+  .follower__notifications__center > p {
+    max-width: 150px;
+  }
 }

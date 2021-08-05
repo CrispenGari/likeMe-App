@@ -47,7 +47,7 @@ const PostOptions = ({ post, setAnchorEl }) => {
         .then(() => {
           helperFunctions.notifyToWhomItMayConcern(
             user,
-            "has started following you.",
+            "started following you.",
             null,
             _user,
             "follower"

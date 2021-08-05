@@ -6,7 +6,7 @@
   padding: 10px 0;
   height: fit-content;
   border-top: 1px solid lightgray;
-  z-index: 10;
+  z-index: 20;
   border-bottom-left-radius: 5px;
   display: none;
   display: flex;
