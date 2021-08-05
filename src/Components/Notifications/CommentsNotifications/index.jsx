@@ -4,9 +4,15 @@ import { VerifiedBadge } from "../../Common";
 import helperFunctions from "../../../utils/helperfunctions";
 import "./CommentsNotifications.css";
 import { FaComments } from "react-icons/fa";
+import { useSelector } from "react-redux";
 const CommentsNotifications = ({ notification }) => {
+  const user = useSelector((state) => state.user);
+  const openNotification = (notification) => {
+    helperFunctions.readNotification(user, notification);
+  };
   return (
     <div
+      onClick={() => openNotification(notification)}
       className={`comment__notifications ${
         notification?.viewed ? "" : "new-notification"
       }`}

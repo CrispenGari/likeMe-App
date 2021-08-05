@@ -376,6 +376,17 @@ const notifyToWhomItMayConcern = (
   }
 };
 
+const readNotification = (user, notification) => {
+  firebase.db
+    .collection("users")
+    .doc(user?.uid)
+    .collection("notifications")
+    .doc(notification?.id)
+    .update({
+      viewed: true,
+    })
+    .catch((error) => console.error(error));
+};
 const helperFunctions = {
   findHashTags,
   findMentions,
@@ -388,5 +399,6 @@ const helperFunctions = {
   updateProfile,
   numberFormat,
   notifyToWhomItMayConcern,
+  readNotification,
 };
 export default helperFunctions;

@@ -12,7 +12,11 @@ const FollowersNotification = ({ notification }) => {
         notification?.viewed ? "" : "new-notification"
       }`}
     >
-      <Avatar className="follower__notifications__avatar" />
+      <Avatar
+        src={notification?.photoURL ? notification?.photoURL : null}
+        alt={notification?.displayName}
+        className="follower__notifications__avatar"
+      />
       <div className="follower__notifications__center">
         <h1>
           @{notification?.displayName}
