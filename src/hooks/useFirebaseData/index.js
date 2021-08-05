@@ -20,21 +20,6 @@ const useFirebaseData = () => {
         );
       });
   }, [dispatch]);
-  // useEffect(() => {
-  //   const unsubscribe = firebase.db
-  //     .collection("messages")
-  //     .orderBy("timestamp", "asc")
-  //     .onSnapshot((snapshot) => {
-  //       dispatch(
-  //         actions.setMessages(
-  //           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-  //         )
-  //       );
-  //     });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, [dispatch]);
   useEffect(() => {
     firebase.db
       .collection("hashtags")

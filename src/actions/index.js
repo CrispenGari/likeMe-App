@@ -72,6 +72,12 @@ const setFollowers = (value) => {
     value: value,
   };
 };
+const setNotifications = (value) => {
+  return {
+    type: constants.SET_NOTIFICATIONS,
+    value: value,
+  };
+};
 
 const actions = {
   setUser,
@@ -86,6 +92,7 @@ const actions = {
   setProfiles,
   setFollowings,
   setFollowers,
+  setNotifications,
 };
 
 export default actions;

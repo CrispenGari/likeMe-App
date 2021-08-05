@@ -5,7 +5,6 @@ import actions from "../../actions";
 import helperFunctions from "../../utils/helperfunctions";
 const useFleetFetch = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     firebase.db
       .collection("fleets")
@@ -22,7 +21,7 @@ const useFleetFetch = () => {
       });
   }, []);
   useEffect(() => {
-    const unsubscribe = firebase.db
+    firebase.db
       .collection("fleets")
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
@@ -32,9 +31,6 @@ const useFleetFetch = () => {
           )
         );
       });
-    return () => {
-      unsubscribe();
-    };
   }, [dispatch]);
   return;
 };

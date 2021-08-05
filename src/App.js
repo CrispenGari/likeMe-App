@@ -21,6 +21,7 @@ import {
   useFollowings,
   useFetchBanners,
   useFetchProfiles,
+  useNotifications,
 } from "./hooks";
 import Settings from "./Views/Settings/Settings";
 import useFetchUsers from "./hooks/useFetchUsers";
@@ -36,6 +37,7 @@ const App = () => {
   useFetchProfiles();
   useFollowers(user?.uid);
   useFollowings(user?.uid);
+  useNotifications(user?.uid);
 
   useEffect(() => {
     if (user) {

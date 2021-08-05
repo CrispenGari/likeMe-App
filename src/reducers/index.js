@@ -10,6 +10,7 @@ import profileTab from "./profileTabReducer";
 import profiles from "./setProfilesReducer";
 import followers from "./followersReducer";
 import followings from "./followingsReducer";
+import notifications from "./notificationsReducer";
 const rootReducers = combineReducers({
   messages,
   posts,
@@ -22,6 +23,7 @@ const rootReducers = combineReducers({
   profiles,
   followers,
   followings,
+  notifications,
 });
 
 export default rootReducers;

@@ -105,7 +105,7 @@ const Post = ({ post, setShowNotification }) => {
         { merge: true }
       );
     }
-  }, [post?.id, postUser]);
+  }, [post?.id, postUser, post?.userVerified]);
 
   const postComment = (e) => {
     e.preventDefault();
@@ -121,9 +121,30 @@ const Post = ({ post, setShowNotification }) => {
         timestamp: firebase.timestamp,
         userId: user?.uid,
         comment: comment,
-        userVerified: currentUser?.userVerified ?? false,
+        userVerified: currentUser?.userVerified ? true : false,
       })
-      .then(() => {})
+      .then(() => {
+        if (user?.uid !== post?.userId) {
+          firebase.db
+            .collection("users")
+            .doc(post?.userId)
+            .collection("notifications")
+            .add({
+              email: user?.email,
+              photoURL: user?.photoURL,
+              displayName: user?.displayName,
+              timestamp: firebase.timestamp,
+              userId: user?.uid,
+              message: `${user?.email} commented your posts.`,
+              postUrl: post?.imageURL,
+              caption: post?.caption,
+              postId: post?.id,
+              userVerified: currentUser?.userVerified ? true : false,
+              type: "comment",
+              viewed: false,
+            });
+        }
+      })
       .catch((error) => console.log(error))
       .finally(() => {
         setComment("");
@@ -161,7 +182,28 @@ const Post = ({ post, setShowNotification }) => {
           timestamp: firebase.timestamp,
           userId: user?.uid,
         })
-        .then(() => {})
+        .then(() => {
+          if (user?.uid !== post?.userId) {
+            firebase.db
+              .collection("users")
+              .doc(post?.userId)
+              .collection("notifications")
+              .add({
+                email: user?.email,
+                photoURL: user?.photoURL,
+                displayName: user?.displayName,
+                timestamp: firebase.timestamp,
+                userId: user?.uid,
+                message: `${user?.email} liked your posts.`,
+                postUrl: post?.imageURL,
+                caption: post?.caption,
+                postId: post?.id,
+                userVerified: currentUser?.userVerified ? true : false,
+                type: "reaction",
+                viewed: false,
+              });
+          }
+        })
         .catch((error) => console.log(error))
         .finally(() => {});
       return;
