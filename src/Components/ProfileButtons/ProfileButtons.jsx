@@ -5,6 +5,7 @@ import { ActivityIndicator } from "../Common";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useFollowers } from "../../hooks";
+import helperFunctions from "../../utils/helperfunctions";
 
 const ProfileButtons = () => {
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,15 @@ const ProfileButtons = () => {
           photoURL: currentUser?.photoURL ? currentUser?.photoURL : null,
           isVerified: currentUser?.isVerified ? true : false,
           timestamp: firebase.timestamp,
+        })
+        .then(() => {
+          helperFunctions.notifyToWhomItMayConcern(
+            user,
+            "has started following you.",
+            null,
+            _user,
+            "follower"
+          );
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));

@@ -1,6 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
-
+import { RiAdminFill } from "react-icons/ri";
 import "./AdminNotifications.css";
 const AdminNotifications = () => {
   return (
@@ -11,7 +11,7 @@ const AdminNotifications = () => {
         <p>You are verified to this application</p>
       </div>
       <div className="admin__notifications__right">
-        <h1>Admin</h1>
+        <RiAdminFill />
         <p>time</p>
       </div>
     </div>

@@ -44,6 +44,15 @@ const PostOptions = ({ post, setAnchorEl }) => {
           isVerified: currentUser?.isVerified ? true : false,
           timestamp: firebase.timestamp,
         })
+        .then(() => {
+          helperFunctions.notifyToWhomItMayConcern(
+            user,
+            "has started following you.",
+            null,
+            _user,
+            "follower"
+          );
+        })
         .catch((error) => console.error(error))
         .finally(() => {});
       firebase.db

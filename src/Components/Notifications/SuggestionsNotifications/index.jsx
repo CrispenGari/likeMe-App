@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar } from "@material-ui/core";
-
+import { GiVintageRobot } from "react-icons/gi";
 import "./SuggestionsNotifications.css";
 const SuggestionsNotifications = () => {
   return (
@@ -11,7 +11,7 @@ const SuggestionsNotifications = () => {
         <p>Follow username2 she's desperate.</p>
       </div>
       <div className="suggestion__notifications__right">
-        <h1>Robot</h1>
+        <GiVintageRobot />
         <p>time</p>
       </div>
     </div>

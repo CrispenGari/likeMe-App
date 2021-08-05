@@ -125,24 +125,13 @@ const Post = ({ post, setShowNotification }) => {
       })
       .then(() => {
         if (user?.uid !== post?.userId) {
-          firebase.db
-            .collection("users")
-            .doc(post?.userId)
-            .collection("notifications")
-            .add({
-              email: user?.email,
-              photoURL: user?.photoURL,
-              displayName: user?.displayName,
-              timestamp: firebase.timestamp,
-              userId: user?.uid,
-              message: `${user?.email} commented your posts.`,
-              postUrl: post?.imageURL,
-              caption: post?.caption,
-              postId: post?.id,
-              userVerified: currentUser?.userVerified ? true : false,
-              type: "comment",
-              viewed: false,
-            });
+          helperFunctions.notifyToWhomItMayConcern(
+            user,
+            "commented on your post.",
+            post,
+            null,
+            "comment"
+          );
         }
       })
       .catch((error) => console.log(error))
@@ -184,24 +173,14 @@ const Post = ({ post, setShowNotification }) => {
         })
         .then(() => {
           if (user?.uid !== post?.userId) {
-            firebase.db
-              .collection("users")
-              .doc(post?.userId)
-              .collection("notifications")
-              .add({
-                email: user?.email,
-                photoURL: user?.photoURL,
-                displayName: user?.displayName,
-                timestamp: firebase.timestamp,
-                userId: user?.uid,
-                message: `${user?.email} liked your posts.`,
-                postUrl: post?.imageURL,
-                caption: post?.caption,
-                postId: post?.id,
-                userVerified: currentUser?.userVerified ? true : false,
-                type: "reaction",
-                viewed: false,
-              });
+            helperFunctions.notifyToWhomItMayConcern(
+              user,
+              "liked your post.",
+              post,
+              null,
+
+              "reaction"
+            );
           }
         })
         .catch((error) => console.log(error))

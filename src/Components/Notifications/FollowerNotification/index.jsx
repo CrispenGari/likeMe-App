@@ -1,18 +1,36 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
-
+// import { BsFillPersonPlusFill } from "react-icons/bs";
 import "./FollowerNotification.css";
-const FollowersNotification = () => {
+import { VerifiedBadge } from "../../Common";
+import helperFunctions from "../../../utils/helperfunctions";
+
+const FollowersNotification = ({ notification }) => {
   return (
-    <div className="follower__notifications">
+    <div
+      className={`follower__notifications ${
+        notification?.viewed ? "" : "new-notification"
+      }`}
+    >
       <Avatar className="follower__notifications__avatar" />
       <div className="follower__notifications__center">
-        <h1>@username2</h1>
-        <p>commented is now following you</p>
+        <h1>
+          @{notification?.displayName}
+          {notification?.userVerified ? <VerifiedBadge size={14} /> : null}
+        </h1>
+        <p>{notification?.message}</p>
       </div>
+
       <div className="follower__notifications__right">
-        <h1>Follower</h1>
-        <p>time</p>
+        {/* <BsFillPersonPlusFill className="follower__notifications__icon" /> */}
+        <div className="follower__notifications__button">
+          <button title="follow back">follow back</button>
+        </div>
+        <p>
+          {helperFunctions.timeString(
+            helperFunctions.timestampToTime(notification?.timestamp)
+          )}
+        </p>
       </div>
     </div>
   );

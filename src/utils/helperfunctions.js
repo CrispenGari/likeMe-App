@@ -330,6 +330,52 @@ const numberFormat = (value) => {
     return `${Number(value)}`;
   }
 };
+
+const notifyToWhomItMayConcern = (
+  currentUser,
+  message,
+  post,
+  anotherUser,
+  type
+) => {
+  if (post !== null) {
+    firebase.db
+      .collection("users")
+      .doc(post?.userId)
+      .collection("notifications")
+      .add({
+        email: currentUser?.email,
+        photoURL: currentUser?.photoURL,
+        displayName: currentUser?.displayName,
+        timestamp: firebase.timestamp,
+        userId: currentUser?.uid,
+        message: `${currentUser?.displayName} ${message}`,
+        postUrl: post?.imageURL,
+        caption: post?.caption,
+        postId: post?.id,
+        userVerified: currentUser?.userVerified ? true : false,
+        type: type,
+        viewed: false,
+      });
+  } else {
+    firebase.db
+      .collection("users")
+      .doc(anotherUser?.id)
+      .collection("notifications")
+      .add({
+        email: currentUser?.email,
+        photoURL: currentUser?.photoURL,
+        displayName: currentUser?.displayName,
+        timestamp: firebase.timestamp,
+        userId: currentUser?.uid,
+        message: `${currentUser?.displayName} ${message}`,
+        userVerified: currentUser?.userVerified ? true : false,
+        type: type,
+        viewed: false,
+      });
+  }
+};
+
 const helperFunctions = {
   findHashTags,
   findMentions,
@@ -341,5 +387,6 @@ const helperFunctions = {
   postSize,
   updateProfile,
   numberFormat,
+  notifyToWhomItMayConcern,
 };
 export default helperFunctions;
