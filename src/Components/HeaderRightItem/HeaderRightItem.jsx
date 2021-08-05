@@ -42,10 +42,10 @@ const HeaderRightItem = ({ content, withUser, title, Icon, subTitle, dot }) => {
   const navigate = (title) => {
     if (title === "sign out") {
       firebase.auth.signOut().finally(() => history.replace("/"));
-    } else if (title === "notifications") {
     } else if (title === "settings") {
       history.push(`/settings/${user?.uid}/${uuid_v4()}`);
     } else if (title === "notifications") {
+      history.push(`/notifications/${user?.uid}/${uuid_v4()}`);
     } else if (title === "friends") {
     } else if (title === "chats") {
     } else {

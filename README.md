@@ -1,3 +1,22 @@
+### Notification
+
+```
+
+What Notifications?
+* On new follower
+* On Post Likes
+* On Story Reaction
+* LikeMe Notifications
+* Verification Notifications
+
+Notification:
+        [users collection].(uid)--------->[ Notification ]-----------> [Reducer](actions)
+                                                 |
+                                [Read](click)          [Not Read] ---> Read remain false in the collection
+                                  |
+                        [Update Collection] ----> Read is now true
+```
+
 # LikeMe app
 
 THIS IS A SOCIAL DATING APP THAT ALLOWS USERS TO POST THEIR RELATIONSHIP STATUS AND BE ABLE TO FIND THEIR PARTNERS. THIS APPLICATION WAS DEVELOPED FOR TESTING PURPOSES ONLY.

@@ -11,6 +11,7 @@ import {
   Terms,
   People,
   Landing,
+  Notifications,
 } from "./Views";
 import { useSelector } from "react-redux";
 import {
@@ -84,6 +85,9 @@ const App = () => {
             </Route>
             <Route path="/settings/:uid/:randomId">
               <Settings />
+            </Route>
+            <Route path="/notifications/:uid/:randomId">
+              <Notifications />
             </Route>
             <Route path="/">
               <Home />

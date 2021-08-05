@@ -1,0 +1,45 @@
+.follower__notifications {
+  display: flex;
+  padding: 10px;
+  background-color: white !important;
+  border-bottom: 1px solid lightblue;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin: 1px auto;
+  user-select: none;
+  cursor: pointer;
+}
+.follower__notifications__avatar {
+  width: 40px !important;
+  height: 40px !important;
+  cursor: pointer;
+}
+.follower__notifications__center {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 5px;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.follower__notifications__center > h1,
+.follower__notifications__right > h1 {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.follower__notifications__right {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.follower__notifications__right > h1 {
+  text-decoration: underline;
+  color: cornflowerblue;
+}
+.follower__notifications__right > p {
+  color: gray;
+  font-size: 0.8rem;
+}
