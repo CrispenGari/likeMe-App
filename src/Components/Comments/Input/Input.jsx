@@ -4,6 +4,7 @@ import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import firebase from "../../../backend";
+import helperFunctions from "../../../utils/helperfunctions";
 import { ActivityIndicator } from "../../Common";
 const Input = ({ post }) => {
   const user = useSelector((state) => state.user);
@@ -28,7 +29,17 @@ const Input = ({ post }) => {
         comment: comment,
         userVerified: currentUser?.userVerified ?? false,
       })
-      .then(() => {})
+      .then(() => {
+        if (user?.uid !== post?.userId) {
+          helperFunctions.notifyToWhomItMayConcern(
+            user,
+            "commented on your post.",
+            post,
+            null,
+            "comment"
+          );
+        }
+      })
       .catch((error) => console.log(error))
       .finally(() => {
         setComment("");

@@ -134,9 +134,17 @@ const Comment = ({ comment, post }) => {
         <div>
           <p>
             <span
-              className="comment__username"
+              className={`comment__username ${
+                comment?.displayName === user?.displayName
+                  ? "comment__username--me"
+                  : ""
+              }`}
               onClick={() => {
-                openUserProfile();
+                if (comment?.displayName === user?.displayName) {
+                  return;
+                } else {
+                  openUserProfile();
+                }
               }}
             >
               @

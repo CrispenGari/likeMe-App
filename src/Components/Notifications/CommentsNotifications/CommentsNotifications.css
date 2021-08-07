@@ -68,6 +68,6 @@
 
 @media only screen and (max-width: 400px) {
   .comment__notifications__center > p {
-    max-width: 200px;
+    max-width: 150px;
   }
 }

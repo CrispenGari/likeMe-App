@@ -97,3 +97,8 @@
   text-decoration: underline;
   color: cornflowerblue;
 }
+.comment__username--me:hover {
+  cursor: pointer;
+  text-decoration: unset;
+  color: unset;
+}
