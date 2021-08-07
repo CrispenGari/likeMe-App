@@ -9,17 +9,23 @@ import helperFunctions from "../../utils/helperfunctions";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid_v4 } from "uuid";
-
+import { BsFillReplyAllFill } from "react-icons/bs";
+import { MdCancel } from "react-icons/md";
 import { ActivityIndicator, VerifiedBadge } from "../Common";
+import Input from "./Input/Input";
 const Comment = ({ comment, post }) => {
   const user = useSelector((state) => state.user);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [time, setTime] = React.useState(null);
   const [likes, setLikes] = useState([]);
+
+  const [reply, setReply] = useState(false);
   const history = useHistory();
   const openUserProfile = () => {
     history.push(`/profile/${comment?.userId}/${uuid_v4()}`);
   };
+
+  const replyComment = () => {};
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
@@ -175,7 +181,6 @@ const Comment = ({ comment, post }) => {
           <div className="comment__controls">
             <div className="comment__controls__right">
               <div>{time ? time : <ActivityIndicator size={5} />}</div>
-
               <IconButton title="react" onClick={handleLike}>
                 {likes.filter((like) => like?.email === user?.email).length !==
                 0 ? (
@@ -195,6 +200,18 @@ const Comment = ({ comment, post }) => {
                   <Delete className="comment__icon" />
                 </IconButton>
               )}
+              {user?.uid !== comment?.userId && (
+                <IconButton
+                  title={!reply ? "reply" : "cancel"}
+                  onClick={() => setReply((prev) => !prev)}
+                >
+                  {!reply ? (
+                    <BsFillReplyAllFill className="comment__icon__reply " />
+                  ) : (
+                    <MdCancel className="comment__icon__reply " />
+                  )}
+                </IconButton>
+              )}
             </div>
             <p>
               <span>{likes?.length}</span>
@@ -203,6 +220,11 @@ const Comment = ({ comment, post }) => {
           </div>
         </div>
       </div>
+      {reply ? (
+        <div className="comment__inline__reply">
+          <Input />
+        </div>
+      ) : null}
     </div>
   );
 };
