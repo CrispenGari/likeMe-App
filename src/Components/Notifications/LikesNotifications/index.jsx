@@ -38,9 +38,11 @@ const LikesNotifications = ({ notification }) => {
         </h1>
         <p>{notification?.message}</p>
       </div>
-      <div className="like__notification__post">
-        <img src={notification?.postUrl} alt="" />
-      </div>
+      {notification?.postUrl && (
+        <div className="like__notification__post">
+          <img src={notification?.postUrl} alt="" />
+        </div>
+      )}
       <div className="like__notifications__right">
         <Favorite className="like__notifications__icon" />
         <p>

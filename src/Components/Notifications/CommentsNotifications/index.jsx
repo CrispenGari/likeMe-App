@@ -41,9 +41,11 @@ const CommentsNotifications = ({ notification }) => {
           <span>{notification?.message?.split(".")[1]}</span>
         </p>
       </div>
-      <div className="comment__notification__post">
-        <img src={notification?.postUrl} alt="" />
-      </div>
+      {notification?.postUrl && (
+        <div className="comment__notification__post">
+          <img src={notification?.postUrl} alt="" />
+        </div>
+      )}
       <div className="comment__notifications__right">
         <FaComments className="comment__notifications__icon" />
         <p>

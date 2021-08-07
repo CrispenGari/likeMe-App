@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import "./Comment.css";
 import { Avatar, IconButton } from "@material-ui/core";
-import { HiBadgeCheck } from "react-icons/hi";
 import { Delete } from "@material-ui/icons";
 import firebase from "../../backend";
 import { FavoriteBorder, Favorite } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import helperFunctions from "../../utils/helperfunctions";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { v4 as uuid_v4 } from "uuid";
+
 import { ActivityIndicator, VerifiedBadge } from "../Common";
 const Comment = ({ comment, post }) => {
-  const [liked, setLiked] = React.useState(false);
   const user = useSelector((state) => state.user);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [time, setTime] = React.useState(null);
   const [likes, setLikes] = useState([]);
+  const history = useHistory();
+  const openUserProfile = () => {
+    history.push(`/profile/${comment?.userId}/${uuid_v4()}`);
+  };
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
@@ -47,7 +52,18 @@ const Comment = ({ comment, post }) => {
         .collection("likes")
         .doc(likeId)
         .delete()
-        .then(() => {})
+        .then(() => {
+          helperFunctions.deleteNotification(
+            user,
+            {
+              postUrl: post?.imageURL,
+              caption: post?.caption,
+              postId: post?.id,
+              userId: comment?.userId,
+            },
+            "reaction"
+          );
+        })
         .catch((error) => console.log(error));
       return;
     } else {
@@ -65,7 +81,22 @@ const Comment = ({ comment, post }) => {
           timestamp: firebase.timestamp,
           userId: user?.uid,
         })
-        .then(() => {})
+        .then(() => {
+          if (user?.uid !== post?.userId) {
+            helperFunctions.notifyToWhomItMayConcern(
+              user,
+              "liked your comment.",
+              {
+                postUrl: post?.imageURL,
+                caption: post?.caption,
+                postId: post?.id,
+                userId: comment?.userId,
+              },
+              null,
+              "reaction"
+            );
+          }
+        })
         .catch((error) => console.log(error))
         .finally(() => {});
       return;
@@ -102,7 +133,12 @@ const Comment = ({ comment, post }) => {
         />
         <div>
           <p>
-            <span className="comment__username">
+            <span
+              className="comment__username"
+              onClick={() => {
+                openUserProfile();
+              }}
+            >
               @
               {comment?.displayName === user?.displayName
                 ? "you"

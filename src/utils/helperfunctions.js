@@ -331,14 +331,14 @@ const numberFormat = (value) => {
   }
 };
 
-const deleteNotification= (currentUser, post, type)=>{
+const deleteNotification = (currentUser, post, type) => {
   firebase.db
-  .collection("users")
-  .doc(post?.userId)
-  .collection("notifications")
-  .doc(`${type}-${post?.id}-${currentUser?.uid}`)
-  .delete()
-}
+    .collection("users")
+    .doc(post?.userId)
+    .collection("notifications")
+    .doc(`${type}-${post?.id}-${currentUser?.uid}`)
+    .delete();
+};
 const notifyToWhomItMayConcern = (
   currentUser,
   message,
@@ -367,9 +367,9 @@ const notifyToWhomItMayConcern = (
               timestamp: firebase.timestamp,
               userId: currentUser?.uid,
               message: `${currentUser?.displayName} ${message}`,
-              postUrl: post?.imageURL,
-              caption: post?.caption,
-              postId: post?.id,
+              postUrl: post?.imageURL ? post?.imageURL : "",
+              caption: post?.caption ? post?.caption : "",
+              postId: post?.id ? post?.id : "",
               userVerified: currentUser?.userVerified ? true : false,
               type: type,
               viewed: false,
@@ -448,6 +448,6 @@ const helperFunctions = {
   numberFormat,
   notifyToWhomItMayConcern,
   readNotification,
-  deleteNotification
+  deleteNotification,
 };
 export default helperFunctions;
