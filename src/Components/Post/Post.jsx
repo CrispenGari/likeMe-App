@@ -75,18 +75,25 @@ const Post = ({ post, setShowNotification }) => {
   }, [post?.id]);
 
   useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("posts")
-      .doc(post.id)
-      .collection("comments")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setComments(
-          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        );
-      });
+    let mounted = true;
+
+    if (mounted) {
+      const unsubscribe = firebase.db
+        .collection("posts")
+        .doc(post.id)
+        .collection("comments")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) => {
+          setComments(
+            snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+          );
+        });
+      return () => {
+        unsubscribe();
+      };
+    }
     return () => {
-      unsubscribe();
+      mounted = false;
     };
   }, [post?.id]);
 

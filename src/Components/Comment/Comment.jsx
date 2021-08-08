@@ -21,12 +21,12 @@ const Comment = ({ comment, post }) => {
   const [likes, setLikes] = useState([]);
 
   const [reply, setReply] = useState(false);
+  const [readAll, setReadAll] = useState(false);
   const history = useHistory();
   const openUserProfile = () => {
     history.push(`/profile/${comment?.userId}/${uuid_v4()}`);
   };
 
-  const replyComment = () => {};
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
@@ -229,7 +229,10 @@ const Comment = ({ comment, post }) => {
               {user?.uid !== comment?.userId && (
                 <IconButton
                   title={!reply ? "reply" : "cancel"}
-                  onClick={() => setReply((prev) => !prev)}
+                  onClick={() => {
+                    setReply((prev) => !prev);
+                    setReadAll((prev) => !prev);
+                  }}
                 >
                   {!reply ? (
                     <BsFillReplyAllFill className="comment__icon__reply " />
@@ -246,16 +249,30 @@ const Comment = ({ comment, post }) => {
           </div>
         </div>
       </div>
-      <div className="comment__inline__comment">
-        {comments?.map((comment_, index) => (
-          <InlineComment
-            motherComment={comment}
-            key={index}
-            comment={comment_}
-            post={post}
-          />
-        ))}
-      </div>
+      {comments?.length > 0 && (
+        <div className="comment__inline__expand">
+          <p
+            onClick={() => {
+              setReadAll(true);
+              setReply(true);
+            }}
+          >
+            {comments?.length} comments
+          </p>
+        </div>
+      )}
+      {readAll ? (
+        <div className="comment__inline__comment">
+          {comments?.map((comment_, index) => (
+            <InlineComment
+              motherComment={comment}
+              key={index}
+              comment={comment_}
+              post={post}
+            />
+          ))}
+        </div>
+      ) : null}
 
       {reply ? (
         <div className="comment__inline__reply">
