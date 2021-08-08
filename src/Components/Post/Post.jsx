@@ -19,6 +19,7 @@ import { ActivityIndicator, VerifiedBadge } from "../Common";
 import Image from "../Image/Image";
 import helperFunctions from "../../utils/helperfunctions";
 import { v4 as uuid_v4 } from "uuid";
+import SampleComments from "./SampleComments";
 const Post = ({ post, setShowNotification }) => {
   const time = helperFunctions.timeString(
     helperFunctions.timestampToTime(post?.timestamp)
@@ -360,7 +361,10 @@ const Post = ({ post, setShowNotification }) => {
         </form>
         <div className="post__bottom__comment__container">
           {comments?.length > 0 ? (
-            <button onClick={() => setOpenComments(true)}>Read Comments</button>
+            <SampleComments
+              setOpenComments={setOpenComments}
+              comments={comments}
+            />
           ) : (
             <h1>No Comments</h1>
           )}
