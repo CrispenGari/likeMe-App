@@ -1,5 +1,18 @@
 ### Notification
 
+"Leaning `Elixir` and `PostgreSQL` and build a million dollar company that will last forever"- `Gari`
+
+```js
+defmodule Math do
+  def sum(a, b) do
+    a + b
+  end
+end
+
+// Then
+SELECT * from Elixir WHERE databaseEngine like 'PostgreSQL' LIMIT 1;
+```
+
 ```
 
 What Notifications?

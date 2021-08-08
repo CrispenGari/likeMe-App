@@ -108,5 +108,9 @@
   font-size: 15px !important;
 }
 .comment__inline__reply {
-  margin: 0px 10px 5px 80px;
+  margin: 0px 0px 5px 80px;
+}
+
+.comment__inline__comment {
+  margin: 0px 0px 5px 80px;
 }

@@ -1,37 +1,45 @@
-import React, { useState } from "react";
-import "./Comment.css";
+import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
-import firebase from "../../backend";
 import { FavoriteBorder, Favorite } from "@material-ui/icons";
 import { useSelector } from "react-redux";
-import helperFunctions from "../../utils/helperfunctions";
+import helperFunctions from "../../../utils/helperfunctions";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid_v4 } from "uuid";
-import { BsFillReplyAllFill } from "react-icons/bs";
-import { MdCancel } from "react-icons/md";
-import { ActivityIndicator, VerifiedBadge } from "../Common";
-import Input from "./Input/Input";
-import InlineComment from "./InlineComment/InlineComment";
-const Comment = ({ comment, post }) => {
+import firebase from "../../../backend";
+import { ActivityIndicator, VerifiedBadge } from "../../Common";
+import "./InlineComment.css";
+import { useState } from "react";
+const InlineComment = ({ comment, post, motherComment }) => {
   const user = useSelector((state) => state.user);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [time, setTime] = React.useState(null);
+  const openTag = () => {};
+  const history = useHistory();
   const [likes, setLikes] = useState([]);
 
-  const [reply, setReply] = useState(false);
-  const history = useHistory();
-  const openUserProfile = () => {
-    history.push(`/profile/${comment?.userId}/${uuid_v4()}`);
+  const deleteComment = () => {
+    setDeleteLoading(true);
+    firebase.db
+      .collection("posts")
+      .doc(post?.id)
+      .collection("comments")
+      .doc(motherComment?.id)
+      .collection("innerComment")
+      .doc(comment?.id)
+      .delete()
+      .then(() => {})
+      .finally(() => setDeleteLoading(false));
   };
 
-  const replyComment = () => {};
   useEffect(() => {
     const unsubscribe = firebase.db
       .collection("posts")
       .doc(post?.id)
       .collection("comments")
+      .doc(motherComment?.id)
+      .collection("innerComment")
       .doc(comment?.id)
       .collection("likes")
       .orderBy("timestamp", "desc")
@@ -42,6 +50,11 @@ const Comment = ({ comment, post }) => {
       unsubscribe();
     };
   }, [post?.id, comment?.id]);
+
+  const openUserProfile = () => {
+    history.push(`/profile/${comment?.userId}/${uuid_v4()}`);
+  };
+
   const handleLike = () => {
     let likeId = "";
     likes.forEach((like) => {
@@ -55,6 +68,8 @@ const Comment = ({ comment, post }) => {
         .collection("posts")
         .doc(post?.id)
         .collection("comments")
+        .doc(motherComment?.id)
+        .collection("innerComment")
         .doc(comment?.id)
         .collection("likes")
         .doc(likeId)
@@ -75,10 +90,13 @@ const Comment = ({ comment, post }) => {
       return;
     } else {
       // add it to the database
+
       firebase.db
         .collection("posts")
         .doc(post?.id)
         .collection("comments")
+        .doc(motherComment?.id)
+        .collection("innerComment")
         .doc(comment?.id)
         .collection("likes")
         .add({
@@ -89,10 +107,10 @@ const Comment = ({ comment, post }) => {
           userId: user?.uid,
         })
         .then(() => {
-          if (user?.uid !== post?.userId) {
+          if (user?.uid !== comment?.userId) {
             helperFunctions.notifyToWhomItMayConcern(
               user,
-              "liked your comment.",
+              "liked your reply.",
               {
                 postUrl: post?.imageURL,
                 caption: post?.caption,
@@ -118,50 +136,13 @@ const Comment = ({ comment, post }) => {
       setTime(_time);
     }
   }, [comment]);
-  const deleteComment = () => {
-    setDeleteLoading(true);
-    firebase.db
-      .collection("posts")
-      .doc(post?.id)
-      .collection("comments")
-      .doc(comment?.id)
-      .delete()
-      .then(() => {})
-      .finally(() => setDeleteLoading(false));
-  };
-
-  const [comments, setComments] = useState([]);
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      firebase.db
-        .collection("posts")
-        .doc(post?.id)
-        .collection("comments")
-        .doc(comment?.id)
-        .collection("innerComment")
-        .orderBy("timestamp", "desc")
-        .onSnapshot((comments_) => {
-          setComments(
-            comments_.docs.map((comment_) => ({
-              id: comment_.id,
-              ...comment_.data(),
-            }))
-          );
-        });
-    }
-    return () => {
-      mounted = false;
-    };
-  }, [post?.id, comment?.id]);
-  const openTag = (cap) => {};
   return (
-    <div className="comment">
-      <div className="comment__top">
+    <div className="inline__comment">
+      <div className="inline__comment__comment__top">
         <Avatar
-          className="comment__avatar"
           src={comment?.photoURL}
           alt={comment?.displayName}
+          className="inline__comment__comment__avatar"
         />
         <div>
           <p>
@@ -219,23 +200,11 @@ const Comment = ({ comment, post }) => {
                 <ActivityIndicator size={10} />
               ) : (
                 <IconButton
-                  disabled={user?.uid !== comment?.userId}
                   title="delete"
+                  disabled={user?.uid !== comment?.userId}
                   onClick={deleteComment}
                 >
                   <Delete className="comment__icon" />
-                </IconButton>
-              )}
-              {user?.uid !== comment?.userId && (
-                <IconButton
-                  title={!reply ? "reply" : "cancel"}
-                  onClick={() => setReply((prev) => !prev)}
-                >
-                  {!reply ? (
-                    <BsFillReplyAllFill className="comment__icon__reply " />
-                  ) : (
-                    <MdCancel className="comment__icon__reply " />
-                  )}
                 </IconButton>
               )}
             </div>
@@ -246,24 +215,8 @@ const Comment = ({ comment, post }) => {
           </div>
         </div>
       </div>
-      <div className="comment__inline__comment">
-        {comments?.map((comment_, index) => (
-          <InlineComment
-            motherComment={comment}
-            key={index}
-            comment={comment_}
-            post={post}
-          />
-        ))}
-      </div>
-
-      {reply ? (
-        <div className="comment__inline__reply">
-          <Input post={post} comment={comment} />
-        </div>
-      ) : null}
     </div>
   );
 };
 
-export default Comment;
+export default InlineComment;
