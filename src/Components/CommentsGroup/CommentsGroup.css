@@ -1,0 +1,22 @@
+.comments__group {
+  display: flex;
+  flex-direction: column;
+}
+.comments__group__breaker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.comments__group__breaker > div {
+  border-top: 1px solid #f5f5f5;
+  flex: 1;
+  border-radius: 999px;
+}
+.comments__group__breaker > h1 {
+  color: gray;
+  font-weight: 400;
+  margin: 0px 5px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}

@@ -108,11 +108,15 @@
   font-size: 15px !important;
 }
 .comment__inline__reply {
-  margin: 0px 0px 5px 80px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .comment__inline__comment {
-  margin: 0px 0px 5px 80px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 .comment__inline__expand > p {
   color: gray;

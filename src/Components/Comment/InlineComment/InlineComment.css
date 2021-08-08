@@ -3,6 +3,7 @@
   flex-direction: column;
   display: flex;
   margin-bottom: 5px;
+  width: 90%;
 }
 .inline__comment__comment__top {
   display: flex;

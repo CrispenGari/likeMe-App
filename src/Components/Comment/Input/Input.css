@@ -4,6 +4,7 @@
   border: 1px solid lightblue;
   border-radius: 999px;
   padding-right: 5px;
+  width: 90%;
 }
 .comment__input__inline > input {
   flex: 1;
