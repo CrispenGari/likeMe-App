@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 10px !important;
 }
 .image__viewer__container {
   width: 100%;

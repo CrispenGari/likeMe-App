@@ -1,16 +1,43 @@
 import "./Viewers.css";
 import React from "react";
 import Viewer from "../Viewer/Viewer";
-const Viewers = () => {
+import firebase from "../../../backend";
+const Viewers = ({ currentFleetIndex, fleets }) => {
+  const [viewers, setViewers] = React.useState([]);
+
+  React.useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      firebase.db
+        .collection("fleets")
+        .doc(fleets[currentFleetIndex]?.id)
+        .collection("viewers")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((viewers) => {
+          setViewers(
+            viewers.docs.map((doc) => ({
+              id: doc?.id,
+              ...doc?.data(),
+            }))
+          );
+        });
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="viewers">
-      <h1>35 viewers</h1>
+      <h1>
+        {Boolean(viewers?.length)
+          ? `${viewers?.length} ${viewers?.length === 1 ? "viewer" : "viewers"}`
+          : "no views yet"}
+      </h1>
       <div className="viewers__container">
-        {Array(10)
-          .fill(null)
-          .map((_, i) => (
-            <Viewer key={i} />
-          ))}
+        {viewers?.map((viewer, index) => (
+          <Viewer viewer={viewer} key={index} />
+        ))}
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ const FleetViewer = ({ displayName, setDisplayName }) => {
               />
             </div>
           ) : (
-            <Viewers />
+            <Viewers fleets={fleets} currentFleetIndex={currentFleetIndex} />
           )}
         </div>
       ) : (

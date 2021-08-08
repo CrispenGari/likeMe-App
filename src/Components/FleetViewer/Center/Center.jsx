@@ -7,6 +7,7 @@ import { MdDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
+import firebase from "../../../backend";
 const Center = ({ fleets, setCurrentFleetIndex, currentFleetIndex }) => {
   const currentUser = useSelector((state) => state.user);
   const next = () => {
@@ -23,6 +24,43 @@ const Center = ({ fleets, setCurrentFleetIndex, currentFleetIndex }) => {
       setCurrentFleetIndex((prev) => prev - 1);
     }
   };
+  React.useEffect(() => {
+    if (currentUser?.displayName !== fleets[currentFleetIndex]?.displayName) {
+      firebase.db
+        .collection("fleets")
+        .doc(fleets[currentFleetIndex]?.id)
+        .collection("viewers")
+        .doc(currentUser?.uid)
+        .get()
+        .then((doc) => {
+          if (Boolean(doc?.docs?.length > 0)) {
+            return;
+          } else {
+            // New Viewer
+            firebase.db
+              .collection("fleets")
+              .doc(fleets[currentFleetIndex]?.id)
+              .collection("viewers")
+              .doc(currentUser?.uid)
+              .set({
+                timestamp: firebase.timestamp,
+                displayName: currentUser?.displayName,
+                userId: currentUser?.uid,
+                photoURL: currentUser?.photoURL,
+                email: currentUser?.email,
+              });
+          }
+        });
+    }
+  }, [fleets, currentFleetIndex]);
+
+  const deleteFleet = () => {
+    firebase.db
+      .collection("fleets")
+      .doc(fleets[currentFleetIndex]?.id)
+      .delete();
+  };
+
   return (
     <div className="center">
       <IconButton title="previous" onClick={prev}>
@@ -46,7 +84,7 @@ const Center = ({ fleets, setCurrentFleetIndex, currentFleetIndex }) => {
         </div>
         {fleets[currentFleetIndex]?.displayName === currentUser?.displayName ? (
           <div>
-            <IconButton title="delete">
+            <IconButton title="delete" onClick={deleteFleet}>
               <MdDelete className="center__controls__icon__delete" />
             </IconButton>
           </div>

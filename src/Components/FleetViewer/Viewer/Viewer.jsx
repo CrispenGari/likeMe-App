@@ -1,10 +1,14 @@
 import "./Viewer.css";
 import React from "react";
 import { Avatar } from "@material-ui/core";
-const Viewer = () => {
+const Viewer = ({ viewer }) => {
   return (
-    <div className="viewer">
-      <Avatar className="viewer__avatar" />
+    <div className="viewer" title={viewer?.displayName}>
+      <Avatar
+        className="viewer__avatar"
+        alt={viewer?.displayName}
+        src={viewer?.photoURL}
+      />
     </div>
   );
 };
