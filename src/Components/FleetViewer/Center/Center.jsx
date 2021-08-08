@@ -52,7 +52,14 @@ const Center = ({ fleets, setCurrentFleetIndex, currentFleetIndex }) => {
           }
         });
     }
-  }, [fleets, currentFleetIndex]);
+  }, [
+    fleets,
+    currentFleetIndex,
+    currentUser?.displayName,
+    currentUser?.email,
+    currentUser?.photoURL,
+    currentUser?.uid,
+  ]);
 
   const deleteFleet = () => {
     firebase.db

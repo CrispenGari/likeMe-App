@@ -12,8 +12,10 @@ const Input = ({ post, comment }) => {
   const currentUser = useSelector((state) => state.users)?.find(
     (_user) => _user?.id === user?.uid
   );
+  const motherCommentUser = useSelector((state) => state.users)?.find(
+    (_user) => _user?.id === comment?.userId
+  );
   const [loading, setLoading] = useState("");
-
   const replyComment = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -35,8 +37,14 @@ const Input = ({ post, comment }) => {
       .then(() => {
         if (user?.uid !== comment?.userId) {
           helperFunctions.notifyToWhomItMayConcern(
-            user,
-            `replied to you comment on ${
+            {
+              email: motherCommentUser?.email,
+              photoURL: motherCommentUser?.photoURL,
+              displayName: motherCommentUser?.displayName,
+              uid: motherCommentUser?.id,
+              userVerified: motherCommentUser?.userVerified ? true : false,
+            },
+            `replied to your comment on ${
               user?.uid === post?.userId ? "your" : post?.displayName + "'s"
             } post.`,
             post,

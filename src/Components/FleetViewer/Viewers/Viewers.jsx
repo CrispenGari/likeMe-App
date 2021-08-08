@@ -25,7 +25,7 @@ const Viewers = ({ currentFleetIndex, fleets }) => {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [currentFleetIndex, fleets]);
 
   return (
     <div className="viewers">

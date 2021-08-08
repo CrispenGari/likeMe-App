@@ -19,6 +19,9 @@ const InlineComment = ({ comment, post, motherComment }) => {
   const history = useHistory();
   const [likes, setLikes] = useState([]);
 
+  const motherCommentUser = useSelector((state) => state.users)?.find(
+    (_user) => _user?.id === motherComment?.userId
+  );
   const deleteComment = () => {
     setDeleteLoading(true);
     firebase.db
@@ -34,22 +37,29 @@ const InlineComment = ({ comment, post, motherComment }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = firebase.db
-      .collection("posts")
-      .doc(post?.id)
-      .collection("comments")
-      .doc(motherComment?.id)
-      .collection("innerComment")
-      .doc(comment?.id)
-      .collection("likes")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((likes) => {
-        setLikes(likes.docs.map((like) => ({ id: like.id, ...like.data() })));
-      });
+    let mounted = true;
+
+    if (mounted) {
+      const unsubscribe = firebase.db
+        .collection("posts")
+        .doc(post?.id)
+        .collection("comments")
+        .doc(motherComment?.id)
+        .collection("innerComment")
+        .doc(comment?.id)
+        .collection("likes")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((likes) => {
+          setLikes(likes.docs.map((like) => ({ id: like.id, ...like.data() })));
+        });
+      return () => {
+        unsubscribe();
+      };
+    }
     return () => {
-      unsubscribe();
+      mounted = false;
     };
-  }, [post?.id, comment?.id]);
+  }, [post?.id, comment?.id, motherComment?.id]);
 
   const openUserProfile = () => {
     history.push(`/profile/${comment?.userId}/${uuid_v4()}`);
@@ -109,7 +119,13 @@ const InlineComment = ({ comment, post, motherComment }) => {
         .then(() => {
           if (user?.uid !== comment?.userId) {
             helperFunctions.notifyToWhomItMayConcern(
-              user,
+              {
+                email: motherCommentUser?.email,
+                photoURL: motherCommentUser?.photoURL,
+                displayName: motherCommentUser?.displayName,
+                uid: motherCommentUser?.id,
+                userVerified: motherCommentUser?.userVerified ? true : false,
+              },
               "liked your reply.",
               {
                 postUrl: post?.imageURL,

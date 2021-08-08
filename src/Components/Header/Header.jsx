@@ -60,7 +60,6 @@ const Header = () => {
     <div className="header">
       <div className="header__left">
         <img onClick={() => history.push("/")} src={logos.header_logo} alt="" />
-        <h1 onClick={() => history.push("/")}>LIKE ME</h1>
       </div>
       <div className="header__center">
         <div className="header__search">

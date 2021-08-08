@@ -5,37 +5,12 @@
 }
 .sample__comments > h1 {
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 400;
   color: gray;
   text-align: center;
+  padding: 10px;
 }
 .sample__comments > h1:hover {
   color: cornflowerblue;
-}
-.sample__comments > div {
-  text-align: start;
-  padding: 10px 0;
-  display: flex;
-  color: gray;
-}
-.sample__comments > div > div {
-  font-size: 0.9rem;
-}
-.delimeter {
-  color: gray;
-  font-size: 0.9rem;
-}
-.username {
-  font-weight: 500 !important;
-  cursor: pointer;
-  color: black !important;
-  font-size: 0.9rem !important;
-}
-
-.username:hover {
-  color: cornflowerblue !important;
-}
-.username:last-of-type {
-  margin-right: 5px;
 }
