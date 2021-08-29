@@ -3,8 +3,10 @@ import "./Welcome.css";
 import { useHistory } from "react-router-dom";
 
 import { logos } from "../../utils/logos";
-
-const Welcome = ({ setWelcome }) => {
+interface Props{
+  setWelcome?: string
+}
+const Welcome:React.FC<Props> = ({ setWelcome }) => {
   document.title = `LikeMe • Welcome`;
   const history = useHistory();
   const next = () => {
