@@ -1,7 +1,6 @@
 import constants from "../../utils";
 
-import { ActionType } from "../../types";
-const followingsReducer = (state = [], action: ActionType) => {
+const followingsReducer = (state = [], action) => {
   switch (action.type) {
     case constants.SET_FOLLOWINGS:
       return (state = action.value);

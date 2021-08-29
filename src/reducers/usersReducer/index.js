@@ -1,7 +1,7 @@
-import { ActionType } from "../../types";
+
 import constants from "../../utils";
 
-const users = (state = [], action: ActionType) => {
+const users = (state = [], action) => {
   switch (action.type) {
     case constants.SET_USERS:
       return (state = action.value);

@@ -1,12 +1,12 @@
 import { ActionType } from "../../types";
 import constants from "../../utils";
-
-const setProfilesReducer = (state = [], action: ActionType) => {
+const hashTags = (state = [], action) => {
   switch (action.type) {
-    case constants.SET_PROFILES:
+    case constants.SET_HASH_TAGS:
       return (state = action.value);
     default:
       return state;
   }
 };
-export default setProfilesReducer;
+
+export default hashTags;

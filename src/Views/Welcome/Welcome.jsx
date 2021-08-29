@@ -3,10 +3,7 @@ import "./Welcome.css";
 import { useHistory } from "react-router-dom";
 
 import { logos } from "../../utils/logos";
-interface Props{
-  setWelcome?: string
-}
-const Welcome:React.FC<Props> = ({ setWelcome }) => {
+const Welcome = ({ setWelcome }) => {
   document.title = `LikeMe • Welcome`;
   const history = useHistory();
   const next = () => {

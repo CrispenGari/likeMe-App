@@ -1,7 +1,7 @@
-import { ActionType } from "../../types";
+
 import constants from "../../utils";
 
-const fleetsReducer = (state = [], action: ActionType) => {
+const fleetsReducer = (state = [], action) => {
   switch (action.type) {
     case constants.SET_FLEETS:
       return (state = action.value);

@@ -1,6 +1,6 @@
-import { ActionType } from "../../types";
+
 import constants from "../../utils";
-const notificationsReducer = (state = [], action: ActionType) => {
+const notificationsReducer = (state = [], action) => {
   switch (action.type) {
     case constants.SET_NOTIFICATIONS:
       return (state = action.value);
