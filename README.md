@@ -1,5 +1,7 @@
 ### Notification
 
+yarn add firebase redux react-redux react-icons @material-ui/core @material-ui/icons @material-ui/lab
+
 "Leaning `Elixir` and `PostgreSQL` and build a million dollar company that will last forever"- `Gari`
 
 ```js
