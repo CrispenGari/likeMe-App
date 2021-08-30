@@ -7,7 +7,7 @@ import {
   Welcome,
   Auth,
   Messages,
-  Chat,
+  // Chat,
   Terms,
   People,
   Landing,
@@ -27,7 +27,6 @@ import Settings from "./Views/Settings/Settings";
 import useFetchUsers from "./hooks/useFetchUsers";
 
 const App = () => {
-
   const { loading } = useUserFetch();
   const [welcome, setWelcome] = useState(true);
   const user = useSelector((state) => state.user);
@@ -84,7 +83,7 @@ const App = () => {
               <People />
             </Route>
             <Route path="/chat/:uid/:randomId" exact>
-              <Chat />
+              {/* <Chat /> */}
             </Route>
             <Route path="/settings/:uid/:randomId">
               <Settings />

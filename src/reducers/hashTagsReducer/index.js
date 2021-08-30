@@ -1,4 +1,3 @@
-import { ActionType } from "../../types";
 import constants from "../../utils";
 const hashTags = (state = [], action) => {
   switch (action.type) {

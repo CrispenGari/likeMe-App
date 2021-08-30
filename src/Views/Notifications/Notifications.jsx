@@ -4,13 +4,6 @@ import { Header } from "../../Components";
 import { IoMdNotificationsOff } from "react-icons/io";
 
 import helperFunctions from "../../utils/helperfunctions";
-import {
-  AdminNotification,
-  CommentNotification,
-  FollowerNotification,
-  LikeNotification,
-  SuggestionsNotification,
-} from "../../Components/Notifications";
 import "./Notifications.css";
 import NotificationGroup from "../../Components/NotificationGroup/NotificationGroup";
 const Notifications = () => {

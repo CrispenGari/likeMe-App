@@ -6,8 +6,6 @@ import { MdArrowBack, MdCancel } from "react-icons/md";
 import { AiFillPicture } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import firebase from "../../backend";
-
-import fb from "firebase";
 import "./Chat.css";
 import { Avatar, IconButton, LinearProgress } from "@material-ui/core";
 const Chat = () => {
@@ -93,7 +91,7 @@ const Chat = () => {
                 message: message,
                 sender: user?.uid,
                 receiver: uid,
-                timestamp: fb.firestore.FieldValue.serverTimestamp(),
+                timestamp: null,
                 read: false,
                 imageMessage: url,
               });
@@ -113,7 +111,7 @@ const Chat = () => {
           message: message,
           sender: user?.uid,
           receiver: uid,
-          timestamp: fb.firestore.FieldValue.serverTimestamp(),
+          timestamp: null,
           read: false,
           imageMessage: null,
         })

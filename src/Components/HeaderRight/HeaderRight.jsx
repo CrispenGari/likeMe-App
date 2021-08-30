@@ -1,9 +1,8 @@
 import "./HeaderRight.css";
 import HeaderRightItem from "../HeaderRightItem/HeaderRightItem";
-import { IoIosPeople, IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
-import { RiChatSmile3Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 const HeaderRight = () => {
   const notifications = useSelector((state) =>
@@ -12,18 +11,6 @@ const HeaderRight = () => {
   return (
     <div className="header__right">
       <HeaderRightItem withUser subTitle="open your profile" />
-      <HeaderRightItem
-        title="chats"
-        Icon={RiChatSmile3Line}
-        subTitle="open your chats"
-        content={3}
-      />
-      <HeaderRightItem
-        title="friends"
-        Icon={IoIosPeople}
-        subTitle="discover new friends"
-        content={9}
-      />
       <HeaderRightItem
         title="notifications"
         Icon={IoMdNotificationsOutline}

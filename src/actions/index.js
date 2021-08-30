@@ -1,78 +1,78 @@
 import constants from "../utils";
 
-const setUser = (value: any) => {
+const setUser = (value) => {
   return {
     type: constants.SET_USER,
     value: value,
   };
 };
-const setUsers = (value: any) => {
+const setUsers = (value) => {
   return {
     type: constants.SET_USERS,
     value: value,
   };
 };
-const setFleets = (value: any) => {
+const setFleets = (value) => {
   return {
     type: constants.SET_FLEETS,
     value: value,
   };
 };
-const setLikes = (value: any) => {
+const setLikes = (value) => {
   return {
     type: constants.SET_LIKES,
     value: value,
   };
 };
-const setMessages = (value: any) => {
+const setMessages = (value) => {
   return {
     type: constants.SET_MESSAGES,
     value: value,
   };
 };
-const setPosts = (value: any) => {
+const setPosts = (value) => {
   return {
     type: constants.SET_POSTS,
     value: value,
   };
 };
-const setHashTags = (value: any) => {
+const setHashTags = (value) => {
   return {
     type: constants.SET_HASH_TAGS,
     value: value,
   };
 };
-const setBanners = (value: any) => {
+const setBanners = (value) => {
   return {
     type: constants.SET_BANNERS,
     value: value,
   };
 };
-const setProfileTab = (value: any) => {
+const setProfileTab = (value) => {
   return {
     type: constants.SET_PROFILE_TAB,
     value: value,
   };
 };
-const setProfiles = (value: any) => {
+const setProfiles = (value) => {
   return {
     type: constants.SET_PROFILES,
     value: value,
   };
 };
-const setFollowings = (value: any) => {
+const setFollowings = (value) => {
   return {
     type: constants.SET_FOLLOWINGS,
     value: value,
   };
 };
-const setFollowers = (value: any) => {
+const setFollowers = (value) => {
   return {
     type: constants.SET_FOLLOWERS,
     value: value,
   };
 };
-const setNotifications = (value: any) => {
+const setNotifications = (value) => {
   return {
     type: constants.SET_NOTIFICATIONS,
     value: value,

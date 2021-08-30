@@ -1,10 +1,9 @@
 import "./Menu.css";
 import React from "react";
 import MenuItem from "../MenuItem/MenuItem";
-import { IoIosPeople, IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { MdPowerSettingsNew } from "react-icons/md";
-import { RiChatSmile3Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 const Menu = ({ setOpen }) => {
   const notifications = useSelector((state) =>
@@ -14,20 +13,6 @@ const Menu = ({ setOpen }) => {
   return (
     <div className={"menu"}>
       <MenuItem setOpen={setOpen} withUser subTitle="open your profile" />
-      <MenuItem
-        title="chats"
-        Icon={RiChatSmile3Line}
-        subTitle="open your chats"
-        setOpen={setOpen}
-        content={3}
-      />
-      <MenuItem
-        title="friends"
-        Icon={IoIosPeople}
-        subTitle="discover new friends"
-        setOpen={setOpen}
-        content={9}
-      />
       <MenuItem
         title="notifications"
         Icon={IoMdNotificationsOutline}

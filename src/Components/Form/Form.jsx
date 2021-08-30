@@ -4,7 +4,7 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { AiFillCamera } from "react-icons/ai";
 import { MdDelete, MdLocationOn, MdLocationOff } from "react-icons/md";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { ActivityIndicator } from "../Common";
 import "./Form.css";
@@ -17,7 +17,6 @@ const Form = ({ setShowForm }) => {
   const currentUser = useSelector((state) => state.users)?.find(
     (_user) => _user?.id === user?.uid
   );
-  const dispatch = useDispatch();
   /* LOCAL STATE AND REFS */
   const [caption, setCaption] = useState("");
   const imageInputRef = useRef(null);
@@ -27,9 +26,6 @@ const Form = ({ setShowForm }) => {
   const [posting, setPosting] = useState(false);
   const textInputRef = useRef(null);
   const [image, setImage] = useState(null);
-
-  const [hashTag, setHashTag] = useState([]);
-  const [mentions, setMentions] = useState([]);
 
   // FUNCTIONS
   const removePhoto = () => {
@@ -58,7 +54,6 @@ const Form = ({ setShowForm }) => {
     if (image) {
       setPosting(true);
       const hashTags = helperFunctions.findHashTags(caption);
-      const mentions = helperFunctions.findMentions(caption);
       helperFunctions.addHashTag(hashTags);
       const postImageName = `${uuid_v4(10)}_${user?.uid}`;
       const task = firebase.storage

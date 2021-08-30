@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextTruncate from "react-text-truncate";
 import "./User.css";
 import { Avatar } from "@material-ui/core";
 import { HiBadgeCheck } from "react-icons/hi";
@@ -47,29 +46,8 @@ const User = ({ user, fleets }) => {
           {user?.data?.displayName}{" "}
           <HiBadgeCheck className="post__high__badge" />
         </h1>
-        {/* Show the last message */}
-        {chatMessages?.length ? (
-          <small>
-            {chatMessages[chatMessages?.length - 1]?.data?.message ? (
-              <TextTruncate
-                line={1}
-                element="span"
-                truncateText="…"
-                text={chatMessages[chatMessages?.length - 1]?.data?.message}
-                className="user__info__last__message"
-              />
-            ) : (
-              "photo "
-            )}
-            •{" "}
-            {chatMessages[chatMessages?.length - 1]?.data?.receiver ===
-            currentUser?.uid
-              ? "not you"
-              : "you"}
-          </small>
-        ) : (
-          <small>No messages in this chat yet</small>
-        )}
+
+        <small>No messages in this chat yet</small>
       </div>
       <div className="user__left">
         <small>all messages</small>

@@ -274,9 +274,6 @@ const addHashTag = (tags) => {
       });
     });
 };
-const mentionPeople = (mentions) => {
-  const mentioned = firebase.db.collection("users");
-};
 
 const refetchPostsHashtags = () => {
   const hashtags = firebase.db

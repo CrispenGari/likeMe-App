@@ -3,23 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useFollowers, useFollowings } from "../../hooks";
-import firebase from "../../backend";
 import helperFunctions from "../../utils/helperfunctions";
-const likesForEachPost = async (posts) => {
-  let total = 0;
-
-  await posts.forEach(({ id }) => {
-    firebase.db
-      .collection("posts")
-      .doc(id)
-      .collection("likes")
-      .get()
-      .then((likes) => {
-        total += likes.docs.length;
-      });
-  });
-  return total;
-};
 
 const ProfileStats = () => {
   const { uid } = useParams();

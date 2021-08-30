@@ -34,7 +34,6 @@ const Post = ({ post, setShowNotification }) => {
   const [postSize, setPostSize] = useState(null);
   const [openPicture, setOpenPicture] = useState(false);
   const [likes, setLikes] = useState([]);
-  const [openLike, setOpenLike] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [image, setImage] = useState(null);
@@ -341,7 +340,7 @@ const Post = ({ post, setShowNotification }) => {
                 <FavoriteBorder className="post__icon__unlike" />
               )}
             </IconButton>
-            <p onClick={() => setOpenLike(true)}>{likes.length}</p>
+            <p onClick={() => {}}>{likes.length}</p>
           </div>
         </div>
         <form className="post__bottom__comment__input">
